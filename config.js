@@ -33,7 +33,7 @@ const CONFIG = {
           مثال: photo: "assets/team/ibrahim.jpg"   (يُفضّل صورة مربعة واضحة الوجه) ---- */
   team: [
     { name: "الكابتن الفلسطيني إبراهيم الحاج", role: "مدير البطولة وصاحب المبادرة",
-      about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "" },
+      about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "assets/team/ibrahim-alhaj.webp" },
     { name: "الحكم الدولي علي نور", role: "المسؤول عن التحكيم والتنظيم الفني",
       about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "" },
     { name: "Captain Taekwondo", role: "المنصة الإعلامية",
