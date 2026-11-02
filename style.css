@@ -509,3 +509,19 @@ html[lang=en] body{line-height:1.7}
 .det-body .facts{list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:.6rem}
 .det-body .facts li{margin:0;padding:.6rem .9rem;border-radius:12px;border:1px solid rgba(244,203,85,.45);border-inline-start:4px solid #f4cb55;background:rgba(244,203,85,.08);
   font:700 1.12rem/1.6 var(--fd);color:#f4cb55;text-shadow:0 0 14px rgba(244,203,85,.35)}
+
+/* فخامة أكثر: نص ذهبي متدرّج يلمع + شريط لمعان يعبر الصندوق */
+.det-body .facts li{position:relative;overflow:hidden;isolation:isolate;
+  background:linear-gradient(135deg,rgba(244,203,85,.16),rgba(125,82,8,.2) 55%,rgba(244,203,85,.1));
+  border:1px solid rgba(255,229,138,.6);border-inline-start:4px solid #ffe58a;
+  box-shadow:0 6px 22px rgba(0,0,0,.4),0 0 22px rgba(244,203,85,.22),inset 0 0 0 1px rgba(255,244,189,.12);text-shadow:none}
+.det-body .facts li span{display:block;color:#f4cb55;
+  background:linear-gradient(100deg,#e0a929 0%,#ffe58a 22%,#fffbe0 38%,#f4cb55 52%,#e0a929 72%,#ffe58a 100%) 0 0/250% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:factText 4.5s linear infinite}
+.det-body .facts li::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(100deg,transparent 35%,rgba(255,244,189,.32) 50%,transparent 65%);
+  transform:translateX(-120%);animation:factShine 3.6s ease-in-out infinite}
+.det-body .facts li:nth-child(2)::before{animation-delay:1.2s}
+@keyframes factShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
+@keyframes factText{to{background-position:-250% 0}}
+@media (prefers-reduced-motion:reduce){.det-body .facts li span,.det-body .facts li::before{animation:none}}
