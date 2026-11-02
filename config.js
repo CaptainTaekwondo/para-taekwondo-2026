@@ -35,7 +35,7 @@ const CONFIG = {
     { name: "الكابتن الفلسطيني إبراهيم الحاج", role: "مدير البطولة وصاحب المبادرة",
       about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "assets/team/ibrahim-alhaj.webp" },
     { name: "الحكم الدولي علي نور", role: "المسؤول عن التحكيم والتنظيم الفني",
-      about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "" },
+      about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "assets/team/ali-nour.webp" },
     { name: "Captain Taekwondo", role: "المنصة الإعلامية",
       about: "المسؤول الدعائي والتسويقي للبطولة والتصميم الفني والتقني", phone: "+20 103 144 1064", initial: "C",
       photo: "", logo: "assets/captain.webp", darkLogo: true },
