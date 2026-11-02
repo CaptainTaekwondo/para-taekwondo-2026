@@ -376,7 +376,7 @@ html[lang=en] body{line-height:1.7}
 .cc .body .rows{flex:1;min-width:0;padding:0;align-content:space-around}
 @media(max-width:640px){.tbtn.lang{padding:0 .6rem}.dlbox .acts{width:100%}.dlbox .acts .btn{flex:1}}
 #links a{padding:.3rem .6rem;font-size:.9rem}
-@media(max-width:1240px){.brand span{display:none}}
+.brand span{display:none}
 /* بطاقات الفيديو: الصف الأخير (إن بقيت بطاقة وحدها) يتوسّط الصفحة */
 .vgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.6rem}
 .vgrid>.vcard{flex:1 1 320px;max-width:calc((100% - 3.2rem)/3)}
@@ -455,7 +455,7 @@ html[lang=en] body{line-height:1.7}
 .menubtn[aria-expanded="true"] .bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
 .menubtn[aria-expanded="true"] .bars i:nth-child(2){opacity:0}
 .menubtn[aria-expanded="true"] .bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-@media(max-width:900px){
+@media(max-width:1120px){
   .menubtn{display:inline-flex;order:2;margin-inline-start:auto}
   .tools{order:3}
   .brand{order:1}
@@ -475,3 +475,9 @@ html[lang=en] body{line-height:1.7}
 .soon-note{display:inline-flex;align-items:center;gap:.6rem;margin:1rem auto 0;padding:.55rem 1.2rem;border:1px dashed rgba(244,203,85,.6);border-radius:99px;background:rgba(244,203,85,.08);color:var(--gold1);font-weight:700;font-size:.95rem;line-height:1.6;text-align:center}
 .soon-note span{color:var(--gold2);flex:none}
 .sec-head:has(.soon-note){display:flex;flex-direction:column;align-items:center}
+/* رسالة الدعوة في المنتصف (عربي وإنجليزي) */
+.invite>div:not(.poster-wrap){text-align:center}
+.invite p{margin-inline:auto}
+.invite h2{text-align:center}
+.invite .ribbons{justify-items:center;margin-inline:auto}
+@media(max-width:900px){.invite>div:not(.poster-wrap){max-width:640px;margin-inline:auto}}

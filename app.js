@@ -162,7 +162,7 @@
   ul.addEventListener("click", e => { if (e.target.closest("a")) menuSet(false); });
   document.addEventListener("click", e => { if (!e.target.closest("#nav")) menuSet(false); });
   addEventListener("keydown", e => { if (e.key === "Escape") menuSet(false); });
-  addEventListener("resize", () => { if (innerWidth > 900) menuSet(false); });
+  addEventListener("resize", () => { if (innerWidth > 1120) menuSet(false); });
   const so = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
     links.forEach(l => {
