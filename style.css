@@ -525,3 +525,6 @@ html[lang=en] body{line-height:1.7}
 @keyframes factShine{0%{transform:translateX(-120%)}55%,100%{transform:translateX(120%)}}
 @keyframes factText{to{background-position:-250% 0}}
 @media (prefers-reduced-motion:reduce){.det-body .facts li span,.det-body .facts li::before{animation:none}}
+
+.det-body .dtags{margin:1.1rem 0 0;text-align:center;font:700 1rem/1.7 var(--fd);color:#f4cb55;letter-spacing:.02em;word-break:break-word}
+.det-body .dtags bdi{unicode-bidi:isolate}

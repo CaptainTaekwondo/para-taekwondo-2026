@@ -106,6 +106,7 @@
     $("#detName").textContent = T(p.name); $("#detRole").textContent = T(p.role);
     $("#detBody").innerHTML = (bio.length || facts.length)
       ? bio.map(t => `<p>${esc(t)}</p>`).join("") + (facts.length ? `<ul class="facts">${facts.map(f => `<li><span>${esc(f)}</span></li>`).join("")}</ul>` : "")
+        + (d.tags || (p.details && p.details.tags) ? `<p class="dtags" dir="ltr">${(d.tags || p.details.tags).split("|").map(t => `<bdi>${esc(t.trim())}</bdi>`).join(" | ")}</p>` : "")
       : `<p class="soon">${esc(T("تُضاف التفاصيل قريبًا."))}</p>`;
     const num = p.phone || "", tel = num.replace(/[^\d+]/g, ""), wa = tel.replace("+", "");
     $("#detActs").innerHTML = num ? `<a class="btn sm" href="tel:${esc(tel)}"><svg aria-hidden="true"><use href="#i-ph"/></svg>${esc(T("اتصال"))}</a><a class="btn sm wa" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>${esc(T("واتساب"))}</a>` : "";
