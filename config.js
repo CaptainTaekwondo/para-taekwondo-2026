@@ -33,7 +33,11 @@ const CONFIG = {
           مثال: photo: "assets/team/ibrahim.jpg"   (يُفضّل صورة مربعة واضحة الوجه) ---- */
   team: [
     { name: "الكابتن الفلسطيني إبراهيم الحاج", role: "مدير البطولة وصاحب المبادرة",
-      about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "assets/team/ibrahim-alhaj.webp" },
+      about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "assets/team/ibrahim-alhaj.webp",
+      details: {
+        bio: "مدرب فلسطيني وصاحب فكرة بطولة أساسيات التايكوندو\nالمدرب إبراهيم الحاج هو صاحب فكرة إطلاق بطولة أساسيات التايكوندو، وهي مبادرة تهدف إلى تقديم نموذج مختلف للمنافسات الرياضية، يركز على إتقان المهارات الأساسية، وإتاحة فرص أوسع للاعبين لإظهار قدراتهم الفنية وفق مستويات محددة.\nوتقوم فكرته على تطوير أساليب المشاركة في التايكوندو، والاستفادة من الإمكانات الرقمية لتسهيل المنافسات عن بُعد، مع الاهتمام بالبارا تايكوندو وتوفير فرص تنافسية أكثر شمولًا لأبطاله.\nويشارك في الجوانب الإدارية والتنظيمية والتنسيق بين فريق العمل، سعيًا إلى تحويل الفكرة إلى تجربة رياضية متميزة تفتح آفاقًا جديدة أمام اللاعبين والمدربين، وتدعم الابتكار والتطوير في رياضة التايكوندو.",
+        en: { bio: "Palestinian coach and originator of the Taekwondo Basics Championship\nCoach Ibrahim Al-Haj is the originator of the Taekwondo Basics Championship, an initiative that aims to offer a different model of sports competition, focused on mastering the fundamental skills and giving athletes wider opportunities to show their technical abilities within defined levels.\nHis idea is built on developing the ways people take part in Taekwondo and making use of digital capabilities to make remote competition easier, with a focus on Para Taekwondo and more inclusive competitive opportunities for its champions.\nHe also takes part in the administrative and organizational aspects and in coordinating the work team, seeking to turn the idea into an outstanding sporting experience that opens new horizons for athletes and coaches and supports innovation and development in Taekwondo." }
+      } },
     { name: "الحكم الدولي علي نور", role: "المسؤول عن التحكيم والتنظيم الفني",
       about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "assets/team/ali-nour.webp",
       details: {
