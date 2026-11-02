@@ -534,6 +534,7 @@ html[lang=en] body{line-height:1.7}
 :lang(en) .det-body .facts li span{letter-spacing:.025em}
 :lang(ar) .det-body .facts li span{word-spacing:.45em}
 
-/* زر الإغلاق يبقى ثابتًا أعلى النافذة حتى أثناء التمرير */
-.detbox .mx{position:sticky;top:.4rem;z-index:6;display:block;float:none;margin:-1.6rem 0 -40px auto;inset-inline-end:auto;background:#061443;box-shadow:0 0 0 4px rgba(6,20,67,.85)}
-.detbox:dir(rtl) .mx{margin-inline:0 auto}
+/* علامة × مرسومة بالـCSS لتكون في منتصف الدائرة تمامًا */
+.mx{font-size:0;position:absolute;display:block;padding:0}
+.mx::before,.mx::after{content:"";position:absolute;left:50%;top:50%;width:16px;height:2px;border-radius:2px;background:currentColor;transform:translate(-50%,-50%) rotate(45deg)}
+.mx::after{transform:translate(-50%,-50%) rotate(-45deg)}
