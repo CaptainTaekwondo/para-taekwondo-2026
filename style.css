@@ -481,3 +481,18 @@ html[lang=en] body{line-height:1.7}
 .invite h2{text-align:center}
 .invite .ribbons{justify-items:center;margin-inline:auto}
 @media(max-width:900px){.invite>div:not(.poster-wrap){max-width:640px;margin-inline:auto}}
+/* زر التفاصيل ونافذتها */
+.tc .det-btn{margin-top:.6rem;width:100%;max-width:230px;position:relative;overflow:hidden}
+.tc .det-btn::before{content:"";position:absolute;inset:-30% auto -30% -60%;width:40%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.8),transparent);transform:skewX(-20deg);animation:supShine 3.6s ease-in-out infinite;pointer-events:none}
+@media(prefers-reduced-motion:reduce){.tc .det-btn::before{animation:none}}
+#detModal{backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.detbox{width:min(640px,100%);padding:1.8rem 1.5rem 1.5rem;border-radius:26px;text-align:center;box-shadow:0 0 0 6px rgba(244,203,85,.12),0 30px 90px rgba(0,0,0,.6),0 0 90px rgba(47,107,255,.45);animation:supPop .45s cubic-bezier(.2,.9,.3,1.25) both}
+.det-head{display:flex;flex-direction:column;align-items:center;gap:.35rem}
+.det-head h3{margin:.3rem 0 0;font:700 1.6rem var(--fd);color:#fff;padding:0}
+#detAv .av{position:static;margin:0 auto;width:140px;height:140px}
+.det-body{margin:1.1rem 0;text-align:start;color:#dbe5ff;line-height:1.9}
+.det-body p{margin:0 0 .8rem}
+.det-body .soon{text-align:center;color:var(--mut);padding:1rem;border:1.5px dashed rgba(244,203,85,.5);border-radius:14px}
+.det-body .facts{margin:.4rem 0 0;padding-inline-start:1.2rem}
+.det-body .facts li{margin-bottom:.35rem}
+#detActs{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap}

@@ -261,6 +261,8 @@
     "تُضاف تفاصيلها بعد الاعتماد الرسمي.": "Details will be added after official approval.",
     "كيف يمكنني الحصول على شهادة دعم أصحاب الهمم": "How can I get the Support Certificate for People of Determination",
     "القائمة": "Menu",
+    "عرض التفاصيل": "View details",
+    "تُضاف التفاصيل قريبًا.": "Details will be added soon.",
     "تحميل الدليل كاملًا (15 صفحة)": "Download the full guide (15 pages)",
     "الدليل الكامل للبطولة كملف PDF، أو جميع صفحاته كصور عالية الجودة في ملف مضغوط.": "The full championship guide as a PDF, or all its pages as high-quality images in a ZIP file.",
     "الدليل PDF": "Guide PDF",

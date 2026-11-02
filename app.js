@@ -94,6 +94,28 @@
   setQr("#regQr", (C.qr || {}).registration, "رمز QR للتسجيل");
   setQr("#waQr", (C.qr || {}).whatsapp, "رمز QR للانضمام إلى جروب الواتساب");
 
+  /* ---------- نافذة تفاصيل المنظم ---------- */
+  const dm = $("#detModal"), dmBox = $(".mbox", dm);
+  let dmFrom = null;
+  const dmClose = () => { dm.hidden = true; document.body.style.overflow = ""; if (dmFrom) dmFrom.focus(); };
+  function openDetails(p, avEl) {
+    const en = I18N.lang === "en" && p.details && p.details.en ? p.details.en : null;
+    const d = en || p.details || {};
+    const bio = (d.bio || "").split(/\n+/).filter(Boolean), facts = d.facts || [];
+    $("#detAv").innerHTML = avEl ? avEl.outerHTML : "";
+    $("#detName").textContent = T(p.name); $("#detRole").textContent = T(p.role);
+    $("#detBody").innerHTML = (bio.length || facts.length)
+      ? bio.map(t => `<p>${esc(t)}</p>`).join("") + (facts.length ? `<ul class="facts">${facts.map(f => `<li>${esc(f)}</li>`).join("")}</ul>` : "")
+      : `<p class="soon">${esc(T("تُضاف التفاصيل قريبًا."))}</p>`;
+    const num = p.phone || "", tel = num.replace(/[^\d+]/g, ""), wa = tel.replace("+", "");
+    $("#detActs").innerHTML = num ? `<a class="btn sm" href="tel:${esc(tel)}"><svg aria-hidden="true"><use href="#i-ph"/></svg>${esc(T("اتصال"))}</a><a class="btn sm wa" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>${esc(T("واتساب"))}</a>` : "";
+    dmFrom = document.activeElement; dm.hidden = false; document.body.style.overflow = "hidden"; dmBox.scrollTop = 0;
+    $(".mx", dm).focus();
+  }
+  $(".mx", dm).addEventListener("click", dmClose);
+  dm.addEventListener("click", e => { if (e.target === dm) dmClose(); });
+  addEventListener("keydown", e => { if (e.key === "Escape" && !dm.hidden) dmClose(); });
+
   /* ---------- المنظمون ---------- */
   const teamGrid = $("#teamGrid");
   (C.team || []).forEach(p => {
@@ -107,7 +129,9 @@
     el.innerHTML = av + `<h3>${esc(p.name)}</h3><span class="role">${esc(p.role)}</span><p class="about">${esc(p.about)}</p>` +
       (num ? `<div class="num">${esc(num)}</div><div class="acts">` +
         `<a class="btn sm" href="tel:${esc(tel)}"><svg aria-hidden="true"><use href="#i-ph"/></svg>اتصال</a>` +
-        `<a class="btn sm wa" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>واتساب</a></div>` : "");
+        `<a class="btn sm wa" href="https://wa.me/${esc(wa)}" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true"><use href="#i-wa"/></svg>واتساب</a></div>` : "") +
+      `<button type="button" class="btn fill sm det-btn">عرض التفاصيل</button>`;
+    el.querySelector(".det-btn").addEventListener("click", () => openDetails(p, el.querySelector(".av")));
     teamGrid.append(el);
   });
   const sp = C.sponsor || {};
