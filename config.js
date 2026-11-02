@@ -35,7 +35,11 @@ const CONFIG = {
     { name: "الكابتن الفلسطيني إبراهيم الحاج", role: "مدير البطولة وصاحب المبادرة",
       about: "صاحب المبادرة والمدير التنفيذي", phone: "+972 599 370 269", initial: "إ", photo: "assets/team/ibrahim-alhaj.webp" },
     { name: "الحكم الدولي علي نور", role: "المسؤول عن التحكيم والتنظيم الفني",
-      about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "assets/team/ali-nour.webp" },
+      about: "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي", phone: "+20 11 51221662", initial: "ع", photo: "assets/team/ali-nour.webp",
+      details: {
+        bio: "رئيس لجنة حكام البارا تايكوندو بالاتحاد العربي للتايكوندو\nيتمتع الكابتن علي نور بمكانة في منظومة التحكيم الرياضي، ويتولى رئاسة لجنة حكام البارا تايكوندو بالاتحاد العربي للتايكوندو، في دور يستهدف دعم وتطوير منظومة التحكيم، والارتقاء بالمستوى الفني للحكام، وتعزيز العدالة والنزاهة في المنافسات.\nوتعكس هذه المسؤولية أهمية الخبرات التحكيمية المتخصصة في تطوير رياضة البارا تايكوندو، والمساهمة في تنظيم منافسات أكثر احترافية، تراعي طبيعة اللعبة وخصوصية اللاعبين.",
+        en: { bio: "Head of the Para Taekwondo Referees Committee at the Arab Taekwondo Federation\nCaptain Ali Nour holds a distinguished standing in the sports officiating system and heads the Para Taekwondo Referees Committee at the Arab Taekwondo Federation, in a role aimed at supporting and developing the officiating system, raising the technical level of referees, and strengthening fairness and integrity in competitions.\nThis responsibility reflects the importance of specialized officiating expertise in developing Para Taekwondo and in helping organize more professional competitions that respect the nature of the sport and the particular needs of the athletes." }
+      } },
     { name: "Captain Taekwondo", role: "المنصة الإعلامية",
       about: "المسؤول الدعائي والتسويقي للبطولة والتصميم الفني والتقني", phone: "+20 103 144 1064", initial: "C",
       photo: "", logo: "assets/captain.webp", darkLogo: true,
