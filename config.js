@@ -49,7 +49,11 @@ const CONFIG = {
       } },
     { name: "منصة الكابتن عادل SportLand", role: "منصة التسجيل",
       about: "المسؤولة عن تسجيل البيانات والتحكيم", phone: "+216 44 162 995", initial: "ع",
-      photo: "", logo: "assets/sportland.webp" }
+      photo: "", logo: "assets/sportland.webp",
+      details: {
+        bio: "الشريك التقني وإدارة المنافسات الإلكترونية\nتُسهم منصة SportLand في تطوير منظومة المنافسات الرياضية الرقمية، من خلال توفير الحلول التقنية اللازمة لاستقبال فيديوهات اللاعبين، وإتاحة التحكيم الإلكتروني، وإدارة النتائج وتنظيمها، بما يساعد على تسهيل إجراءات المشاركة وتحسين كفاءة إدارة البطولات.",
+        en: { bio: "Technical partner and electronic competition management\nThe SportLand platform contributes to developing the digital sports competition system by providing the technical solutions needed to receive athletes' videos, enable electronic judging, and manage and organize results, helping to simplify participation procedures and improve the efficiency of tournament management." }
+      } }
   ],
 
   /* تفاصيل كل منظم: أضف داخل كل عنصر في team الحقل التالي (الفارغ = «تُضاف التفاصيل قريبًا»):
