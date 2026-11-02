@@ -504,3 +504,8 @@ html[lang=en] body{line-height:1.7}
 .av.logo.dark{background:#000 padding-box,conic-gradient(from 30deg,#fff8cf,#e0a929,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf) border-box}
 .av.logo img{padding:0;object-fit:cover;border-radius:50%}
 #detAv .av.logo{border-width:8px}
+
+/* أسماء القيادة داخل نافذة التفاصيل: خط ذهبي مميز */
+.det-body .facts{list-style:none;padding:0;margin:1.1rem 0 0;display:grid;gap:.6rem}
+.det-body .facts li{margin:0;padding:.6rem .9rem;border-radius:12px;border:1px solid rgba(244,203,85,.45);border-inline-start:4px solid #f4cb55;background:rgba(244,203,85,.08);
+  font:700 1.12rem/1.6 var(--fd);color:#f4cb55;text-shadow:0 0 14px rgba(244,203,85,.35)}
