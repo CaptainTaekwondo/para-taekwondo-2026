@@ -528,3 +528,8 @@ html[lang=en] body{line-height:1.7}
 
 .det-body .dtags{margin:1.1rem 0 0;text-align:center;font:700 1rem/1.7 var(--fd);color:#f4cb55;letter-spacing:.02em;word-break:break-word}
 .det-body .dtags bdi{unicode-bidi:isolate}
+
+/* تباعد أوضح بين كلمات أسماء القيادة (دون تباعد حروف في العربية حتى لا ينقطع اتصالها) */
+.det-body .facts li span{word-spacing:.32em;line-height:1.75}
+:lang(en) .det-body .facts li span{letter-spacing:.025em}
+:lang(ar) .det-body .facts li span{word-spacing:.45em}
