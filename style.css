@@ -502,5 +502,5 @@ html[lang=en] body{line-height:1.7}
   background:#fff padding-box,conic-gradient(from 30deg,#fff8cf,#e0a929,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf) border-box;
   box-shadow:inset 0 0 0 2px #7d5208,inset 0 0 0 4px #ffe58a,inset 0 0 14px rgba(0,0,0,.45),0 0 0 1px #5a3a04,0 12px 30px rgba(0,0,0,.55),0 0 34px rgba(244,203,85,.5)}
 .av.logo.dark{background:#000 padding-box,conic-gradient(from 30deg,#fff8cf,#e0a929,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf) border-box}
-.av.logo img{padding:10px}
+.av.logo img{padding:0;object-fit:cover;border-radius:50%}
 #detAv .av.logo{border-width:8px}
