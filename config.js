@@ -5,7 +5,7 @@
 const CONFIG = {
 
   /* رابط الموقع النهائي بعد الرفع على GitHub Pages (يُستخدم في زر المشاركة). الفارغ = الرابط الحالي للصفحة */
-  siteUrl: "",
+  siteUrl: "https://captaintaekwondo.github.io/para-taekwondo-2026/",
 
   /* ---- 1) فيديوهات يوتيوب (تظهر داخل نافذة منبثقة عند الضغط على «شاهد الفيديو»)
           ضع الرابط بين علامتي التنصيص. يقبل: youtube.com/watch?v=...  أو  youtu.be/...  أو  shorts/...
