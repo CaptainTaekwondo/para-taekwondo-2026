@@ -310,6 +310,7 @@
     langBtn.lang = I18N.lang === "en" ? "ar" : "en";
     qe.textContent = T(Q[qi]);
     const gi = $("#guideZoom img"); if (gi) gi.src = guideSrc();
+    $$("a[data-en]").forEach(l => { l.href = I18N.lang === "en" ? l.dataset.en : l.dataset.ar; });
     refresh();
   };
   langBtn.addEventListener("click", () => I18N.setLang(I18N.lang === "en" ? "ar" : "en"));
