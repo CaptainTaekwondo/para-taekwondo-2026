@@ -43,7 +43,7 @@
     <p class="hint" data-t="lkHint">أدخل رقم هاتفك والبريد الإلكتروني المسجَّلين والكود القديم الظاهر على بطاقتك. وبعد التأكد من البيانات تُفتح صفحة تعديلها.</p>
     <div class="fld"><label for="f_lkPhone" data-t="lkPhone">رقم الهاتف المسجَّل</label><input id="f_lkPhone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel"></div>
     <div class="fld"><label for="f_lkEmail" data-t="lkEmail">البريد الإلكتروني</label><input id="f_lkEmail" type="email" dir="ltr" autocomplete="email"></div>
-    <div class="fld"><label for="f_lkCode" data-t="lkCode">الكود القديم الخاص بك</label><input id="f_lkCode" type="text" dir="ltr" placeholder="PTA-2026-0001" autocapitalize="characters"></div>
+    <div class="fld"><label for="f_lkCode" data-t="lkCode">الكود القديم الخاص بك</label><div dir="ltr" style="display:flex;align-items:stretch;border:1px solid rgba(255,255,255,.18);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.05)"><span style="padding:0 12px;display:flex;align-items:center;background:rgba(240,185,60,.16);color:#f0b93c;font-weight:700;letter-spacing:.5px;white-space:nowrap">PTA-2026-</span><input id="f_lkCode" type="text" dir="ltr" inputmode="numeric" maxlength="4" pattern="[0-9]{4}" placeholder="0001" autocomplete="off" style="flex:1;min-width:0;border:0;border-radius:0;outline:0;box-shadow:none;background:transparent"></div></div>
     <p class="err big" id="lkErr" role="alert" hidden></p>
     <div class="acts"><button class="btn fill" id="lkBtn" type="button" data-t="lkBtn">عرض بياناتي</button><button class="btn" id="lkBack" type="button" data-t="lkBack">رجوع</button></div>
   </section>

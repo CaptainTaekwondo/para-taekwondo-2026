@@ -21,7 +21,7 @@
       zoom: "تكبير الصورة",
       oneCard: "⚠️ تنبيه: يُمنع إصدار أكثر من بطاقة لنفس المدرب. يُسجَّل كل مدرب مرة واحدة فقط (بريد إلكتروني ورقم هاتف واحد)، وأي تسجيل مكرر يُرفض. لتغيير بياناتك استخدم «تعديل بطاقتي».", phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "أدخل رقم هاتف صحيحًا مع رمز الدولة.", lkPhone: "رقم الهاتف المسجَّل",
       modeT: "ماذا تريد أن تفعل؟", newId: "إصدار بطاقة جديدة", newHint: "سجّل بياناتك لأول مرة واحصل على كودك وبطاقتك.", editId: "تعديل بطاقتي", editHint: "لديك كود؟ عدّل بياناتك أو صورتك وأصدر بطاقتك من جديد.",
-      lkT: "تعديل بطاقتي", lkHint: "أدخل رقم هاتفك والبريد الإلكتروني المسجَّلين والكود القديم الظاهر على بطاقتك. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkEmail: "البريد الإلكتروني", lkCode: "الكود القديم الخاص بك", lkBtn: "عرض بياناتي", lkBack: "رجوع",
+      lkT: "تعديل بطاقتي", lkHint: "أدخل رقم هاتفك والبريد الإلكتروني المسجَّلين والكود القديم الظاهر على بطاقتك. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkEmail: "البريد الإلكتروني", lkCode: "كودك القديم (آخر 4 أرقام فقط)", lkBtn: "عرض بياناتي", lkBack: "رجوع",
       eNotFound: "لم نجد تسجيلًا بهذا البريد والكود. تأكد من كتابتهما كما سجّلت.", eLk: "أدخل رقم الهاتف والبريد الإلكتروني والكود.", editBadge: "وضع التعديل: عدّل ما تريد ثم احفظ لإصدار بطاقتك من جديد.", submitEdit: "احفظ التعديلات وأصدر البطاقة", doneEditT: "تم تحديث بياناتك",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يُسجَّل كل بريد إلكتروني مرة واحدة فقط وبكود واحد.", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.", vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.", eDup: "هذا البريد الإلكتروني مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».", eDupPhone: "رقم الهاتف هذا مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».",
       promo: "هل تريد مشاركة لاعبك في الفيديو الترويجي للبطولة؟",
@@ -56,7 +56,7 @@
       zoom: "Zoom",
       oneCard: "⚠️ Notice: issuing more than one card for the same coach is not allowed. Each coach registers once only (one email and one phone number); any duplicate registration is rejected. To change your details use “Edit my card”.", phone: "Phone number (required, with country code)", ePhone: "Enter a valid phone number with country code.", lkPhone: "Registered phone number",
       modeT: "What would you like to do?", newId: "Issue a new card", newHint: "Register for the first time and get your code and card.", editId: "Edit my card", editHint: "Already have a code? Update your details or photo and re-issue your card.",
-      lkT: "Edit my card", lkHint: "Enter your registered phone number, email and the old code shown on your card. Once verified, the edit page opens.", lkEmail: "Email", lkCode: "Your old code", lkBtn: "Show my details", lkBack: "Back",
+      lkT: "Edit my card", lkHint: "Enter your registered phone number, email and the old code shown on your card. Once verified, the edit page opens.", lkEmail: "Email", lkCode: "Your old code (last 4 digits only)", lkBtn: "Show my details", lkBack: "Back",
       eNotFound: "No registration found for this email and code. Check them as you registered.", eLk: "Enter your phone number, email and code.", editBadge: "Edit mode: change what you need, then save to re-issue your card.", submitEdit: "Save changes & re-issue the card", doneEditT: "Your details are updated",
       email: "Email (required)", emailHint: "Each email can be registered once, with a single code.", eEmail: "Enter a valid email address.", vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.", eDup: "This email is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.", eDupPhone: "This phone number is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.",
       promo: "Would you like your athlete to appear in the promo video?",
@@ -357,12 +357,13 @@
     redraw();
   }
   $("#btnNew").addEventListener("click", () => showForm("new"));
+  $("#f_lkCode").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
   $("#btnEdit").addEventListener("click", () => { modeBox.hidden = true; lkBox.hidden = false; $("#f_lkEmail").focus(); });
   $("#lkBack").addEventListener("click", () => { lkBox.hidden = true; modeBox.hidden = false; $("#lkErr").hidden = true; });
   let lkBusy = false;
   $("#lkBtn").addEventListener("click", async () => {
     if (lkBusy) return; const err = $("#lkErr"); err.hidden = true;
-    const email = $("#f_lkEmail").value.trim().toLowerCase(), code = $("#f_lkCode").value.trim().toUpperCase(), phone = $("#f_lkPhone").value.trim();
+    const email = $("#f_lkEmail").value.trim().toLowerCase(), dg = $("#f_lkCode").value.replace(/\D/g, ""), code = dg ? "PTA-2026-" + ("0000" + dg).slice(-4) : "", phone = $("#f_lkPhone").value.trim();
     if (!email || !code || !phone) { err.textContent = t("eLk"); err.hidden = false; return; }
     if (!API) { err.textContent = t("eSrv"); err.hidden = false; return; }
     lkBusy = true; const b = $("#lkBtn"); b.disabled = true; b.textContent = t("saving");
