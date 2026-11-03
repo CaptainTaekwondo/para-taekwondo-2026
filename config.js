@@ -7,6 +7,11 @@ const CONFIG = {
   /* رابط الموقع النهائي بعد الرفع على GitHub Pages (يُستخدم في زر المشاركة). الفارغ = الرابط الحالي للصفحة */
   siteUrl: "https://captaintaekwondo.github.io/para-taekwondo-2026/",
 
+  /* ---- تسجيل المدربين وبطاقة الهوية (صفحة card.html) ----
+          ضع هنا رابط تطبيق الويب الناتج من Google Apps Script بعد نشره (ينتهي بـ /exec).
+          أثناء تركه فارغًا تعمل الصفحة بوضع المعاينة فقط ولا تحفظ أي بيانات. */
+  cardApi: "https://script.google.com/macros/s/AKfycbyWxN11ceZajY-Jg9wa5eVu_qN10WPLPdMFf5TB0i00qUusnIK3Nnz-Xasvn3QYGIuxmg/exec",
+
   /* ---- 1) فيديوهات يوتيوب (تظهر داخل نافذة منبثقة عند الضغط على «شاهد الفيديو»)
           ضع الرابط بين علامتي التنصيص. يقبل: youtube.com/watch?v=...  أو  youtu.be/...  أو  shorts/...
           وأثناء ترك الرابط فارغًا تظهر رسالة «سيتم رفع الفيديو قريبًا». ---- */
@@ -84,7 +89,7 @@ const CONFIG = {
   certificate: "",     // مثال: "assets/certificate.png"
   supportCert: "",     // تصميم شهادة دعم أصحاب الهمم بعد تجهيزه، مثال: "assets/support-certificate.png" (يملأ الإطار الفارغ)
   coachCert: "",       // تصميم شهادة المدرب بعد تجهيزه، مثال: "assets/coach-certificate.png"
-  coachCard: "",       // تصميم بطاقة المدرب بعد تجهيزه، مثال: "assets/coach-card.png" (يملأ الإطار الفارغ)
+  coachCard: "assets/coach-card-v5.webp",       // تصميم بطاقة المدرب بعد تجهيزه، مثال: "assets/coach-card.png" (يملأ الإطار الفارغ)
 
   /* ---- 8) استطلاع «كيف تريد أن تدعمنا؟»: رقم واتساب استقبال الاختيارات، وقائمة طرق المساعدة (عدّلها كما تشاء) ---- */
   supportWhatsapp: "+20 103 144 1064",

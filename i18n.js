@@ -12,7 +12,7 @@
     "أساسيات البارا تايكوندو 2026": "Para Taekwondo Basics 2026",
     "الفيديوهات": "Videos", "الدعوة": "Invitation", "التصوير": "Filming", "عن البطولة": "About",
     "الفئات": "Categories", "الأحزمة": "Belts", "التسجيل": "Register", "التقييم": "Scoring",
-    "المواعيد": "Dates", "المنظمون": "Organizers", "الشروط": "Terms",
+    "المواعيد": "Dates", "الشهادات": "Certificates", "المنظمون": "Organizers", "الشروط": "Terms",
     "«الأبطال لا يعرفون حدودًا»": "“Champions know no limits”",
     "«إرادتكم هي أقوى من أي تحدٍّ»": "“Your will is stronger than any challenge”",
     "«أنتم أبطال الإصرار والتحدي»": "“You are champions of determination”",
@@ -172,6 +172,7 @@
     "اسم المدرب": "Coach name",
     "رقم التسجيل": "Registration no.",
     "بطاقة المدرب (Coach ID Card)": "Coach card (Coach ID Card)",
+    "سجّل بيانات المدرب وأصدر بطاقتك الخاصة": "Register as a coach & get your own ID card",
     "مساحة مخصصة لإضافة تصميم بطاقة المدرب (Coach ID Card) بعد تجهيزه، وتُستبدل هذه البطاقة التجريبية به تلقائيًا.": "A space reserved for the coach card (Coach ID Card) design once it is ready; this sample card is replaced by it automatically.",
 
     /* المنظمون */

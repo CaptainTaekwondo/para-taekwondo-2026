@@ -153,7 +153,17 @@
   /* ---------- الشهادة وبطاقة المدرب ---------- */
   if (C.certificate) $("#cert").innerHTML = `<img src="${esc(C.certificate)}" alt="شهادة التقدير لكل الأبطال المشاركين" loading="lazy">`;
   if (C.supportCert) $("#cert2").innerHTML = `<img src="${esc(C.supportCert)}" alt="شهادة دعم أصحاب الهمم" loading="lazy">`;
-  if (C.coachCard) { const cc = $("#cc"); cc.style.padding = "0"; cc.innerHTML = `<img src="${esc(C.coachCard)}" alt="بطاقة المدرب" loading="lazy">`; }
+  if (C.coachCard) { const cc = $("#cc"); cc.style.padding = "0"; cc.innerHTML = `<img class="ccbg" src="${esc(C.coachCard)}" alt="" aria-hidden="true" loading="lazy"><img class="ccfg" src="${esc(C.coachCard)}" alt="بطاقة المدرب" loading="lazy">`
+    cc.setAttribute("role", "button"); cc.tabIndex = 0; cc.style.cursor = "zoom-in"; cc.setAttribute("aria-label", "تكبير بطاقة المدرب");
+    const openLb = () => {
+      if (document.getElementById("ccLb")) return;
+      const lb = document.createElement("div"); lb.id = "ccLb"; lb.setAttribute("role", "dialog"); lb.setAttribute("aria-modal", "true");
+      lb.innerHTML = `<img src="${esc(C.coachCard)}" alt="بطاقة المدرب"><button type="button" aria-label="إغلاق">✕</button>`;
+      const close = () => { lb.remove(); document.removeEventListener("keydown", onKey); cc.focus(); };
+      const onKey = (e) => { if (e.key === "Escape") close(); };
+      lb.addEventListener("click", close); document.addEventListener("keydown", onKey); document.body.appendChild(lb);
+    };
+    cc.addEventListener("click", openLb); cc.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openLb(); } }); }
 
   /* ---------- الدائرة البيانية للتقييم ---------- */
   const donut = $("#donut");
@@ -197,6 +207,7 @@
     });
   }), { rootMargin: "-45% 0px -50% 0px" });
   links.forEach(l => { const s = $(l.getAttribute("href")); if (s) so.observe(s); });
+  let scrT; addEventListener("scroll", () => { document.documentElement.classList.add("scrolling"); clearTimeout(scrT); scrT = setTimeout(() => document.documentElement.classList.remove("scrolling"), 180); }, { passive: true });
   const prog = $("#prog"); let tick = false;
   addEventListener("scroll", () => {
     if (tick) return; tick = true;
@@ -260,13 +271,28 @@
 
   /* ---------- الملصق ثلاثي الأبعاد + تكبير الصور ---------- */
   const poster = $("#poster");
-  if (!reduce && fine) {
+  if (!reduce) {
+    const pReset = () => { poster.style.transform = ""; poster.classList.remove("shine"); };
+    poster.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") poster.classList.add("shine"); });
+    ["pointerup", "pointercancel"].forEach(t => poster.addEventListener(t, e => { if (e.pointerType !== "mouse") setTimeout(pReset, 350); }));
     poster.addEventListener("pointermove", e => {
       const r = poster.getBoundingClientRect();
       const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
       poster.style.transform = `rotateY(${x * -14}deg) rotateX(${y * 10}deg)`;
     });
-    poster.addEventListener("pointerleave", () => { poster.style.transform = ""; });
+    poster.addEventListener("pointerleave", pReset);
+  }
+  const ccEl = $("#cc");
+  if (ccEl && !reduce) {
+    const ccReset = () => { ccEl.style.transform = ""; ccEl.classList.remove("shine"); };
+    ccEl.addEventListener("pointerdown", e => { if (e.pointerType !== "mouse") ccEl.classList.add("shine"); });
+    ["pointerup", "pointercancel"].forEach(t => ccEl.addEventListener(t, e => { if (e.pointerType !== "mouse") setTimeout(ccReset, 350); }));
+    ccEl.addEventListener("pointermove", e => {
+      const r = ccEl.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+      ccEl.style.transform = `perspective(1100px) rotateY(${x * -14}deg) rotateX(${y * 10}deg)`;
+    });
+    ccEl.addEventListener("pointerleave", ccReset);
   }
   const zoomImg = (src, alt, title) => () => { const im = new Image(); im.src = src; im.alt = alt; openModal(title, im, true); };
   poster.addEventListener("click", zoomImg("assets/poster.webp", "ملصق بطولة أساسيات البارا تايكوندو 2026", "ملصق البطولة"));
