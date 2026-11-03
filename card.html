@@ -8,8 +8,8 @@
 <meta name="theme-color" content="#030a24">
 <link rel="icon" href="assets/champion.webp">
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="style.css">
-<link rel="stylesheet" href="card.css">
+<link rel="stylesheet" href="style.css?v=20261103">
+<link rel="stylesheet" href="card.css?v=20261103">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -80,6 +80,7 @@
           <div class="fld"><label for="f_clubAr" data-t="clubAr">النادي أو الأكاديمية بالعربية</label><input id="f_clubAr" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" id="e_clubAr" hidden></p></div>
           <div class="fld"><label for="f_clubEn" data-t="clubEn">النادي أو الأكاديمية بالإنجليزية</label><input id="f_clubEn" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" id="e_clubEn" hidden></p></div>
           <div class="fld"><label for="f_email" data-t="email">البريد الإلكتروني (إجباري)</label><input id="f_email" type="email" maxlength="120" dir="ltr" autocomplete="email" inputmode="email"><p class="hint" data-t="emailHint">يُسجَّل كل بريد إلكتروني مرة واحدة فقط وبكود واحد.</p><p class="err" id="e_email" hidden></p></div>
+          <div class="fld" id="vbox"><label for="f_vcode" data-t="vLbl">كود تأكيد البريد (6 أرقام)</label><div style="display:flex;gap:8px"><input id="f_vcode" type="text" inputmode="numeric" maxlength="6" dir="ltr" autocomplete="one-time-code" style="flex:1"><button type="button" class="btn" id="btnSendCode" data-t="vSend">أرسل الكود</button></div><p class="hint" id="vMsg" data-t="vHint">اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).</p><p class="err" id="e_vcode" hidden></p></div>
           <div class="fld"><label for="f_phone" data-t="phone">رقم الهاتف (إجباري، مع رمز الدولة)</label><input id="f_phone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel" maxlength="25"><p class="err" id="e_phone" hidden></p></div>
           <div class="fld"><label for="f_champions" data-t="champions">عدد الأبطال المشاركين معك</label><input id="f_champions" type="number" inputmode="numeric" min="0" max="999" dir="ltr"><p class="hint" data-t="championsHint">للإدارة فقط ولا يظهر على البطاقة. اختياري.</p></div>
         </fieldset>
@@ -125,8 +126,8 @@
   </div>
 </main>
 
-<script src="config.js"></script>
-<script src="ai-prompt.js"></script>
-  <script src="card.js"></script>
+<script src="config.js?v=20261103"></script>
+<script src="ai-prompt.js?v=20261103"></script>
+  <script src="card.js?v=20261103"></script>
 </body>
 </html>

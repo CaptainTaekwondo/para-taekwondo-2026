@@ -23,7 +23,7 @@
       modeT: "ماذا تريد أن تفعل؟", newId: "إصدار بطاقة جديدة", newHint: "سجّل بياناتك لأول مرة واحصل على كودك وبطاقتك.", editId: "تعديل بطاقتي", editHint: "لديك كود؟ عدّل بياناتك أو صورتك وأصدر بطاقتك من جديد.",
       lkT: "تعديل بطاقتي", lkHint: "أدخل رقم هاتفك والبريد الإلكتروني المسجَّلين والكود القديم الظاهر على بطاقتك. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkEmail: "البريد الإلكتروني", lkCode: "الكود القديم الخاص بك", lkBtn: "عرض بياناتي", lkBack: "رجوع",
       eNotFound: "لم نجد تسجيلًا بهذا البريد والكود. تأكد من كتابتهما كما سجّلت.", eLk: "أدخل رقم الهاتف والبريد الإلكتروني والكود.", editBadge: "وضع التعديل: عدّل ما تريد ثم احفظ لإصدار بطاقتك من جديد.", submitEdit: "احفظ التعديلات وأصدر البطاقة", doneEditT: "تم تحديث بياناتك",
-      email: "البريد الإلكتروني (إجباري)", emailHint: "يُسجَّل كل بريد إلكتروني مرة واحدة فقط وبكود واحد.", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.", eDup: "هذا البريد الإلكتروني مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».", eDupPhone: "رقم الهاتف هذا مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».",
+      email: "البريد الإلكتروني (إجباري)", emailHint: "يُسجَّل كل بريد إلكتروني مرة واحدة فقط وبكود واحد.", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.", vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.", eDup: "هذا البريد الإلكتروني مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».", eDupPhone: "رقم الهاتف هذا مسجّل مسبقًا بالكود {code}. يُمنع إصدار أكثر من بطاقة لنفس المدرب. استخدم «تعديل بطاقتي».",
       promo: "هل تريد مشاركة لاعبك في الفيديو الترويجي للبطولة؟",
       promoYes: "نعم", promoNo: "لا",
       wa: "رقم واتساب للتواصل (إلزامي عند اختيار نعم)",
@@ -58,7 +58,7 @@
       modeT: "What would you like to do?", newId: "Issue a new card", newHint: "Register for the first time and get your code and card.", editId: "Edit my card", editHint: "Already have a code? Update your details or photo and re-issue your card.",
       lkT: "Edit my card", lkHint: "Enter your registered phone number, email and the old code shown on your card. Once verified, the edit page opens.", lkEmail: "Email", lkCode: "Your old code", lkBtn: "Show my details", lkBack: "Back",
       eNotFound: "No registration found for this email and code. Check them as you registered.", eLk: "Enter your phone number, email and code.", editBadge: "Edit mode: change what you need, then save to re-issue your card.", submitEdit: "Save changes & re-issue the card", doneEditT: "Your details are updated",
-      email: "Email (required)", emailHint: "Each email can be registered once, with a single code.", eEmail: "Enter a valid email address.", eDup: "This email is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.", eDupPhone: "This phone number is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.",
+      email: "Email (required)", emailHint: "Each email can be registered once, with a single code.", eEmail: "Enter a valid email address.", vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.", eDup: "This email is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.", eDupPhone: "This phone number is already registered with code {code}. Issuing more than one card for the same coach is not allowed. Use “Edit my card”.",
       promo: "Would you like your athlete to appear in the promo video?",
       promoYes: "Yes", promoNo: "No",
       wa: "WhatsApp number (required if Yes)",
@@ -98,7 +98,8 @@
 
   /* ---------- الأصول ---------- */
   const IMG = {};
-  const loadImg = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const loadImg1 = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+  const loadImg = (src) => loadImg1(src).catch(() => loadImg1(src + (src.startsWith("data:") || src.startsWith("blob:") ? "" : "?r=" + Date.now())));
   const assetsReady = Promise.all([
     loadImg("assets/card/frame.webp").then((i) => (IMG.frame = i)),
     loadImg("assets/card/logo.webp").then((i) => (IMG.logo = i)),
@@ -168,6 +169,9 @@
   }
 
   /* ---------- رسم البطاقة ---------- */
+  const safe = (fn) => { try { fn(); } catch (e) { try { console.error("card draw:", e); } catch (x) {} } };
+  const dimg = (c, im, ...a) => safe(() => { if (im && im.naturalWidth) c.drawImage(im, ...a); });
+  { const _line = line, _parts = parts; line = (...a) => safe(() => _line(...a)); parts = (...a) => safe(() => _parts(...a)); }
   function draw() {
     const c = ctx, v = (k, ph) => (F[k].value.trim() ? { s: F[k].value.trim(), a: 1 } : { s: ph, a: 0.5 });
     c.clearRect(0, 0, W, H); c.fillStyle = "#030a24"; c.fillRect(0, 0, W, H);
@@ -175,22 +179,22 @@
     c.save(); archPath(c, PH.x - 6, PH.y - 6, PH.w + 12, PH.h + 12); c.clip();
     if (st.photo) { const r = coverRect(st.photo); c.drawImage(st.photo, r.x, r.y, r.w, r.h); } else placeholderPhoto(c);
     c.restore();
-    c.drawImage(IMG.frame, 0, 0, W, H);
+    dimg(c, IMG.frame, 0, 0, W, H);
     // اللوجو
-    c.save(); c.beginPath(); c.arc(332.5, 168.5, 117.5, 0, 7); c.clip(); c.drawImage(IMG.logo, 215, 51, 235, 235); c.restore();
-    c.drawImage(IMG.plaque, 132, 746, 386, 140);
-    c.drawImage(IMG.slogan, 685, 828, 760, 140);
+    c.save(); c.beginPath(); c.arc(332.5, 168.5, 117.5, 0, 7); c.clip(); dimg(c, IMG.logo, 215, 51, 235, 235); c.restore();
+    dimg(c, IMG.plaque, 132, 746, 386, 140);
+    dimg(c, IMG.slogan, 685, 828, 760, 140);
 
     const CX = 937;
     const nAr = v("nameAr", t("phName")), nEn = v("nameEn", "Coach Full Name");
     line(c, nAr.s, CX, 421, { w: 800, s: 48, c: "#fff", dir: "rtl", maxW: 470, a: nAr.a, st: 2 });
     line(c, nEn.s, CX, 482, { w: 700, s: 28, c: GOLD, maxW: 470, a: nEn.a, st: 2 });
-    c.drawImage(IMG.divider, 707, 512, 460, 17);
+    dimg(c, IMG.divider, 707, 512, 460, 17);
     const lab = (cy, e, a) => parts(c, [{ t: e, w: 700, s: 21, c: GOLD, ls: "0.9px", st: 1.6 }, { t: "|", w: 700, s: 21, c: "#9fb3e6", st: 1.6 }, { t: a, w: 700, s: 21, c: GOLD, dir: "rtl", st: 1.6 }], CX, cy, 9, 470);
     lab(551, "Country", "الدولة");
     const cAr = v("countryAr", "الدولة"), cEn = v("countryEn", "Country");
     parts(c, [{ t: cEn.s, w: 800, s: 25, c: "#e4ecff", a: cEn.a, st: 2 }, { t: "•", w: 800, s: 29, c: GOLD, st: 2 }, { t: cAr.s, w: 800, s: 29, c: "#fff", dir: "rtl", a: cAr.a, st: 2 }], CX, 586, 10, 470);
-    c.drawImage(IMG.divider, 707, 612, 460, 17);
+    dimg(c, IMG.divider, 707, 612, 460, 17);
     lab(650, "Club / Academy", "النادي أو الأكاديمية");
     const kAr = v("clubAr", t("phClub")), kEn = v("clubEn", "Club / Academy Name");
     line(c, kAr.s, CX, 695, { w: 800, s: 27, c: "#fff", dir: "rtl", maxW: 470, a: kAr.a, st: 2 });
@@ -253,6 +257,7 @@
     chk("countryAr", AR, t("eNameAr")); chk("countryEn", EN, t("eNameEn"));
     chk("clubAr", AR, t("eNameAr")); chk("clubEn", EN, t("eNameEn"));
     const em = $("#f_email").value.trim(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) bad("email", t("eEmail")); else setErr("email", "");
+    if (API && mode !== "edit" && !/^\d{6}$/.test($("#f_vcode").value.trim())) bad("vcode", t("vReq")); else setErr("vcode", "");
     const ph = $("#f_phone").value.trim(); if (!/^\+?[0-9 ()\-]{8,20}$/.test(ph) || ph.replace(/\D/g, "").length < 8) bad("phone", t("ePhone")); else setErr("phone", "");
     if (!st.photo) bad("photo", t("ePhoto")); else setErr("photo", "");
     const promo = ($("input[name=promo]:checked") || {}).value === "yes";
@@ -278,6 +283,26 @@
   }
   const toBlob = (type, q) => new Promise((res) => canvas.toBlob(res, type, q));
   let busy = false;
+  /* ---------- تأكيد البريد ---------- */
+  (function () {
+    const b = $("#btnSendCode"); if (!b) return; let cd = 0, tm = null;
+    const msg = (k, bad) => { const m = $("#vMsg"); m.textContent = t(k); m.style.color = bad ? "#c0392b" : ""; };
+    const tick = () => { if (cd > 0) { b.textContent = t("vResend") + " (" + cd + ")"; b.disabled = true; cd--; tm = setTimeout(tick, 1000); } else { b.textContent = t("vResend"); b.disabled = false; } };
+    b.addEventListener("click", async () => {
+      const em = $("#f_email").value.trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { setErr("email", t("eEmail")); $("#f_email").focus(); return; }
+      setErr("email", ""); b.disabled = true;
+      try {
+        const r = await post({ action: "sendcode", email: em }, 30000);
+        if (r && r.ok) { msg("vSent"); cd = 60; clearTimeout(tm); tick(); $("#f_vcode").focus(); return; }
+        const e = r && r.error;
+        if (e === "email_exists") { setErr("email", t("eDup").replace("{code}", r.code || "")); }
+        else msg(e === "wait" ? "vWait" : e === "quota" ? "vQuota" : e === "mail_failed" ? "vMail" : e === "bad_email" ? "eEmail" : "eSrv", true);
+      } catch (x) { msg("eNet", true); }
+      b.disabled = false;
+    });
+  })();
+
   $("#regForm").addEventListener("submit", async (ev) => {
     ev.preventDefault(); if (busy) return;
     if ($("#f_website").value) return; // honeypot
@@ -289,7 +314,7 @@
       nameAr: F.nameAr.value.trim(), nameEn: F.nameEn.value.trim(), countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
       clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), email: $("#f_email").value.trim().toLowerCase(), phone: $("#f_phone").value.trim(), champions: $("#f_champions").value.trim(),
       promo: promo ? "yes" : "no", whatsapp: promo ? $("#f_wa").value.trim() : "", coachInVideo: promo && $("#f_coachVid").checked ? "yes" : "no",
-      photo: photoJpeg(),
+      photo: photoJpeg(), vcode: $("#f_vcode").value.trim(),
     };
     if (mode === "edit") { data.action = "update"; data.code = editCode; }
     try {
@@ -298,7 +323,7 @@
       else res = mode === "edit" ? { ok: false, error: "srv" } : { ok: true, code: "PTA-2026-0000", demo: true };
       st.code = res.code; st.final = true; draw(); await finish(res);
     } catch (err) {
-      const m = $("#formErr"); m.textContent = err && err.message === "email_exists" ? t("eDup").replace("{code}", err.code || "") : err && err.message === "phone_exists" ? t("eDupPhone").replace("{code}", err.code || "") : (err && err.name === "AbortError") || err instanceof TypeError ? t("eNet") : err && err.message === "not_found" ? t("eNotFound") : t("eSrv"); m.hidden = false;
+      const m = $("#formErr"); m.textContent = err && /^(bad_vcode|vcode_expired)$/.test(err.message) ? (setErr("vcode", t(err.message === "bad_vcode" ? "vBad" : "vExp")), t(err.message === "bad_vcode" ? "vBad" : "vExp")) : err && err.message === "email_exists" ? t("eDup").replace("{code}", err.code || "") : err && err.message === "phone_exists" ? t("eDupPhone").replace("{code}", err.code || "") : (err && err.name === "AbortError") || err instanceof TypeError ? t("eNet") : err && err.message === "not_found" ? t("eNotFound") : t("eSrv"); m.hidden = false;
       btn.disabled = false; btn.textContent = t($("#submitBtn").dataset.t);
     } finally { busy = false; }
   });
@@ -328,7 +353,7 @@
   function showForm(m) {
     mode = m; modeBox.hidden = true; lkBox.hidden = true; grid.hidden = false;
     const sb = $("#submitBtn"); sb.dataset.t = m === "edit" ? "submitEdit" : "submit"; sb.textContent = t(sb.dataset.t);
-    $("#editBadge").hidden = m !== "edit"; $("#f_email").readOnly = m === "edit"; $("#f_phone").readOnly = m === "edit";
+    $("#editBadge").hidden = m !== "edit"; $("#f_email").readOnly = m === "edit"; $("#f_phone").readOnly = m === "edit"; $("#vbox").hidden = m === "edit" || !API;
     redraw();
   }
   $("#btnNew").addEventListener("click", () => showForm("new"));
