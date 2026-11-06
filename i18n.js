@@ -112,8 +112,7 @@
     "مستخدمو الكراسي المتحركة": "Wheelchair users",
     "الصم أو الإعاقة السمعية": "Deaf or hearing impaired",
     "قِصار القامة وفق القياسات المعتمدة": "Short stature according to the approved measurements",
-    "تصنيف أولي استرشادي، ولا يُعدّ تحديدًا نهائيًا لفئة اللاعب أو إثباتًا لأهليته للمشاركة. الرموز ليست تصنيفًا رسميًا نهائيًا قبل مراجعة الجهة الفنية المختصة.":
-      "This is a preliminary guide only. It is not a final determination of the athlete's category or proof of eligibility. The codes are not an official final classification before review by the competent technical body.",
+    "تم اعتماد هذه الرموز رسميًا.": "These codes have been officially approved.",
 
     /* التسجيل */
     "خطوات التسجيل وإرسال المشاركة": "Registration and Submitting Your Entry",
