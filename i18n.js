@@ -155,7 +155,6 @@
 
     /* المواعيد */
     "المواعيد والجوائز": "Dates and Prizes",
-    "الإعلان الرسمي ": "Official announcement",
     "فتح التسجيل": "Registration opens",
     "آخر موعد للتسجيل": "Registration deadline",
     "موعد إرسال الفيديوهات": "Video submission date",
@@ -187,7 +186,6 @@
     "منصة التسجيل": "Registration platform",
     "المسؤولة عن تسجيل البيانات والتحكيم": "Responsible for data registration and judging",
     "المسؤول الدعائي والتسويقي للبطولة والتصميم الفني والتقني": "In charge of the championship's promotion, marketing, and design and technical work",
-    "المنصة الإعلامية ": "Media platform",
     "اتصال": "Call", "واتساب": "WhatsApp",
     "الراعي الرسمي للبطولة": "Official championship sponsor",
     "الراعي الرسمي": "Official sponsor",
@@ -230,7 +228,7 @@
     "نسخ الرابط": "Copy link",
     "تم نسخ الرابط": "Link copied",
     "تعذّر النسخ، انسخ الرابط من شريط العنوان": "Could not copy, copy the link from the address bar",
-    "فيسبوك": "Facebook", "إكس (تويتر)": "X (Twitter)", "تيليجرام": "Telegram", "واتساب ": "WhatsApp",
+    "فيسبوك": "Facebook", "إكس (تويتر)": "X (Twitter)", "تيليجرام": "Telegram",
     "بطولة أساسيات البارا تايكوندو 2026: مبادرة رياضية مجانية عبر الإنترنت. شاهد الفيديوهات الإرشادية وسجّل مشاركتك.":
       "Arab Para Taekwondo Basics Championship 2026: a free online sports initiative. Watch the guide videos and register.",
     "English": "العربية",
@@ -280,13 +278,10 @@
     "اكتب اسمك واختر طريقة واحدة على الأقل.": "Enter your name and choose at least one way.",
     "جاهز! اضغط الزر لفتح واتساب برسالة جاهزة.": "Ready! Press the button to open WhatsApp with your message ready.",
     "الترويج للبطولة بين الأندية والأكاديميات والمدربين": "Promote the championship among clubs, academies and coaches",
-    "ترجمة مواد البطولة إلى لغة أخرى": "Translate the championship materials into another language",
     "التواصل مع لاعبين وأندية في بلدي لدعوتهم للمشاركة": "Contact athletes and clubs in my country to invite them to take part",
     "نشر رابط الموقع وملصق البطولة على حساباتي ومجموعاتي": "Share the site link and the championship poster on my accounts and groups",
     "عمل فيديو عن البطولة ونشره عندي للترويج لها": "Make a video about the championship and publish it on my channels to promote it",
     "تصميم محتوى للترويج (منشورات أو صور أو فيديوهات قصيرة)": "Design promotional content (posts, images or short videos)",
-    "الترويج للبطولة بين الأندية والأكاديميات والمدربين": "Promote the championship among clubs, academies and coaches",
-    "التواصل مع لاعبين وأندية في بلدي لدعوتهم للمشاركة": "Contact athletes and clubs in my country to invite them to take part",
     "دعم معنوي (رسائل تشجيع وتحفيز للمشاركين)": "Moral support (messages of encouragement for participants)",
     "دعم مالي أو عيني للأبطال أصحاب المراكز": "Financial or in-kind support for the medal-winning champions",
     "رعاية أو دعم مادي أو عيني للبطولة نفسها": "Sponsorship or financial/in-kind support for the championship itself",
@@ -298,9 +293,6 @@
     "مساعدة تقنية (مونتاج أو تصميم أو برمجة)": "Technical help (editing, design or programming)",
     "الانضمام كمتطوع في تنظيم البطولة": "Join as a volunteer in organizing the championship",
     "ترشيح مدربين أو لاعبين أو جهات يمكنها المشاركة أو الدعم": "Recommend coaches, athletes or organizations that could take part or support",
-    "طريقة أخرى (أكتبها في الملاحظات)": "Another way (I'll write it in the notes)",
-    "المساعدة في التحكيم أو المراجعة الفنية": "Help with refereeing or technical review",
-    "مساعدة تقنية (مونتاج أو تصميم أو برمجة)": "Technical help (editing, design or programming)",
     "طريقة أخرى (أكتبها في الملاحظات)": "Another way (I will write it in the notes)",
     "مرحبًا، أودّ دعم بطولة أساسيات البارا تايكوندو 2026.": "Hello, I would like to support the Arab Para Taekwondo Basics Championship 2026.",
     "الاسم:": "Name:",
@@ -314,7 +306,14 @@
     "بطاقة المدرب Coach ID Card": "Coach ID Card",
     "مكان صورة وجه المدرب": "Place for the coach's face photo",
     "إغلاق": "Close",
-    "تعليمات تصوير فيديو المشاركة ": "Entry video filming instructions"
+    "شاهد الفيديو: المستوى الأول": "Watch the video: Level 1",
+    "شاهد الفيديو: المستوى الثاني": "Watch the video: Level 2",
+    "شاهد الفيديو: المستوى الثالث": "Watch the video: Level 3",
+    "رمز QR للانضمام إلى جروب الواتساب": "QR code to join the WhatsApp group",
+    "تكبير بطاقة المدرب": "Enlarge the coach card",
+    "صورة الكابتن الفلسطيني إبراهيم الحاج": "Photo of Palestinian Captain Ibrahim Al-Haj",
+    "صورة الحكم الدولي علي نور": "Photo of international referee Ali Nour",
+    "شعار منصة الكابتن عادل SportLand": "Logo of Captain Adel's SportLand platform"
   };
 
   /* ---------------- المحرّك ---------------- */
