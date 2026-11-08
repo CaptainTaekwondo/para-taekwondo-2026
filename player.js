@@ -33,6 +33,7 @@
       title: "تسجيل اللاعب وإصدار بطاقة البطل",
       lead: "املأ بيانات اللاعب وستظهر بطاقته أمامك فورًا. بعد الحفظ يحصل اللاعب على كوده الفريد وتحمّل البطاقة بصورة عالية الجودة.",
       sportland: "هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منصة SportLand بعد فتح رابطها رسميًا.",
+      guideBtn: "شاهد شرح التسجيل مع مريم", guideT: "شرح التسجيل مع مريم", guideClose: "إغلاق", guideMin: "تصغير الفيديو", guideMax: "تكبير", guideBack: "رجوع 10 ثوانٍ ⏪", guideFwd: "⏩ تقديم 10 ثوانٍ", guideBackS: "10 ⏪", guideFwdS: "⏩ 10", guideWide: "↔ بالعرض", guideTall: "↕ بالطول",
       back: "العودة للموقع", lang: "English", choose: "اختر",
       modeT: "ماذا تريد أن تفعل؟", newId: "تسجيل جديد", newHint: "سجّل بيانات اللاعب لأول مرة واحصل على كوده وبطاقته.", editId: "تعديل بطاقة لاعب", editHint: "لديك كود اللاعب؟ عدّل بياناته أو صورته وأصدر بطاقته من جديد.",
       oneCard: "⚠️ تنبيه: يُسجَّل كل لاعب مرة واحدة فقط وببطاقة واحدة، وأي تسجيل مكرر لنفس اللاعب يُرفض. لتغيير بيانات اللاعب استخدم «تعديل بطاقة لاعب».",
@@ -84,6 +85,7 @@
       title: "Player Registration & Champion Card",
       lead: "Fill in the player's details and the card appears live. After saving, the player gets a unique code and a high-quality card to download.",
       sportland: "This is the initial registration of the player's details and card. Uploading the performance video and judging take place on the SportLand platform once its link is officially opened.",
+      guideBtn: "Watch the registration guide (Arabic)", guideT: "Registration guide with Mariam", guideClose: "Close", guideMin: "Minimize video", guideMax: "Enlarge", guideBack: "⏪ Back 10 seconds", guideFwd: "Forward 10 seconds ⏩", guideBackS: "⏪ 10", guideFwdS: "10 ⏩", guideWide: "↔ Landscape", guideTall: "↕ Portrait",
       back: "Back to site", lang: "عربي", choose: "Choose",
       modeT: "What would you like to do?", newId: "New registration", newHint: "Register the player for the first time and get the code and card.", editId: "Edit a player card", editHint: "Have the player's code? Update the details or photo and re-issue the card.",
       oneCard: "⚠️ Notice: each player registers once only, with one card; any duplicate registration of the same player is rejected. To change a player's details use “Edit a player card”.",
@@ -765,6 +767,80 @@
     document.querySelectorAll("#f_video, [data-k=video]").forEach((i) => { if (!VIDEO_OPEN) { i.placeholder = t("vClosedPh"); i.dir = lang === "en" ? "ltr" : "rtl"; } });
   }
   $("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); });
+
+  /* ---------- فيديو شرح التسجيل ---------- */
+  (() => {
+    const m = /(?:youtu\.be\/|v=|shorts\/|embed\/|live\/)([\w-]{11})/.exec((typeof CONFIG !== "undefined" && CONFIG.guideVideo) || "");
+    if (!m) return;
+    const btn = $("#guideBtn"), dlg = $("#guideDlg"), bg = $("#guideBg"), hd = $("#guideHd"), mv = $("#guideMv"), vol = $("#guideVol"), volIn = $("input", vol), volOut = $("output", vol), minB = $("#guideMin"), xB = $("#guideX"), wideB = $("#guideWide"), backB = $("#guideBack"), fwdB = $("#guideFwd");
+    btn.hidden = false;
+    let curT = 0, dur = 0, hello = 0;
+    const cmd =(func, args) => { const f = $("iframe", mv); if (f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: "command", func, args: args || [] }), "*"); };
+    const setVol = (v) => { v = Math.max(0, Math.min(100, +v)); volIn.value = v; volOut.textContent = v + "%"; if (v > 0) cmd("unMute"); cmd("setVolume", [v]); if (v === 0) cmd("mute"); };
+    volIn.addEventListener("input", () => setVol(volIn.value));
+    vol.querySelectorAll("button").forEach((b) => b.addEventListener("click", () => setVol(+volIn.value + +b.dataset.d)));
+    btn.addEventListener("click", () => {
+      const f = document.createElement("iframe");
+      f.title = t("guideT"); f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+      f.src = `https://www.youtube-nocookie.com/embed/${m[1]}?autoplay=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
+      f.addEventListener("load", () => { clearInterval(hello); listen(); hello = setInterval(listen, 1000); });
+      curT = 0; volIn.value = 100; volOut.textContent = "100%";
+      xB.setAttribute("aria-label", t("guideClose"));
+      dlg.hidden = false; setMini(false); setWide(false); mv.replaceChildren(f); xB.focus();
+    });
+    const listen = () => { const f = $("iframe", mv); if (f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: "listening" }), "*"); };
+    window.addEventListener("message", (e) => { // الوقت الحالي للفيديو من مشغّل يوتيوب
+      const f = $("iframe", mv); if (!f || e.source !== f.contentWindow) return;
+      let d; try { d = JSON.parse(e.data); } catch (x) { return; }
+      if (d && d.info && d.info.duration) dur = d.info.duration;
+      if (d && d.info && typeof d.info.currentTime === "number") { curT = d.info.currentTime; clearInterval(hello); }
+    });
+    function setMini(on) { // لا نحرّك الإطار في الصفحة حتى لا يُعاد تحميل الفيديو
+      dlg.classList.toggle("mini", on); bg.hidden = on;
+      document.documentElement.classList.toggle("guide-lock", !on);
+      dlg.toggleAttribute("aria-modal", false); if (!on) dlg.setAttribute("aria-modal", "true");
+      dlg.style.left = dlg.style.top = dlg.style.bottom = "";
+      minB.dataset.t = on ? "guideMax" : "guideMin"; minB.textContent = t(minB.dataset.t);
+      backB.dataset.t = on ? "guideBackS" : "guideBack"; backB.textContent = t(backB.dataset.t); backB.setAttribute("aria-label", t("guideBack"));
+      fwdB.dataset.t = on ? "guideFwdS" : "guideFwd"; fwdB.textContent = t(fwdB.dataset.t); fwdB.setAttribute("aria-label", t("guideFwd"));
+    }
+    function setWide(on) {
+      dlg.classList.toggle("wide", on);
+      wideB.dataset.t = on ? "guideTall" : "guideWide"; wideB.textContent = t(wideB.dataset.t);
+      if (dlg.style.top) { const r = dlg.getBoundingClientRect(); moveTo(r.left, r.top); } // تبقى النافذة المسحوبة داخل الشاشة
+    }
+    wideB.addEventListener("click", () => setWide(!dlg.classList.contains("wide")));
+    function closeGuide() {
+      clearInterval(hello); mv.replaceChildren(); dlg.hidden = bg.hidden = true; // يوقف الفيديو والصوت
+      document.documentElement.classList.remove("guide-lock"); btn.focus();
+    }
+    minB.addEventListener("click", () => setMini(!dlg.classList.contains("mini")));
+    xB.addEventListener("click", closeGuide); bg.addEventListener("click", closeGuide);
+    const seekBy = (s) => { curT = Math.max(0, curT + s); if (dur) curT = Math.min(curT, Math.max(0, dur - 1)); cmd("seekTo", [curT, true]); };
+    backB.addEventListener("click", () => seekBy(-10));
+    fwdB.addEventListener("click", () => seekBy(10));
+    dlg.addEventListener("keydown", (e) => { // Esc وحصر التنقل بالتاب في العرض الكبير فقط
+      if (dlg.classList.contains("mini")) return;
+      if (e.key === "Escape") { closeGuide(); return; }
+      if (e.key !== "Tab") return;
+      const all = [...dlg.querySelectorAll("button, input, iframe")], first = all[0], last = all[all.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    });
+    /* سحب النافذة الصغيرة من شريطها العلوي */
+    const clamp = (x, y) => [Math.max(0, Math.min(x, innerWidth - dlg.offsetWidth)), Math.max(0, Math.min(y, innerHeight - dlg.offsetHeight))];
+    const moveTo = (x, y) => { [x, y] = clamp(x, y); dlg.style.left = x + "px"; dlg.style.top = y + "px"; dlg.style.bottom = "auto"; };
+    let drag = null;
+    hd.addEventListener("pointerdown", (e) => {
+      if (!dlg.classList.contains("mini") || e.target.closest("button")) return;
+      const r = dlg.getBoundingClientRect(); drag = { dx: e.clientX - r.left, dy: e.clientY - r.top };
+      hd.setPointerCapture(e.pointerId);
+    });
+    hd.addEventListener("pointermove", (e) => { if (drag) moveTo(e.clientX - drag.dx, e.clientY - drag.dy); });
+    const endDrag = () => { drag = null; };
+    hd.addEventListener("pointerup", endDrag); hd.addEventListener("pointercancel", endDrag);
+    window.addEventListener("resize", () => { if (!dlg.hidden && dlg.classList.contains("mini") && dlg.style.top) { const r = dlg.getBoundingClientRect(); moveTo(r.left, r.top); } });
+  })();
 
   fillSelects(); applyRole(); infoAll();
   Promise.all([assetsReady, fontsReady]).then(() => { applyLang(); canvas.classList.add("ready"); });

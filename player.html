@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="style.css?v=20261108">
 <link rel="stylesheet" href="card.css?v=20261108">
-<link rel="stylesheet" href="player.css?v=20261108">
+<link rel="stylesheet" href="player.css?v=20261108b">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -31,6 +31,14 @@
   </header>
   <p class="demo" id="demoBanner" hidden data-t="demo">وضع المعاينة: لم يُربط الحفظ بعد، لذلك لن تُسجَّل البيانات. البطاقة قابلة للتحميل للتجربة فقط.</p>
   <p class="pinfo" data-t="sportland">هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منصة SportLand بعد فتح رابطها رسميًا.</p>
+  <button class="guidebtn" id="guideBtn" type="button" hidden><span aria-hidden="true">▶</span> <span data-t="guideBtn">شاهد شرح التسجيل مع مريم</span></button>
+  <div class="guidebg" id="guideBg" hidden></div>
+  <div class="guidedlg" id="guideDlg" role="dialog" aria-labelledby="guideT" hidden>
+    <div class="guidehd" id="guideHd"><span class="guidegrip" aria-hidden="true">⠿</span><h2 id="guideT" data-t="guideT">شرح التسجيل مع مريم</h2><button id="guideMin" type="button" data-t="guideMin">تصغير الفيديو</button><button id="guideX" type="button" aria-label="إغلاق">×</button></div>
+    <div class="mv tall" id="guideMv"></div>
+    <div class="guidectl"><button class="guideback" id="guideBack" type="button" data-t="guideBack">رجوع 10 ثوانٍ ⏪</button><button class="guideback" id="guideFwd" type="button" data-t="guideFwd">⏩ تقديم 10 ثوانٍ</button><button class="guideback" id="guideWide" type="button" data-t="guideWide">↔ بالعرض</button></div>
+    <div class="vvol" id="guideVol"><button type="button" data-d="-10" aria-label="خفض الصوت">🔉</button><input type="range" min="0" max="100" step="5" value="100" aria-label="مستوى الصوت"><button type="button" data-d="10" aria-label="رفع الصوت">🔊</button><output>100%</output></div>
+  </div>
 
   <section class="mode" id="modeBox">
     <h2 class="foil" data-t="modeT">ماذا تريد أن تفعل؟</h2>
@@ -178,8 +186,8 @@
   </div>
 </main>
 
-<script src="config.js?v=20261108"></script>
+<script src="config.js?v=20261108b"></script>
 <script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261108"></script>
+<script src="player.js?v=20261108b"></script>
 </body>
 </html>

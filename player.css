@@ -1,4 +1,46 @@
 /* صفحة تسجيل اللاعب (إضافات فوق card.css) */
+.guidebtn{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0 auto 1.6rem;padding:.85rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold2);background:linear-gradient(180deg,#e0242f,#a50f19);color:#fff;font:800 1.1rem var(--fb);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.guidebtn[hidden]{display:none}
+.guidebtn:hover{filter:brightness(1.1)}
+.guidebtn:focus-visible,#guideX:focus-visible,#guideMin:focus-visible,.guideback:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.guidebg{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.8)}
+.guidebg[hidden],.guidedlg[hidden]{display:none}
+html.guide-lock{overflow:hidden}
+.guidedlg{position:fixed;z-index:1001;top:50%;left:50%;transform:translate(-50%,-50%);box-sizing:border-box;width:min(94vw,460px);max-height:96dvh;padding:.8rem;border:1.5px solid var(--gold2);border-radius:16px;background:#061540;color:var(--txt);overflow:auto;box-shadow:0 10px 30px rgba(0,0,0,.55)}
+.guidehd{display:flex;align-items:center;gap:.5rem;margin-bottom:.6rem}
+.guidehd h2{flex:1;min-width:0;font:800 1.05rem var(--fb);color:var(--gold1);margin:0}
+.guidegrip{display:none;flex:1;color:var(--gold1);font-size:1.2rem;line-height:1}
+#guideMin{flex:none;min-height:2.4rem;padding:.25rem .8rem;border-radius:999px;border:1.5px solid var(--gold2);background:rgba(244,203,85,.14);color:var(--gold1);font:800 .9rem var(--fb);cursor:pointer}
+#guideX{width:2.4rem;height:2.4rem;flex:none;border-radius:50%;border:1.5px solid var(--gold2);background:rgba(3,10,36,.7);color:var(--gold1);font-size:1.4rem;line-height:1;cursor:pointer}
+.guidedlg .mv.tall{width:min(100%,calc((96dvh - 12.5rem) * 9 / 16))}
+.guidectl{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem;margin-top:.6rem;direction:ltr} /* الرجوع يسارًا والتقديم يمينًا مثل المشغّلات */
+html[dir=rtl] .guideback{direction:rtl}
+.guideback{min-height:2.4rem;padding:.25rem 1rem;border-radius:999px;border:1.5px solid var(--gold2);background:rgba(3,10,36,.7);color:var(--gold1);font:800 .9rem var(--fb);cursor:pointer}
+.guidedlg.mini{top:auto;left:12px;bottom:12px;transform:none;width:228px;padding:.4rem}
+.guidedlg.mini .guidehd{margin-bottom:.35rem;cursor:move;touch-action:none}
+.guidedlg.mini .guidehd h2,.guidedlg.mini .vvol{display:none}
+.guidedlg.mini .guidegrip{display:block}
+.guidedlg.mini .mv.tall{width:100%}
+.guidedlg.mini .guidectl{margin-top:.35rem;gap:.3rem}
+.guidedlg.mini .guideback{padding:.2rem .6rem;font-size:.82rem}
+/* زر «بالعرض»: مشغّل عرضي 16:9 بدل الطولي */
+.guidedlg.wide{width:min(94vw,860px)}
+.guidedlg.wide .mv.tall{aspect-ratio:16/9;width:min(100%,calc((96dvh - 12.5rem) * 16 / 9))}
+.guidedlg.mini.wide{width:min(calc(100vw - 24px),400px)}
+.guidedlg.mini.wide .mv.tall{aspect-ratio:auto;width:100%;height:200px}
+/* الموبايل بالعرض: الفيديو في جانب والأزرار في الجانب الآخر */
+@media (orientation:landscape) and (max-height:520px){
+  .guidedlg:not([hidden]){display:grid;grid-template-columns:auto 300px;grid-template-rows:auto auto 1fr;column-gap:.6rem;align-content:start;width:auto;max-width:96vw;padding:.4rem}
+  .guidedlg .guidehd h2{display:none}
+  .guidedlg.mini:not([hidden]){grid-template-columns:auto 150px;left:6px;bottom:6px}
+  .guidedlg .guidehd,.guidedlg .guidectl,.guidedlg .vvol{grid-column:2}
+  .guidedlg .mv.tall,.guidedlg.mini .mv.tall{grid-column:1;grid-row:1/4;width:max(200px,calc((100dvh - 2.5rem) * 9 / 16));margin:0}
+  .guidedlg.wide:not([hidden]){grid-template-columns:auto 190px}
+  .guidedlg.wide .vvol output,.guidedlg.wide .vvol input{display:none}
+  .guidedlg.wide .mv.tall{width:min(calc(96vw - 225px),calc((100dvh - 2.5rem) * 16 / 9))}
+  .guidedlg.mini.wide:not([hidden]){grid-template-columns:auto 150px;width:auto}
+  .guidedlg.mini.wide .mv.tall{width:356px}
+}
 .pinfo{max-width:760px;margin:0 auto 1.6rem;text-align:center;color:var(--gold1);background:rgba(6,21,64,.55);border:1px solid rgba(244,203,85,.35);border-radius:14px;padding:.75rem 1rem;line-height:1.7;font-size:.95rem}
 .cform select,.cform input[type=date]{width:100%;padding:.7rem .9rem;border-radius:12px;border:1.5px solid rgba(156,192,255,.35);background:rgba(3,10,36,.7);color:var(--txt);font:600 1rem var(--fb);line-height:1.5;color-scheme:dark}
 .cform select option{background:#06153f;color:var(--txt)}
