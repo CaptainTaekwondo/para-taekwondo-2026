@@ -15,11 +15,26 @@
   /* ---------- النافذة المنبثقة ---------- */
   const vm = $("#vm"), vmv = $("#vmv"), vmt = $("#vmt"), mx = $(".mx", vm);
   let lastFocus = null;
+  /* التحكم في مستوى الصوت (مشغّل Shorts المضمَّن فيه كتم/تشغيل فقط) عبر YouTube IFrame API بالرسائل */
+  const vvol = document.createElement("div");
+  vvol.className = "vvol"; vvol.hidden = true;
+  vvol.innerHTML = '<button type="button" data-d="-10" aria-label="خفض الصوت">🔉</button>' +
+    '<input type="range" min="0" max="100" step="5" value="100" aria-label="مستوى الصوت">' +
+    '<button type="button" data-d="10" aria-label="رفع الصوت">🔊</button><output>100%</output>';
+  vmv.after(vvol);
+  const volIn = $("input", vvol), volOut = $("output", vvol);
+  const ytCmd = (func, args) => { const f = $("iframe", vmv); if (f && f.contentWindow) f.contentWindow.postMessage(JSON.stringify({ event: "command", func, args: args || [] }), "*"); };
+  const setVol = v => { v = Math.max(0, Math.min(100, +v)); volIn.value = v; volOut.textContent = v + "%"; if (v > 0) ytCmd("unMute"); ytCmd("setVolume", [v]); if (v === 0) ytCmd("mute"); };
+  volIn.addEventListener("input", () => setVol(volIn.value));
+  $$("button", vvol).forEach(b => b.addEventListener("click", () => setVol(+volIn.value + +b.dataset.d)));
   function openModal(title, node, auto) {
     lastFocus = document.activeElement;
     vmt.textContent = title;
-    vmv.className = "mv" + (auto ? " auto" : "");
+    vmv.className = "mv" + (auto === true ? " auto" : auto === "tall" ? " tall" : "");
     vmv.replaceChildren(node);
+    const isYt = node.tagName === "IFRAME" && /youtube/.test(node.src);
+    vvol.hidden = !isYt;
+    if (isYt) { volIn.value = 100; volOut.textContent = "100%"; node.addEventListener("load", () => { node.contentWindow.postMessage(JSON.stringify({ event: "listening" }), "*"); }); }
     vm.hidden = false;
     if (window.I18N) I18N.apply(vm);
     document.body.style.overflow = "hidden";
@@ -37,7 +52,7 @@
     if (vm.hidden) return;
     if (e.key === "Escape") closeModal();
     if (e.key === "Tab") { // إبقاء التركيز داخل النافذة
-      const f = [mx, ...$$("iframe", vm)];
+      const f = [mx, ...$$("iframe", vm), ...(vvol.hidden ? [] : $$("button, input", vvol))];
       const i = f.indexOf(document.activeElement);
       e.preventDefault();
       f[(i + (e.shiftKey ? f.length - 1 : 1)) % f.length].focus();
@@ -61,7 +76,7 @@
       let node;
       if (id) {
         node = document.createElement("iframe");
-        node.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+        node.src = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&enablejsapi=1&origin=${encodeURIComponent(location.origin)}`;
         node.title = v.title;
         node.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
         node.allowFullscreen = true;
@@ -70,7 +85,7 @@
         node.className = "soon";
         node.innerHTML = "<span>سيتم رفع الفيديو قريبًا</span><small>سيظهر هنا فيديو شرح حركات هذا المستوى</small>";
       }
-      openModal(v.title + " — " + v.belts, node);
+      openModal(v.title + " — " + v.belts, node, id && /shorts\//.test(v.url) ? "tall" : false);   // فيديو Shorts طولي
     });
     c.append(b);
     vgrid.append(c);

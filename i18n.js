@@ -39,6 +39,7 @@
     "الفيديوهات الإرشادية": "Guide Videos",
     "شاهد فيديو مستواك قبل التصوير، وأدِّ الحركات كما تظهر فيه تمامًا.": "Watch your level's video before filming, and perform the moves exactly as shown.",
     "شاهد الفيديو": "Watch video",
+    "خفض الصوت": "Volume down", "رفع الصوت": "Volume up", "مستوى الصوت": "Volume",
     "سيتم رفع الفيديو قريبًا": "The video will be uploaded soon",
     "سيظهر هنا فيديو شرح حركات هذا المستوى": "The video explaining this level's moves will appear here",
     "المستوى الأول": "Level 1", "المستوى الثاني": "Level 2", "المستوى الثالث": "Level 3",
@@ -171,6 +172,8 @@
     "رقم التسجيل": "Registration no.",
     "بطاقة المدرب (Coach ID Card)": "Coach card (Coach ID Card)",
     "سجّل بيانات المدرب وأصدر بطاقتك الخاصة": "Register as a coach & get your own ID card",
+    "سجّل بيانات اللاعب الآن واحصل على كوده وبطاقة البطل. والمدرب الذي يشارك كلاعب يسجّل بياناته ثم يضيف لاعبيه.": "Register the player now and get the player code and champion card. A coach competing as a player registers first, then adds their players.",
+    "سجّل بيانات اللاعب وأصدر بطاقة البطل": "Register a player & get the champion card",
     "مساحة مخصصة لإضافة تصميم بطاقة المدرب (Coach ID Card) بعد تجهيزه، وتُستبدل هذه البطاقة التجريبية به تلقائيًا.": "A space reserved for the coach card (Coach ID Card) design once it is ready; this sample card is replaced by it automatically.",
 
     /* المنظمون */

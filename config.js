@@ -12,13 +12,22 @@ const CONFIG = {
           أثناء تركه فارغًا تعمل الصفحة بوضع المعاينة فقط ولا تحفظ أي بيانات. */
   cardApi: "https://script.google.com/macros/s/AKfycbyWxN11ceZajY-Jg9wa5eVu_qN10WPLPdMFf5TB0i00qUusnIK3Nnz-Xasvn3QYGIuxmg/exec",
 
+  /* ---- تسجيل اللاعبين وبطاقة البطل (صفحة player.html) ----
+          ضع هنا رابط تطبيق الويب الناتج من نشر backend/players.gs (ينتهي بـ /exec).
+          أثناء تركه فارغًا تعمل الصفحة بوضع المعاينة فقط ولا تحفظ أي بيانات. */
+  playerApi: "https://script.google.com/macros/s/AKfycbyKPFjtIxERnfKahRqlWJumj-9Mi-wvIkN8eAKd-tM6xobKzQdQRHLX9v1c8enXQD2i/exec",
+  /* تاريخ احتساب العمر للفئات العمرية (مبدئي حتى يعتمده المنظمون) بصيغة سنة-شهر-يوم */
+  ageDate: "2026-12-31",
+  /* خانة «رابط فيديو المشاركة» في صفحة اللاعب: false = مغلقة مؤقتًا حتى يبدأ موعد إرسال الفيديوهات، true = مفتوحة */
+  videoOpen: false,
+
   /* ---- 1) فيديوهات يوتيوب (تظهر داخل نافذة منبثقة عند الضغط على «شاهد الفيديو»)
           ضع الرابط بين علامتي التنصيص. يقبل: youtube.com/watch?v=...  أو  youtu.be/...  أو  shorts/...
           وأثناء ترك الرابط فارغًا تظهر رسالة «سيتم رفع الفيديو قريبًا». ---- */
   videos: [
-    { title: "المستوى الأول",  belts: "الحزام الأبيض والأصفر",  colors: ["#ffffff", "#f2c91b"], url: "" },
-    { title: "المستوى الثاني", belts: "الحزام الأخضر والأزرق", colors: ["#1e8e3e", "#1f4fb4"], url: "" },
-    { title: "المستوى الثالث", belts: "الحزام الأحمر والأسود", colors: ["#c41e2a", "#0b0b0f"], url: "" }
+    { title: "المستوى الأول",  belts: "الحزام الأبيض والأصفر",  colors: ["#ffffff", "#f2c91b"], url: "https://youtube.com/shorts/ywcsE5rvTws" },
+    { title: "المستوى الثاني", belts: "الحزام الأخضر والأزرق", colors: ["#1e8e3e", "#1f4fb4"], url: "https://youtube.com/shorts/bu4z0gJuK38" },
+    { title: "المستوى الثالث", belts: "الحزام الأحمر والأسود", colors: ["#c41e2a", "#0b0b0f"], url: "https://youtube.com/shorts/Pd_7FuQHZmQ" }
   ],
 
   /* ---- 2) الروابط الرسمية ---- */

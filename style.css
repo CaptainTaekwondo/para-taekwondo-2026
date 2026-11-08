@@ -565,3 +565,11 @@ html.scrolling *,html.scrolling *::before,html.scrolling *::after{animation-play
 .beam,.mat,.medal::before{will-change:transform}
 .beam{contain:layout paint}
 @media (max-width:900px),(pointer:coarse){.beam{animation:none}}
+.preg{max-width:720px;margin:1.4rem auto 1.8rem;text-align:center;border:1px solid rgba(244,203,85,.35);border-radius:var(--r);padding:1.1rem 1.2rem;background:rgba(6,21,64,.45)}
+.preg p{margin-bottom:.8rem;line-height:1.7}
+.mv.tall{aspect-ratio:9/16;width:min(100%,calc(78vh * 9 / 16));margin-inline:auto}
+.vvol{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:.7rem auto 0;max-width:360px}
+.vvol[hidden]{display:none}
+.vvol button{width:2.6rem;height:2.6rem;border-radius:50%;border:1.5px solid var(--gold2);background:rgba(3,10,36,.7);font-size:1.15rem;cursor:pointer;flex:none}
+.vvol input{flex:1;min-width:0;accent-color:var(--gold2)}
+.vvol output{min-width:3.2rem;text-align:center;font-weight:800;color:var(--gold1)}

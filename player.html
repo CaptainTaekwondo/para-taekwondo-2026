@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>تسجيل اللاعب وبطاقة البطل — أساسيات البارا تايكوندو 2026</title>
+<meta name="description" content="سجّل بيانات اللاعب وشاهد بطاقة البطل فورًا وحمّلها بعد الحفظ.">
+<meta name="theme-color" content="#030a24">
+<link rel="icon" href="assets/champion.webp">
+<link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="style.css?v=20261108">
+<link rel="stylesheet" href="card.css?v=20261108">
+<link rel="stylesheet" href="player.css?v=20261108">
+</head>
+<body>
+<nav id="nav" class="cnav" aria-label="التنقل">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/champion.webp" alt="" width="40" height="40"><span>أساسيات البارا تايكوندو 2026</span></a>
+    <div class="tools">
+      <a class="tbtn" href="index.html#register" data-t="back">العودة للموقع</a>
+      <button class="tbtn lang" id="langBtn" type="button" aria-label="Language">English</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap creg">
+  <header class="sec-head">
+    <h1 class="foil" data-t="title">تسجيل اللاعب وإصدار بطاقة البطل</h1>
+    <div class="orn"><i></i><b></b><i></i></div>
+    <p data-t="lead">املأ بيانات اللاعب وستظهر بطاقته أمامك فورًا. بعد الحفظ يحصل اللاعب على كوده الفريد وتحمّل البطاقة بصورة عالية الجودة.</p>
+  </header>
+  <p class="demo" id="demoBanner" hidden data-t="demo">وضع المعاينة: لم يُربط الحفظ بعد، لذلك لن تُسجَّل البيانات. البطاقة قابلة للتحميل للتجربة فقط.</p>
+  <p class="pinfo" data-t="sportland">هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منصة SportLand بعد فتح رابطها رسميًا.</p>
+
+  <section class="mode" id="modeBox">
+    <h2 class="foil" data-t="modeT">ماذا تريد أن تفعل؟</h2>
+    <p class="warn" data-t="oneCard">⚠️ تنبيه: يُسجَّل كل لاعب مرة واحدة فقط وببطاقة واحدة، وأي تسجيل مكرر لنفس اللاعب يُرفض. لتغيير بيانات اللاعب استخدم «تعديل بطاقة لاعب».</p>
+    <div class="mode-btns">
+      <button class="modebtn" id="btnNew" type="button"><b data-t="newId">تسجيل جديد</b><span data-t="newHint">سجّل بيانات اللاعب لأول مرة واحصل على كوده وبطاقته.</span></button>
+      <button class="modebtn" id="btnEdit" type="button"><b data-t="editId">تعديل بطاقة لاعب</b><span data-t="editHint">لديك كود اللاعب؟ عدّل بياناته أو صورته وأصدر بطاقته من جديد.</span></button>
+    </div>
+  </section>
+  <section class="mode" id="lookupBox" hidden>
+    <h2 class="foil" data-t="lkT">تعديل بطاقة لاعب</h2>
+    <p class="hint" data-t="lkHint">أدخل رقم الهاتف والبريد الإلكتروني المسجَّلين وكود اللاعب الظاهر على بطاقته. وبعد التأكد من البيانات تُفتح صفحة تعديلها.</p>
+    <div class="fld"><label for="f_lkPhone" data-t="lkPhone">رقم الهاتف المسجَّل</label><input id="f_lkPhone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel"></div>
+    <div class="fld"><label for="f_lkEmail" data-t="lkEmail">البريد الإلكتروني</label><input id="f_lkEmail" type="email" dir="ltr" autocomplete="email"></div>
+    <div class="fld"><label for="f_lkCode" data-t="lkCode">كود اللاعب (آخر 4 أرقام فقط)</label><div class="pfx" dir="ltr"><span>PTP-2026-</span><input id="f_lkCode" type="text" dir="ltr" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div></div>
+    <p class="err big" id="lkErr" role="alert" hidden></p>
+    <div class="acts"><button class="btn fill" id="lkBtn" type="button" data-t="lkBtn">عرض البيانات</button><button class="btn" id="lkBack" type="button" data-t="lkBack">رجوع</button></div>
+  </section>
+  <p class="editbadge" id="editBadge" hidden data-t="editBadge">وضع التعديل: عدّل ما تريد ثم احفظ لإصدار البطاقة من جديد.</p>
+  <div class="cgrid" id="cgrid" hidden>
+    <section class="cprev" aria-label="Preview">
+      <div class="ptabs" id="ptabs" role="tablist" hidden></div>
+      <canvas id="card" role="img" aria-label="Player ID card preview"></canvas>
+      <p class="pnote" data-t="previewNote">هذه معاينة حيّة. يظهر الكود الفريد بعد الحفظ.</p>
+      <button type="button" class="aibtn" id="aiBtn" aria-expanded="false" aria-controls="aiBox"><span aria-hidden="true">✨</span> <span data-t="aiBtn">اصنع صورة لاعب احترافية من خلال AI ChatGPT</span></button>
+      <div class="aibox" id="aiBox" hidden>
+        <p class="aihint" data-t="aiHint">انسخ الأمر التالي، ثم الصقه في ChatGPT وأرسل صورة اللاعب عندما يطلبها.</p>
+        <textarea id="aiText" readonly rows="9" dir="auto" aria-label="ChatGPT prompt"></textarea>
+        <div class="aiacts">
+          <button type="button" class="aicopy" id="aiCopy" data-t="aiCopy">نسخ الأمر الاحترافي</button>
+          <button type="button" class="aigo" id="aiGo" data-t="aiGo">انسخ واذهب مباشرة إلى ChatGPT</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="cform">
+      <p class="warn" data-t="oneCard">⚠️ تنبيه: يُسجَّل كل لاعب مرة واحدة فقط وببطاقة واحدة، وأي تسجيل مكرر لنفس اللاعب يُرفض. لتغيير بيانات اللاعب استخدم «تعديل بطاقة لاعب».</p>
+      <form id="regForm" novalidate autocomplete="on">
+        <input type="text" id="f_website" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp">
+
+        <fieldset id="roleBox">
+          <legend data-t="roleT">مَن يسجّل؟</legend>
+          <p class="q" data-t="roleQ">اختر صفتك في البطولة</p>
+          <div class="rolebtns">
+            <label class="rolebtn"><input type="radio" name="role" value="player" checked><b data-t="rolePlayer">لاعب</b><span data-t="rolePlayerHint">أسجّل بياناتي أنا فقط.</span></label>
+            <label class="rolebtn"><input type="radio" name="role" value="coach"><b data-t="roleCoach">مدرب</b><span data-t="roleCoachHint">أسجّل لاعبيّ، ويمكنني المشاركة أنا أيضًا كلاعب.</span></label>
+          </div>
+          <div class="fld" id="competeRow" hidden><span class="q" data-t="competeQ">هل ستشارك أنت أيضًا كلاعب في البطولة؟</span>
+            <div class="radios"><label><input type="radio" name="compete" value="no" checked> <span data-t="competeNo">لا، سأسجّل لاعبيّ فقط</span></label><label><input type="radio" name="compete" value="yes"> <span data-t="competeYes">نعم، سأشارك كلاعب</span></label></div></div>
+        </fieldset>
+
+        <fieldset>
+          <legend id="lg1" data-t="g1">بيانات اللاعب</legend>
+          <div class="fld"><label for="f_nameAr" id="l_nameAr" data-t="nameAr">اسم اللاعب الكامل بالعربية</label><input id="f_nameAr" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" id="e_nameAr" hidden></p></div>
+          <div class="fld"><label for="f_nameEn" id="l_nameEn" data-t="nameEn">اسم اللاعب الكامل بالإنجليزية</label><input id="f_nameEn" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" id="e_nameEn" hidden></p></div>
+          <div class="fld" id="genderRow"><span class="q" data-t="gender">الجنس</span>
+            <div class="radios" id="genderBox"><label><input type="radio" name="gender" value="m"> <span data-t="male">ذكر</span></label><label><input type="radio" name="gender" value="f"> <span data-t="female">أنثى</span></label></div>
+            <p class="err" id="e_gender" hidden></p></div>
+          <div class="fld" id="birthRow"><label for="f_birth" data-t="birth">تاريخ الميلاد</label><input id="f_birth" type="date" dir="ltr" min="1940-01-01"><p class="hint" id="ageInfo" aria-live="polite"></p><p class="err" id="e_birth" hidden></p></div>
+          <div class="two">
+            <div class="fld"><label for="f_countryAr" data-t="countryAr">الدولة بالعربية</label><input id="f_countryAr" type="text" maxlength="30" dir="rtl" lang="ar" list="countries"><p class="err" id="e_countryAr" hidden></p></div>
+            <div class="fld"><label for="f_countryEn" data-t="countryEn">الدولة بالإنجليزية</label><input id="f_countryEn" type="text" maxlength="30" dir="ltr" lang="en" list="countriesEn"><p class="err" id="e_countryEn" hidden></p></div>
+          </div>
+          <datalist id="countries"></datalist><datalist id="countriesEn"></datalist>
+          <div class="fld"><label for="f_clubAr" data-t="clubAr">النادي أو الأكاديمية بالعربية (اختياري)</label><input id="f_clubAr" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" id="e_clubAr" hidden></p></div>
+          <div class="fld"><label for="f_clubEn" data-t="clubEn">النادي أو الأكاديمية بالإنجليزية (اختياري)</label><input id="f_clubEn" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" id="e_clubEn" hidden></p></div>
+        </fieldset>
+
+        <fieldset id="beltSet">
+          <legend data-t="g2">الحزام والتصنيف</legend>
+          <div class="fld"><label for="f_belt" data-t="belt">لون الحزام</label>
+            <select id="f_belt"></select>
+            <p class="hint" data-t="beltHint">اختر لون الحزام الأساسي، ويشمل جميع درجاته. يُحدَّد المستوى تلقائيًا.</p><p class="hint" id="levelInfo" aria-live="polite"></p><p class="err" id="e_belt" hidden></p></div>
+          <div class="fld"><label for="f_para" data-t="para">رمز تصنيف البارا</label>
+            <select id="f_para"></select>
+            <p class="hint" data-t="paraHint">إن لم تكن تعرف الرمز اختر «لا أعرف / لم يُصنَّف بعد».</p><p class="err" id="e_para" hidden></p></div>
+        </fieldset>
+
+        <fieldset>
+          <legend data-t="g3">التواصل وولي الأمر</legend>
+          <div class="fld" id="coachRow"><label for="f_coach" id="l_coach" data-t="coach">كود المدرب (اختياري)</label><div class="pfx" dir="ltr"><span>PTA-2026-</span><input id="f_coach" type="text" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div><p class="hint" id="h_coach" data-t="coachHint">آخر 4 أرقام من كود المدرب الظاهر على بطاقة المدرب، إن وُجد.</p><p class="err" id="e_coach" hidden></p></div>
+          <div class="fld" id="guardianRow"><label for="f_guardian" data-t="guardian">اسم ولي الأمر</label><input id="f_guardian" type="text" maxlength="60"><p class="hint" data-t="guardianHint">مطلوب إذا كان عمر اللاعب أقل من 18 سنة.</p><p class="err" id="e_guardian" hidden></p></div>
+          <div class="fld"><label for="f_email" data-t="email">البريد الإلكتروني (إجباري)</label><input id="f_email" type="email" maxlength="120" dir="ltr" autocomplete="email" inputmode="email"><p class="hint" data-t="emailHint">يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).</p><p class="err" id="e_email" hidden></p></div>
+          <div class="fld" id="vbox"><label for="f_vcode" data-t="vLbl">كود تأكيد البريد (6 أرقام)</label><div style="display:flex;gap:8px"><input id="f_vcode" type="text" inputmode="numeric" maxlength="6" dir="ltr" autocomplete="one-time-code" style="flex:1"><button type="button" class="btn" id="btnSendCode" data-t="vSend">أرسل الكود</button></div><p class="hint" id="vMsg" data-t="vHint">اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).</p><p class="err" id="e_vcode" hidden></p></div>
+          <div class="fld"><label for="f_phone" data-t="phone">رقم الهاتف (إجباري، مع رمز الدولة)</label><input id="f_phone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel" maxlength="25"><p class="err" id="e_phone" hidden></p></div>
+        </fieldset>
+
+        <fieldset id="photoSet">
+          <legend id="lg4" data-t="g4">صورة اللاعب</legend>
+          <div class="fld"><label for="f_photo" id="l_photo" data-t="photo">اختر صورة واضحة للاعب</label><input id="f_photo" type="file" accept="image/*"><p class="hint" data-t="photoHint">صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.</p><p class="err" id="e_photo" hidden></p></div>
+          <div class="fld" id="zoomRow" hidden><label for="f_zoom" data-t="zoom">تكبير الصورة</label><input id="f_zoom" type="range" min="1" max="3" step="0.02" value="1"></div>
+        </fieldset>
+
+        <fieldset id="promoBox">
+          <legend data-t="gPromo">المشاركة في الفيديو الترويجي (اختياري)</legend>
+          <p class="q" id="promoQ" data-t="promoQ">هل تريد المشاركة في الفيديو الترويجي للبطولة؟</p>
+          <div class="radios"><label><input type="radio" name="promo" value="no" checked> <span data-t="promoNo">لا</span></label><label><input type="radio" name="promo" value="yes"> <span data-t="promoYes">نعم</span></label></div>
+          <div id="promoMore" hidden>
+            <p class="hint" id="promoHow" data-t="promoHow">صوّر اللاعب طوليًا ببدلة التايكوندو، وهو يقول شعار البطولة بصوت واضح: «أنا بطل… والأبطال لا يعرفون حدودًا». من غير كتابة أو ملصقات على الفيديو.</p>
+            <img class="guide" src="assets/card/promo-player.webp" alt="رسم توضيحي: تصوير اللاعب بالبدلة طوليًا وهو يقول شعار البطولة" width="1600" height="900" loading="lazy">
+            <div class="fld"><label for="f_wa" data-t="wa">رقم واتساب للتواصل (إلزامي عند اختيار نعم)</label><input id="f_wa" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel" maxlength="25"><p class="err" id="e_wa" hidden></p></div>
+            <div id="coachVidRow" hidden><label class="chk"><input type="checkbox" id="f_coachVid"> <span data-t="coachVid">أرغب أن أشارك أنا أيضًا في الفيديو بصفتي المدرب</span></label>
+            <img class="guide" id="coachImg" hidden src="assets/card/promo-coach.webp" alt="رسم توضيحي: تصوير المدرب وهو يقدّم نفسه" width="1600" height="900" loading="lazy"></div>
+          </div>
+        </fieldset>
+
+        <fieldset id="videoSet">
+          <legend data-t="gVideo">فيديو المشاركة</legend>
+          <div class="fld"><label for="f_video" data-t="video">رابط فيديو المشاركة (يمكن إضافته لاحقًا)</label><input id="f_video" type="url" inputmode="url" dir="ltr" maxlength="200" placeholder="https://youtu.be/..." autocomplete="off">
+            <p class="hint" data-t="videoHint">ارفع الفيديو على قناتك في يوتيوب واجعله «عام» ليشاهده الجميع وتنتشر البطولة، ثم ضع رابطه هنا. يمكنك تركه الآن وإضافته لاحقًا من «تعديل بطاقة لاعب».</p>
+            <p class="vmsg" id="videoMsg" aria-live="polite"></p><div class="vprev" id="videoPrev"></div><p class="err" id="e_video" hidden></p></div>
+        </fieldset>
+
+        <fieldset id="playersBox" hidden>
+          <legend data-t="gPlayers">لاعبوك</legend>
+          <p class="hint" data-t="playersHint">أضف بيانات كل لاعب تدرّبه، ويحصل كل لاعب على كوده وبطاقته عند الحفظ. الدولة والنادي والبريد والهاتف تؤخذ من بياناتك.</p>
+          <div id="plist"></div>
+          <button class="btn addp" id="addP" type="button"><span aria-hidden="true">+</span> <span data-t="addP">أضف لاعب</span></button>
+        </fieldset>
+
+        <fieldset>
+          <legend data-t="g5">الإقرار والحفظ</legend>
+          <label class="chk"><input type="checkbox" id="f_consent"> <span id="t_consent" data-t="consent">أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.</span></label>
+          <p class="err" id="e_consent" hidden></p>
+          <p class="err big" id="formErr" role="alert" hidden></p>
+          <button class="btn fill" id="submitBtn" type="submit" data-t="submit">احفظ البيانات وأصدر البطاقة</button>
+        </fieldset>
+      </form>
+
+      <div class="done" id="result" hidden>
+        <h2 class="foil" id="doneTitle" data-t="doneT">تم تسجيل اللاعب</h2>
+        <p class="demo" id="demoNote" hidden data-t="demo">وضع المعاينة: لم يُربط الحفظ بعد.</p>
+        <div id="mainRes">
+        <p class="lbl" data-t="doneCode">كود اللاعب</p>
+        <p class="code ltr" id="doneCode">PTP-2026-0000</p>
+        <p class="hint" data-t="keep">احتفظ بالكود، فهو رقم اللاعب في البطولة.</p>
+        <div class="acts"><a class="btn fill" id="dlPng" href="#" download data-t="dlPng">تحميل البطاقة PNG</a><a class="btn" id="dlJpg" href="#" download data-t="dlJpg">تحميل JPG</a></div>
+        </div>
+        <p class="drive" id="driveSt" hidden role="status"></p>
+        <p class="cert-note" data-t="certNote">🎓 بعد انتهاء البطولة وتجهيز تصميم شهادة المشاركة، يحصل كل لاعب مسجَّل على شهادة مشاركة بالكود الخاص به. احتفظ بالكود.</p>
+        <div class="added" id="addedBox" hidden><h3 data-t="addedT">بطاقات لاعبيك</h3><div class="zbar" id="zBar" hidden><label class="chk"><input type="checkbox" id="zAll" checked> <span data-t="zAll">تحديد الكل</span></label><button type="button" class="btn sm fill" id="zDl">تحميل المحدد (ZIP)</button></div><p class="hint" data-t="zHint">علّم على البطاقات اللي عايزها وحمّلها مرة واحدة، أو حمّل كل بطاقة لوحدها من PNG أو JPG.</p><ul id="addedList"></ul></div>
+        <button class="btn sm" id="againBtn" type="button" data-t="another">تسجيل جديد</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="config.js?v=20261108"></script>
+<script src="ai-prompt-player.js?v=20261108"></script>
+<script src="player.js?v=20261108"></script>
+</body>
+</html>
