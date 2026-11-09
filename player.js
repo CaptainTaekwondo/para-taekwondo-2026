@@ -60,7 +60,7 @@
       guardian: "اسم ولي الأمر", guardianHint: "مطلوب إذا كان عمر اللاعب أقل من 18 سنة.",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
       vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
-      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
+      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", mineB: "لاعبيني", mineBH: "للمدربين: اعرض كل اللاعبين الذين سجلتهم بكود بطاقتك.", mineT: "لاعبيني", mineHint: "أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين في البطاقة. تظهر هنا اللاعبون الذين سجلتهم بنفس البريد وكود البطاقة.", mineCode: "كود بطاقة المدرب (آخر 4 أرقام فقط)", mineShow: "عرض لاعبيني", mineReq: "أدخل آخر 4 أرقام من الكود والهاتف والبريد.", mineNF: "لا توجد بطاقة مدرب بهذه البيانات. تأكد من الكود والهاتف والبريد.", mineWait: "محاولات كثيرة. حاول مرة أخرى بعد 15 دقيقة.", mineNone: "لا يوجد لاعبون مسجلون بهذا البريد وكود البطاقة.", mineCount: "عدد اللاعبين: {n}", mineEdit: "تعديل", mineDl: "تحميل البطاقة", mineNoCard: "البطاقة غير محفوظة بعد", coachSaved: "تم ملء بياناتك المحفوظة على هذا الجهاز.", coachForget: "مسح البيانات المحفوظة", remember: "احفظ بياناتي على هذا الجهاز لتسهيل التسجيل في المرة القادمة", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
       photo: "اختر صورة واضحة للاعب", photoC: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.", zoom: "تكبير الصورة",
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
       consentC: "أقرّ بصحة بياناتي وبيانات لاعبيّ، وأوافق على استخدام صورتي وبياناتي لإصدار بطاقة البطل وفي تنظيم البطولة، وأقرّ بأنني حصلت على موافقة لاعبيّ أو أولياء أمورهم على تسجيلهم واستخدام صورهم وبياناتهم.",
@@ -112,7 +112,7 @@
       guardian: "Guardian's name", guardianHint: "Required if the player is under 18.",
       email: "Email (required)", emailHint: "The same email can register more than one player (e.g. siblings).", eEmail: "Enter a valid email address.",
       vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
-      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
+      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", mineB: "My players", mineBH: "For coaches: see all the players you registered with your card code.", mineT: "My players", mineHint: "Enter the last 4 digits of your coach card code with the phone and email registered on the card. The players you registered with the same email and card code appear here.", mineCode: "Coach card code (last 4 digits only)", mineShow: "Show my players", mineReq: "Enter the last 4 digits of the code, the phone and the email.", mineNF: "No coach card matches these details. Check the code, phone and email.", mineWait: "Too many attempts. Try again in 15 minutes.", mineNone: "No players are registered with this email and card code.", mineCount: "Players: {n}", mineEdit: "Edit", mineDl: "Download card", mineNoCard: "Card not saved yet", coachSaved: "Your saved details on this device were filled in.", coachForget: "Delete saved details", remember: "Save my details on this device to make the next registration easier", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
       photo: "Choose a clear photo of the player", photoC: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.", zoom: "Zoom",
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
       consentC: "I confirm my details and my players' details are correct, agree to the use of my photo and details for the champion card and the championship, and confirm I have my players' or their guardians' consent to register them and use their photos and details.",
@@ -477,16 +477,43 @@
     $("#moreClubs").hidden = !withPlayers() || !clubRows.length;
     $("#addClubRow").hidden = !withPlayers();
   }
-  function addClubRow() {
+  function addClubRow(noFocus) {
     const id = String(++clubSeq), r = document.createElement("div"); r.className = "clubrow"; r.dataset.id = id;
     r.innerHTML = `<div class="fld"><label for="c${id}_ar" data-t="clubAr">${t("clubAr")}</label><input id="c${id}_ar" data-c="ar" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" data-ce="ar" hidden></p></div>
       <div class="fld"><label for="c${id}_en" data-t="clubEn">${t("clubEn")}</label><input id="c${id}_en" data-c="en" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" data-ce="en" hidden></p></div>
       <button type="button" class="prem" data-t="remove">${t("remove")}</button>`;
     r.addEventListener("input", () => { syncClubs(); renderTabs(); redraw(); });
     r.querySelector(".prem").addEventListener("click", () => { clubRows.splice(clubRows.indexOf(r), 1); r.remove(); syncClubs(); renderTabs(); redraw(); });
-    $("#moreClubs").appendChild(r); clubRows.push(r); syncClubs(); r.querySelector("input").focus();
+    $("#moreClubs").appendChild(r); clubRows.push(r); syncClubs(); if (!noFocus) r.querySelector("input").focus();
   }
-  $("#addClub").addEventListener("click", addClubRow);
+  $("#addClub").addEventListener("click", () => addClubRow());
+
+  /* بيانات المدرب تُحفظ على جهازه فقط بعد نجاح التسجيل، وتُملأ في الزيارة التالية (بدون الصور أو كود تأكيد البريد) */
+  const COACH_KEY = "ptk_coach_v1";
+  let coachFilled = false, coachNote = false;
+  const readCoach = () => { try { const o = JSON.parse(localStorage.getItem(COACH_KEY) || "null"); return o && typeof o === "object" ? o : null; } catch (e) { return null; } };
+  function forgetCoach() { try { localStorage.removeItem(COACH_KEY); } catch (e) {} coachNote = false; $("#coachSavedNote").hidden = true; }
+  function rememberCoach() {
+    if (!$("#f_remember").checked) return forgetCoach();
+    try {
+      localStorage.setItem(COACH_KEY, JSON.stringify({
+        nameAr: F.nameAr.value.trim(), nameEn: F.nameEn.value.trim(), countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(), coach: F.coach.value.trim(),
+        email: F.email.value.trim(), phone: F.phone.value.trim(), dial: dialSels[0].value, dialTouched: !!dialSels[0].dataset.touched, clubs: clubs().map((c) => ({ ar: c.ar, en: c.en })),
+      }));
+    } catch (e) {}
+  }
+  function fillCoach() {
+    if (coachFilled || role !== "coach" || mode === "edit") return;
+    coachFilled = true;
+    const o = readCoach(); if (!o) return;
+    ["nameAr", "nameEn", "countryAr", "countryEn", "coach", "email", "phone"].forEach((k) => { if (!F[k].value.trim() && typeof o[k] === "string") F[k].value = o[k]; });
+    const list = Array.isArray(o.clubs) ? o.clubs : [];
+    if (list[0] && !F.clubAr.value.trim() && !F.clubEn.value.trim()) { F.clubAr.value = list[0].ar || ""; F.clubEn.value = list[0].en || ""; }
+    if (!clubRows.length) list.slice(1).forEach((c) => { addClubRow(true); const r = clubRows[clubRows.length - 1]; r.querySelector("[data-c=ar]").value = c.ar || ""; r.querySelector("[data-c=en]").value = c.en || ""; });
+    if (DIAL[o.dial]) { dialSels[0].value = o.dial; if (o.dialTouched) dialSels[0].dataset.touched = "1"; }
+    syncDial(); coachNote = true; $("#coachSavedNote").hidden = false; syncClubs(); infoAll(); renderTabs(); redraw();
+  }
+  $("#coachForget").addEventListener("click", forgetCoach);
   $("#f_clubPick").addEventListener("change", () => { renderTabs(); redraw(); });
   [F.clubAr, F.clubEn].forEach((i) => i.addEventListener("input", syncClubs));
 
@@ -758,6 +785,7 @@
   }
 
   async function finish(demo) {
+    if (!demo && withPlayers() && (main.final || blocks.some((b) => b.final))) rememberCoach();
     const co = coachOnly();
     $("#regForm").hidden = true; $("#result").hidden = false; $("#doneCode").textContent = main.code; $("#mainRes").hidden = co;
     const dt = $("#doneTitle"); dt.dataset.t = mode === "edit" ? "doneEditT" : co ? "doneCoachOnlyT" : withPlayers() && blocks.length ? "doneCoachT" : "doneT"; dt.textContent = t(dt.dataset.t);
@@ -823,8 +851,9 @@
     $("#coachVidRow").hidden = !coach || mode === "edit";
     if (!withPlayers() && active !== main) setActive(main);
     $("#vbox").hidden = !needCode(); syncClubs(); renderTabs();
+    $("#rememberRow").style.display = withPlayers() ? "" : "none"; $("#coachSavedNote").hidden = !withPlayers() || !coachNote;
   }
-  document.querySelectorAll("input[name=role]").forEach((r) => r.addEventListener("change", () => { role = r.value; applyRole(); }));   // لا يُفتح لاعب تلقائيًا: المدرب يضغط «إضافة لاعبين» بعد بياناته
+  document.querySelectorAll("input[name=role]").forEach((r) => r.addEventListener("change", () => { role = r.value; applyRole(); fillCoach(); }));   // لا يُفتح لاعب تلقائيًا: المدرب يضغط «إضافة لاعبين» بعد بياناته
   document.querySelectorAll("input[name=compete]").forEach((r) => r.addEventListener("change", () => { compete = r.value === "yes"; applyRole(); infoAll(); redraw(); }));
   F.email.addEventListener("input", () => { $("#vbox").hidden = !needCode(); });
 
@@ -838,6 +867,63 @@
   }
   $("#btnNew").addEventListener("click", () => showForm("new"));
   $("#btnEdit").addEventListener("click", () => { modeBox.hidden = true; lkBox.hidden = false; $("#f_lkPhone").focus(); });
+
+  /* «لاعبيني»: قائمة لاعبي المدرب بعد التحقق من الكود والهاتف والبريد */
+  const mineBox = $("#mineBox"), mineErr = $("#mineErr"), mineList = $("#mineList"), mineBtn = $("#mineBtn");
+  let mineCred = null, minePlayers = [], mineBusy = false;
+  const mineMsg = (m) => { mineErr.textContent = m; mineErr.hidden = !m; };
+  const mineErrText = (e) => (e === "not_found" ? t("mineNF") : e === "wait" ? t("mineWait") : e === "net" ? t("eNet") : t("eSrv"));
+  function renderMine() {
+    mineList.textContent = "";
+    const head = document.createElement("p"); head.className = "hint"; head.textContent = minePlayers.length ? t("mineCount").replace("{n}", minePlayers.length) : t("mineNone"); mineList.appendChild(head);
+    minePlayers.forEach((p) => {
+      const it = document.createElement("div"); it.className = "mineitem";
+      const b = document.createElement("b"); b.textContent = (lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn); it.appendChild(b);
+      const belt = beltOf(p.belt), club = lang === "en" ? p.clubEn || p.clubAr : p.clubAr || p.clubEn;
+      const m = document.createElement("span"); m.className = "mmeta"; m.dir = "auto";
+      m.textContent = [p.code, club, belt ? belt[lang === "en" ? 2 : 1] : "", p.ageCat, p.para].filter(Boolean).join(" • "); it.appendChild(m);
+      const acts = document.createElement("div"); acts.className = "mineacts";
+      const ed = document.createElement("button"); ed.type = "button"; ed.className = "pshow"; ed.textContent = t("mineEdit");
+      ed.addEventListener("click", () => {
+        mineBox.hidden = true; lkBox.hidden = false; $("#f_lkPhone").value = mineCred.phone; $("#f_lkEmail").value = mineCred.email; $("#f_lkCode").value = String(p.code).slice(-4); $("#lkBtn").click();
+      });
+      acts.appendChild(ed);
+      if (p.hasCard) {
+        const dl = document.createElement("button"); dl.type = "button"; dl.className = "pshow"; dl.textContent = t("mineDl");
+        dl.addEventListener("click", async () => {
+          if (dl.disabled) return; dl.disabled = true; mineMsg("");
+          try {
+            const r = await post(Object.assign({ action: "playercard", player: p.code }, mineCred), 90000);
+            if (!r || !r.ok) throw new Error((r && r.error) || "srv");
+            const a = document.createElement("a"); a.href = r.card; a.download = r.name; document.body.appendChild(a); a.click(); a.remove();
+          } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
+          dl.disabled = false;
+        });
+        acts.appendChild(dl);
+      } else {
+        const none = document.createElement("span"); none.className = "mmeta"; none.textContent = t("mineNoCard"); acts.appendChild(none);
+      }
+      it.appendChild(acts); mineList.appendChild(it);
+    });
+  }
+  function showMineForm() { mineCred = null; minePlayers = []; mineList.hidden = true; mineList.textContent = ""; $("#mineForm").hidden = false; mineBtn.style.display = ""; mineMsg(""); }
+  $("#btnMine").addEventListener("click", () => { modeBox.hidden = true; mineBox.hidden = false; showMineForm(); $("#f_mineCode").focus(); });
+  $("#mineBack").addEventListener("click", () => { if (mineCred) return showMineForm(); mineBox.hidden = true; modeBox.hidden = false; mineMsg(""); });
+  $("#f_mineCode").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
+  mineBtn.addEventListener("click", async () => {
+    if (mineBusy) return;
+    const cred = { code: $("#f_mineCode").value.trim(), phone: $("#f_minePhone").value.trim(), email: $("#f_mineEmail").value.trim().toLowerCase() };
+    if (cred.code.length !== 4 || !cred.phone || !cred.email) return mineMsg(t("mineReq"));
+    if (!API) return mineMsg(t("eSrv"));
+    mineBusy = true; mineBtn.disabled = true; mineBtn.textContent = t("saving"); mineMsg("");
+    try {
+      const r = await post(Object.assign({ action: "myplayers" }, cred));
+      if (!r || !r.ok) throw new Error((r && r.error) || "srv");
+      mineCred = cred; minePlayers = r.players || []; renderMine();
+      $("#mineForm").hidden = true; mineBtn.style.display = "none"; mineList.hidden = false;
+    } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
+    mineBusy = false; mineBtn.disabled = false; mineBtn.textContent = t("mineShow");
+  });
   $("#lkBack").addEventListener("click", () => { lkBox.hidden = true; modeBox.hidden = false; $("#lkErr").hidden = true; });
   let lkBusy = false;
   $("#lkBtn").addEventListener("click", async () => {
@@ -889,7 +975,7 @@
     document.querySelectorAll("[data-t]").forEach((el) => { const k = el.dataset.t; if (T[lang][k]) el.textContent = T[lang][k]; });
     document.title = t("title") + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
     const sb = $("#submitBtn"); if (!busy) sb.textContent = t(sb.dataset.t);
-    $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API;
+    $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API; if (mineCred) renderMine();
     fillSelects(); fillDialOpts(); numberBlocks(); applyRole(); infoAll(); draw();
     document.querySelectorAll("#f_video, [data-k=video]").forEach((i) => { if (!VIDEO_OPEN) { i.placeholder = t("vClosedPh"); i.dir = lang === "en" ? "ltr" : "rtl"; } });
   }
