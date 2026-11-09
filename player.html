@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="style.css?v=20261108">
 <link rel="stylesheet" href="card.css?v=20261109">
-<link rel="stylesheet" href="player.css?v=20261109b">
+<link rel="stylesheet" href="player.css?v=20261109d">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -105,6 +105,9 @@
           <datalist id="countries"></datalist><datalist id="countriesEn"></datalist>
           <div class="fld"><label for="f_clubAr" data-t="clubAr">النادي أو الأكاديمية بالعربية (اختياري)</label><input id="f_clubAr" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" id="e_clubAr" hidden></p></div>
           <div class="fld"><label for="f_clubEn" data-t="clubEn">النادي أو الأكاديمية بالإنجليزية (اختياري)</label><input id="f_clubEn" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" id="e_clubEn" hidden></p></div>
+          <div id="moreClubs" hidden></div>
+          <div id="addClubRow" hidden><button class="btn addp" id="addClub" type="button"><span aria-hidden="true">+</span> <span data-t="addClub">أضف ناديًا آخر</span></button><p class="hint" data-t="addClubHint">إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.</p></div>
+          <div class="fld" id="mainClubRow" hidden><label for="f_clubPick" data-t="clubPickSelf">النادي الذي تشارك باسمه</label><select id="f_clubPick"></select><p class="err" id="e_clubPick" hidden></p></div>
         </fieldset>
 
         <fieldset id="beltSet">
@@ -132,19 +135,6 @@
           <div class="fld" id="zoomRow" hidden><label for="f_zoom" data-t="zoom">تكبير الصورة</label><input id="f_zoom" type="range" min="1" max="3" step="0.02" value="1"></div>
         </fieldset>
 
-        <fieldset id="promoBox">
-          <legend data-t="gPromo">المشاركة في الفيديو الترويجي (اختياري)</legend>
-          <p class="q" id="promoQ" data-t="promoQ">هل تريد المشاركة في الفيديو الترويجي للبطولة؟</p>
-          <div class="radios"><label><input type="radio" name="promo" value="no" checked> <span data-t="promoNo">لا</span></label><label><input type="radio" name="promo" value="yes"> <span data-t="promoYes">نعم</span></label></div>
-          <div id="promoMore" hidden>
-            <p class="hint" id="promoHow" data-t="promoHow">صوّر اللاعب طوليًا ببدلة التايكوندو، وهو يقول شعار البطولة بصوت واضح: «أنا بطل… والأبطال لا يعرفون حدودًا». من غير كتابة أو ملصقات على الفيديو.</p>
-            <img class="guide" src="assets/card/promo-player.webp" alt="رسم توضيحي: تصوير اللاعب بالبدلة طوليًا وهو يقول شعار البطولة" width="1600" height="900" loading="lazy">
-            <div class="fld"><label for="f_wa" data-t="wa">رقم واتساب للتواصل (إلزامي عند اختيار نعم)</label><div class="phonewrap"><select id="f_waDial" aria-label="رمز الدولة"></select><input id="f_wa" type="tel" inputmode="tel" dir="ltr" placeholder="100 000 0000" autocomplete="tel-national" maxlength="25"></div><p class="err" id="e_wa" hidden></p></div>
-            <div id="coachVidRow" hidden><label class="chk"><input type="checkbox" id="f_coachVid"> <span data-t="coachVid">أرغب أن أشارك أنا أيضًا في الفيديو بصفتي المدرب</span></label>
-            <img class="guide" id="coachImg" hidden src="assets/card/promo-coach.webp" alt="رسم توضيحي: تصوير المدرب وهو يقدّم نفسه" width="1600" height="900" loading="lazy"></div>
-          </div>
-        </fieldset>
-
         <fieldset id="videoSet">
           <legend data-t="gVideo">فيديو المشاركة</legend>
           <div class="fld"><label for="f_video" data-t="video">رابط فيديو المشاركة (يمكن إضافته لاحقًا)</label><input id="f_video" type="url" inputmode="url" dir="ltr" maxlength="200" placeholder="https://youtu.be/..." autocomplete="off">
@@ -156,7 +146,20 @@
           <legend data-t="gPlayers">لاعبوك</legend>
           <p class="hint" data-t="playersHint">أضف بيانات كل لاعب تدرّبه، ويحصل كل لاعب على كوده وبطاقته عند الحفظ. الدولة والنادي والبريد والهاتف تؤخذ من بياناتك.</p>
           <div id="plist"></div>
-          <button class="btn addp" id="addP" type="button"><span aria-hidden="true">+</span> <span data-t="addP">أضف لاعب</span></button>
+          <button class="btn addp" id="addP" type="button"><span data-t="addP">إضافة لاعبين</span> <span aria-hidden="true">+</span></button>
+        </fieldset>
+
+        <fieldset id="promoBox">
+          <legend data-t="gPromo">المشاركة في الفيديو الترويجي (اختياري)</legend>
+          <p class="q" id="promoQ" data-t="promoQ">هل تريد المشاركة في الفيديو الترويجي للبطولة؟</p>
+          <div class="radios"><label><input type="radio" name="promo" value="no" checked> <span data-t="promoNo">لا</span></label><label><input type="radio" name="promo" value="yes"> <span data-t="promoYes">نعم</span></label></div>
+          <div id="promoMore" hidden>
+            <p class="hint" id="promoHow" data-t="promoHow">صوّر اللاعب طوليًا ببدلة التايكوندو، وهو يقول شعار البطولة بصوت واضح: «أنا بطل… والأبطال لا يعرفون حدودًا». من غير كتابة أو ملصقات على الفيديو.</p>
+            <img class="guide" src="assets/card/promo-player.webp" alt="رسم توضيحي: تصوير اللاعب بالبدلة طوليًا وهو يقول شعار البطولة" width="1600" height="900" loading="lazy">
+            <div class="fld"><label for="f_wa" data-t="wa">رقم واتساب للتواصل (إلزامي عند اختيار نعم)</label><div class="phonewrap"><select id="f_waDial" aria-label="رمز الدولة"></select><input id="f_wa" type="tel" inputmode="tel" dir="ltr" placeholder="100 000 0000" autocomplete="tel-national" maxlength="25"></div><p class="err" id="e_wa" hidden></p></div>
+            <div id="coachVidRow" hidden><label class="chk"><input type="checkbox" id="f_coachVid"> <span data-t="coachVid">أرغب أن أشارك أنا أيضًا في الفيديو بصفتي المدرب</span></label>
+            <img class="guide" id="coachImg" hidden src="assets/card/promo-coach.webp" alt="رسم توضيحي: تصوير المدرب وهو يقدّم نفسه" width="1600" height="900" loading="lazy"></div>
+          </div>
         </fieldset>
 
         <fieldset>
@@ -188,6 +191,6 @@
 
 <script src="config.js?v=20261108b"></script>
 <script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261109c"></script>
+<script src="player.js?v=20261109f"></script>
 </body>
 </html>

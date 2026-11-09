@@ -60,7 +60,7 @@
       guardian: "اسم ولي الأمر", guardianHint: "مطلوب إذا كان عمر اللاعب أقل من 18 سنة.",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
       vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
-      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
+      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
       photo: "اختر صورة واضحة للاعب", photoC: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.", zoom: "تكبير الصورة",
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
       consentC: "أقرّ بصحة بياناتي وبيانات لاعبيّ، وأوافق على استخدام صورتي وبياناتي لإصدار بطاقة البطل وفي تنظيم البطولة، وأقرّ بأنني حصلت على موافقة لاعبيّ أو أولياء أمورهم على تسجيلهم واستخدام صورهم وبياناتهم.",
@@ -70,7 +70,7 @@
       demo: "وضع المعاينة: لم يُربط الحفظ بعد، لذلك لن تُسجَّل البيانات. البطاقة قابلة للتحميل للتجربة فقط.",
       doneT: "تم تسجيل اللاعب", doneEditT: "تم تحديث البيانات", doneCode: "كود اللاعب", keep: "احتفظ بالكود، فهو رقم اللاعب في البطولة.",
       dlPng: "تحميل البطاقة PNG", dlJpg: "تحميل JPG", another: "تسجيل جديد",
-      gPlayers: "لاعبوك", playersHint: "أضف بيانات كل لاعب تدرّبه، ويحصل كل لاعب على كوده وبطاقته عند الحفظ. الدولة والنادي والبريد والهاتف تؤخذ من بياناتك.", addP: "أضف لاعب", remove: "حذف", showCard: "عرض البطاقة", playerN: "لاعب {n}", tabMe: "بطاقتك", addedT: "بطاقات لاعبيك", doneCoachT: "تم تسجيلك وتسجيل لاعبيك", savedOf: "تم حفظ {a} من {b} لاعبين.",
+      gPlayers: "لاعبوك", playersHint: "أضف بيانات كل لاعب تدرّبه، ويحصل كل لاعب على كوده وبطاقته عند الحفظ. الدولة والنادي والبريد والهاتف تؤخذ من بياناتك.", addP: "إضافة لاعبين", remove: "حذف", showCard: "عرض البطاقة", playerN: "لاعب {n}", tabMe: "بطاقتك", addedT: "بطاقات لاعبيك", doneCoachT: "تم تسجيلك وتسجيل لاعبيك", savedOf: "تم حفظ {a} من {b} لاعبين.",
       driveOk: "تم حفظ نسخة من البطاقة لدى الإدارة.", driveWait: "جاري حفظ نسخة من البطاقة…", driveFail: "تعذّر حفظ نسخة البطاقة تلقائيًا، لكن البيانات سُجّلت.",
       lkT: "تعديل بطاقة لاعب", lkHint: "أدخل رقم الهاتف والبريد الإلكتروني المسجَّلين وكود اللاعب الظاهر على بطاقته. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkPhone: "رقم الهاتف المسجَّل", lkEmail: "البريد الإلكتروني", lkCode: "كود اللاعب (آخر 4 أرقام فقط)", lkBtn: "عرض البيانات", lkBack: "رجوع",
       eNotFound: "لم نجد تسجيلًا بهذه البيانات. تأكد من كتابتها كما سجّلت.", eLk: "أدخل رقم الهاتف والبريد الإلكتروني والكود.", editBadge: "وضع التعديل: عدّل ما تريد ثم احفظ لإصدار البطاقة من جديد.",
@@ -112,7 +112,7 @@
       guardian: "Guardian's name", guardianHint: "Required if the player is under 18.",
       email: "Email (required)", emailHint: "The same email can register more than one player (e.g. siblings).", eEmail: "Enter a valid email address.",
       vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
-      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
+      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
       photo: "Choose a clear photo of the player", photoC: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.", zoom: "Zoom",
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
       consentC: "I confirm my details and my players' details are correct, agree to the use of my photo and details for the champion card and the championship, and confirm I have my players' or their guardians' consent to register them and use their photos and details.",
@@ -122,7 +122,7 @@
       demo: "Preview mode: saving is not connected yet, so nothing is recorded. The card can be downloaded for testing only.",
       doneT: "The player is registered", doneEditT: "The details are updated", doneCode: "Player code", keep: "Keep this code — it is the player's championship number.",
       dlPng: "Download card (PNG)", dlJpg: "Download JPG", another: "New registration",
-      gPlayers: "Your players", playersHint: "Add the details of each player you coach; every player gets a code and a card when you save. Country, club, email and phone are taken from your details.", addP: "Add player", remove: "Remove", showCard: "Show card", playerN: "Player {n}", tabMe: "Your card", addedT: "Your players' cards", doneCoachT: "You and your players are registered", savedOf: "{a} of {b} players saved.",
+      gPlayers: "Your players", playersHint: "Add the details of each player you coach; every player gets a code and a card when you save. Country, club, email and phone are taken from your details.", addP: "Add players", remove: "Remove", showCard: "Show card", playerN: "Player {n}", tabMe: "Your card", addedT: "Your players' cards", doneCoachT: "You and your players are registered", savedOf: "{a} of {b} players saved.",
       driveOk: "A copy of the card was saved with the organisers.", driveWait: "Saving a copy of the card…", driveFail: "Could not store the card copy automatically, but the details are registered.",
       lkT: "Edit a player card", lkHint: "Enter the registered phone number, email and the player's code shown on the card. Once verified, the edit page opens.", lkPhone: "Registered phone number", lkEmail: "Email", lkCode: "Player code (last 4 digits only)", lkBtn: "Show details", lkBack: "Back",
       eNotFound: "No registration found with these details. Check them as you registered.", eLk: "Enter the phone number, email and code.", editBadge: "Edit mode: change what you need, then save to re-issue the card.",
@@ -199,6 +199,7 @@
   const beltOf = (id) => BELTS.find((b) => b[0] === id);
   const q = (sub, k) => sub.el.querySelector(`[data-k="${k}"]`);
   function val(sub, k) {
+    if ((sub.kind === "block" || withPlayers()) && (k === "clubAr" || k === "clubEn")) { const c = clubOf(sub); return c ? (k === "clubAr" ? c.ar : c.en) : ""; }   // النادي حسب اختيار المدرب له وللاعبيه
     if (sub.kind === "main" || INHERIT.includes(k)) {
       if (k === "gender") return ($("input[name=gender]:checked") || {}).value || "";
       return F[k] ? F[k].value.trim() : "";
@@ -452,34 +453,98 @@
   const videoInp = (sub) => (sub.kind === "main" ? $("#f_video") : sub.el.querySelector("[data-k=video]"));
   const videoVal = (sub) => { const i = videoInp(sub); return i && i.dataset.v === "ok" ? ytUrl(i.dataset.id) : ""; };
 
+  /* ---------- نوادي المدرب: يضيف ما يشاء، ويختار النادي لنفسه ولكل لاعب ---------- */
+  const clubRows = [];
+  let clubSeq = 0;
+  const pickOf = (sub) => (sub.kind === "main" ? $("#f_clubPick") : q(sub, "clubPick"));
+  function clubs() {
+    const list = [], a = F.clubAr.value.trim(), e = F.clubEn.value.trim();
+    if (a || e) list.push({ id: "0", ar: a, en: e });
+    if (withPlayers()) clubRows.forEach((r) => { const ca = r.querySelector("[data-c=ar]").value.trim(), ce = r.querySelector("[data-c=en]").value.trim(); if (ca || ce) list.push({ id: r.dataset.id, ar: ca, en: ce }); });
+    return list;
+  }
+  function clubOf(sub) { const list = clubs(); return list.length <= 1 ? list[0] || null : list.find((c) => c.id === pickOf(sub).value) || null; }
+  function syncClubs() {
+    const list = clubs();
+    [main, ...blocks].forEach((b) => {
+      const s = pickOf(b), cur = s.value;
+      s.textContent = ""; s.add(new Option(t("clubPickPh"), ""));
+      list.forEach((c) => s.add(new Option(lang === "en" ? c.en || c.ar : c.ar || c.en, c.id)));
+      s.value = list.some((c) => c.id === cur) ? cur : "";
+      if (b !== main) b.el.querySelector(".pclub").hidden = list.length <= 1;
+    });
+    $("#mainClubRow").hidden = !withPlayers() || !compete || list.length <= 1;
+    $("#moreClubs").hidden = !withPlayers() || !clubRows.length;
+    $("#addClubRow").hidden = !withPlayers();
+  }
+  function addClubRow() {
+    const id = String(++clubSeq), r = document.createElement("div"); r.className = "clubrow"; r.dataset.id = id;
+    r.innerHTML = `<div class="fld"><label for="c${id}_ar" data-t="clubAr">${t("clubAr")}</label><input id="c${id}_ar" data-c="ar" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" data-ce="ar" hidden></p></div>
+      <div class="fld"><label for="c${id}_en" data-t="clubEn">${t("clubEn")}</label><input id="c${id}_en" data-c="en" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" data-ce="en" hidden></p></div>
+      <button type="button" class="prem" data-t="remove">${t("remove")}</button>`;
+    r.addEventListener("input", () => { syncClubs(); renderTabs(); redraw(); });
+    r.querySelector(".prem").addEventListener("click", () => { clubRows.splice(clubRows.indexOf(r), 1); r.remove(); syncClubs(); renderTabs(); redraw(); });
+    $("#moreClubs").appendChild(r); clubRows.push(r); syncClubs(); r.querySelector("input").focus();
+  }
+  $("#addClub").addEventListener("click", addClubRow);
+  $("#f_clubPick").addEventListener("change", () => { renderTabs(); redraw(); });
+  [F.clubAr, F.clubEn].forEach((i) => i.addEventListener("input", syncClubs));
+
   /* ---------- لاعبو المدرب (+ أضف لاعب) ---------- */
   let bid = 0;
   function addBlock() {
     const id = ++bid, el = document.createElement("div"); el.className = "pblock";
     el.innerHTML = `
-      <div class="phead"><b class="pt"></b><span><button type="button" class="pshow" data-t="showCard">${t("showCard")}</button> <button type="button" class="prem" data-t="remove">${t("remove")}</button></span></div>
+      <div class="phead"><b class="pt"></b><span class="psum"></span><span class="pbtns"><button type="button" class="pshow" data-t="showCard">${t("showCard")}</button> <button type="button" class="pshow pedit" data-t="editP">${t("editP")}</button> <button type="button" class="prem" data-t="remove">${t("remove")}</button></span></div>
+      <div class="pbody">
       <div class="fld"><label for="b${id}_nameAr" data-t="nameAr">${t("nameAr")}</label><input id="b${id}_nameAr" data-k="nameAr" type="text" maxlength="60" dir="rtl" lang="ar"><p class="err" data-e="nameAr" hidden></p></div>
       <div class="fld"><label for="b${id}_nameEn" data-t="nameEn">${t("nameEn")}</label><input id="b${id}_nameEn" data-k="nameEn" type="text" maxlength="60" dir="ltr" lang="en"><p class="err" data-e="nameEn" hidden></p></div>
       <div class="fld"><span class="q" data-t="gender">${t("gender")}</span><div class="radios"><label><input type="radio" name="g${id}" data-k="gender" value="m"> <span data-t="male">${t("male")}</span></label><label><input type="radio" name="g${id}" data-k="gender" value="f"> <span data-t="female">${t("female")}</span></label></div><p class="err" data-e="gender" hidden></p></div>
       <div class="fld"><label for="b${id}_birth" data-t="birth">${t("birth")}</label><input id="b${id}_birth" data-k="birth" type="date" dir="ltr" min="1940-01-01"><p class="hint bAge"></p><p class="err" data-e="birth" hidden></p></div>
+      <div class="fld pclub" hidden><label for="b${id}_clubPick" data-t="clubPick">${t("clubPick")}</label><select id="b${id}_clubPick" data-k="clubPick"></select><p class="err" data-e="clubPick" hidden></p></div>
       <div class="fld"><label for="b${id}_belt" data-t="belt">${t("belt")}</label><select id="b${id}_belt" data-k="belt">${beltOpts()}</select><p class="hint bLevel"></p><p class="err" data-e="belt" hidden></p></div>
       <div class="fld"><label for="b${id}_para" data-t="para">${t("para")}</label><select id="b${id}_para" data-k="para">${paraOpts()}</select><p class="err" data-e="para" hidden></p></div>
       <div class="fld pguard" hidden><label for="b${id}_guardian" data-t="guardian">${t("guardian")}</label><input id="b${id}_guardian" data-k="guardian" type="text" maxlength="60"><p class="hint" data-t="guardianHint">${t("guardianHint")}</p><p class="err" data-e="guardian" hidden></p></div>
       <div class="fld"><label for="b${id}_photo" data-t="photo">${t("photo")}</label><input id="b${id}_photo" data-k="photo" type="file" accept="image/*"><p class="err" data-e="photo" hidden></p></div>
       <div class="fld pzoom" hidden><label data-t="zoom">${t("zoom")}</label><input class="pzoomIn" type="range" min="1" max="3" step="0.02" value="1"></div>
-      <div class="fld"><label for="b${id}_video" data-t="video">${t("video")}</label><input id="b${id}_video" data-k="video" type="url" inputmode="url" dir="ltr" maxlength="200" placeholder="https://youtu.be/..." autocomplete="off"><p class="vmsg"></p><div class="vprev"></div><p class="err" data-e="video" hidden></p></div>`;
+      <div class="fld"><label for="b${id}_video" data-t="video">${t("video")}</label><input id="b${id}_video" data-k="video" type="url" inputmode="url" dir="ltr" maxlength="200" placeholder="https://youtu.be/..." autocomplete="off"><p class="vmsg"></p><div class="vprev"></div><p class="err" data-e="video" hidden></p></div>
+      </div>
+      <div class="pfoot"><button type="button" class="btn addp pdone"><span aria-hidden="true">✓</span> <span data-t="saveNext">${t("saveNext")}</span></button><p class="hint" data-t="saveNote">${t("saveNote")}</p></div>`;
     $("#plist").appendChild(el);
     const sub = mkSub("block", el); blocks.push(sub);
     wireVideo(el.querySelector("[data-k=video]"), el.querySelector(".vmsg"), el.querySelector(".vprev")); lockVideo(el.querySelector("[data-k=video]"), el.querySelector(".vmsg"));
     el.addEventListener("focusin", () => { if (active !== sub) setActive(sub); });
-    el.addEventListener("input", () => { infoFor(sub); renderTabs(); if (active === sub) redraw(); });
-    el.addEventListener("change", (e) => { if (e.target.dataset.k === "photo") pickPhoto(sub, e.target.files && e.target.files[0]); infoFor(sub); renderTabs(); if (active === sub) redraw(); });
+    el.addEventListener("input", () => { sub.saved = false; infoFor(sub); renderTabs(); if (active === sub) redraw(); });
+    el.addEventListener("change", (e) => { if (e.target.closest(".pbody")) sub.saved = false; if (e.target.dataset.k === "photo") pickPhoto(sub, e.target.files && e.target.files[0]); infoFor(sub); renderTabs(); if (active === sub) redraw(); });
     el.querySelector(".pzoomIn").addEventListener("input", (e) => { sub.zoom = parseFloat(e.target.value); setActive(sub); });
     el.querySelector(".pshow").addEventListener("click", () => { setActive(sub); canvas.scrollIntoView({ behavior: "smooth", block: "center" }); });
-    el.querySelector(".prem").addEventListener("click", () => { blocks.splice(blocks.indexOf(sub), 1); el.remove(); numberBlocks(); setActive(active === sub ? (blocks[0] || main) : active); });
-    numberBlocks(); setActive(sub); el.querySelector("input").focus();
+    el.querySelector(".prem").addEventListener("click", () => removeBlock(sub));
+    el.querySelector(".pedit").addEventListener("click", () => { openBlock(sub); setActive(sub); });
+    el.querySelector(".pdone").addEventListener("click", () => {
+      if (!checkPerson(sub)) { const f = el.querySelector("[aria-invalid=true]"); if (f) f.focus(); return; }
+      sub.saved = true;
+      const next = blocks.find((b) => b !== sub && isBlank(b));
+      if (next) { openBlock(next); setActive(next); next.el.querySelector("input").focus(); } else addBlock();
+      (next || blocks[blocks.length - 1]).el.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    syncClubs(); openBlock(sub); numberBlocks(); setActive(sub); el.querySelector("input").focus();
   }
-  function numberBlocks() { blocks.forEach((b, i) => { b.el.querySelector(".pt").textContent = t("playerN").replace("{n}", i + 1); }); }
+  /* حفظ مؤقت داخل الصفحة: لاعب واحد مفتوح والباقي سطور مختصرة، حتى لا تطول الصفحة */
+  function openBlock(sub) { blocks.forEach((b) => b.el.classList.toggle("collapsed", b !== sub)); updateSums(); }
+  function updateSums() {
+    blocks.forEach((b) => {
+      const name = val(b, "nameAr") || val(b, "nameEn"), club = val(b, "clubAr") || val(b, "clubEn");
+      b.el.querySelector(".psum").textContent = (b.saved ? "✓ " : "") + (name ? name + (club ? " — " + club : "") : t("pNoName"));
+    });
+  }
+  const isBlank = (b) => !b.photo && !["nameAr", "nameEn", "birth", "guardian", "belt", "para", "gender"].some((k) => val(b, k)) && !q(b, "clubPick").value;
+  function removeBlock(sub) {
+    const wasOpen = !sub.el.classList.contains("collapsed");
+    blocks.splice(blocks.indexOf(sub), 1); sub.el.remove(); numberBlocks();
+    if (wasOpen && blocks.length) openBlock(blocks[blocks.length - 1]);
+    setActive(active === sub ? (blocks[blocks.length - 1] || main) : active);
+  }
+  function numberBlocks() { blocks.forEach((b, i) => { b.el.querySelector(".pt").textContent = t("playerN").replace("{n}", i + 1); }); updateSums(); }
   $("#addP").addEventListener("click", addBlock);
 
   /* ---------- التحقق ---------- */
@@ -517,6 +582,7 @@
     if (!val(sub, "belt")) bad("belt", t("eReq")); else setErrS(sub, "belt", "");
     if (!val(sub, "para")) bad("para", t("eReq")); else setErrS(sub, "para", "");
     if (age != null && age < 18 && val(sub, "guardian").length < 2) bad("guardian", t("eGuardian")); else setErrS(sub, "guardian", "");
+    if (sub.kind === "block" || withPlayers()) { if (clubs().length > 1 && !pickOf(sub).value) bad("clubPick", t("eClubPick")); else setErrS(sub, "clubPick", ""); }
     if (!sub.photo) bad("photo", t("ePhoto")); else setErrS(sub, "photo", "");
     const vi = videoInp(sub); if (vi && vi.value.trim() && vi.dataset.v !== "ok") bad("video", t("eVideo")); else setErrS(sub, "video", "");
     return ok;
@@ -530,6 +596,11 @@
     const chk = (k, re, msgRe, opt) => { const v = F[k].value.trim(); if (!v) return opt ? setErr(k, "") : bad(k, t("eReq")); if (v.length < 2) return bad(k, t("eName")); if (!re.test(v)) return bad(k, msgRe); setErr(k, ""); };
     chk("countryAr", AR, t("eNameAr")); chk("countryEn", EN, t("eNameEn"));
     chk("clubAr", AR, t("eNameAr"), true); chk("clubEn", EN, t("eNameEn"), true);
+    if (withPlayers()) clubRows.forEach((r) => ["ar", "en"].forEach((side) => {
+      const v = r.querySelector(`[data-c=${side}]`).value.trim(), e = r.querySelector(`[data-ce=${side}]`);
+      const m = !v ? "" : v.length < 2 ? t("eName") : !(side === "ar" ? AR : EN).test(v) ? t(side === "ar" ? "eNameAr" : "eNameEn") : "";
+      e.textContent = m; e.hidden = !m; if (m) ok = false;
+    }));
     if (F.coach.value && !/^\d{4}$/.test(F.coach.value)) bad("coach", t("eCoach")); else setErr("coach", "");
     if (!EMAIL.test(F.email.value.trim())) bad("email", t("eEmail")); else setErr("email", "");
     if (needCode() && !/^\d{6}$/.test(F.vcode.value.trim())) bad("vcode", t("vReq")); else setErr("vcode", "");
@@ -584,7 +655,7 @@
       rid: sub.rid, lang, role: sub.kind === "main" && role === "coach" ? "coach" : "player", addedBy: addedBy || "",
       nameAr: val(sub, "nameAr"), nameEn: val(sub, "nameEn"), gender: val(sub, "gender"), birth,
       ageCat: (ageCat(ageOf(birth)) || [])[1] || "", countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
-      clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), belt: val(sub, "belt"), level: (beltOf(val(sub, "belt")) || [])[4] || "",
+      clubAr: val(sub, "clubAr"), clubEn: val(sub, "clubEn"), belt: val(sub, "belt"), level: (beltOf(val(sub, "belt")) || [])[4] || "",
       para: val(sub, "para"), coachCode: F.coach.value && (sub.kind === "main" || role === "coach") ? "PTA-2026-" + F.coach.value : "", guardian: val(sub, "guardian"),
       coachName: sub.kind === "block" ? F.nameAr.value.trim() + " / " + F.nameEn.value.trim() : "", video: VIDEO_OPEN ? videoVal(sub) : undefined,
       promo: promoYes() ? "yes" : "no", whatsapp: promoYes() ? normPhone($("#f_wa").value, dialSels[1]) : "",
@@ -597,8 +668,13 @@
   $("#regForm").addEventListener("submit", async (ev) => {
     ev.preventDefault(); if (busy) return;
     if ($("#f_website").value) return; // honeypot
+    if (withPlayers()) {   // الخانات الفاضية للاعب التالي لا تُحسب
+      const blanks = blocks.filter(isBlank);
+      if (coachOnly() && blanks.length === blocks.length) blanks.shift();
+      blanks.forEach(removeBlock);
+    }
     const v = validate();
-    if (!v.ok) { setActive(v.firstBad); const first = (v.firstBad.kind === "main" ? $("#regForm") : v.firstBad.el).querySelector("[aria-invalid=true]") || $("[aria-invalid=true]"); if (first) first.focus(); return; }
+    if (!v.ok) { if (v.firstBad.kind === "block") openBlock(v.firstBad); setActive(v.firstBad); const first = (v.firstBad.kind === "main" ? $("#regForm") : v.firstBad.el).querySelector("[aria-invalid=true]") || $("[aria-invalid=true]"); if (first) first.focus(); return; }
     busy = true; const btn = $("#submitBtn"); btn.disabled = true; btn.textContent = t("saving"); $("#formErr").hidden = true;
     let demo = !API;
     if (coachOnly()) return saveCoachOnly(btn);
@@ -745,9 +821,9 @@
     set("#promoQ", coach && withPlayers() ? "promoQCoach" : "promoQ");
     $("#coachVidRow").hidden = !coach || mode === "edit";
     if (!withPlayers() && active !== main) setActive(main);
-    $("#vbox").hidden = !needCode(); renderTabs();
+    $("#vbox").hidden = !needCode(); syncClubs(); renderTabs();
   }
-  document.querySelectorAll("input[name=role]").forEach((r) => r.addEventListener("change", () => { role = r.value; applyRole(); if (role === "coach" && !blocks.length) addBlock(); }));
+  document.querySelectorAll("input[name=role]").forEach((r) => r.addEventListener("change", () => { role = r.value; applyRole(); }));   // لا يُفتح لاعب تلقائيًا: المدرب يضغط «إضافة لاعبين» بعد بياناته
   document.querySelectorAll("input[name=compete]").forEach((r) => r.addEventListener("change", () => { compete = r.value === "yes"; applyRole(); infoAll(); redraw(); }));
   F.email.addEventListener("input", () => { $("#vbox").hidden = !needCode(); });
 

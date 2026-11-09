@@ -1,4 +1,13 @@
 /* صفحة تسجيل اللاعب (إضافات فوق card.css) */
+.clubrow{border-top:1px dashed rgba(156,192,255,.3);padding-top:.7rem;margin-top:.5rem}
+.clubrow .prem{margin-bottom:.4rem}
+.pfoot{margin-top:.6rem}
+.pblock.collapsed{padding-bottom:.6rem}
+.pblock.collapsed .pbody,.pblock.collapsed .pfoot,.pblock.collapsed .pshow:not(.pedit){display:none}
+.pblock:not(.collapsed) .psum,.pblock:not(.collapsed) .pedit{display:none}
+.phead .pt{flex:none}
+.psum{flex:1;min-width:0;color:#cfe0ff;font:600 .9rem var(--fb);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.pbtns{flex:none}
 .guidebtn{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0 auto 1.6rem;padding:.85rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold2);background:linear-gradient(180deg,#e0242f,#a50f19);color:#fff;font:800 1.1rem var(--fb);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .guidebtn[hidden]{display:none}
 .guidebtn:hover{filter:brightness(1.1)}
