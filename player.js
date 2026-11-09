@@ -655,6 +655,7 @@
       rid: sub.rid, lang, role: sub.kind === "main" && role === "coach" ? "coach" : "player", addedBy: addedBy || "",
       nameAr: val(sub, "nameAr"), nameEn: val(sub, "nameEn"), gender: val(sub, "gender"), birth,
       ageCat: (ageCat(ageOf(birth)) || [])[1] || "", countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
+      coachClubs: withPlayers() ? clubs().map((c) => ({ ar: c.ar, en: c.en })) : undefined,   // قائمة نوادي المدرب تُحفظ في ورقة منفصلة
       clubAr: val(sub, "clubAr"), clubEn: val(sub, "clubEn"), belt: val(sub, "belt"), level: (beltOf(val(sub, "belt")) || [])[4] || "",
       para: val(sub, "para"), coachCode: F.coach.value && (sub.kind === "main" || role === "coach") ? "PTA-2026-" + F.coach.value : "", guardian: val(sub, "guardian"),
       coachName: sub.kind === "block" ? F.nameAr.value.trim() + " / " + F.nameEn.value.trim() : "", video: VIDEO_OPEN ? videoVal(sub) : undefined,
