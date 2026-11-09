@@ -1,6 +1,8 @@
 /* صفحة تسجيل اللاعب (إضافات فوق card.css) */
 .clubrow{border-top:1px dashed rgba(156,192,255,.3);padding-top:.7rem;margin-top:.5rem}
 .clubrow .prem{margin-bottom:.4rem}
+#btnMine{grid-column:1/-1;justify-self:center;width:calc(50% - .5rem)}
+@media (max-width:600px){#btnMine{width:100%}}
 .mineitem{border:1.5px solid rgba(244,203,85,.4);border-radius:14px;padding:.8rem .9rem;margin:.7rem auto;max-width:520px;background:rgba(3,10,36,.45);text-align:start}
 .mineitem b{display:block;font:800 1.05rem var(--fb);color:var(--gold1)}
 .mineitem .mname2,.mineitem .mmeta{display:block;color:#cfe0ff;font-size:.9rem;line-height:1.7}
