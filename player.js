@@ -60,7 +60,7 @@
       guardian: "اسم ولي الأمر", guardianHint: "مطلوب إذا كان عمر اللاعب أقل من 18 سنة.",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
       vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
-      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "أدخل رقم هاتف صحيحًا مع رمز الدولة.",
+      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
       photo: "اختر صورة واضحة للاعب", photoC: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.", zoom: "تكبير الصورة",
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
       consentC: "أقرّ بصحة بياناتي وبيانات لاعبيّ، وأوافق على استخدام صورتي وبياناتي لإصدار بطاقة البطل وفي تنظيم البطولة، وأقرّ بأنني حصلت على موافقة لاعبيّ أو أولياء أمورهم على تسجيلهم واستخدام صورهم وبياناتهم.",
@@ -112,7 +112,7 @@
       guardian: "Guardian's name", guardianHint: "Required if the player is under 18.",
       email: "Email (required)", emailHint: "The same email can register more than one player (e.g. siblings).", eEmail: "Enter a valid email address.",
       vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
-      phone: "Phone number (required, with country code)", ePhone: "Enter a valid phone number with country code.",
+      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
       photo: "Choose a clear photo of the player", photoC: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.", zoom: "Zoom",
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
       consentC: "I confirm my details and my players' details are correct, agree to the use of my photo and details for the champion card and the championship, and confirm I have my players' or their guardians' consent to register them and use their photos and details.",
@@ -150,6 +150,14 @@
     ["الولايات المتحدة","United States"],["كندا","Canada"],["البرازيل","Brazil"],["المكسيك","Mexico"],["أستراليا","Australia"],
   ];
   const byAr = new Map(COUNTRIES.map(([a, e]) => [a, e])), byEn = new Map(COUNTRIES.map(([a, e]) => [e.toLowerCase(), a]));
+  const DIAL = { "egypt": "20", "saudi arabia": "966", "united arab emirates": "971", "kuwait": "965", "qatar": "974", "bahrain": "973", "oman": "968", "yemen": "967",
+    "iraq": "964", "syria": "963", "lebanon": "961", "jordan": "962", "palestine": "970", "libya": "218", "tunisia": "216", "algeria": "213",
+    "morocco": "212", "mauritania": "222", "sudan": "249", "south sudan": "211", "somalia": "252", "djibouti": "253", "comoros": "269",
+    "turkey": "90", "iran": "98", "pakistan": "92", "afghanistan": "93", "india": "91", "bangladesh": "880", "indonesia": "62", "malaysia": "60",
+    "south korea": "82", "japan": "81", "china": "86", "philippines": "63", "thailand": "66", "vietnam": "84", "uzbekistan": "998", "kazakhstan": "7",
+    "russia": "7", "ukraine": "380", "germany": "49", "france": "33", "italy": "39", "spain": "34", "united kingdom": "44", "netherlands": "31",
+    "sweden": "46", "turkmenistan": "993", "azerbaijan": "994", "nigeria": "234", "senegal": "221", "kenya": "254", "ethiopia": "251", "south africa": "27",
+    "united states": "1", "canada": "1", "brazil": "55", "mexico": "52", "australia": "61" };
 
   /* ---------- الأصول ---------- */
   const IMG = {};
@@ -373,6 +381,23 @@
   $("#countriesEn").innerHTML = COUNTRIES.map(([, e]) => `<option value="${e}">`).join("");
   F.countryAr.addEventListener("change", () => { const e = byAr.get(F.countryAr.value.trim()); if (e && !F.countryEn.value.trim()) { F.countryEn.value = e; redraw(); } });
   F.countryEn.addEventListener("change", () => { const a = byEn.get(F.countryEn.value.trim().toLowerCase()); if (a && !F.countryAr.value.trim()) { F.countryAr.value = a; redraw(); } });
+  /* قائمة رمز الدولة: تتبع دولة اللاعب تلقائيًا، ويمكن تغييرها لو الرقم من دولة أخرى */
+  const dialSels = [$("#f_phoneDial"), $("#f_waDial")];
+  function fillDialOpts() {
+    dialSels.forEach((s) => {
+      const cur = s.value;
+      s.innerHTML = `<option value="">${t("dialPick")}</option>` + COUNTRIES.map(([a, e]) => `<option value="${e.toLowerCase()}">+${DIAL[e.toLowerCase()]} ${lang === "en" ? e : a}</option>`).join("");
+      s.value = cur;
+    });
+  }
+  function syncDial(ev) {
+    const fromAr = (byAr.get(F.countryAr.value.trim()) || "").toLowerCase(), fromEn = F.countryEn.value.trim().toLowerCase();
+    const en = ev && ev.target === F.countryAr ? fromAr : fromEn || fromAr;   // الأولوية للخانة اللي اتغيرت
+    if (DIAL[en]) dialSels.forEach((s) => { if (!s.dataset.touched) s.value = en; });
+  }
+  dialSels.forEach((s) => s.addEventListener("change", () => { s.dataset.touched = "1"; }));
+  ["change", "input"].forEach((ev) => [F.countryAr, F.countryEn].forEach((i) => i.addEventListener(ev, syncDial)));
+  fillDialOpts();
   const mainFields = $("#regForm");
   mainFields.addEventListener("focusin", (e) => { if (!coachOnly() && !e.target.closest(".pblock") && !e.target.closest("#playersBox") && active !== main && (INHERIT.includes((e.target.id || "").slice(2)) ? false : true)) setActive(main); });
   Object.values(F).forEach((el) => ["input", "change"].forEach((n) => el.addEventListener(n, () => { infoAll(); renderTabs(); redraw(); })));
@@ -454,7 +479,24 @@
 
   /* ---------- التحقق ---------- */
   const AR = /[؀-ۿ]/, EN = /[A-Za-z]/, EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
-  const phoneOk = (v) => /^\+?[0-9 ()\-]{8,20}$/.test(v) && v.replace(/\D/g, "").length >= 8;
+  const phoneOk = (v) => /^\+\d{8,15}$/.test(v);   // لازم بكود الدولة
+  /* يوحّد الرقم بصيغة +رمز_الدولة والرقم حسب القائمة المختارة بجانبه، ويحذف صفر البداية */
+  function normPhone(v, sel) {
+    const s = String(v || "").replace(/[٠-٩]/g, (c) => "٠١٢٣٤٥٦٧٨٩".indexOf(c)).replace(/[۰-۹]/g, (c) => "۰۱۲۳۴۵۶۷۸۹".indexOf(c)).trim();
+    const all = s.replace(/\D/g, ""), dial = DIAL[sel.value] || "";
+    let d;
+    if (s.startsWith("+") || all.startsWith("00")) {   // كتب الرمز بنفسه: يُعتمد ما كتبه
+      d = s.startsWith("+") ? all : all.slice(2);
+      const m = Object.values(DIAL).find((x) => d.startsWith(x + "0"));
+      if (m) d = m + d.slice(m.length).replace(/^0+/, "");
+    } else {
+      if (!dial) return s;   // لم يختر رمز الدولة: يرفضه التحقق
+      const local = all.replace(/^0+/, "");
+      const full = local.startsWith(dial) && local.length >= dial.length + 8 && (dial.length > 1 || local.length === 11);
+      d = full ? local : dial + local;
+    }
+    return "+" + d;
+  }
   function setErr(k, m) { const e = $("#e_" + k); if (e) { e.textContent = m; e.hidden = !m; } const inp = $("#f_" + k); if (inp) inp.setAttribute("aria-invalid", m ? "true" : "false"); }
   function setErrS(sub, k, m) {
     if (sub.kind === "main") return setErr(k, m);
@@ -486,9 +528,9 @@
     if (F.coach.value && !/^\d{4}$/.test(F.coach.value)) bad("coach", t("eCoach")); else setErr("coach", "");
     if (!EMAIL.test(F.email.value.trim())) bad("email", t("eEmail")); else setErr("email", "");
     if (needCode() && !/^\d{6}$/.test(F.vcode.value.trim())) bad("vcode", t("vReq")); else setErr("vcode", "");
-    if (!phoneOk(F.phone.value.trim())) bad("phone", t("ePhone")); else setErr("phone", "");
+    if (mode !== "edit" && !phoneOk(normPhone(F.phone.value, dialSels[0]))) bad("phone", t("ePhone")); else setErr("phone", "");   // في التعديل الرقم تم التحقق منه بالفعل
     if (!$("#f_consent").checked) bad("consent", t("eConsent")); else setErr("consent", "");
-    if (promoYes() && !phoneOk($("#f_wa").value.trim())) bad("wa", t("eWa")); else setErr("wa", "");
+    if (promoYes() && !phoneOk(normPhone($("#f_wa").value, dialSels[1]))) bad("wa", t("eWa")); else setErr("wa", "");
     let firstBad = ok ? null : main;
     if (withPlayers()) blocks.forEach((b) => { if (!checkPerson(b)) { ok = false; firstBad = firstBad || b; } });
     if (coachOnly() && !blocks.length) { ok = false; const m = $("#formErr"); m.textContent = t("eNoPlayers"); m.hidden = false; }
@@ -537,12 +579,12 @@
       clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), belt: val(sub, "belt"), level: (beltOf(val(sub, "belt")) || [])[4] || "",
       para: val(sub, "para"), coachCode: F.coach.value && (sub.kind === "main" || role === "coach") ? "PTA-2026-" + F.coach.value : "", guardian: val(sub, "guardian"),
       coachName: sub.kind === "block" ? F.nameAr.value.trim() + " / " + F.nameEn.value.trim() : "", video: VIDEO_OPEN ? videoVal(sub) : undefined,
-      promo: promoYes() ? "yes" : "no", whatsapp: promoYes() ? $("#f_wa").value.trim() : "",
+      promo: promoYes() ? "yes" : "no", whatsapp: promoYes() ? normPhone($("#f_wa").value, dialSels[1]) : "",
       coachInVideo: promoYes() && role === "coach" && sub.kind === "main" && $("#f_coachVid").checked ? "yes" : "no",   // undefined = لا يُرسل، فلا يُمسح رابط محفوظ
-      email: F.email.value.trim().toLowerCase(), phone: F.phone.value.trim(), photo: photoJpeg(sub), vcode: F.vcode.value.trim(), token: sess.token,
+      email: F.email.value.trim().toLowerCase(), phone: mode === "edit" ? F.phone.value.trim() : normPhone(F.phone.value, dialSels[0]), photo: photoJpeg(sub), vcode: F.vcode.value.trim(), token: sess.token,
     };
   }
-  const errText = (e, code) => e === "player_exists" ? t("eDup").replace("{code}", code || "") : e === "bad_vcode" ? t("vBad") : e === "vcode_expired" ? t("vExp") : e === "not_found" ? t("eNotFound") : e === "net" ? t("eNet") : t("eSrv");
+  const errText = (e, code) => e === "player_exists" ? t("eDup").replace("{code}", code || "") : e === "bad_phone" ? t("ePhone") : e === "bad_vcode" ? t("vBad") : e === "vcode_expired" ? t("vExp") : e === "not_found" ? t("eNotFound") : e === "net" ? t("eNet") : t("eSrv");
 
   $("#regForm").addEventListener("submit", async (ev) => {
     ev.preventDefault(); if (busy) return;
@@ -706,7 +748,7 @@
   function showForm(m) {
     mode = m; modeBox.hidden = true; lkBox.hidden = true; grid.hidden = false;
     const sb = $("#submitBtn"); sb.dataset.t = m === "edit" ? "submitEdit" : "submit"; sb.textContent = t(sb.dataset.t);
-    $("#editBadge").hidden = m !== "edit"; F.email.readOnly = m === "edit"; F.phone.readOnly = m === "edit";
+    $("#editBadge").hidden = m !== "edit"; F.email.readOnly = m === "edit"; F.phone.readOnly = m === "edit"; dialSels[0].disabled = m === "edit";
     applyRole(); infoAll(); redraw();
   }
   $("#btnNew").addEventListener("click", () => showForm("new"));
@@ -727,7 +769,7 @@
       F.email.value = email; F.phone.value = phone; F.coach.value = (d.coachCode || "").slice(-4);
       if (VIDEO_OPEN) { $("#f_video").value = d.video || ""; checkVideo($("#f_video"), $("#videoMsg"), $("#videoPrev")); }
       const pr = $("input[name=promo][value=" + (d.promo === "yes" ? "yes" : "no") + "]"); if (pr) pr.checked = true;
-      $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
+      $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; syncDial(); $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
       fillSelects(); F.belt.value = d.belt || ""; F.para.value = d.para || "";
       const g = $("input[name=gender][value=" + (d.gender === "f" ? "f" : "m") + "]"); if (g && d.gender) g.checked = true;
       role = d.role === "coach" ? "coach" : "player";
@@ -763,7 +805,7 @@
     document.title = t("title") + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
     const sb = $("#submitBtn"); if (!busy) sb.textContent = t(sb.dataset.t);
     $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API;
-    fillSelects(); numberBlocks(); applyRole(); infoAll(); draw();
+    fillSelects(); fillDialOpts(); numberBlocks(); applyRole(); infoAll(); draw();
     document.querySelectorAll("#f_video, [data-k=video]").forEach((i) => { if (!VIDEO_OPEN) { i.placeholder = t("vClosedPh"); i.dir = lang === "en" ? "ltr" : "rtl"; } });
   }
   $("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); });

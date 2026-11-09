@@ -10,7 +10,7 @@
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="style.css?v=20261108">
 <link rel="stylesheet" href="card.css?v=20261108">
-<link rel="stylesheet" href="player.css?v=20261108b">
+<link rel="stylesheet" href="player.css?v=20261109">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -123,7 +123,7 @@
           <div class="fld" id="guardianRow"><label for="f_guardian" data-t="guardian">اسم ولي الأمر</label><input id="f_guardian" type="text" maxlength="60"><p class="hint" data-t="guardianHint">مطلوب إذا كان عمر اللاعب أقل من 18 سنة.</p><p class="err" id="e_guardian" hidden></p></div>
           <div class="fld"><label for="f_email" data-t="email">البريد الإلكتروني (إجباري)</label><input id="f_email" type="email" maxlength="120" dir="ltr" autocomplete="email" inputmode="email"><p class="hint" data-t="emailHint">يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).</p><p class="err" id="e_email" hidden></p></div>
           <div class="fld" id="vbox"><label for="f_vcode" data-t="vLbl">كود تأكيد البريد (6 أرقام)</label><div style="display:flex;gap:8px"><input id="f_vcode" type="text" inputmode="numeric" maxlength="6" dir="ltr" autocomplete="one-time-code" style="flex:1"><button type="button" class="btn" id="btnSendCode" data-t="vSend">أرسل الكود</button></div><p class="hint" id="vMsg" data-t="vHint">اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).</p><p class="err" id="e_vcode" hidden></p></div>
-          <div class="fld"><label for="f_phone" data-t="phone">رقم الهاتف (إجباري، مع رمز الدولة)</label><input id="f_phone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel" maxlength="25"><p class="err" id="e_phone" hidden></p></div>
+          <div class="fld"><label for="f_phone" data-t="phone">رقم الهاتف (إجباري، مع رمز الدولة)</label><div class="phonewrap"><select id="f_phoneDial" aria-label="رمز الدولة"></select><input id="f_phone" type="tel" inputmode="tel" dir="ltr" placeholder="100 000 0000" autocomplete="tel-national" maxlength="25"></div><p class="hint" data-t="dialHint">الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.</p><p class="err" id="e_phone" hidden></p></div>
         </fieldset>
 
         <fieldset id="photoSet">
@@ -139,7 +139,7 @@
           <div id="promoMore" hidden>
             <p class="hint" id="promoHow" data-t="promoHow">صوّر اللاعب طوليًا ببدلة التايكوندو، وهو يقول شعار البطولة بصوت واضح: «أنا بطل… والأبطال لا يعرفون حدودًا». من غير كتابة أو ملصقات على الفيديو.</p>
             <img class="guide" src="assets/card/promo-player.webp" alt="رسم توضيحي: تصوير اللاعب بالبدلة طوليًا وهو يقول شعار البطولة" width="1600" height="900" loading="lazy">
-            <div class="fld"><label for="f_wa" data-t="wa">رقم واتساب للتواصل (إلزامي عند اختيار نعم)</label><input id="f_wa" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel" maxlength="25"><p class="err" id="e_wa" hidden></p></div>
+            <div class="fld"><label for="f_wa" data-t="wa">رقم واتساب للتواصل (إلزامي عند اختيار نعم)</label><div class="phonewrap"><select id="f_waDial" aria-label="رمز الدولة"></select><input id="f_wa" type="tel" inputmode="tel" dir="ltr" placeholder="100 000 0000" autocomplete="tel-national" maxlength="25"></div><p class="err" id="e_wa" hidden></p></div>
             <div id="coachVidRow" hidden><label class="chk"><input type="checkbox" id="f_coachVid"> <span data-t="coachVid">أرغب أن أشارك أنا أيضًا في الفيديو بصفتي المدرب</span></label>
             <img class="guide" id="coachImg" hidden src="assets/card/promo-coach.webp" alt="رسم توضيحي: تصوير المدرب وهو يقدّم نفسه" width="1600" height="900" loading="lazy"></div>
           </div>
@@ -188,6 +188,6 @@
 
 <script src="config.js?v=20261108b"></script>
 <script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261108b"></script>
+<script src="player.js?v=20261109"></script>
 </body>
 </html>
