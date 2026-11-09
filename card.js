@@ -19,7 +19,7 @@
       champions: "عدد الأبطال المشاركين معك", championsHint: "للإدارة فقط ولا يظهر على البطاقة. اختياري.",
       photo: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.",
       zoom: "تكبير الصورة",
-      oneCard: "⚠️ تنبيه: يُمنع إصدار أكثر من بطاقة لنفس المدرب. يُسجَّل كل مدرب مرة واحدة فقط (بريد إلكتروني ورقم هاتف واحد)، وأي تسجيل مكرر يُرفض. لتغيير بياناتك استخدم «تعديل بطاقتي».", phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "أدخل رقم هاتف صحيحًا مع رمز الدولة.", lkPhone: "رقم الهاتف المسجَّل",
+      oneCard: "⚠️ تنبيه: يُمنع إصدار أكثر من بطاقة لنفس المدرب. يُسجَّل كل مدرب مرة واحدة فقط (بريد إلكتروني ورقم هاتف واحد)، وأي تسجيل مكرر يُرفض. لتغيير بياناتك استخدم «تعديل بطاقتي».", phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.", lkPhone: "رقم الهاتف المسجَّل",
       modeT: "ماذا تريد أن تفعل؟", newId: "إصدار بطاقة جديدة", newHint: "سجّل بياناتك لأول مرة واحصل على كودك وبطاقتك.", editId: "تعديل بطاقتي", editHint: "لديك كود؟ عدّل بياناتك أو صورتك وأصدر بطاقتك من جديد.",
       lkT: "تعديل بطاقتي", lkHint: "أدخل رقم هاتفك والبريد الإلكتروني المسجَّلين والكود القديم الظاهر على بطاقتك. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkEmail: "البريد الإلكتروني", lkCode: "كودك القديم (آخر 4 أرقام فقط)", lkBtn: "عرض بياناتي", lkBack: "رجوع",
       eNotFound: "لم نجد تسجيلًا بهذا البريد والكود. تأكد من كتابتهما كما سجّلت.", eLk: "أدخل رقم الهاتف والبريد الإلكتروني والكود.", editBadge: "وضع التعديل: عدّل ما تريد ثم احفظ لإصدار بطاقتك من جديد.", submitEdit: "احفظ التعديلات وأصدر البطاقة", doneEditT: "تم تحديث بياناتك",
@@ -54,7 +54,7 @@
       champions: "Number of champions participating with you", championsHint: "For the organisers only; not printed on the card. Optional.",
       photo: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.",
       zoom: "Zoom",
-      oneCard: "⚠️ Notice: issuing more than one card for the same coach is not allowed. Each coach registers once only (one email and one phone number); any duplicate registration is rejected. To change your details use “Edit my card”.", phone: "Phone number (required, with country code)", ePhone: "Enter a valid phone number with country code.", lkPhone: "Registered phone number",
+      oneCard: "⚠️ Notice: issuing more than one card for the same coach is not allowed. Each coach registers once only (one email and one phone number); any duplicate registration is rejected. To change your details use “Edit my card”.", phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.", lkPhone: "Registered phone number",
       modeT: "What would you like to do?", newId: "Issue a new card", newHint: "Register for the first time and get your code and card.", editId: "Edit my card", editHint: "Already have a code? Update your details or photo and re-issue your card.",
       lkT: "Edit my card", lkHint: "Enter your registered phone number, email and the old code shown on your card. Once verified, the edit page opens.", lkEmail: "Email", lkCode: "Your old code (last 4 digits only)", lkBtn: "Show my details", lkBack: "Back",
       eNotFound: "No registration found for this email and code. Check them as you registered.", eLk: "Enter your phone number, email and code.", editBadge: "Edit mode: change what you need, then save to re-issue your card.", submitEdit: "Save changes & re-issue the card", doneEditT: "Your details are updated",
@@ -95,6 +95,14 @@
     ["الولايات المتحدة","United States"],["كندا","Canada"],["البرازيل","Brazil"],["المكسيك","Mexico"],["أستراليا","Australia"],
   ];
   const byAr = new Map(COUNTRIES.map(([a, e]) => [a, e])), byEn = new Map(COUNTRIES.map(([a, e]) => [e.toLowerCase(), a]));
+  const DIAL = { "egypt": "20", "saudi arabia": "966", "united arab emirates": "971", "kuwait": "965", "qatar": "974", "bahrain": "973", "oman": "968", "yemen": "967",
+    "iraq": "964", "syria": "963", "lebanon": "961", "jordan": "962", "palestine": "970", "libya": "218", "tunisia": "216", "algeria": "213",
+    "morocco": "212", "mauritania": "222", "sudan": "249", "south sudan": "211", "somalia": "252", "djibouti": "253", "comoros": "269",
+    "turkey": "90", "iran": "98", "pakistan": "92", "afghanistan": "93", "india": "91", "bangladesh": "880", "indonesia": "62", "malaysia": "60",
+    "south korea": "82", "japan": "81", "china": "86", "philippines": "63", "thailand": "66", "vietnam": "84", "uzbekistan": "998", "kazakhstan": "7",
+    "russia": "7", "ukraine": "380", "germany": "49", "france": "33", "italy": "39", "spain": "34", "united kingdom": "44", "netherlands": "31",
+    "sweden": "46", "turkmenistan": "993", "azerbaijan": "994", "nigeria": "234", "senegal": "221", "kenya": "254", "ethiopia": "251", "south africa": "27",
+    "united states": "1", "canada": "1", "brazil": "55", "mexico": "52", "australia": "61" };
 
   /* ---------- الأصول ---------- */
   const IMG = {};
@@ -243,12 +251,51 @@
   /* ---------- الدول: تعبئة تلقائية للترجمة ---------- */
   $("#countries").innerHTML = COUNTRIES.map(([a]) => `<option value="${a}">`).join("");
   $("#countriesEn").innerHTML = COUNTRIES.map(([, e]) => `<option value="${e}">`).join("");
-  F.countryAr.addEventListener("change", () => { const e = byAr.get(F.countryAr.value.trim()); if (e && !F.countryEn.value.trim()) { F.countryEn.value = e; redraw(); } });
-  F.countryEn.addEventListener("change", () => { const a = byEn.get(F.countryEn.value.trim().toLowerCase()); if (a && !F.countryAr.value.trim()) { F.countryAr.value = a; redraw(); } });
+  F.countryAr.addEventListener("change", () => { const e = byAr.get(F.countryAr.value.trim()); if (e && (!F.countryEn.value.trim() || byEn.has(F.countryEn.value.trim().toLowerCase()))) { F.countryEn.value = e; redraw(); } });   // يتحدث لو الخانة فاضية أو فيها دولة من القائمة، ولا يمس ما كُتب يدويًا
+  F.countryEn.addEventListener("change", () => { const a = byEn.get(F.countryEn.value.trim().toLowerCase()); if (a && (!F.countryAr.value.trim() || byAr.has(F.countryAr.value.trim()))) { F.countryAr.value = a; redraw(); } });
   Object.values(F).forEach((el) => el.addEventListener("input", redraw));
+  /* قائمة رمز الدولة: تتبع دولة المدرب تلقائيًا، ويمكن تغييرها لو الرقم من دولة أخرى */
+  const dialSels = [$("#f_phoneDial"), $("#f_waDial")];
+  const dialShown = dialSels.map((s) => { const c = document.createElement("span"); c.className = "dialcode"; c.setAttribute("aria-hidden", "true"); s.after(c); return c; });
+  function showDial() { dialSels.forEach((s, i) => { const d = DIAL[s.value]; dialShown[i].textContent = d ? "+" + d : t("dialPick"); dialShown[i].classList.toggle("empty", !d); }); }
+  function fillDialOpts() {
+    dialSels.forEach((s) => {
+      const cur = s.value;
+      s.innerHTML = `<option value="">${t("dialPick")}</option>` + COUNTRIES.map(([a, e]) => `<option value="${e.toLowerCase()}">+${DIAL[e.toLowerCase()]} ${lang === "en" ? e : a}</option>`).join("");
+      s.value = cur;
+    });
+    showDial();
+  }
+  function syncDial(ev) {
+    const fromAr = (byAr.get(F.countryAr.value.trim()) || "").toLowerCase(), fromEn = F.countryEn.value.trim().toLowerCase();
+    const en = ev && ev.target === F.countryAr ? fromAr : fromEn || fromAr;   // الأولوية للخانة اللي اتغيرت
+    if (DIAL[en]) dialSels.forEach((s) => { if (!s.dataset.touched) s.value = en; });
+    showDial();
+  }
+  dialSels.forEach((s) => s.addEventListener("change", () => { s.dataset.touched = "1"; showDial(); }));
+  ["change", "input"].forEach((ev) => [F.countryAr, F.countryEn].forEach((i) => i.addEventListener(ev, syncDial)));
+  fillDialOpts();
 
   /* ---------- التحقق ---------- */
   const AR = /[؀-ۿ]/, EN = /[A-Za-z]/;
+  const phoneOk = (v) => /^\+\d{8,15}$/.test(v);   // لازم بكود الدولة
+  /* يوحّد الرقم بصيغة +رمز_الدولة والرقم حسب القائمة المختارة بجانبه، ويحذف صفر البداية */
+  function normPhone(v, sel) {
+    const s = String(v || "").replace(/[٠-٩]/g, (c) => "٠١٢٣٤٥٦٧٨٩".indexOf(c)).replace(/[۰-۹]/g, (c) => "۰۱۲۳۴۵۶۷۸۹".indexOf(c)).trim();
+    const all = s.replace(/\D/g, ""), dial = DIAL[sel.value] || "";
+    let d;
+    if (s.startsWith("+") || all.startsWith("00")) {   // كتب الرمز بنفسه: يُعتمد ما كتبه
+      d = s.startsWith("+") ? all : all.slice(2);
+      const m = Object.values(DIAL).find((x) => d.startsWith(x + "0"));
+      if (m) d = m + d.slice(m.length).replace(/^0+/, "");
+    } else {
+      if (!dial) return s;   // لم يختر رمز الدولة: يرفضه التحقق
+      const local = all.replace(/^0+/, "");
+      const full = local.startsWith(dial) && local.length >= dial.length + 8 && (dial.length > 1 || local.length === 11);
+      d = full ? local : dial + local;
+    }
+    return "+" + d;
+  }
   function setErr(k, m) { const e = $("#e_" + k); if (e) { e.textContent = m; e.hidden = !m; } const inp = $("#f_" + k); if (inp) inp.setAttribute("aria-invalid", m ? "true" : "false"); }
   function validate() {
     let ok = true; const bad = (k, m) => { setErr(k, m); ok = false; };
@@ -258,11 +305,10 @@
     chk("clubAr", AR, t("eNameAr")); chk("clubEn", EN, t("eNameEn"));
     const em = $("#f_email").value.trim(); if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) bad("email", t("eEmail")); else setErr("email", "");
     if (API && mode !== "edit" && !/^\d{6}$/.test($("#f_vcode").value.trim())) bad("vcode", t("vReq")); else setErr("vcode", "");
-    const ph = $("#f_phone").value.trim(); if (!/^\+?[0-9 ()\-]{8,20}$/.test(ph) || ph.replace(/\D/g, "").length < 8) bad("phone", t("ePhone")); else setErr("phone", "");
+    if (mode !== "edit" && !phoneOk(normPhone($("#f_phone").value, dialSels[0]))) bad("phone", t("ePhone")); else setErr("phone", "");   // في التعديل الرقم تم التحقق منه بالفعل
     if (!st.photo) bad("photo", t("ePhoto")); else setErr("photo", "");
     const promo = ($("input[name=promo]:checked") || {}).value === "yes";
-    const wa = $("#f_wa").value.trim();
-    if (promo && !/^\+?[0-9 ()\-]{8,20}$/.test(wa)) bad("wa", t("eWa")); else setErr("wa", "");
+    if (promo && !phoneOk(normPhone($("#f_wa").value, dialSels[1]))) bad("wa", t("eWa")); else setErr("wa", "");
     if (!$("#f_consent").checked) bad("consent", t("eConsent")); else setErr("consent", "");
     return ok;
   }
@@ -312,8 +358,8 @@
     const data = {
       action: "register", rid, lang,
       nameAr: F.nameAr.value.trim(), nameEn: F.nameEn.value.trim(), countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
-      clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), email: $("#f_email").value.trim().toLowerCase(), phone: $("#f_phone").value.trim(), champions: $("#f_champions").value.trim(),
-      promo: promo ? "yes" : "no", whatsapp: promo ? $("#f_wa").value.trim() : "", coachInVideo: promo && $("#f_coachVid").checked ? "yes" : "no",
+      clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), email: $("#f_email").value.trim().toLowerCase(), phone: mode === "edit" ? $("#f_phone").value.trim() : normPhone($("#f_phone").value, dialSels[0]), champions: $("#f_champions").value.trim(),
+      promo: promo ? "yes" : "no", whatsapp: promo ? normPhone($("#f_wa").value, dialSels[1]) : "", coachInVideo: promo && $("#f_coachVid").checked ? "yes" : "no",
       photo: photoJpeg(), vcode: $("#f_vcode").value.trim(),
     };
     if (mode === "edit") { data.action = "update"; data.code = editCode; }
@@ -323,7 +369,7 @@
       else res = mode === "edit" ? { ok: false, error: "srv" } : { ok: true, code: "PTA-2026-0000", demo: true };
       st.code = res.code; st.final = true; draw(); await finish(res);
     } catch (err) {
-      const m = $("#formErr"); m.textContent = err && /^(bad_vcode|vcode_expired)$/.test(err.message) ? (setErr("vcode", t(err.message === "bad_vcode" ? "vBad" : "vExp")), t(err.message === "bad_vcode" ? "vBad" : "vExp")) : err && err.message === "email_exists" ? t("eDup").replace("{code}", err.code || "") : err && err.message === "phone_exists" ? t("eDupPhone").replace("{code}", err.code || "") : (err && err.name === "AbortError") || err instanceof TypeError ? t("eNet") : err && err.message === "not_found" ? t("eNotFound") : t("eSrv"); m.hidden = false;
+      const m = $("#formErr"); m.textContent = err && /^(bad_vcode|vcode_expired)$/.test(err.message) ? (setErr("vcode", t(err.message === "bad_vcode" ? "vBad" : "vExp")), t(err.message === "bad_vcode" ? "vBad" : "vExp")) : err && err.message === "email_exists" ? t("eDup").replace("{code}", err.code || "") : err && err.message === "bad_phone" ? t("ePhone") : err && err.message === "phone_exists" ? t("eDupPhone").replace("{code}", err.code || "") : (err && err.name === "AbortError") || err instanceof TypeError ? t("eNet") : err && err.message === "not_found" ? t("eNotFound") : t("eSrv"); m.hidden = false;
       btn.disabled = false; btn.textContent = t($("#submitBtn").dataset.t);
     } finally { busy = false; }
   });
@@ -353,7 +399,7 @@
   function showForm(m) {
     mode = m; modeBox.hidden = true; lkBox.hidden = true; grid.hidden = false;
     const sb = $("#submitBtn"); sb.dataset.t = m === "edit" ? "submitEdit" : "submit"; sb.textContent = t(sb.dataset.t);
-    $("#editBadge").hidden = m !== "edit"; $("#f_email").readOnly = m === "edit"; $("#f_phone").readOnly = m === "edit"; $("#vbox").hidden = m === "edit" || !API;
+    $("#editBadge").hidden = m !== "edit"; $("#f_email").readOnly = m === "edit"; $("#f_phone").readOnly = m === "edit"; dialSels[0].disabled = m === "edit"; $("#vbox").hidden = m === "edit" || !API;
     redraw();
   }
   $("#btnNew").addEventListener("click", () => showForm("new"));
@@ -374,7 +420,7 @@
       ["nameAr", "nameEn", "countryAr", "countryEn", "clubAr", "clubEn"].forEach((k) => { F[k].value = d[k] || ""; });
       $("#f_email").value = email; $("#f_phone").value = phone; $("#f_champions").value = d.champions || "";
       const pr = $("input[name=promo][value=" + (d.promo === "yes" ? "yes" : "no") + "]"); if (pr) pr.checked = true;
-      $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
+      $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; syncDial(); $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
       if (d.photo) { try { const img = await loadImg(d.photo); st.photo = img; st.zoom = 1; st.ox = st.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
       st.code = editCode; $("#f_consent").checked = false;
       showForm("edit");
@@ -404,7 +450,7 @@
     document.querySelectorAll("[data-t]").forEach((el) => { const k = el.dataset.t; if (T[lang][k]) el.textContent = T[lang][k]; });
     document.title = t("title") + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
     const sb = $("#submitBtn"); if (!busy) sb.textContent = t(sb.dataset.t);
-    $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API; draw();
+    $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API; fillDialOpts(); draw();
   }
   $("#langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("lang", lang); } catch (e) {} applyLang(); });
   $("#promoBox").addEventListener("change", () => { const y = ($("input[name=promo]:checked") || {}).value === "yes"; $("#promoMore").hidden = !y; });

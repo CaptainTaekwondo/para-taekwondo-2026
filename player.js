@@ -379,23 +379,28 @@
   /* ---------- الحقول الأساسية ---------- */
   $("#countries").innerHTML = COUNTRIES.map(([a]) => `<option value="${a}">`).join("");
   $("#countriesEn").innerHTML = COUNTRIES.map(([, e]) => `<option value="${e}">`).join("");
-  F.countryAr.addEventListener("change", () => { const e = byAr.get(F.countryAr.value.trim()); if (e && !F.countryEn.value.trim()) { F.countryEn.value = e; redraw(); } });
-  F.countryEn.addEventListener("change", () => { const a = byEn.get(F.countryEn.value.trim().toLowerCase()); if (a && !F.countryAr.value.trim()) { F.countryAr.value = a; redraw(); } });
+  F.countryAr.addEventListener("change", () => { const e = byAr.get(F.countryAr.value.trim()); if (e && (!F.countryEn.value.trim() || byEn.has(F.countryEn.value.trim().toLowerCase()))) { F.countryEn.value = e; redraw(); } });   // يتحدث لو الخانة فاضية أو فيها دولة من القائمة، ولا يمس ما كُتب يدويًا
+  F.countryEn.addEventListener("change", () => { const a = byEn.get(F.countryEn.value.trim().toLowerCase()); if (a && (!F.countryAr.value.trim() || byAr.has(F.countryAr.value.trim()))) { F.countryAr.value = a; redraw(); } });
   /* قائمة رمز الدولة: تتبع دولة اللاعب تلقائيًا، ويمكن تغييرها لو الرقم من دولة أخرى */
   const dialSels = [$("#f_phoneDial"), $("#f_waDial")];
+  /* الخانة المقفولة تعرض الرمز فقط عشان أسماء الدول الطويلة ماتتقصش، والقائمة نفسها بالأسماء كاملة */
+  const dialShown = dialSels.map((s) => { const c = document.createElement("span"); c.className = "dialcode"; c.setAttribute("aria-hidden", "true"); s.after(c); return c; });
+  function showDial() { dialSels.forEach((s, i) => { const d = DIAL[s.value]; dialShown[i].textContent = d ? "+" + d : t("dialPick"); dialShown[i].classList.toggle("empty", !d); }); }
   function fillDialOpts() {
     dialSels.forEach((s) => {
       const cur = s.value;
       s.innerHTML = `<option value="">${t("dialPick")}</option>` + COUNTRIES.map(([a, e]) => `<option value="${e.toLowerCase()}">+${DIAL[e.toLowerCase()]} ${lang === "en" ? e : a}</option>`).join("");
       s.value = cur;
     });
+    showDial();
   }
   function syncDial(ev) {
     const fromAr = (byAr.get(F.countryAr.value.trim()) || "").toLowerCase(), fromEn = F.countryEn.value.trim().toLowerCase();
     const en = ev && ev.target === F.countryAr ? fromAr : fromEn || fromAr;   // الأولوية للخانة اللي اتغيرت
     if (DIAL[en]) dialSels.forEach((s) => { if (!s.dataset.touched) s.value = en; });
+    showDial();
   }
-  dialSels.forEach((s) => s.addEventListener("change", () => { s.dataset.touched = "1"; }));
+  dialSels.forEach((s) => s.addEventListener("change", () => { s.dataset.touched = "1"; showDial(); }));
   ["change", "input"].forEach((ev) => [F.countryAr, F.countryEn].forEach((i) => i.addEventListener(ev, syncDial)));
   fillDialOpts();
   const mainFields = $("#regForm");

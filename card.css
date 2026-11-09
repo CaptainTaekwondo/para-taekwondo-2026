@@ -17,6 +17,16 @@
 .fld{margin-top:.9rem}.fld label,.q{display:block;font-weight:700;margin-bottom:.3rem;font-size:.98rem}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
 .cform input[type=text],.cform input[type=number],.cform input[type=tel]{width:100%;padding:.7rem .9rem;border-radius:12px;border:1.5px solid rgba(156,192,255,.35);background:rgba(3,10,36,.7);color:var(--txt);font:600 1rem var(--fb);line-height:1.5}
+/* رمز الدولة بجانب رقم الهاتف (صفحتا المدرب واللاعب) */
+.phonewrap{display:flex;gap:.4rem;direction:ltr;position:relative}
+.cform .phonewrap select{flex:0 0 46%;width:46%;min-width:0;direction:ltr;padding:.7rem .9rem;border-radius:12px;border:1.5px solid rgba(156,192,255,.35);background-color:rgba(3,10,36,.7);color:transparent;font:600 1rem var(--fb);line-height:1.5;color-scheme:dark;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23e8eefc' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right .75rem center}
+.cform .phonewrap select option{background:#06153f;color:var(--txt)}
+.cform .phonewrap select:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.cform .phonewrap select:disabled{opacity:.6}
+.dialcode{position:absolute;left:.95rem;top:50%;transform:translateY(-50%);max-width:calc(46% - 2.6rem);overflow:hidden;white-space:nowrap;pointer-events:none;color:var(--txt);font:600 1rem var(--fb)}
+.dialcode.empty{font-size:.82rem;color:var(--mut)}
+.phonewrap select:disabled + .dialcode{opacity:.6}
+.phonewrap input{flex:1;min-width:0}
 .cform input[type=file]{width:100%;color:var(--mut);font:600 .95rem var(--fb)}
 .cform input[type=file]::file-selector-button{margin-inline-end:.8rem;padding:.5rem 1rem;border-radius:99px;border:2px solid var(--gold2);background:rgba(3,10,36,.5);color:var(--gold1);font:800 .9rem var(--fb);cursor:pointer}
 .cform input[type=range]{width:100%;accent-color:var(--gold2)}

@@ -1,8 +1,4 @@
 /* صفحة تسجيل اللاعب (إضافات فوق card.css) */
-.phonewrap{display:flex;gap:.4rem;direction:ltr}
-.cform .phonewrap select{flex:0 0 46%;width:46%;min-width:0;direction:ltr}
-.cform .phonewrap select:disabled{opacity:.6}
-.phonewrap input{flex:1;min-width:0}
 .guidebtn{display:flex;align-items:center;justify-content:center;gap:.6rem;margin:0 auto 1.6rem;padding:.85rem 1.6rem;border-radius:999px;border:1.5px solid var(--gold2);background:linear-gradient(180deg,#e0242f,#a50f19);color:#fff;font:800 1.1rem var(--fb);cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.35)}
 .guidebtn[hidden]{display:none}
 .guidebtn:hover{filter:brightness(1.1)}
