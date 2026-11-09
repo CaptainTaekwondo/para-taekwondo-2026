@@ -545,6 +545,9 @@
   const needCode = () => !!API && mode !== "edit" && !(sess.token && F.email.value.trim().toLowerCase() === sess.email);
 
   /* ---------- الاتصال بالخادم ---------- */
+  /* في التعديل: الصورة تُرسل فقط لو اتغيرت أو اتحركت أو اتكبرت، عشان الأرشيف مايتملاش بنسخ مكررة */
+  let savedPhoto = null;
+  const photoSame = (sub) => !!savedPhoto && sub.photo === savedPhoto && sub.zoom === 1 && sub.ox === 0 && sub.oy === 0;
   function photoJpeg(sub) {
     const c = document.createElement("canvas"); c.width = PH.w * 2; c.height = PH.h * 2; const x = c.getContext("2d");
     const r = coverRect(sub); x.drawImage(sub.photo, (r.x - PH.x) * 2, (r.y - PH.y) * 2, r.w * 2, r.h * 2);
@@ -586,7 +589,7 @@
       coachName: sub.kind === "block" ? F.nameAr.value.trim() + " / " + F.nameEn.value.trim() : "", video: VIDEO_OPEN ? videoVal(sub) : undefined,
       promo: promoYes() ? "yes" : "no", whatsapp: promoYes() ? normPhone($("#f_wa").value, dialSels[1]) : "",
       coachInVideo: promoYes() && role === "coach" && sub.kind === "main" && $("#f_coachVid").checked ? "yes" : "no",   // undefined = لا يُرسل، فلا يُمسح رابط محفوظ
-      email: F.email.value.trim().toLowerCase(), phone: mode === "edit" ? F.phone.value.trim() : normPhone(F.phone.value, dialSels[0]), photo: photoJpeg(sub), vcode: F.vcode.value.trim(), token: sess.token,
+      email: F.email.value.trim().toLowerCase(), phone: mode === "edit" ? F.phone.value.trim() : normPhone(F.phone.value, dialSels[0]), photo: mode === "edit" && photoSame(sub) ? "" : photoJpeg(sub), vcode: F.vcode.value.trim(), token: sess.token,
     };
   }
   const errText = (e, code) => e === "player_exists" ? t("eDup").replace("{code}", code || "") : e === "bad_phone" ? t("ePhone") : e === "bad_vcode" ? t("vBad") : e === "vcode_expired" ? t("vExp") : e === "not_found" ? t("eNotFound") : e === "net" ? t("eNet") : t("eSrv");
@@ -779,7 +782,7 @@
       const g = $("input[name=gender][value=" + (d.gender === "f" ? "f" : "m") + "]"); if (g && d.gender) g.checked = true;
       role = d.role === "coach" ? "coach" : "player";
       if (res.token) { sess.token = res.token; sess.email = email; }
-      if (d.photo) { try { const img = await loadImg(d.photo); main.photo = img; main.zoom = 1; main.ox = main.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
+      if (d.photo) { try { const img = await loadImg(d.photo); main.photo = img; savedPhoto = img; main.zoom = 1; main.ox = main.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
       main.code = editCode; $("#f_consent").checked = false;
       showForm("edit");
     } catch (e) {

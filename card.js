@@ -315,6 +315,9 @@
 
   /* ---------- الحفظ ---------- */
   const rid = (() => { try { return crypto.randomUUID(); } catch (e) { return "r" + Date.now() + Math.random().toString(16).slice(2); } })();
+  /* في التعديل: الصورة تُرسل فقط لو اتغيرت أو اتحركت أو اتكبرت، عشان الأرشيف مايتملاش بنسخ مكررة */
+  let savedPhoto = null;
+  const photoSame = () => !!savedPhoto && st.photo === savedPhoto && st.zoom === 1 && st.ox === 0 && st.oy === 0;
   function photoJpeg() {
     const c = document.createElement("canvas"); c.width = PH.w * 2; c.height = PH.h * 2; const x = c.getContext("2d");
     const r = coverRect(st.photo); x.drawImage(st.photo, (r.x - PH.x) * 2, (r.y - PH.y) * 2, r.w * 2, r.h * 2);
@@ -360,7 +363,7 @@
       nameAr: F.nameAr.value.trim(), nameEn: F.nameEn.value.trim(), countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
       clubAr: F.clubAr.value.trim(), clubEn: F.clubEn.value.trim(), email: $("#f_email").value.trim().toLowerCase(), phone: mode === "edit" ? $("#f_phone").value.trim() : normPhone($("#f_phone").value, dialSels[0]), champions: $("#f_champions").value.trim(),
       promo: promo ? "yes" : "no", whatsapp: promo ? normPhone($("#f_wa").value, dialSels[1]) : "", coachInVideo: promo && $("#f_coachVid").checked ? "yes" : "no",
-      photo: photoJpeg(), vcode: $("#f_vcode").value.trim(),
+      photo: mode === "edit" && photoSame() ? "" : photoJpeg(), vcode: $("#f_vcode").value.trim(),
     };
     if (mode === "edit") { data.action = "update"; data.code = editCode; }
     try {
@@ -421,7 +424,7 @@
       $("#f_email").value = email; $("#f_phone").value = phone; $("#f_champions").value = d.champions || "";
       const pr = $("input[name=promo][value=" + (d.promo === "yes" ? "yes" : "no") + "]"); if (pr) pr.checked = true;
       $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; syncDial(); $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
-      if (d.photo) { try { const img = await loadImg(d.photo); st.photo = img; st.zoom = 1; st.ox = st.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
+      if (d.photo) { try { const img = await loadImg(d.photo); st.photo = img; savedPhoto = img; st.zoom = 1; st.ox = st.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
       st.code = editCode; $("#f_consent").checked = false;
       showForm("edit");
     } catch (e) {
