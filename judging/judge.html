@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>صفحة الحكم</title>
+<link rel="stylesheet" href="judge.css?v=1">
+</head>
+<body>
+<header class="bar">
+  <strong class="brand" data-i="brand">نظام التحكيم</strong>
+  <span class="spacer"></span>
+  <span id="remain" class="pill" hidden></span>
+  <button class="icon" id="lang" type="button" title="English / عربي">EN</button>
+  <button class="icon" id="theme" type="button" aria-label="الوضع الليلي / النهاري" title="الوضع الليلي / النهاري">🌙</button>
+  <button class="icon" id="logout" type="button" hidden data-i="logout">خروج</button>
+</header>
+
+<main>
+  <!-- تسجيل الدخول -->
+  <section id="login" class="card narrow">
+    <h1 data-i="loginTitle">دخول الحكم</h1>
+    <label><span data-i="email">الإيميل</span><input id="em" type="email" autocomplete="username" dir="ltr"></label>
+    <label><span data-i="password">كلمة السر</span><input id="pw" type="password" autocomplete="current-password" dir="ltr"></label>
+    <button class="primary" id="go" type="button" data-i="enter">دخول</button>
+    <p id="loginMsg" class="msg" role="alert"></p>
+  </section>
+
+  <!-- شاشة التحكيم -->
+  <section id="work" hidden>
+    <div id="returned" class="note" hidden></div>
+    <div class="grid">
+      <div class="left">
+        <div class="stage" id="stage"><div class="zoom" id="zoom"><div id="yt"></div></div></div>
+        <div class="tools">
+          <div class="grp" id="speedGrp">
+            <span class="lbl"><span data-i="speed">السرعة</span>
+              <button class="tip" type="button" data-help="helpSpeed" aria-label="شرح">i</button></span>
+          </div>
+          <div class="grp">
+            <span class="lbl"><span data-i="zoomL">التكبير</span>
+              <button class="tip" type="button" data-help="helpZoom" aria-label="شرح">i</button></span>
+            <button class="chip" id="zOut" type="button" aria-label="تصغير">−</button>
+            <span id="zVal" class="val">100%</span>
+            <button class="chip" id="zIn" type="button" aria-label="تكبير">+</button>
+            <button class="chip" id="zReset" type="button" data-i="reset">إعادة</button>
+            <span id="pan" class="pan" hidden>
+              <button class="chip" data-pan="l" type="button" aria-label="يسار">◀</button>
+              <button class="chip" data-pan="u" type="button" aria-label="أعلى">▲</button>
+              <button class="chip" data-pan="d" type="button" aria-label="أسفل">▼</button>
+              <button class="chip" data-pan="r" type="button" aria-label="يمين">▶</button>
+            </span>
+          </div>
+          <div class="grp">
+            <button class="chip" id="back5" type="button">⏪ 5</button>
+            <button class="chip" id="pp" type="button">⏯</button>
+            <button class="chip" id="fwd5" type="button">5 ⏩</button>
+            <span id="clock" class="val" dir="ltr">0:00</span>
+          </div>
+        </div>
+      </div>
+
+      <aside class="right card">
+        <div class="who">
+          <div><small data-i="player">اللاعب</small><div id="pid" class="pid" dir="ltr"></div></div>
+          <div id="pname" class="pname"></div>
+          <div><span id="secName" class="pill"></span> <span id="cls" class="pill warn" hidden></span></div>
+        </div>
+
+        <div class="total"><small data-i="total">الدرجة الحالية</small><b id="tot">0.0</b></div>
+
+        <h3><span data-i="ded">الخصومات</span>
+          <button class="tip" type="button" data-help="helpDed" aria-label="شرح">i</button></h3>
+        <div class="dedBtns">
+          <button class="ded big" id="dBig" type="button"></button>
+          <button class="ded small" id="dSmall" type="button"></button>
+        </div>
+        <ul id="dLog" class="dlog"></ul>
+        <button class="chip" id="undo" type="button" data-i="undo">تراجع عن آخر خصم</button>
+
+        <div id="itemsBox">
+          <h3><span data-i="items">درجات البنود</span>
+            <button class="tip" type="button" data-help="helpItems" aria-label="شرح">i</button></h3>
+          <div id="items"></div>
+        </div>
+
+        <button class="primary" id="save" type="button" data-i="saveNext">حفظ والتالي</button>
+        <p id="workMsg" class="msg" role="alert"></p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- انتهاء الفيديوهات -->
+  <section id="done" class="card narrow" hidden>
+    <h1 data-i="doneTitle">خلصت الفيديوهات المطلوبة</h1>
+    <p data-i="doneText">تقدر دلوقتي ترسل تقييماتك لرئيس الحكام للمراجعة.</p>
+    <button class="primary" id="submit" type="button" data-i="submit">إرسال لرئيس الحكام</button>
+    <p id="doneMsg" class="msg" role="alert"></p>
+  </section>
+</main>
+
+<div id="tipBox" class="tipbox" role="tooltip" hidden></div>
+<script src="config.js"></script>
+<script src="judge.js?v=1"></script>
+</body>
+</html>

@@ -13,6 +13,8 @@
     "الفيديوهات": "Videos", "الدعوة": "Invitation", "التصوير": "Filming", "عن البطولة": "About",
     "الفئات": "Categories", "الأحزمة": "Belts", "التسجيل": "Register", "التقييم": "Scoring",
     "المواعيد": "Dates", "الشهادات": "Certificates", "المنظمون": "Organizers", "الشروط": "Terms",
+    "النتائج": "Results", "نتائج البطولة": "Championship Results", "الفائزون في البطولة حسب القسم والفئة.": "The championship winners, by section and group.",
+    "الشهادات متاحة الآن للاعبين والمدربين والحكام.": "Certificates are now available for athletes, coaches and judges.", "أصدر شهادتك": "Get your certificate",
     "«الأبطال لا يعرفون حدودًا»": "“Champions know no limits”",
     "«إرادتكم هي أقوى من أي تحدٍّ»": "“Your will is stronger than any challenge”",
     "«أنتم أبطال الإصرار والتحدي»": "“You are champions of determination”",
