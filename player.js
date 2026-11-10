@@ -60,7 +60,7 @@
       guardian: "اسم ولي الأمر", guardianHint: "مطلوب إذا كان عمر اللاعب أقل من 18 سنة.",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
       vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
-      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", mineB: "لاعبيني", mineBH: "للمدربين: اعرض كل اللاعبين الذين سجلتهم بكود بطاقتك.", mineT: "لاعبيني", mineHint: "أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين في البطاقة. تظهر هنا اللاعبون الذين سجلتهم بنفس البريد وكود البطاقة.", mineCode: "كود بطاقة المدرب (آخر 4 أرقام فقط)", mineShow: "عرض لاعبيني", mineReq: "أدخل آخر 4 أرقام من الكود والهاتف والبريد.", mineNF: "لا توجد بطاقة مدرب بهذه البيانات. تأكد من الكود والهاتف والبريد.", mineWait: "محاولات كثيرة. حاول مرة أخرى بعد 15 دقيقة.", mineNone: "لا يوجد لاعبون مسجلون بهذا البريد وكود البطاقة.", mineCount: "عدد اللاعبين: {n}", mineEdit: "تعديل", mineDl: "تحميل البطاقة", mineNoCard: "البطاقة غير محفوظة بعد", coachSaved: "تم ملء بياناتك المحفوظة على هذا الجهاز.", coachForget: "مسح البيانات المحفوظة", remember: "احفظ بياناتي على هذا الجهاز لتسهيل التسجيل في المرة القادمة", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
+      phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", mineAdd: "إضافة لاعبين", mineDel: "إزالة", mineDelQ: "هل تريد إزالة اللاعب «{name}» من البطولة؟", mineB: "لاعبيني", mineBH: "للمدربين: اعرض لاعبيك وعدّلهم أو أزلهم أو أضف لاعبين جددًا بكود بطاقتك.", mineT: "لاعبيني", mineHint: "أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين في البطاقة. تظهر هنا اللاعبون الذين سجلتهم بنفس البريد وكود البطاقة.", mineCode: "كود بطاقة المدرب (آخر 4 أرقام فقط)", mineShow: "عرض لاعبيني", mineReq: "أدخل آخر 4 أرقام من الكود والهاتف والبريد.", mineNF: "لا توجد بطاقة مدرب بهذه البيانات. تأكد من الكود والهاتف والبريد.", mineWait: "محاولات كثيرة. حاول مرة أخرى بعد 15 دقيقة.", mineNone: "لا يوجد لاعبون مسجلون بهذا البريد وكود البطاقة.", mineCount: "عدد اللاعبين: {n}", mineEdit: "تعديل", mineDl: "تحميل البطاقة", mineNoCard: "البطاقة غير محفوظة بعد", coachSaved: "تم ملء بياناتك المحفوظة على هذا الجهاز.", coachForget: "مسح البيانات المحفوظة", remember: "احفظ بياناتي على هذا الجهاز لتسهيل التسجيل في المرة القادمة", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
       photo: "اختر صورة واضحة للاعب", photoC: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.", zoom: "تكبير الصورة",
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
       consentC: "أقرّ بصحة بياناتي وبيانات لاعبيّ، وأوافق على استخدام صورتي وبياناتي لإصدار بطاقة البطل وفي تنظيم البطولة، وأقرّ بأنني حصلت على موافقة لاعبيّ أو أولياء أمورهم على تسجيلهم واستخدام صورهم وبياناتهم.",
@@ -112,7 +112,7 @@
       guardian: "Guardian's name", guardianHint: "Required if the player is under 18.",
       email: "Email (required)", emailHint: "The same email can register more than one player (e.g. siblings).", eEmail: "Enter a valid email address.",
       vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
-      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", mineB: "My players", mineBH: "For coaches: see all the players you registered with your card code.", mineT: "My players", mineHint: "Enter the last 4 digits of your coach card code with the phone and email registered on the card. The players you registered with the same email and card code appear here.", mineCode: "Coach card code (last 4 digits only)", mineShow: "Show my players", mineReq: "Enter the last 4 digits of the code, the phone and the email.", mineNF: "No coach card matches these details. Check the code, phone and email.", mineWait: "Too many attempts. Try again in 15 minutes.", mineNone: "No players are registered with this email and card code.", mineCount: "Players: {n}", mineEdit: "Edit", mineDl: "Download card", mineNoCard: "Card not saved yet", coachSaved: "Your saved details on this device were filled in.", coachForget: "Delete saved details", remember: "Save my details on this device to make the next registration easier", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
+      phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", mineAdd: "Add players", mineDel: "Remove", mineDelQ: "Remove the player \"{name}\" from the championship?", mineB: "My players", mineBH: "For coaches: view, edit or remove your players, or add new ones with your card code.", mineT: "My players", mineHint: "Enter the last 4 digits of your coach card code with the phone and email registered on the card. The players you registered with the same email and card code appear here.", mineCode: "Coach card code (last 4 digits only)", mineShow: "Show my players", mineReq: "Enter the last 4 digits of the code, the phone and the email.", mineNF: "No coach card matches these details. Check the code, phone and email.", mineWait: "Too many attempts. Try again in 15 minutes.", mineNone: "No players are registered with this email and card code.", mineCount: "Players: {n}", mineEdit: "Edit", mineDl: "Download card", mineNoCard: "Card not saved yet", coachSaved: "Your saved details on this device were filled in.", coachForget: "Delete saved details", remember: "Save my details on this device to make the next registration easier", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
       photo: "Choose a clear photo of the player", photoC: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.", zoom: "Zoom",
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
       consentC: "I confirm my details and my players' details are correct, agree to the use of my photo and details for the champion card and the championship, and confirm I have my players' or their guardians' consent to register them and use their photos and details.",
@@ -181,6 +181,7 @@
   let active = main, mode = "new", editCode = "", role = "player", compete = false;
   const coachOnly = () => role === "coach" && !compete && mode !== "edit";   // مدرب لا يشارك: يسجّل لاعبيه فقط
   const sess = { token: "", email: "" };
+  let fromMine = false;   // فتح التسجيل من صفحة «لاعبيني»: المدرب يضيف لاعبين فقط
   const F = {};
   ["nameAr", "nameEn", "countryAr", "countryEn", "clubAr", "clubEn", "birth", "belt", "para", "coach", "guardian", "email", "phone", "vcode"].forEach((k) => (F[k] = $("#f_" + k)));
   const canvas = $("#card"), ctx = canvas.getContext("2d");
@@ -833,7 +834,7 @@
   /* ---------- اختيار الصفة (لاعب / مدرب) ---------- */
   function applyRole() {
     const coach = role === "coach";
-    $("#roleBox").hidden = mode === "edit";
+    $("#roleBox").hidden = mode === "edit" || fromMine;
     const set = (sel, k) => { const el = $(sel); el.dataset.t = k; el.textContent = t(k); };
     set("#lg1", coach ? "g1coach" : "g1");
     set("#l_nameAr", coach ? "nameArC" : "nameAr"); set("#l_nameEn", coach ? "nameEnC" : "nameEn");
@@ -842,7 +843,7 @@
     const co = coachOnly();
     set("#t_consent", co ? "consentCO" : coach ? "consentC" : "consent");
     if (co) set("#lg1", "g1coachOnly");
-    $("#competeRow").hidden = !coach || mode === "edit";
+    $("#competeRow").hidden = !coach || mode === "edit" || fromMine;
     ["#genderRow", "#birthRow", "#beltSet", "#photoSet", "#videoSet"].forEach((x) => ($(x).hidden = co));
     if (co) $("#guardianRow").hidden = true;
     $("#playersBox").hidden = !withPlayers();
@@ -870,7 +871,7 @@
 
   /* «لاعبيني»: قائمة لاعبي المدرب بعد التحقق من الكود والهاتف والبريد */
   const mineBox = $("#mineBox"), mineErr = $("#mineErr"), mineList = $("#mineList"), mineBtn = $("#mineBtn");
-  let mineCred = null, minePlayers = [], mineBusy = false;
+  let mineCred = null, minePlayers = [], mineBusy = false, mineCoach = null, mineToken = "";
   const mineMsg = (m) => { mineErr.textContent = m; mineErr.hidden = !m; };
   const mineErrText = (e) => (e === "not_found" ? t("mineNF") : e === "wait" ? t("mineWait") : e === "net" ? t("eNet") : t("eSrv"));
   function renderMine() {
@@ -903,10 +904,34 @@
       } else {
         const none = document.createElement("span"); none.className = "mmeta"; none.textContent = t("mineNoCard"); acts.appendChild(none);
       }
+      const del = document.createElement("button"); del.type = "button"; del.className = "prem"; del.textContent = t("mineDel");
+      del.addEventListener("click", async () => {
+        if (del.disabled || !window.confirm(t("mineDelQ").replace("{name}", p.nameAr || p.nameEn))) return;
+        del.disabled = true; mineMsg("");
+        try {
+          const r = await post(Object.assign({ action: "deleteplayer", player: p.code }, mineCred), 90000);
+          if (!r || !r.ok) throw new Error((r && r.error) || "srv");
+          minePlayers = minePlayers.filter((x) => x !== p); renderMine();
+        } catch (err) { del.disabled = false; mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
+      });
+      acts.appendChild(del);
       it.appendChild(acts); mineList.appendChild(it);
     });
   }
-  function showMineForm() { mineCred = null; minePlayers = []; mineList.hidden = true; mineList.textContent = ""; $("#mineForm").hidden = false; mineBtn.style.display = ""; mineMsg(""); }
+  function showMineForm() { mineCred = null; minePlayers = []; mineList.hidden = true; mineList.textContent = ""; $("#mineForm").hidden = false; mineBtn.style.display = ""; $("#mineAdd").style.display = "none"; mineMsg(""); }
+  /* إضافة لاعبين من صفحة المدرب: بياناته جاهزة من بطاقته، وبدون كود تأكيد لأن هويته اتراجعت */
+  $("#mineAdd").addEventListener("click", () => {
+    const c = mineCoach || {}, list = Array.isArray(c.clubs) ? c.clubs : [];
+    coachFilled = true; fromMine = true; mineBox.hidden = true; showForm("new");
+    F.nameAr.value = c.nameAr || ""; F.nameEn.value = c.nameEn || ""; F.countryAr.value = c.countryAr || ""; F.countryEn.value = c.countryEn || "";
+    if (list[0]) { F.clubAr.value = list[0].ar || ""; F.clubEn.value = list[0].en || ""; }
+    if (!clubRows.length) list.slice(1).forEach((x) => { addClubRow(true); const r = clubRows[clubRows.length - 1]; r.querySelector("[data-c=ar]").value = x.ar || ""; r.querySelector("[data-c=en]").value = x.en || ""; });
+    F.coach.value = mineCred.code; F.email.value = mineCred.email; F.email.readOnly = true; F.phone.value = mineCred.phone;
+    sess.token = mineToken; sess.email = mineCred.email;
+    $("input[name=role][value=coach]").click(); $("input[name=compete][value=no]").click();
+    syncDial(); applyRole(); infoAll(); renderTabs(); redraw(); addBlock();
+  });
+  $("#mineAdd").style.display = "none";
   $("#btnMine").addEventListener("click", () => { modeBox.hidden = true; mineBox.hidden = false; showMineForm(); $("#f_mineCode").focus(); });
   $("#mineBack").addEventListener("click", () => { if (mineCred) return showMineForm(); mineBox.hidden = true; modeBox.hidden = false; mineMsg(""); });
   $("#f_mineCode").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
@@ -919,8 +944,8 @@
     try {
       const r = await post(Object.assign({ action: "myplayers" }, cred));
       if (!r || !r.ok) throw new Error((r && r.error) || "srv");
-      mineCred = cred; minePlayers = r.players || []; renderMine();
-      $("#mineForm").hidden = true; mineBtn.style.display = "none"; mineList.hidden = false;
+      mineCred = cred; minePlayers = r.players || []; mineCoach = r.coach || null; mineToken = r.token || ""; renderMine();
+      $("#mineForm").hidden = true; mineBtn.style.display = "none"; mineList.hidden = false; $("#mineAdd").style.display = "";
     } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
     mineBusy = false; mineBtn.disabled = false; mineBtn.textContent = t("mineShow");
   });

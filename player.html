@@ -46,7 +46,7 @@
     <div class="mode-btns">
       <button class="modebtn" id="btnNew" type="button"><b data-t="newId">تسجيل جديد</b><span data-t="newHint">سجّل بيانات اللاعب لأول مرة واحصل على كوده وبطاقته.</span></button>
       <button class="modebtn" id="btnEdit" type="button"><b data-t="editId">تعديل بطاقة لاعب</b><span data-t="editHint">لديك كود اللاعب؟ عدّل بياناته أو صورته وأصدر بطاقته من جديد.</span></button>
-      <button class="modebtn" id="btnMine" type="button"><b data-t="mineB">لاعبيني</b><span data-t="mineBH">للمدربين: اعرض كل اللاعبين الذين سجلتهم بكود بطاقتك.</span></button>
+      <button class="modebtn" id="btnMine" type="button"><b data-t="mineB">لاعبيني</b><span data-t="mineBH">للمدربين: اعرض لاعبيك وعدّلهم أو أزلهم أو أضف لاعبين جددًا بكود بطاقتك.</span></button>
     </div>
   </section>
   <section class="mode" id="lookupBox" hidden>
@@ -68,6 +68,7 @@
     </div>
     <p class="err big" id="mineErr" role="alert" hidden></p>
     <div id="mineList" hidden></div>
+    <button class="btn addp" id="mineAdd" type="button" style="display:none;max-width:520px;margin-inline:auto;margin-bottom:.9rem"><span data-t="mineAdd">إضافة لاعبين</span> <span aria-hidden="true">+</span></button>
     <div class="acts"><button class="btn fill" id="mineBtn" type="button" data-t="mineShow">عرض لاعبيني</button><button class="btn" id="mineBack" type="button" data-t="lkBack">رجوع</button></div>
   </section>
   <p class="editbadge" id="editBadge" hidden data-t="editBadge">وضع التعديل: عدّل ما تريد ثم احفظ لإصدار البطاقة من جديد.</p>
@@ -204,6 +205,6 @@
 
 <script src="config.js?v=20261108b"></script>
 <script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261109i"></script>
+<script src="player.js?v=20261110a"></script>
 </body>
 </html>
