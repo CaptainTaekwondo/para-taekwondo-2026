@@ -425,4 +425,37 @@
   spx.addEventListener("click", closeShare);
   shp.addEventListener("click", e => { if (e.target === shp) closeShare(); });
   addEventListener("keydown", e => { if (e.key === "Escape" && !shp.hidden) closeShare(); });
+
+  /* ---------- نتائج البطولة (من نظام التحكيم: تظهر فقط بعد أن ينشرها رئيس الحكام) ---------- */
+  (async () => {
+    if (!C.judgingApi) return;
+    let r;
+    try {
+      const res = await fetch(C.judgingApi, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "publicResults" }) });
+      r = await res.json();
+    } catch (e) { return; }
+    if (!r || !r.ok || !r.published || !Array.isArray(r.rows) || !r.rows.length) return;
+    const box = $("#resBox"), sec = $("#results");
+    if (!box || !sec) return;
+    const groups = new Map();
+    r.rows.forEach(x => {
+      const k = [x.section, x.groupName, x.classCode].join("|");
+      if (!groups.has(k)) groups.set(k, { x, rows: [] });
+      groups.get(k).rows.push(x);
+    });
+    box.innerHTML = [...groups.values()].map(g => {
+      const sub = [g.x.groupName, g.x.classCode].filter(Boolean).map(esc).join(" · ");
+      const rows = g.rows.map(x => {
+        const n = /^\d+$/.test(String(x.place)) ? +x.place : 0;
+        return `<tr><td class="pl"><span class="pl"><b class="${n === 2 ? "p2" : n === 3 ? "p3" : ""}">${esc(x.place)}</b></span></td><td>${esc(x.name)}</td>` +
+          (x.band ? `<td class="bd">${esc(x.band)}</td>` : "<td></td>") +
+          (r.showScore && x.total !== undefined ? `<td class="sc">${Number(x.total).toFixed(2)}</td>` : "") + "</tr>";
+      }).join("");
+      return `<article class="res-card"><h3>${esc(g.x.section)}${sub ? `<small>${sub}</small>` : ""}</h3><table class="rtable"><tbody>${rows}</tbody></table></article>`;
+    }).join("");
+    sec.hidden = false;
+    const link = $("#resLink"); if (link) link.hidden = false;
+    const cert = $("#resCert"); if (cert) cert.hidden = !r.certificatesOpen;
+    if (window.I18N) I18N.apply(sec);
+  })();
 })();

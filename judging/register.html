@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>تسجيل في نظام التحكيم</title>
+<link rel="stylesheet" href="judge.css?v=2">
+</head>
+<body>
+<header class="bar"><strong class="brand">نظام التحكيم</strong><span class="spacer"></span><button class="icon" id="theme" type="button" aria-label="الوضع الليلي / النهاري">🌙</button></header>
+<main>
+  <section class="card narrow">
+    <h1>إنشاء حساب</h1>
+    <p id="inv" class="msg"></p>
+    <label><span>الاسم الكامل</span><input id="nm" type="text" autocomplete="name"></label>
+    <label><span>الإيميل</span><input id="em" type="email" autocomplete="username" dir="ltr"></label>
+    <label><span>رقم الموبايل (يبدأ بـ + وكود الدولة)</span><input id="ph" type="tel" autocomplete="tel" dir="ltr" placeholder="+20..."></label>
+    <label><span>كلمة السر (8 أحرف على الأقل)</span><input id="pw" type="password" autocomplete="new-password" dir="ltr"></label>
+    <button class="primary" id="go" type="button">تسجيل</button>
+    <p id="msg" class="msg" role="alert"></p>
+  </section>
+</main>
+<script src="config.js"></script>
+<script>
+(function () {
+  var $ = function (i) { return document.getElementById(i); };
+  var inv = new URLSearchParams(location.search).get('i') || '';
+  var E = { bad_name: 'اكتب الاسم كاملًا', bad_email: 'الإيميل غير صحيح', bad_phone: 'الموبايل لازم يبدأ بـ + وكود الدولة', weak_password: 'كلمة السر لازم 8 أحرف على الأقل',
+    bad_invite: 'الرابط غير صالح أو انتهى أو اتستخدم', email_exists: 'الإيميل مسجل قبل كده', net: 'تعذّر الاتصال. حاول تاني' };
+  var th = 'light'; try { th = localStorage.getItem('jd_theme') || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); } catch (e) {}
+  function setTheme(m) { document.documentElement.setAttribute('data-theme', m); $('theme').textContent = m === 'dark' ? '☀️' : '🌙'; try { localStorage.setItem('jd_theme', m); } catch (e) {} }
+  setTheme(th); $('theme').onclick = function () { setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'); };
+  if (!inv) { $('inv').textContent = 'الرابط ناقص. اطلب رابط تسجيل جديد.'; $('go').disabled = true; }
+  $('go').onclick = function () {
+    var api = window.JUDGING && window.JUDGING.api; $('msg').className = 'msg'; $('msg').textContent = '';
+    if (!api) { $('msg').textContent = 'رابط الخدمة غير مضبوط بعد'; return; }
+    $('go').disabled = true;
+    fetch(api, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ action: 'register', invite: inv, name: $('nm').value, email: $('em').value, phone: $('ph').value.replace(/\s/g, ''), password: $('pw').value }) })
+      .then(function (r) { return r.json(); }).catch(function () { return { ok: false, error: 'net' }; })
+      .then(function (r) {
+        $('go').disabled = false;
+        if (!r.ok) { $('msg').textContent = E[r.error] || E.net; return; }
+        $('msg').className = 'msg ok'; $('msg').textContent = 'تم التسجيل. تقدر تدخل دلوقتي.'; $('go').hidden = true;
+        var a = document.createElement('a'); a.href = r.role === 'judge' ? 'judge.html' : 'head.html'; a.textContent = 'اذهب لصفحة الدخول'; $('msg').appendChild(document.createElement('br')); $('msg').appendChild(a);
+      });
+  };
+})();
+</script>
+</body>
+</html>

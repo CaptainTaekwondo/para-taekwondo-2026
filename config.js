@@ -16,6 +16,10 @@ const CONFIG = {
           ضع هنا رابط تطبيق الويب الناتج من نشر backend/players.gs (ينتهي بـ /exec).
           أثناء تركه فارغًا تعمل الصفحة بوضع المعاينة فقط ولا تحفظ أي بيانات. */
   playerApi: "https://script.google.com/macros/s/AKfycbyKPFjtIxERnfKahRqlWJumj-9Mi-wvIkN8eAKd-tM6xobKzQdQRHLX9v1c8enXQD2i/exec",
+  /* ---- نظام التحكيم بالفيديو (مجلد judging/) ----
+          رابط تطبيق الويب (ينتهي بـ /exec). يظهر قسم «نتائج البطولة» تلقائيًا فقط بعد أن ينشر رئيس الحكام النتائج،
+          ويظهر زر «أصدر شهادتك» فقط بعد أن يفتح صاحب الموقع الشهادات. فارغ = القسم مخفي دائمًا. */
+  judgingApi: "https://script.google.com/macros/s/AKfycbzMS4kdNgsglCUUpTm7wVhJOo4R5eatfubh_0-mUHQmMUwLoulGXBGeDjsifytuhdp4/exec",
   /* تاريخ احتساب العمر للفئات العمرية (مبدئي حتى يعتمده المنظمون) بصيغة سنة-شهر-يوم */
   ageDate: "2026-12-31",
   /* خانة «رابط فيديو المشاركة» في صفحة اللاعب: false = مغلقة مؤقتًا حتى يبدأ موعد إرسال الفيديوهات، true = مفتوحة */
