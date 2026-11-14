@@ -3,6 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>/* وضع النت الضعيف: صور أخف وتأثيرات أقل (Chrome/Edge/Android؛ Safari ما بيدعمش) — للتجربة: ?lite=1 أو ?lite=0 */
+(function(){try{var q=/[?&]lite=([01])/.exec(location.search),c=navigator.connection,slow=c&&(c.saveData||/2g|3g/.test(c.effectiveType||""));if(!(q?q[1]==="1":slow))return;var d=document.documentElement;d.classList.add("lite");
+function sw(n){if(n.nodeType===1&&n.tagName==="IMG"&&n.hasAttribute("data-lite")){n.src=n.getAttribute("data-lite");n.removeAttribute("data-lite")}}
+var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++)for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];sw(n);if(n.querySelectorAll){var a=n.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])}}});
+mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",function(){mo.disconnect();var a=document.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])})}catch(e){}})();</script>
 <title>بطولة أساسيات البارا تايكوندو 2026</title>
 <meta name="description" content="الدليل الرسمي لبطولة أساسيات البارا تايكوندو 2026: مبادرة مجانية عبر الإنترنت. الفيديوهات الإرشادية والفئات والأحزمة وخطوات التسجيل والتواصل مع المنظمين.">
 <meta name="theme-color" content="#030a24">
@@ -25,7 +30,7 @@
 <link rel="icon" href="assets/champion.webp">
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/reemkufi.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="style.css?v=20261108">
+<link rel="stylesheet" href="style.css?v=20261114c">
 </head>
 <body id="top">
 <a class="skip" href="#main">تخطَّ إلى المحتوى</a>
@@ -96,7 +101,7 @@
   <div class="wrap invite">
     <div class="poster-wrap">
       <button class="poster" id="poster" type="button" aria-label="تكبير ملصق البطولة">
-        <img src="assets/poster.webp" alt="ملصق بطولة أساسيات البارا تايكوندو 2026: أنا بطل والأبطال لا يعرفون حدودًا" width="1000" height="1415" loading="lazy">
+        <img src="assets/poster.webp" data-lite="assets/poster-lite.webp" alt="ملصق بطولة أساسيات البارا تايكوندو 2026: أنا بطل والأبطال لا يعرفون حدودًا" width="1000" height="1415" loading="lazy">
       </button>
     </div>
     <div>
@@ -138,7 +143,7 @@
     <div class="film">
       <div>
         <button class="zoom" id="guideZoom" type="button" aria-label="تكبير صورة تعليمات التصوير">
-          <img src="assets/filming-guide.webp" alt="رسم توضيحي لتعليمات تصوير الفيديو: التصوير من الأمام والجانب بزاوية 90 درجة على مسافة 3 إلى 5 أمتار، وأمثلة على التصوير غير الصحيح" width="800" height="600" loading="lazy">
+          <img src="assets/filming-guide.webp" data-lite="assets/filming-guide-lite.webp" alt="رسم توضيحي لتعليمات تصوير الفيديو: التصوير من الأمام والجانب بزاوية 90 درجة على مسافة 3 إلى 5 أمتار، وأمثلة على التصوير غير الصحيح" width="800" height="600" loading="lazy">
         </button>
         <p class="hint">اضغط على الصورة لتكبيرها</p>
       </div>
@@ -231,7 +236,7 @@
       <div class="card"><h3>المستوى الثالث</h3><div class="belts"><div class="bl" style="background:#c41e2a"></div><div class="bl k" style="background:#0b0b0f"></div></div><p>الحزام الأحمر والأسود</p></div>
     </div>
     <div class="acc">
-      <details>
+      <details open>
         <summary>رموز تصنيف البارا <span class="tag warn">للاسترشاد فقط</span></summary>
         <div class="det">
           <table class="ptable">
@@ -494,8 +499,8 @@
 </div>
 
 <noscript><p style="padding:1rem;text-align:center;background:#7d1520;color:#fff">يحتاج هذا الموقع إلى تفعيل JavaScript لعرض الفيديوهات وبيانات المنظمين.</p></noscript>
-<script src="config.js?v=20261114a"></script>
-<script src="i18n.js?v=20261114a"></script>
-<script src="app.js?v=20261108"></script>
+<script src="config.js?v=20261114b"></script>
+<script src="i18n.js?v=20261114b"></script>
+<script src="app.js?v=20261114b"></script>
 </body>
 </html>

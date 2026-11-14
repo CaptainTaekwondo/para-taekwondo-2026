@@ -375,7 +375,7 @@
     langBtn.setAttribute("aria-label", I18N.lang === "en" ? "التبديل إلى العربية" : "Switch to English");
     langBtn.lang = I18N.lang === "en" ? "ar" : "en";
     qe.textContent = T(Q[qi]);
-    const gi = $("#guideZoom img"); if (gi) gi.src = guideSrc();
+    const gi = $("#guideZoom img"); if (gi) { const s = guideSrc(), v = document.documentElement.classList.contains("lite") ? s.replace(/\.webp$/, "-lite.webp") : s; if (gi.getAttribute("src") !== v) gi.src = v; }
     $$("a[data-en]").forEach(l => { l.href = I18N.lang === "en" ? l.dataset.en : l.dataset.ar; });
     refresh();
   };

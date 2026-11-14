@@ -113,7 +113,7 @@ button{font-family:inherit}
 .orn i:last-child{background:linear-gradient(270deg,transparent,var(--gold2));transform-origin:0 50%}
 .orn b{width:13px;height:13px;background:var(--red);border:2px solid var(--gold2);transform:rotate(45deg);box-shadow:0 0 14px rgba(217,32,47,.8)}
 .in .orn i,.orn.in i{transform:scaleX(1)}
-.wm{position:absolute;inset:0;background:url(assets/lockup.webp) center/min(520px,70vw) no-repeat;opacity:.045;pointer-events:none}
+.wm{position:absolute;inset:0;background:url(assets/lockup-wm.webp) center/min(520px,70vw) no-repeat;opacity:.045;pointer-events:none}
 
 /* ---------- بطاقات زجاجية بإطار ذهبي ---------- */
 .card{position:relative;border-radius:var(--r);padding:1.5rem;background:linear-gradient(160deg,rgba(28,70,170,.42),rgba(6,18,58,.78))}
@@ -573,3 +573,9 @@ html.scrolling *,html.scrolling *::before,html.scrolling *::after{animation-play
 .vvol button{width:2.6rem;height:2.6rem;border-radius:50%;border:1.5px solid var(--gold2);background:rgba(3,10,36,.7);font-size:1.15rem;cursor:pointer;flex:none}
 .vvol input{flex:1;min-width:0;accent-color:var(--gold2)}
 .vvol output{min-width:3.2rem;text-align:center;font-weight:800;color:var(--gold1)}
+
+/* وضع النت الضعيف (.lite على <html>): من غير العلامة المائية وتأثيرات الزجاج التقيلة على الموبايلات الضعيفة */
+.lite .wm{background:none}
+.lite *,.lite *::before,.lite *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.lite #nav{background:rgb(3,10,36)}
+.lite .cnav{background:rgb(3,10,36)}

@@ -108,13 +108,15 @@
   const IMG = {};
   const loadImg1 = (src) => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
   const loadImg = (src) => loadImg1(src).catch(() => loadImg1(src + (src.startsWith("data:") || src.startsWith("blob:") ? "" : "?r=" + Date.now())));
-  const assetsReady = Promise.all([
+  /* صور الكارت تتحمّل بعد ما الصفحة نفسها تظهر، عشان ما تزاحمش الخطوط والتصميم */
+  const pageLoaded = document.readyState === "complete" ? Promise.resolve() : new Promise((r) => addEventListener("load", r, { once: true }));
+  const assetsReady = pageLoaded.then(() => Promise.all([
     loadImg("assets/card/frame.webp").then((i) => (IMG.frame = i)),
     loadImg("assets/card/logo.webp").then((i) => (IMG.logo = i)),
     loadImg("assets/card/plaque.webp").then((i) => (IMG.plaque = i)),
     loadImg("assets/card/slogan.webp").then((i) => (IMG.slogan = i)),
     loadImg("assets/card/divider.webp").then((i) => (IMG.divider = i)),
-  ]);
+  ]));
   const fontsReady = Promise.all(["800 48px Cairo", "700 28px Cairo", "600 20px Cairo"].map((f) => document.fonts.load(f, "أAa").catch(() => {}))).then(() => document.fonts.ready);
 
   /* ---------- حالة النموذج ---------- */

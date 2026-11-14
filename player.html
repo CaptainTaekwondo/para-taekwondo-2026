@@ -3,12 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>/* وضع النت الضعيف: صور أخف وتأثيرات أقل (Chrome/Edge/Android؛ Safari ما بيدعمش) — للتجربة: ?lite=1 أو ?lite=0 */
+(function(){try{var q=/[?&]lite=([01])/.exec(location.search),c=navigator.connection,slow=c&&(c.saveData||/2g|3g/.test(c.effectiveType||""));if(!(q?q[1]==="1":slow))return;var d=document.documentElement;d.classList.add("lite");
+function sw(n){if(n.nodeType===1&&n.tagName==="IMG"&&n.hasAttribute("data-lite")){n.src=n.getAttribute("data-lite");n.removeAttribute("data-lite")}}
+var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++)for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];sw(n);if(n.querySelectorAll){var a=n.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])}}});
+mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",function(){mo.disconnect();var a=document.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])})}catch(e){}})();</script>
 <title>تسجيل اللاعب وبطاقة البطل — أساسيات البارا تايكوندو 2026</title>
 <meta name="description" content="سجّل بيانات اللاعب وشاهد بطاقة البطل فورًا وحمّلها بعد الحفظ.">
 <meta name="theme-color" content="#030a24">
 <link rel="icon" href="assets/champion.webp">
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="style.css?v=20261108">
+<link rel="stylesheet" href="style.css?v=20261114c">
 <link rel="stylesheet" href="card.css?v=20261109">
 <link rel="stylesheet" href="player.css?v=20261109f">
 </head>
@@ -205,6 +210,6 @@
 
 <script src="config.js?v=20261108b"></script>
 <script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261110a"></script>
+<script src="player.js?v=20261114a"></script>
 </body>
 </html>
