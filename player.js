@@ -3,7 +3,8 @@
 (() => {
   "use strict";
   const $ = (s, r = document) => r.querySelector(s);
-  const API = (typeof CONFIG !== "undefined" && CONFIG.playerApi) || "";
+  const DEMO = typeof window.PTK_DEMO === "function";   // player.html?demo=1: سيرفر وهمي من demo-player.js
+  const API = DEMO ? "demo" : (typeof CONFIG !== "undefined" && CONFIG.playerApi) || "";
   const AGE_DATE = (typeof CONFIG !== "undefined" && CONFIG.ageDate) || "2026-12-31";
   /* نوع اللاعب: para = بارا (PTP)، sup = لاعب داعم من غير تصنيف (PTS) */
   let ptype = "para";
@@ -462,7 +463,7 @@
     inp.addEventListener("input", go); inp.addEventListener("change", go); inp.addEventListener("paste", go);
   }
   const VIDEO_OPEN = typeof CONFIG !== "undefined" && CONFIG.videoOpen === true;
-  const SUP_OPEN = typeof CONFIG !== "undefined" && CONFIG.supportersOpen === true;   // اللاعب الداعم وتحسينات «لاعبيني»
+  const SUP_OPEN = DEMO || (typeof CONFIG !== "undefined" && CONFIG.supportersOpen === true);   // اللاعب الداعم وتحسينات «لاعبيني»
   // قبل موعد إرسال الفيديوهات: الخانة مقفولة مع توضيح
   function lockVideo(inp, msg) {
     if (VIDEO_OPEN || !inp) return;
@@ -514,6 +515,7 @@
   const readCoach = () => { try { const o = JSON.parse(localStorage.getItem(COACH_KEY) || "null"); return o && typeof o === "object" ? o : null; } catch (e) { return null; } };
   function forgetCoach() { try { localStorage.removeItem(COACH_KEY); } catch (e) {} coachNote = false; $("#coachSavedNote").hidden = true; }
   function rememberCoach() {
+    if (DEMO) return;   // بيانات التجربة لا تُحفظ على الجهاز
     if (!$("#f_remember").checked) return forgetCoach();
     try {
       localStorage.setItem(COACH_KEY, JSON.stringify({
@@ -672,6 +674,7 @@
     return c.toDataURL("image/jpeg", 0.88);
   }
   async function post(body, ms = 60000) {
+    if (DEMO) return window.PTK_DEMO(JSON.parse(JSON.stringify(body)));
     const ctl = new AbortController(), tm = setTimeout(() => ctl.abort(), ms);
     try { const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(body), signal: ctl.signal, redirect: "follow" }); return JSON.parse(await r.text()); }
     finally { clearTimeout(tm); }
