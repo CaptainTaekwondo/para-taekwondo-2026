@@ -20,6 +20,7 @@ const CONFIG = {
   ageDate: "2026-12-31",
   /* خانة «رابط فيديو المشاركة» في صفحة اللاعب: false = مغلقة مؤقتًا حتى يبدأ موعد إرسال الفيديوهات، true = مفتوحة */
   videoOpen: false,
+  supportersOpen: false,   // تسجيل «اللاعب الداعم» (PTS) وتحسينات «لاعبيني» (معاينة البطاقة، البحث، الفلاتر): false = مخفية، true = تظهر
   /* فيديو شرح التسجيل مع مريم: يظهر زر مشاهدته أعلى صفحة تسجيل اللاعب (فارغ = يختفي الزر) */
   guideVideo: "https://youtu.be/s9xeFxCtrks",
 
@@ -35,7 +36,7 @@ const CONFIG = {
   /* ---- 2) الروابط الرسمية ---- */
   links: {
     registration: "",                                  // رابط التسجيل على منصة SportLand (فارغ = زر معطّل «قريبًا»)
-    whatsapp: "https://www.canvaqr.com/RGWlQWBNuw",    // رابط جروب الواتساب (مقروء من QR الغلاف، تأكد أنه الرابط الصحيح)
+    whatsapp: "https://chat.whatsapp.com/BD4xmYfh9o05vFmhCoatym",    // رابط جروب الواتساب المباشر (معتمد 2026-11-15)
     sponsor: ""                                        // رابط الراعي (اختياري)
   },
 

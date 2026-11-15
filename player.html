@@ -13,9 +13,9 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
 <meta name="theme-color" content="#030a24">
 <link rel="icon" href="assets/champion.webp">
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
-<link rel="stylesheet" href="style.css?v=20261114c">
+<link rel="stylesheet" href="style.css?v=20261115a">
 <link rel="stylesheet" href="card.css?v=20261109">
-<link rel="stylesheet" href="player.css?v=20261109f">
+<link rel="stylesheet" href="player.css?v=20261115i">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -30,7 +30,7 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
 
 <main class="wrap creg">
   <header class="sec-head">
-    <h1 class="foil" data-t="title">تسجيل اللاعب وإصدار بطاقة البطل</h1>
+    <h1 class="foil" id="pageTitle" data-t="title">تسجيل اللاعب وإصدار بطاقة البطل</h1>
     <div class="orn"><i></i><b></b><i></i></div>
     <p data-t="lead">املأ بيانات اللاعب وستظهر بطاقته أمامك فورًا. بعد الحفظ يحصل اللاعب على كوده الفريد وتحمّل البطاقة بصورة عالية الجودة.</p>
   </header>
@@ -54,12 +54,21 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
       <button class="modebtn" id="btnMine" type="button"><b data-t="mineB">لاعبيني</b><span data-t="mineBH">للمدربين: اعرض لاعبيك وعدّلهم أو أزلهم أو أضف لاعبين جددًا بكود بطاقتك.</span></button>
     </div>
   </section>
+  <section class="mode" id="typeBox" hidden>
+    <h2 class="foil" data-t="typeT">نوع اللاعب</h2>
+    <p class="hint" data-t="typeHint">اختر نوع اللاعب الذي ستسجّله.</p>
+    <div class="mode-btns type-btns">
+      <button class="modebtn gold" id="btnPara" type="button"><b data-t="typePara">تسجيل لاعب بارا</b><span data-t="typeParaHint">للاعبين من أصحاب الهمم، مع رمز التصنيف.</span><em class="mtag" dir="ltr">PTP-2026</em></button>
+      <button class="modebtn" id="btnSup" type="button"><b data-t="typeSup">تسجيل لاعب داعم</b><span data-t="typeSupHint">للاعبين المشاركين دعمًا لأصحاب الهمم، من غير تصنيف.</span><em class="mtag" dir="ltr">PTS-2026</em></button>
+    </div>
+    <div class="acts"><button class="btn" id="typeBack" type="button" data-t="lkBack">رجوع</button></div>
+  </section>
   <section class="mode" id="lookupBox" hidden>
     <h2 class="foil" data-t="lkT">تعديل بطاقة لاعب</h2>
     <p class="hint" data-t="lkHint">أدخل رقم الهاتف والبريد الإلكتروني المسجَّلين وكود اللاعب الظاهر على بطاقته. وبعد التأكد من البيانات تُفتح صفحة تعديلها.</p>
     <div class="fld"><label for="f_lkPhone" data-t="lkPhone">رقم الهاتف المسجَّل</label><input id="f_lkPhone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel"></div>
     <div class="fld"><label for="f_lkEmail" data-t="lkEmail">البريد الإلكتروني</label><input id="f_lkEmail" type="email" dir="ltr" autocomplete="email"></div>
-    <div class="fld"><label for="f_lkCode" data-t="lkCode">كود اللاعب (آخر 4 أرقام فقط)</label><div class="pfx" dir="ltr"><span>PTP-2026-</span><input id="f_lkCode" type="text" dir="ltr" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div></div>
+    <div class="fld"><label for="f_lkCode" data-t="lkCode">كود اللاعب (آخر 4 أرقام فقط)</label><div class="pfx" dir="ltr"><select id="f_lkPfx" aria-label="Code prefix"><option value="PTP-2026-">PTP-2026-</option><option value="PTS-2026-">PTS-2026-</option></select><input id="f_lkCode" type="text" dir="ltr" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div></div>
     <p class="err big" id="lkErr" role="alert" hidden></p>
     <div class="acts"><button class="btn fill" id="lkBtn" type="button" data-t="lkBtn">عرض البيانات</button><button class="btn" id="lkBack" type="button" data-t="lkBack">رجوع</button></div>
   </section>
@@ -72,10 +81,24 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
       <div class="fld"><label for="f_mineEmail" data-t="lkEmail">البريد الإلكتروني</label><input id="f_mineEmail" type="email" dir="ltr" autocomplete="email"></div>
     </div>
     <p class="err big" id="mineErr" role="alert" hidden></p>
+    <div class="minesearch" id="mineSearchBox" hidden><label class="sr" for="mineSearch" data-t="mineSearchL">ابحث عن لاعب</label><input id="mineSearch" type="search" autocomplete="off" enterkeyhint="search" data-tp="mineSearchPh" placeholder="ابحث بالكود أو الاسم أو النادي"></div>
     <div id="mineList" hidden></div>
-    <button class="btn addp" id="mineAdd" type="button" style="display:none;max-width:520px;margin-inline:auto;margin-bottom:.9rem"><span data-t="mineAdd">إضافة لاعبين</span> <span aria-hidden="true">+</span></button>
+    <div class="mine-add" id="mineAdd" hidden>
+      <button class="modebtn gold" id="mineAddP" type="button"><b><span data-t="mineAddP">إضافة لاعبين بارا</span> +</b></button>
+      <button class="modebtn" id="mineAddS" type="button"><b><span data-t="mineAddS">إضافة لاعبين داعمين</span> +</b></button>
+    </div>
     <div class="acts"><button class="btn fill" id="mineBtn" type="button" data-t="mineShow">عرض لاعبيني</button><button class="btn" id="mineBack" type="button" data-t="lkBack">رجوع</button></div>
   </section>
+  <div class="idmodal" id="idModal" hidden>
+    <div class="idbox" role="dialog" aria-modal="true" aria-labelledby="idName">
+      <button class="idx" id="idX" type="button" aria-label="إغلاق">×</button>
+      <canvas id="idc" class="idc" width="1584" height="993" role="button" tabindex="0" aria-label="بطاقة اللاعب — انقر للتعديل" aria-describedby="idTip"></canvas>
+      <p class="idtip" id="idTip" data-t="idTip">انقر على البطاقة للتعديل عليها</p>
+      <p class="idname" id="idName"></p>
+      <p class="hint" id="idMsg" hidden></p>
+      <div class="idacts" id="idActs"></div>
+    </div>
+  </div>
   <p class="editbadge" id="editBadge" hidden data-t="editBadge">وضع التعديل: عدّل ما تريد ثم احفظ لإصدار البطاقة من جديد.</p>
   <div class="cgrid" id="cgrid" hidden>
     <section class="cprev" aria-label="Preview">
@@ -130,11 +153,11 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
         </fieldset>
 
         <fieldset id="beltSet">
-          <legend data-t="g2">الحزام والتصنيف</legend>
+          <legend id="lg2" data-t="g2">الحزام والتصنيف</legend>
           <div class="fld"><label for="f_belt" data-t="belt">لون الحزام</label>
             <select id="f_belt"></select>
             <p class="hint" data-t="beltHint">اختر لون الحزام الأساسي، ويشمل جميع درجاته. يُحدَّد المستوى تلقائيًا.</p><p class="hint" id="levelInfo" aria-live="polite"></p><p class="err" id="e_belt" hidden></p></div>
-          <div class="fld"><label for="f_para" data-t="para">رمز تصنيف البارا</label>
+          <div class="fld ppara"><label for="f_para" data-t="para">رمز تصنيف البارا</label>
             <select id="f_para"></select>
             <p class="hint" data-t="paraHint">إن لم تكن تعرف الرمز اختر «لا أعرف / لم يُصنَّف بعد».</p><p class="err" id="e_para" hidden></p></div>
         </fieldset>
@@ -208,8 +231,8 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
   </div>
 </main>
 
-<script src="config.js?v=20261108b"></script>
-<script src="ai-prompt-player.js?v=20261108"></script>
-<script src="player.js?v=20261114a"></script>
+<script src="config.js?v=20261115a"></script>
+<script src="ai-prompt-player.js?v=20261115k"></script>
+<script src="player.js?v=20261115k"></script>
 </body>
 </html>

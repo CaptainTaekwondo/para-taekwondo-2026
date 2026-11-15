@@ -574,6 +574,21 @@ html.scrolling *,html.scrolling *::before,html.scrolling *::after{animation-play
 .vvol input{flex:1;min-width:0;accent-color:var(--gold2)}
 .vvol output{min-width:3.2rem;text-align:center;font-weight:800;color:var(--gold1)}
 
+/* اللمس على الموبايل: أقل مساحة للزرار 44 بكسل */
+@media (pointer:coarse){
+  .tbtn{min-width:44px;height:44px}
+  .brand img{width:44px;height:44px}
+  .btn.sm{min-height:44px}
+  .vvol button{width:44px;height:44px}
+}
+/* خطوط صغيرة: أقل حجم 14 بكسل */
+.tag{font-size:.875rem}
+.disc small{font-size:.875rem}
+.frame-hint{font-size:.9rem}
+.watch{font-size:.95rem}
+/* الموبايل: زرار الانضمام للجروب بدل QR (الشخص مش هيصوّر شاشة موبايله) */
+@media(max-width:640px){.qrbox:has(a.wa:not([hidden])) #waQr{display:none}}
+
 /* وضع النت الضعيف (.lite على <html>): من غير العلامة المائية وتأثيرات الزجاج التقيلة على الموبايلات الضعيفة */
 .lite .wm{background:none}
 .lite *,.lite *::before,.lite *::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}

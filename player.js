@@ -5,7 +5,11 @@
   const $ = (s, r = document) => r.querySelector(s);
   const API = (typeof CONFIG !== "undefined" && CONFIG.playerApi) || "";
   const AGE_DATE = (typeof CONFIG !== "undefined" && CONFIG.ageDate) || "2026-12-31";
-  const PREFIX = "PTP-2026-";
+  /* نوع اللاعب: para = بارا (PTP)، sup = لاعب داعم من غير تصنيف (PTS) */
+  let ptype = "para";
+  const isSup = () => ptype === "sup";
+  const pfx = () => (isSup() ? "PTS-2026-" : "PTP-2026-");
+  const typeOfCode = (c) => (/^PTS-/.test(String(c || "")) ? "sup" : "para");
   const W = 1584, H = 993, GOLD = "#f4cb55";
 
   /* ---------- بيانات ثابتة ---------- */
@@ -35,6 +39,9 @@
       sportland: "هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منصة SportLand بعد فتح رابطها رسميًا.",
       guideBtn: "شاهد شرح التسجيل مع مريم", guideT: "شرح التسجيل مع مريم", guideClose: "إغلاق", guideMin: "تصغير الفيديو", guideMax: "تكبير", guideBack: "رجوع 10 ثوانٍ ⏪", guideFwd: "⏩ تقديم 10 ثوانٍ", guideBackS: "10 ⏪", guideFwdS: "⏩ 10", guideWide: "↔ بالعرض", guideTall: "↕ بالطول",
       back: "العودة للموقع", lang: "English", choose: "اختر",
+      titleSup: "تسجيل لاعب داعم وإصدار بطاقته", g2sup: "الحزام",
+      typeT: "نوع اللاعب", typeHint: "اختر نوع اللاعب الذي ستسجّله.", typePara: "تسجيل لاعب بارا", typeParaHint: "للاعبين من أصحاب الهمم، مع رمز التصنيف.", typeSup: "تسجيل لاعب داعم", typeSupHint: "للاعبين المشاركين دعمًا لأصحاب الهمم، من غير تصنيف.",
+      mineView: "عرض البطاقة", allBelts: "كل الأحزمة", allAges: "كل الفئات العمرية", ageL: "الفئة العمرية", mineSearchL: "ابحث عن لاعب", mineSearchPh: "ابحث بالكود أو الاسم أو النادي", mineResults: "النتائج: {n} من {t}", mineNoRes: "لا يوجد لاعب بهذا البحث.", idTip: "انقر على البطاقة للتعديل عليها", mineLoadPhoto: "جاري تحميل صورة اللاعب…", mineNoPhoto: "تعذّر تحميل صورة اللاعب.", mineAddP: "إضافة لاعبين بارا", mineAddS: "إضافة لاعبين داعمين", mineAll: "الكل", badgePara: "بارا", badgeSup: "داعم",
       modeT: "ماذا تريد أن تفعل؟", newId: "تسجيل جديد", newHint: "سجّل بيانات اللاعب لأول مرة واحصل على كوده وبطاقته.", editId: "تعديل بطاقة لاعب", editHint: "لديك كود اللاعب؟ عدّل بياناته أو صورته وأصدر بطاقته من جديد.",
       oneCard: "⚠️ تنبيه: يُسجَّل كل لاعب مرة واحدة فقط وببطاقة واحدة، وأي تسجيل مكرر لنفس اللاعب يُرفض. لتغيير بيانات اللاعب استخدم «تعديل بطاقة لاعب».",
       roleT: "مَن يسجّل؟", roleQ: "اختر صفتك في البطولة", rolePlayer: "لاعب", rolePlayerHint: "أسجّل بياناتي أنا فقط.", roleCoach: "مدرب", roleCoachHint: "أسجّل لاعبيّ، ويمكنني المشاركة أنا أيضًا كلاعب.", competeQ: "هل ستشارك أنت أيضًا كلاعب في البطولة؟", competeNo: "لا، سأسجّل لاعبيّ فقط", competeYes: "نعم، سأشارك كلاعب", g1coachOnly: "بياناتك كمدرب", eNoPlayers: "أضف لاعبًا واحدًا على الأقل.", doneCoachOnlyT: "تم تسجيل لاعبيك",
@@ -59,7 +66,7 @@
       coach: "كود المدرب (اختياري)", coachHint: "آخر 4 أرقام من كود المدرب الظاهر على بطاقة المدرب، إن وُجد.", coachC: "كود بطاقتك كمدرب (اختياري)", coachHintC: "إن كانت لديك بطاقة مدرب، اكتب آخر 4 أرقام من كودها.",
       guardian: "اسم ولي الأمر", guardianHint: "مطلوب إذا كان عمر اللاعب أقل من 18 سنة.",
       email: "البريد الإلكتروني (إجباري)", emailHint: "يمكن استخدام نفس البريد لتسجيل أكثر من لاعب (مثل الإخوة).", eEmail: "أدخل بريدًا إلكترونيًا صحيحًا.",
-      vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
+      vLbl: "كود تأكيد البريد (6 أرقام)", vSend: "أرسل الكود", vResend: "إعادة الإرسال", vHint: "اضغط «أرسل الكود» وسيصلك كود على بريدك (تفقّد البريد المزعج أيضًا).", vSame: "أعدنا إرسال نفس الكود إلى بريدك، فأي رسالة منهم تنفع. أدخله هنا (صالح 10 دقائق).", vSent: "تم إرسال الكود إلى بريدك. أدخله هنا (صالح 10 دقائق).", vReq: "أدخل كود التأكيد المرسل إلى بريدك.", vBad: "الكود غير صحيح.", vExp: "انتهت صلاحية الكود. اطلب كودًا جديدًا.", vWait: "انتظر دقيقة قبل طلب كود جديد.", vQuota: "تعذّر الإرسال حاليًا بسبب كثرة الطلبات. حاول لاحقًا.", vMail: "تعذّر إرسال الكود لهذا البريد. تأكد من صحته.",
       phone: "رقم الهاتف (إجباري، مع رمز الدولة)", ePhone: "اختر رمز الدولة وأدخل رقم هاتف صحيحًا.", mineAdd: "إضافة لاعبين", mineDel: "إزالة", mineDelQ: "هل تريد إزالة اللاعب «{name}» من البطولة؟", mineB: "لاعبيني", mineBH: "للمدربين: اعرض لاعبيك وعدّلهم أو أزلهم أو أضف لاعبين جددًا بكود بطاقتك.", mineT: "لاعبيني", mineHint: "أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين في البطاقة. تظهر هنا اللاعبون الذين سجلتهم بنفس البريد وكود البطاقة.", mineCode: "كود بطاقة المدرب (آخر 4 أرقام فقط)", mineShow: "عرض لاعبيني", mineReq: "أدخل آخر 4 أرقام من الكود والهاتف والبريد.", mineNF: "لا توجد بطاقة مدرب بهذه البيانات. تأكد من الكود والهاتف والبريد.", mineWait: "محاولات كثيرة. حاول مرة أخرى بعد 15 دقيقة.", mineNone: "لا يوجد لاعبون مسجلون بهذا البريد وكود البطاقة.", mineCount: "عدد اللاعبين: {n}", mineEdit: "تعديل", mineDl: "تحميل البطاقة", mineNoCard: "البطاقة غير محفوظة بعد", coachSaved: "تم ملء بياناتك المحفوظة على هذا الجهاز.", coachForget: "مسح البيانات المحفوظة", remember: "احفظ بياناتي على هذا الجهاز لتسهيل التسجيل في المرة القادمة", saveNext: "حفظ مؤقت وإضافة اللاعب التالي", saveNote: "هذا الحفظ داخل الصفحة فقط، ولا يُسجَّل اللاعبون إلا بعد الضغط على زر الحفظ النهائي في أسفل الصفحة.", editP: "تعديل", pNoName: "لاعب بدون اسم", addClub: "أضف ناديًا آخر", addClubHint: "إذا كنت تدرّب في أكثر من نادٍ أضفها هنا، ثم اختر النادي الذي تشارك باسمه أنت وكل لاعب.", clubPick: "نادي اللاعب", clubPickSelf: "النادي الذي تشارك باسمه", clubPickPh: "اختر النادي", eClubPick: "اختر النادي من القائمة.", dialPick: "رمز الدولة", dialHint: "الرمز يتحدد حسب الدولة، ولو رقمك من دولة أخرى غيّره من القائمة.",
       photo: "اختر صورة واضحة للاعب", photoC: "اختر صورة شخصية واضحة", photoHint: "صورة بوجه واضح وخلفية بسيطة. اسحب الصورة داخل الإطار بإصبعك أو بالماوس لضبطها، وكبّرها بإصبعين أو بعجلة الماوس.", zoom: "تكبير الصورة",
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
@@ -87,6 +94,9 @@
       sportland: "This is the initial registration of the player's details and card. Uploading the performance video and judging take place on the SportLand platform once its link is officially opened.",
       guideBtn: "Watch the registration guide (Arabic)", guideT: "Registration guide with Mariam", guideClose: "Close", guideMin: "Minimize video", guideMax: "Enlarge", guideBack: "⏪ Back 10 seconds", guideFwd: "Forward 10 seconds ⏩", guideBackS: "⏪ 10", guideFwdS: "10 ⏩", guideWide: "↔ Landscape", guideTall: "↕ Portrait",
       back: "Back to site", lang: "عربي", choose: "Choose",
+      titleSup: "Supporting Player Registration & Card", g2sup: "Belt",
+      typeT: "Player type", typeHint: "Choose the type of player you are registering.", typePara: "Register a para player", typeParaHint: "For players of determination, with a classification code.", typeSup: "Register a supporting player", typeSupHint: "For players taking part in support of people of determination, no classification.",
+      mineView: "View card", allBelts: "All belts", allAges: "All age groups", ageL: "Age group", mineSearchL: "Search for a player", mineSearchPh: "Search by code, name or club", mineResults: "Results: {n} of {t}", mineNoRes: "No player matches this search.", idTip: "Tap the card to edit it", mineLoadPhoto: "Loading the player photo…", mineNoPhoto: "Could not load the player photo.", mineAddP: "Add para players", mineAddS: "Add supporting players", mineAll: "All", badgePara: "Para", badgeSup: "Supporter",
       modeT: "What would you like to do?", newId: "New registration", newHint: "Register the player for the first time and get the code and card.", editId: "Edit a player card", editHint: "Have the player's code? Update the details or photo and re-issue the card.",
       oneCard: "⚠️ Notice: each player registers once only, with one card; any duplicate registration of the same player is rejected. To change a player's details use “Edit a player card”.",
       roleT: "Who is registering?", roleQ: "Choose your role in the championship", rolePlayer: "Player", rolePlayerHint: "I register my own details only.", roleCoach: "Coach", roleCoachHint: "I register my players, and I can compete as a player too.", competeQ: "Will you also compete as a player?", competeNo: "No, I only register my players", competeYes: "Yes, I will compete as a player", g1coachOnly: "Your details as the coach", eNoPlayers: "Add at least one player.", doneCoachOnlyT: "Your players are registered",
@@ -111,7 +121,7 @@
       coach: "Coach code (optional)", coachHint: "The last 4 digits of the code on the coach's ID card, if any.", coachC: "Your coach card code (optional)", coachHintC: "If you have a coach ID card, enter the last 4 digits of its code.",
       guardian: "Guardian's name", guardianHint: "Required if the player is under 18.",
       email: "Email (required)", emailHint: "The same email can register more than one player (e.g. siblings).", eEmail: "Enter a valid email address.",
-      vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
+      vLbl: "Email verification code (6 digits)", vSend: "Send code", vResend: "Resend", vHint: "Press “Send code” and we will email you a code (check spam too).", vSame: "We resent the same code to your email, so any of the messages works. Enter it here (valid 10 minutes).", vSent: "Code sent to your email. Enter it here (valid 10 minutes).", vReq: "Enter the verification code sent to your email.", vBad: "Incorrect code.", vExp: "The code has expired. Request a new one.", vWait: "Please wait a minute before requesting another code.", vQuota: "Sending is temporarily unavailable. Try again later.", vMail: "Could not send a code to this email. Check that it is correct.",
       phone: "Phone number (required, with country code)", ePhone: "Choose the country code and enter a valid phone number.", mineAdd: "Add players", mineDel: "Remove", mineDelQ: "Remove the player \"{name}\" from the championship?", mineB: "My players", mineBH: "For coaches: view, edit or remove your players, or add new ones with your card code.", mineT: "My players", mineHint: "Enter the last 4 digits of your coach card code with the phone and email registered on the card. The players you registered with the same email and card code appear here.", mineCode: "Coach card code (last 4 digits only)", mineShow: "Show my players", mineReq: "Enter the last 4 digits of the code, the phone and the email.", mineNF: "No coach card matches these details. Check the code, phone and email.", mineWait: "Too many attempts. Try again in 15 minutes.", mineNone: "No players are registered with this email and card code.", mineCount: "Players: {n}", mineEdit: "Edit", mineDl: "Download card", mineNoCard: "Card not saved yet", coachSaved: "Your saved details on this device were filled in.", coachForget: "Delete saved details", remember: "Save my details on this device to make the next registration easier", saveNext: "Save for now and add the next player", saveNote: "This keeps the player on this page only. Players are registered only after you press the final save button at the bottom of the page.", editP: "Edit", pNoName: "Unnamed player", addClub: "Add another club", addClubHint: "If you coach at more than one club, add them here, then choose the club you and each player will compete for.", clubPick: "Player's club", clubPickSelf: "The club you compete for", clubPickPh: "Choose the club", eClubPick: "Choose a club from the list.", dialPick: "Country code", dialHint: "The code follows your country. If your number is from another country, change it in the list.",
       photo: "Choose a clear photo of the player", photoC: "Choose a clear profile photo", photoHint: "Clear face, simple background. Drag the photo inside the frame with your finger or mouse to adjust it; pinch or scroll to zoom.", zoom: "Zoom",
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
@@ -202,6 +212,7 @@
   const beltOf = (id) => BELTS.find((b) => b[0] === id);
   const q = (sub, k) => sub.el.querySelector(`[data-k="${k}"]`);
   function val(sub, k) {
+    if (sub.data) return sub.data[k] == null ? "" : String(sub.data[k]).trim();   // معاينة بطاقة لاعب من «لاعبيني»: من بياناته المحفوظة
     if ((sub.kind === "block" || withPlayers()) && (k === "clubAr" || k === "clubEn")) { const c = clubOf(sub); return c ? (k === "clubAr" ? c.ar : c.en) : ""; }   // النادي حسب اختيار المدرب له وللاعبيه
     if (sub.kind === "main" || INHERIT.includes(k)) {
       if (k === "gender") return ($("input[name=gender]:checked") || {}).value || "";
@@ -294,9 +305,14 @@
     const ac = ageCat(ageOf(val(sub, "birth")));
     line(c, ac ? ac[1] : "U—", XS[1], 588, { w: 800, s: 34, c: "#ffd75e", a: ac ? 1 : 0.5, st: 2 });
     if (ac) line(c, lang === "en" ? ac[3] : ac[2], XS[1], 624, { w: 700, s: 17, c: "#e4ecff", dir: lang === "en" ? "ltr" : "rtl", maxW: 150, st: 1.4 });
-    const pc = val(sub, "para");
-    line(c, pc && pc !== "NA" ? pc : "P—", XS[2], 588, { w: 800, s: 34, c: "#ffd75e", a: pc ? 1 : 0.5, st: 2 });
-    line(c, "PARA TAEKWONDO", XS[2], 624, { w: 700, s: 14, c: "#e4ecff", ls: "1px", maxW: 150, st: 1.2 });
+    if (sub.data ? sub.data.type === "sup" : isSup()) {   // اللاعب الداعم: مكان التصنيف يكتب «داعم»
+      line(c, "داعم", XS[2], 588, { w: 800, s: 34, c: "#ffd75e", dir: "rtl", maxW: 150, st: 2 });
+      line(c, "SUPPORTER", XS[2], 624, { w: 700, s: 14, c: "#e4ecff", ls: "1px", maxW: 150, st: 1.2 });
+    } else {
+      const pc = val(sub, "para");
+      line(c, pc && pc !== "NA" ? pc : "P—", XS[2], 588, { w: 800, s: 34, c: "#ffd75e", a: pc ? 1 : 0.5, st: 2 });
+      line(c, "PARA TAEKWONDO", XS[2], 624, { w: 700, s: 14, c: "#e4ecff", ls: "1px", maxW: 150, st: 1.2 });
+    }
     dimg(c, IMG.divider, 707, 646, 460, 17);
 
     const cAr = v("countryAr", "الدولة"), cEn = v("countryEn", "Country");
@@ -307,7 +323,7 @@
 
     vgrad(c, 644, 308, 415, "rgba(244,203,85,0)", GOLD);
     line(c, "ID NUMBER", 645, 442, { w: 700, s: 15, c: GOLD, ls: "4px", shadow: true, st: 1.2 });
-    const code = sub.code || PREFIX + "0000", seg = code.split("-"), cc = sub.code ? 1 : 0.5;
+    const code = sub.code || pfx() + "0000", seg = code.split("-"), cc = sub.code ? 1 : 0.5;
     [seg[0], seg[1], seg[2]].forEach((s, i) => line(c, s, 645, 496 + i * 78, { w: 800, s: 46, c: "#ffd75e", ls: "2px", shadow: true, a: cc, st: 2 }));
     hgrad(c, 615, 675, 535); hgrad(c, 615, 675, 613);
     vgrad(c, 644, 696, 803, GOLD, "rgba(244,203,85,0)");
@@ -446,6 +462,7 @@
     inp.addEventListener("input", go); inp.addEventListener("change", go); inp.addEventListener("paste", go);
   }
   const VIDEO_OPEN = typeof CONFIG !== "undefined" && CONFIG.videoOpen === true;
+  const SUP_OPEN = typeof CONFIG !== "undefined" && CONFIG.supportersOpen === true;   // اللاعب الداعم وتحسينات «لاعبيني»
   // قبل موعد إرسال الفيديوهات: الخانة مقفولة مع توضيح
   function lockVideo(inp, msg) {
     if (VIDEO_OPEN || !inp) return;
@@ -533,7 +550,7 @@
       <div class="fld"><label for="b${id}_birth" data-t="birth">${t("birth")}</label><input id="b${id}_birth" data-k="birth" type="date" dir="ltr" min="1940-01-01"><p class="hint bAge"></p><p class="err" data-e="birth" hidden></p></div>
       <div class="fld pclub" hidden><label for="b${id}_clubPick" data-t="clubPick">${t("clubPick")}</label><select id="b${id}_clubPick" data-k="clubPick"></select><p class="err" data-e="clubPick" hidden></p></div>
       <div class="fld"><label for="b${id}_belt" data-t="belt">${t("belt")}</label><select id="b${id}_belt" data-k="belt">${beltOpts()}</select><p class="hint bLevel"></p><p class="err" data-e="belt" hidden></p></div>
-      <div class="fld"><label for="b${id}_para" data-t="para">${t("para")}</label><select id="b${id}_para" data-k="para">${paraOpts()}</select><p class="err" data-e="para" hidden></p></div>
+      <div class="fld ppara"><label for="b${id}_para" data-t="para">${t("para")}</label><select id="b${id}_para" data-k="para">${paraOpts()}</select><p class="err" data-e="para" hidden></p></div>
       <div class="fld pguard" hidden><label for="b${id}_guardian" data-t="guardian">${t("guardian")}</label><input id="b${id}_guardian" data-k="guardian" type="text" maxlength="60"><p class="hint" data-t="guardianHint">${t("guardianHint")}</p><p class="err" data-e="guardian" hidden></p></div>
       <div class="fld"><label for="b${id}_photo" data-t="photo">${t("photo")}</label><input id="b${id}_photo" data-k="photo" type="file" accept="image/*"><p class="err" data-e="photo" hidden></p></div>
       <div class="fld pzoom" hidden><label data-t="zoom">${t("zoom")}</label><input class="pzoomIn" type="range" min="1" max="3" step="0.02" value="1"></div>
@@ -610,7 +627,7 @@
     if (!val(sub, "gender")) bad("gender", t("eReq")); else setErrS(sub, "gender", "");
     const age = ageOf(val(sub, "birth")); if (age == null || age < 3 || age > 90) bad("birth", t("eBirth")); else setErrS(sub, "birth", "");
     if (!val(sub, "belt")) bad("belt", t("eReq")); else setErrS(sub, "belt", "");
-    if (!val(sub, "para")) bad("para", t("eReq")); else setErrS(sub, "para", "");
+    if (!isSup() && !val(sub, "para")) bad("para", t("eReq")); else setErrS(sub, "para", "");
     if (age != null && age < 18 && val(sub, "guardian").length < 2) bad("guardian", t("eGuardian")); else setErrS(sub, "guardian", "");
     if (sub.kind === "block" || withPlayers()) { if (clubs().length > 1 && !pickOf(sub).value) bad("clubPick", t("eClubPick")); else setErrS(sub, "clubPick", ""); }
     if (!sub.photo) bad("photo", t("ePhoto")); else setErrS(sub, "photo", "");
@@ -672,7 +689,7 @@
       setErr("email", ""); b.disabled = true;
       try {
         const r = await post({ action: "sendcode", email: em, lang }, 30000);
-        if (r && r.ok) { msg("vSent"); cd = 60; clearTimeout(tm); tick(); F.vcode.focus(); return; }
+        if (r && r.ok) { msg(r.same ? "vSame" : "vSent"); cd = 60; clearTimeout(tm); tick(); F.vcode.focus(); return; }
         const e = r && r.error; msg(e === "wait" ? "vWait" : e === "quota" ? "vQuota" : e === "mail_failed" ? "vMail" : e === "bad_email" ? "eEmail" : "eSrv", true);
       } catch (x) { msg("eNet", true); }
       b.disabled = false;
@@ -682,12 +699,12 @@
   function collect(sub, addedBy) {
     const birth = val(sub, "birth");
     return {
-      rid: sub.rid, lang, role: sub.kind === "main" && role === "coach" ? "coach" : "player", addedBy: addedBy || "",
+      rid: sub.rid, lang, ptype, role: sub.kind === "main" && role === "coach" ? "coach" : "player", addedBy: addedBy || "",
       nameAr: val(sub, "nameAr"), nameEn: val(sub, "nameEn"), gender: val(sub, "gender"), birth,
       ageCat: (ageCat(ageOf(birth)) || [])[1] || "", countryAr: F.countryAr.value.trim(), countryEn: F.countryEn.value.trim(),
       coachClubs: withPlayers() ? clubs().map((c) => ({ ar: c.ar, en: c.en })) : undefined,   // قائمة نوادي المدرب تُحفظ في ورقة منفصلة
       clubAr: val(sub, "clubAr"), clubEn: val(sub, "clubEn"), belt: val(sub, "belt"), level: (beltOf(val(sub, "belt")) || [])[4] || "",
-      para: val(sub, "para"), coachCode: F.coach.value && (sub.kind === "main" || role === "coach") ? "PTA-2026-" + F.coach.value : "", guardian: val(sub, "guardian"),
+      para: isSup() ? "" : val(sub, "para"), coachCode: F.coach.value && (sub.kind === "main" || role === "coach") ? "PTA-2026-" + F.coach.value : "", guardian: val(sub, "guardian"),
       coachName: sub.kind === "block" ? F.nameAr.value.trim() + " / " + F.nameEn.value.trim() : "", video: VIDEO_OPEN ? videoVal(sub) : undefined,
       promo: promoYes() ? "yes" : "no", whatsapp: promoYes() ? normPhone($("#f_wa").value, dialSels[1]) : "",
       coachInVideo: promoYes() && role === "coach" && sub.kind === "main" && $("#f_coachVid").checked ? "yes" : "no",   // undefined = لا يُرسل، فلا يُمسح رابط محفوظ
@@ -714,14 +731,14 @@
       const data = collect(main); data.action = mode === "edit" ? "update" : "register"; if (mode === "edit") data.code = editCode;
       let res;
       if (API) { res = await post(data); if (!res || !res.ok) { const e = new Error((res && res.error) || "srv"); e.code = res && res.code; throw e; } }
-      else res = mode === "edit" ? { ok: false, error: "srv" } : { ok: true, code: PREFIX + "0000", demo: true };
+      else res = mode === "edit" ? { ok: false, error: "srv" } : { ok: true, code: pfx() + "0000", demo: true };
       if (res.token) { sess.token = res.token; sess.email = data.email; }
       main.code = res.code; main.final = true;
       // 2) لاعبو المدرب، واحدًا تلو الآخر
       if (withPlayers()) for (const b of blocks) {
         b.err = "";
         try {
-          if (!API) { b.code = PREFIX + "0000"; b.final = true; continue; }
+          if (!API) { b.code = pfx() + "0000"; b.final = true; continue; }
           const d = collect(b, main.code); d.action = "register"; d.token = sess.token;
           const r = await post(d);
           if (r && r.ok) { b.code = r.code; b.final = true; } else b.err = errText(r && r.error, r && r.code);
@@ -772,7 +789,7 @@
     try {
       for (const b of blocks) {
         b.err = "";
-        if (!API) { b.code = PREFIX + "0000"; b.final = true; continue; }
+        if (!API) { b.code = pfx() + "0000"; b.final = true; continue; }
         const d = collect(b, ""); d.action = "register";
         let r;
         try { r = await post(d); } catch (x) { b.err = errText("net"); continue; }
@@ -868,7 +885,23 @@
     $("#editBadge").hidden = m !== "edit"; F.email.readOnly = m === "edit"; F.phone.readOnly = m === "edit"; dialSels[0].disabled = m === "edit";
     applyRole(); infoAll(); redraw();
   }
-  $("#btnNew").addEventListener("click", () => showForm("new"));
+  /* نوع اللاعب: يغيّر العنوان وبداية الكود ويخفي خانة تصنيف البارا للاعب الداعم */
+  function setType(tp) {
+    ptype = tp === "sup" ? "sup" : "para";
+    document.documentElement.classList.toggle("sup", isSup());
+    const h = $("#pageTitle"); h.dataset.t = isSup() ? "titleSup" : "title"; h.textContent = t(h.dataset.t);
+    const g = $("#lg2"); g.dataset.t = isSup() ? "g2sup" : "g2"; g.textContent = t(g.dataset.t);
+    document.title = t(h.dataset.t) + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
+    $("#doneCode").textContent = pfx() + "0000"; redraw();
+  }
+  const typeBox = $("#typeBox");
+  $("#btnNew").addEventListener("click", () => {
+    if (!SUP_OPEN) { setType("para"); showForm("new"); return; }   // الميزة مقفولة: التسجيل القديم مباشرة
+    modeBox.hidden = true; typeBox.hidden = false; $("#btnPara").focus();
+  });
+  $("#btnPara").addEventListener("click", () => { setType("para"); typeBox.hidden = true; showForm("new"); });
+  $("#btnSup").addEventListener("click", () => { setType("sup"); typeBox.hidden = true; showForm("new"); });
+  $("#typeBack").addEventListener("click", () => { typeBox.hidden = true; modeBox.hidden = false; });
   $("#btnEdit").addEventListener("click", () => { modeBox.hidden = true; lkBox.hidden = false; $("#f_lkPhone").focus(); });
 
   /* «لاعبيني»: قائمة لاعبي المدرب بعد التحقق من الكود والهاتف والبريد */
@@ -876,32 +909,116 @@
   let mineCred = null, minePlayers = [], mineBusy = false, mineCoach = null, mineToken = "";
   const mineMsg = (m) => { mineErr.textContent = m; mineErr.hidden = !m; };
   const mineErrText = (e) => (e === "not_found" ? t("mineNF") : e === "wait" ? t("mineWait") : e === "net" ? t("eNet") : t("eSrv"));
+  let mineFilter = "all";   // all | para | sup
+  let mineBelt = "", mineAge = "";   // "" = الكل
+  function editMine(p) {
+    closeId(); mineBox.hidden = true; lkBox.hidden = false;
+    $("#f_lkPhone").value = mineCred.phone; $("#f_lkEmail").value = mineCred.email;
+    $("#f_lkPfx").value = typeOfCode(p.code) === "sup" ? "PTS-2026-" : "PTP-2026-"; $("#f_lkCode").value = String(p.code).slice(-4); $("#lkBtn").click();
+  }
+  async function dlMine(p, btn, say) {
+    if (btn.disabled) return; btn.disabled = true; say("");
+    try {
+      const r = await post(Object.assign({ action: "playercard", player: p.code }, mineCred), 90000);
+      if (!r || !r.ok) throw new Error((r && r.error) || "srv");
+      const a = document.createElement("a"); a.href = r.card; a.download = r.name; document.body.appendChild(a); a.click(); a.remove();
+    } catch (err) { say(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
+    btn.disabled = false;
+  }
+  /* معاينة بطاقة اللاعب: تترسم فورًا من بياناته، وصورته تتحمّل بعدها وتتحفظ عشان ماتتطلبش تاني (نفس فكرة نظام التحكيم) */
+  const idModal = $("#idModal"), idc = $("#idc"), idCtx = idc.getContext("2d"), photoCache = new Map();
+  let idCur = null, idBack = null;
+  const idMsg = (m) => { const e = $("#idMsg"); e.textContent = m; e.hidden = !m; };
+  function drawId() { if (!idCur) return; safe(() => drawCard(idCtx, idCur)); }
+  function openId(p) {
+    idBack = document.activeElement;
+    idCur = { kind: "view", data: Object.assign({}, p), code: p.code, final: true, photo: photoCache.get(p.code) || null, zoom: 1, ox: 0, oy: 0 };
+    $("#idName").textContent = (lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn) + " — " + p.code; idMsg("");
+    const acts = $("#idActs"); acts.textContent = "";
+    if (p.hasCard) { const dl = document.createElement("button"); dl.type = "button"; dl.className = "btn fill"; dl.textContent = t("mineDl"); dl.addEventListener("click", () => dlMine(p, dl, idMsg)); acts.appendChild(dl); }
+    idModal.hidden = false; document.documentElement.classList.add("guide-lock"); drawId(); $("#idX").focus();
+    if (!idCur.photo && p.hasPhoto && API) {
+      const want = p.code; idMsg(t("mineLoadPhoto"));
+      post(Object.assign({ action: "playerphoto", player: want }, mineCred), 60000)
+        .then((r) => (r && r.ok ? loadImg(r.photo) : null))
+        .then((im) => { if (!im) return; photoCache.set(want, im); if (idCur && idCur.code === want) { idCur.photo = im; idMsg(""); drawId(); } })
+        .catch(() => {})
+        .finally(() => { if (idCur && idCur.code === want && !idCur.photo) idMsg(t("mineNoPhoto")); });
+    }
+  }
+  function closeId() { if (idModal.hidden) return; idModal.hidden = true; idCur = null; document.documentElement.classList.remove("guide-lock"); if (idBack && idBack.focus) idBack.focus(); }
+  $("#idX").addEventListener("click", closeId);
+  /* الضغط على البطاقة نفسها يفتح التعديل */
+  const idEdit = () => { if (idCur) editMine(idCur.data); };
+  idc.addEventListener("click", idEdit);
+  idc.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); idEdit(); } });
+  idModal.addEventListener("click", (e) => { if (e.target === idModal) closeId(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeId(); });
+  /* توحيد الحروف للبحث: الهمزات والتاء المربوطة والألف المقصورة والتشكيل، والإنجليزي بحروف صغيرة */
+  const normQ = (s) => String(s || "").toLowerCase().replace(/[ً-ْٰـ]/g, "").replace(/[أإآ]/g, "ا").replace(/ة/g, "ه").replace(/ى/g, "ي").replace(/\s+/g, " ").trim();
+  /* كل كلمة تكتبها لازم تكون بداية كلمة في الاسم أو النادي (و«ال» مش لازمة)، أو جزء من الكود */
+  const wordsOf = (p) => normQ([p.nameAr, p.nameEn, p.clubAr, p.clubEn].join(" ")).split(/[\s|/،,.\-]+/).filter(Boolean).flatMap((w) => (/^ال./.test(w) ? [w, w.slice(2)] : [w]));
+  const matchQ = (p, q) => { const code = normQ(p.code), ws = wordsOf(p); return q.split(" ").every((tk) => code.includes(tk) || ws.some((w) => w.startsWith(tk))); };
   function renderMine() {
     mineList.textContent = "";
     const head = document.createElement("p"); head.className = "hint"; head.textContent = minePlayers.length ? t("mineCount").replace("{n}", minePlayers.length) : t("mineNone"); mineList.appendChild(head);
-    minePlayers.forEach((p) => {
+    const nOf = (tp) => minePlayers.filter((p) => typeOfCode(p.code) === tp).length;
+    if (SUP_OPEN && nOf("para") && nOf("sup")) {   // الفلتر يظهر فقط لو عند المدرب النوعين
+      const bar = document.createElement("div"); bar.className = "minefilter"; bar.setAttribute("role", "group");
+      [["all", t("mineAll") + " (" + minePlayers.length + ")"], ["para", t("badgePara") + " (" + nOf("para") + ")"], ["sup", t("badgeSup") + " (" + nOf("sup") + ")"]].forEach(([k, label]) => {
+        const fb = document.createElement("button"); fb.type = "button"; fb.textContent = label; fb.setAttribute("aria-pressed", String(mineFilter === k));
+        fb.addEventListener("click", () => { mineFilter = k; renderMine(); }); bar.appendChild(fb);
+      });
+      mineList.appendChild(bar);
+    } else mineFilter = "all";
+    /* فلتر لون الحزام: يظهر فقط الأحزمة الموجودة عند لاعبي المدرب */
+    const beltsHere = BELTS.filter((bt) => minePlayers.some((p) => p.belt === bt[0]));
+    if (!beltsHere.some((bt) => bt[0] === mineBelt)) mineBelt = "";
+    /* فلتر الفئة العمرية: نفس الفكرة، الفئات الموجودة فقط */
+    const agesHere = AGES.filter((a) => minePlayers.some((p) => p.ageCat === a[1]));
+    if (!agesHere.some((a) => a[1] === mineAge)) mineAge = "";
+    if (SUP_OPEN && (beltsHere.length > 1 || agesHere.length > 1)) {   // قوائم منسدلة في سطر واحد
+      const wrap = document.createElement("div"); wrap.className = "beltsel";
+      const mkSel = (id, label, allTxt, items, cur, set) => {
+        const sel = document.createElement("select"); sel.id = id; sel.setAttribute("aria-label", label);
+        sel.add(new Option(allTxt + " (" + minePlayers.length + ")", ""));
+        items.forEach(([v, txt, n]) => sel.add(new Option(txt + " (" + n + ")", v)));
+        sel.value = cur;
+        sel.addEventListener("change", () => { set(sel.value); renderMine(); const s = $("#" + id); if (s) s.focus(); });
+        wrap.appendChild(sel);
+      };
+      if (beltsHere.length > 1) mkSel("mineBeltSel", t("belt"), t("allBelts"), beltsHere.map((bt) => [bt[0], lang === "en" ? bt[2] + " belt" : "الحزام " + bt[1], minePlayers.filter((p) => p.belt === bt[0]).length]), mineBelt, (v) => (mineBelt = v));
+      if (agesHere.length > 1) mkSel("mineAgeSel", t("ageL"), t("allAges"), agesHere.map((a) => [a[1], (lang === "en" ? a[3] : a[2]), minePlayers.filter((p) => p.ageCat === a[1]).length]), mineAge, (v) => (mineAge = v));
+      mineList.appendChild(wrap);
+    }
+    /* البحث اللحظي: بالكود أو الاسم (عربي/إنجليزي) أو النادي، والنتيجة تضيق مع كل حرف */
+    const qv = normQ($("#mineSearch").value), shown = minePlayers.filter((p) => (mineFilter === "all" || typeOfCode(p.code) === mineFilter) && (!mineBelt || p.belt === mineBelt) && (!mineAge || p.ageCat === mineAge) && (!qv || matchQ(p, qv)));
+    if (qv || mineFilter !== "all" || mineBelt || mineAge) {
+      const rs = document.createElement("p"); rs.className = "hint mres"; rs.setAttribute("aria-live", "polite");
+      rs.textContent = shown.length ? t("mineResults").replace("{n}", shown.length).replace("{t}", minePlayers.length) : t("mineNoRes"); mineList.appendChild(rs);
+    }
+    shown.forEach((p) => {
       const it = document.createElement("div"); it.className = "mineitem";
-      const b = document.createElement("b"); b.textContent = (lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn); it.appendChild(b);
+      const tp = typeOfCode(p.code);
+      const b = document.createElement("b"); b.textContent = (lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn);
+      if (SUP_OPEN) { const bd = document.createElement("span"); bd.className = "ptype " + tp; bd.textContent = t(tp === "sup" ? "badgeSup" : "badgePara"); b.appendChild(bd); }
+      it.appendChild(b);
       const belt = beltOf(p.belt), club = lang === "en" ? p.clubEn || p.clubAr : p.clubAr || p.clubEn;
       const m = document.createElement("span"); m.className = "mmeta"; m.dir = "auto";
       m.textContent = [p.code, club, belt ? belt[lang === "en" ? 2 : 1] : "", p.ageCat, p.para].filter(Boolean).join(" • "); it.appendChild(m);
       const acts = document.createElement("div"); acts.className = "mineacts";
-      const ed = document.createElement("button"); ed.type = "button"; ed.className = "pshow"; ed.textContent = t("mineEdit");
-      ed.addEventListener("click", () => {
-        mineBox.hidden = true; lkBox.hidden = false; $("#f_lkPhone").value = mineCred.phone; $("#f_lkEmail").value = mineCred.email; $("#f_lkCode").value = String(p.code).slice(-4); $("#lkBtn").click();
-      });
-      acts.appendChild(ed);
+      if (SUP_OPEN) {   // معاينة البطاقة، والتعديل من البطاقة نفسها
+        b.classList.add("mopen"); b.tabIndex = 0; b.setAttribute("role", "button"); b.title = t("mineView");
+        b.addEventListener("click", () => openId(p)); b.addEventListener("keydown", (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); openId(p); } });
+        const vw = document.createElement("button"); vw.type = "button"; vw.className = "pshow pview"; vw.textContent = t("mineView");
+        vw.addEventListener("click", () => openId(p)); acts.appendChild(vw);
+      } else {   // الشكل القديم: زرار تعديل
+        const ed = document.createElement("button"); ed.type = "button"; ed.className = "pshow"; ed.textContent = t("mineEdit");
+        ed.addEventListener("click", () => editMine(p)); acts.appendChild(ed);
+      }
       if (p.hasCard) {
         const dl = document.createElement("button"); dl.type = "button"; dl.className = "pshow"; dl.textContent = t("mineDl");
-        dl.addEventListener("click", async () => {
-          if (dl.disabled) return; dl.disabled = true; mineMsg("");
-          try {
-            const r = await post(Object.assign({ action: "playercard", player: p.code }, mineCred), 90000);
-            if (!r || !r.ok) throw new Error((r && r.error) || "srv");
-            const a = document.createElement("a"); a.href = r.card; a.download = r.name; document.body.appendChild(a); a.click(); a.remove();
-          } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
-          dl.disabled = false;
-        });
+        dl.addEventListener("click", () => dlMine(p, dl, mineMsg));
         acts.appendChild(dl);
       } else {
         const none = document.createElement("span"); none.className = "mmeta"; none.textContent = t("mineNoCard"); acts.appendChild(none);
@@ -920,11 +1037,12 @@
       it.appendChild(acts); mineList.appendChild(it);
     });
   }
-  function showMineForm() { mineCred = null; minePlayers = []; mineList.hidden = true; mineList.textContent = ""; $("#mineForm").hidden = false; mineBtn.style.display = ""; $("#mineAdd").style.display = "none"; mineMsg(""); }
+  function showMineForm() { mineCred = null; minePlayers = []; mineList.hidden = true; mineList.textContent = ""; $("#mineForm").hidden = false; mineBtn.style.display = ""; $("#mineAdd").hidden = true; mineFilter = "all"; mineBelt = ""; mineAge = ""; $("#mineSearch").value = ""; $("#mineSearchBox").hidden = true; mineMsg(""); }
+  $("#mineSearch").addEventListener("input", () => renderMine());
   /* إضافة لاعبين من صفحة المدرب: بياناته جاهزة من بطاقته، وبدون كود تأكيد لأن هويته اتراجعت */
-  $("#mineAdd").addEventListener("click", () => {
+  const mineAddAs = (tp) => {
     const c = mineCoach || {}, list = Array.isArray(c.clubs) ? c.clubs : [];
-    coachFilled = true; fromMine = true; mineBox.hidden = true; showForm("new");
+    setType(tp); coachFilled = true; fromMine = true; mineBox.hidden = true; showForm("new");
     F.nameAr.value = c.nameAr || ""; F.nameEn.value = c.nameEn || ""; F.countryAr.value = c.countryAr || ""; F.countryEn.value = c.countryEn || "";
     if (list[0]) { F.clubAr.value = list[0].ar || ""; F.clubEn.value = list[0].en || ""; }
     if (!clubRows.length) list.slice(1).forEach((x) => { addClubRow(true); const r = clubRows[clubRows.length - 1]; r.querySelector("[data-c=ar]").value = x.ar || ""; r.querySelector("[data-c=en]").value = x.en || ""; });
@@ -932,8 +1050,9 @@
     sess.token = mineToken; sess.email = mineCred.email;
     $("input[name=role][value=coach]").click(); $("input[name=compete][value=no]").click();
     syncDial(); applyRole(); infoAll(); renderTabs(); redraw(); addBlock();
-  });
-  $("#mineAdd").style.display = "none";
+  };
+  $("#mineAddP").addEventListener("click", () => mineAddAs("para"));
+  $("#mineAddS").addEventListener("click", () => mineAddAs("sup"));
   $("#btnMine").addEventListener("click", () => { modeBox.hidden = true; mineBox.hidden = false; showMineForm(); $("#f_mineCode").focus(); });
   $("#mineBack").addEventListener("click", () => { if (mineCred) return showMineForm(); mineBox.hidden = true; modeBox.hidden = false; mineMsg(""); });
   $("#f_mineCode").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
@@ -947,7 +1066,7 @@
       const r = await post(Object.assign({ action: "myplayers" }, cred));
       if (!r || !r.ok) throw new Error((r && r.error) || "srv");
       mineCred = cred; minePlayers = r.players || []; mineCoach = r.coach || null; mineToken = r.token || ""; renderMine();
-      $("#mineForm").hidden = true; mineBtn.style.display = "none"; mineList.hidden = false; $("#mineAdd").style.display = "";
+      $("#mineForm").hidden = true; mineBtn.style.display = "none"; mineList.hidden = false; $("#mineAdd").hidden = false; $("#mineSearchBox").hidden = !SUP_OPEN || minePlayers.length < 2;
     } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
     mineBusy = false; mineBtn.disabled = false; mineBtn.textContent = t("mineShow");
   });
@@ -955,14 +1074,14 @@
   let lkBusy = false;
   $("#lkBtn").addEventListener("click", async () => {
     if (lkBusy) return; const err = $("#lkErr"); err.hidden = true;
-    const email = $("#f_lkEmail").value.trim().toLowerCase(), dg = $("#f_lkCode").value.replace(/\D/g, ""), code = dg ? PREFIX + ("0000" + dg).slice(-4) : "", phone = $("#f_lkPhone").value.trim();
+    const email = $("#f_lkEmail").value.trim().toLowerCase(), dg = $("#f_lkCode").value.replace(/\D/g, ""), code = dg ? $("#f_lkPfx").value + ("0000" + dg).slice(-4) : "", phone = $("#f_lkPhone").value.trim();
     if (!email || !code || !phone) { err.textContent = t("eLk"); err.hidden = false; return; }
     if (!API) { err.textContent = t("eSrv"); err.hidden = false; return; }
     lkBusy = true; const b = $("#lkBtn"); b.disabled = true; b.textContent = t("saving");
     try {
       const res = await post({ action: "lookup", email, phone, code });
       if (!res || !res.ok) throw new Error((res && res.error) || "srv");
-      const d = res.data; editCode = res.code;
+      const d = res.data; editCode = res.code; setType(typeOfCode(res.code));
       ["nameAr", "nameEn", "countryAr", "countryEn", "clubAr", "clubEn", "birth", "guardian"].forEach((k) => { F[k].value = d[k] || ""; });
       F.email.value = email; F.phone.value = phone; F.coach.value = (d.coachCode || "").slice(-4);
       if (VIDEO_OPEN) { $("#f_video").value = d.video || ""; checkVideo($("#f_video"), $("#videoMsg"), $("#videoPrev")); }
@@ -1000,7 +1119,8 @@
   function applyLang() {
     document.documentElement.lang = lang; document.documentElement.dir = lang === "en" ? "ltr" : "rtl";
     document.querySelectorAll("[data-t]").forEach((el) => { const k = el.dataset.t; if (T[lang][k]) el.textContent = T[lang][k]; });
-    document.title = t("title") + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
+    document.querySelectorAll("[data-tp]").forEach((el) => { const k = el.dataset.tp; if (T[lang][k]) el.placeholder = T[lang][k]; });
+    document.title = t($("#pageTitle").dataset.t || "title") + " — " + (lang === "en" ? "Arab Para Taekwondo Basics 2026" : "أساسيات البارا تايكوندو 2026");
     const sb = $("#submitBtn"); if (!busy) sb.textContent = t(sb.dataset.t);
     $("#langBtn").textContent = t("lang"); $("#demoBanner").hidden = !!API; if (mineCred) renderMine();
     fillSelects(); fillDialOpts(); numberBlocks(); applyRole(); infoAll(); draw();
@@ -1082,6 +1202,15 @@
     window.addEventListener("resize", () => { if (!dlg.hidden && dlg.classList.contains("mini") && dlg.style.top) { const r = dlg.getBoundingClientRect(); moveTo(r.left, r.top); } });
   })();
 
+  /* الميزة مقفولة: الصفحة بنفس شكلها القديم (زرار إضافة واحد، وبداية الكود PTP ثابتة) */
+  if (!SUP_OPEN) {
+    $("#mineAddS").remove();
+    const ap = $("#mineAddP"); ap.className = "btn addp"; ap.style.cssText = "max-width:520px;width:100%;margin-inline:auto";
+    const sp = ap.querySelector("[data-t]"); sp.dataset.t = "mineAdd"; sp.textContent = t("mineAdd");
+    $("#mineAdd").style.gridTemplateColumns = "1fr";
+    const ps = $("#f_lkPfx"); ps.value = "PTP-2026-"; ps.hidden = true;
+    const fix = document.createElement("span"); fix.textContent = "PTP-2026-"; ps.after(fix);
+  }
   fillSelects(); applyRole(); infoAll();
   Promise.all([assetsReady, fontsReady]).then(() => { applyLang(); canvas.classList.add("ready"); });
 })();

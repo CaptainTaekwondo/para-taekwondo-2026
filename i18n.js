@@ -109,7 +109,7 @@
     "للاسترشاد فقط": "For guidance only",
     "الإعاقة البصرية": "Visual impairment",
     "الإعاقة الذهنية": "Intellectual impairment",
-    "يشمل P31 وP32 وP33 وP34: فئات عصبية أو حركية متنوعة وفق نظام التصنيف المعتمد": "Includes P31, P32, P33 and P34: various neurological or motor categories under the approved classification system",
+    "يشمل الرموز من P31 إلى P34: فئات عصبية أو حركية متنوعة وفق نظام التصنيف المعتمد": "Includes codes P31 to P34: various neurological or motor categories under the approved classification system",
     "الإعاقة في الأطراف أو محدودية الحركة السلبية": "Limb impairment or limited passive movement",
     "مستخدمو الكراسي المتحركة": "Wheelchair users",
     "الصم أو الإعاقة السمعية": "Deaf or hearing impaired",
