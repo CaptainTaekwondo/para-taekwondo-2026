@@ -72,7 +72,7 @@
       consent: "أقرّ بصحة البيانات، وبأنني اللاعب أو ولي أمره، وأوافق على استخدام صورة اللاعب وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
       consentC: "أقرّ بصحة بياناتي وبيانات لاعبيّ، وأوافق على استخدام صورتي وبياناتي لإصدار بطاقة البطل وفي تنظيم البطولة، وأقرّ بأنني حصلت على موافقة لاعبيّ أو أولياء أمورهم على تسجيلهم واستخدام صورهم وبياناتهم.",
       consentA: "أقرّ بصحة بيانات هذا اللاعب، وبأنني مدربه وحصلت على موافقته أو موافقة ولي أمره على التسجيل واستخدام صورته وبياناته لإصدار بطاقة البطل وفي تنظيم البطولة.",
-      submit: "احفظ البيانات وأصدر البطاقة", submitEdit: "احفظ التعديلات وأصدر البطاقة", saving: "جاري الحفظ…",
+      submit: "احفظ البيانات وأصدر البطاقة", submitEdit: "احفظ التعديلات وأصدر البطاقة", saving: "جاري الحفظ…", mineOpening: "جاري فتح بيانات اللاعب…",
       previewNote: "هذه معاينة حيّة. يظهر الكود الفريد بعد الحفظ.",
       demo: "وضع المعاينة: لم يُربط الحفظ بعد، لذلك لن تُسجَّل البيانات. البطاقة قابلة للتحميل للتجربة فقط.",
       doneT: "تم تسجيل اللاعب", doneEditT: "تم تحديث البيانات", doneCode: "كود اللاعب", keep: "احتفظ بالكود، فهو رقم اللاعب في البطولة.",
@@ -127,7 +127,7 @@
       consent: "I confirm the data is correct, that I am the player or the player's guardian, and agree to the use of the player's photo and details to issue the champion card and run the championship.",
       consentC: "I confirm my details and my players' details are correct, agree to the use of my photo and details for the champion card and the championship, and confirm I have my players' or their guardians' consent to register them and use their photos and details.",
       consentA: "I confirm this player's data is correct, that I am the player's coach, and that I have the player's or guardian's consent to register and to use the player's photo and details for the champion card and the championship.",
-      submit: "Save & issue the card", submitEdit: "Save changes & re-issue the card", saving: "Saving…",
+      submit: "Save & issue the card", submitEdit: "Save changes & re-issue the card", saving: "Saving…", mineOpening: "Opening player details…",
       previewNote: "Live preview. The unique code appears after saving.",
       demo: "Preview mode: saving is not connected yet, so nothing is recorded. The card can be downloaded for testing only.",
       doneT: "The player is registered", doneEditT: "The details are updated", doneCode: "Player code", keep: "Keep this code — it is the player's championship number.",
@@ -911,10 +911,18 @@
   const mineErrText = (e) => (e === "not_found" ? t("mineNF") : e === "wait" ? t("mineWait") : e === "net" ? t("eNet") : t("eSrv"));
   let mineFilter = "all";   // all | para | sup
   let mineBelt = "", mineAge = "";   // "" = الكل
-  function editMine(p) {
-    closeId(); mineBox.hidden = true; lkBox.hidden = false;
-    $("#f_lkPhone").value = mineCred.phone; $("#f_lkEmail").value = mineCred.email;
-    $("#f_lkPfx").value = typeOfCode(p.code) === "sup" ? "PTS-2026-" : "PTP-2026-"; $("#f_lkCode").value = String(p.code).slice(-4); $("#lkBtn").click();
+  /* من «لاعبيني»: المدرب متحقق منه خلاص، فنفتح بيانات اللاعب للتعديل على طول من غير نموذج البحث */
+  let mineEditBusy = false;
+  async function editMine(p) {
+    if (mineEditBusy) return; mineEditBusy = true;
+    closeId(); mineMsg(t("mineOpening"));
+    try {
+      const res = await post(Object.assign({ action: "lookup", player: p.code }, mineCred));
+      if (!res || !res.ok) throw new Error((res && res.error) || "srv");
+      await fillEdit(res, (res.data && res.data.email) || mineCred.email, (res.data && res.data.phone) || mineCred.phone);
+      mineMsg(""); mineBox.hidden = true;
+    } catch (e) { mineMsg(e instanceof TypeError || e.name === "AbortError" ? t("eNet") : mineErrText(e.message)); }
+    finally { mineEditBusy = false; }
   }
   async function dlMine(p, btn, say) {
     if (btn.disabled) return; btn.disabled = true; say("");
@@ -1070,6 +1078,21 @@
     } catch (err) { mineMsg(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
     mineBusy = false; mineBtn.disabled = false; mineBtn.textContent = t("mineShow");
   });
+  async function fillEdit(res, email, phone) {
+    const d = res.data; editCode = res.code; setType(typeOfCode(res.code));
+    ["nameAr", "nameEn", "countryAr", "countryEn", "clubAr", "clubEn", "birth", "guardian"].forEach((k) => { F[k].value = d[k] || ""; });
+    F.email.value = email; F.phone.value = phone; F.coach.value = (d.coachCode || "").slice(-4);
+    if (VIDEO_OPEN) { $("#f_video").value = d.video || ""; checkVideo($("#f_video"), $("#videoMsg"), $("#videoPrev")); }
+    const pr = $("input[name=promo][value=" + (d.promo === "yes" ? "yes" : "no") + "]"); if (pr) pr.checked = true;
+    $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; syncDial(); $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
+    fillSelects(); F.belt.value = d.belt || ""; F.para.value = d.para || "";
+    const g = $("input[name=gender][value=" + (d.gender === "f" ? "f" : "m") + "]"); if (g && d.gender) g.checked = true;
+    role = d.role === "coach" ? "coach" : "player";
+    if (res.token) { sess.token = res.token; sess.email = email; }
+    if (d.photo) { try { const img = await loadImg(d.photo); main.photo = img; savedPhoto = img; main.zoom = 1; main.ox = main.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
+    main.code = editCode; $("#f_consent").checked = false;
+    showForm("edit");
+  }
   $("#lkBack").addEventListener("click", () => { lkBox.hidden = true; modeBox.hidden = false; $("#lkErr").hidden = true; });
   let lkBusy = false;
   $("#lkBtn").addEventListener("click", async () => {
@@ -1081,19 +1104,7 @@
     try {
       const res = await post({ action: "lookup", email, phone, code });
       if (!res || !res.ok) throw new Error((res && res.error) || "srv");
-      const d = res.data; editCode = res.code; setType(typeOfCode(res.code));
-      ["nameAr", "nameEn", "countryAr", "countryEn", "clubAr", "clubEn", "birth", "guardian"].forEach((k) => { F[k].value = d[k] || ""; });
-      F.email.value = email; F.phone.value = phone; F.coach.value = (d.coachCode || "").slice(-4);
-      if (VIDEO_OPEN) { $("#f_video").value = d.video || ""; checkVideo($("#f_video"), $("#videoMsg"), $("#videoPrev")); }
-      const pr = $("input[name=promo][value=" + (d.promo === "yes" ? "yes" : "no") + "]"); if (pr) pr.checked = true;
-      $("#promoMore").hidden = d.promo !== "yes"; $("#f_wa").value = d.whatsapp || ""; syncDial(); $("#f_coachVid").checked = d.coachInVideo === "yes"; $("#coachImg").hidden = d.coachInVideo !== "yes";
-      fillSelects(); F.belt.value = d.belt || ""; F.para.value = d.para || "";
-      const g = $("input[name=gender][value=" + (d.gender === "f" ? "f" : "m") + "]"); if (g && d.gender) g.checked = true;
-      role = d.role === "coach" ? "coach" : "player";
-      if (res.token) { sess.token = res.token; sess.email = email; }
-      if (d.photo) { try { const img = await loadImg(d.photo); main.photo = img; savedPhoto = img; main.zoom = 1; main.ox = main.oy = 0; $("#f_zoom").value = 1; $("#zoomRow").hidden = false; canvas.style.touchAction = "none"; } catch (e) {} }
-      main.code = editCode; $("#f_consent").checked = false;
-      showForm("edit");
+      await fillEdit(res, email, phone);
     } catch (e) {
       err.textContent = e && e.message === "not_found" ? t("eNotFound") : (e && e.name === "AbortError") || e instanceof TypeError ? t("eNet") : t("eSrv"); err.hidden = false;
     } finally { lkBusy = false; b.disabled = false; b.textContent = t("lkBtn"); }
