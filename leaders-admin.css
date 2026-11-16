@@ -1,0 +1,52 @@
+/* صفحة إدارة القيادات — تعتمد على leaders.css وleaders-register.css */
+.adm{background:var(--night)}
+.admmain{max-width:1180px;padding-top:clamp(20px,3vw,34px);padding-bottom:90px}
+.adm .card{margin-bottom:1.2rem}
+.loginform{max-width:380px;margin:0 auto;display:flex;flex-direction:column;gap:.8rem}
+.loginform .f{margin:0}
+.pbadge{min-width:28px;height:28px;padding:0 .5rem;border-radius:99px;background:var(--red);color:#fff;font:800 .85rem/28px "Inter",sans-serif;text-align:center}
+.pbadge[hidden],.tbtn[hidden]{display:none}
+.tabs{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;align-items:center}
+.tabs button[role=tab]{min-height:44px;padding:0 1.1rem;border-radius:99px;border:1.5px solid rgba(244,203,85,.4);background:rgba(3,10,36,.6);color:var(--txt);font:700 .95rem var(--fb);cursor:pointer}
+.tabs button[role=tab][aria-selected=true]{background:linear-gradient(180deg,#ffe58a,#e4b030 55%,#b87e12);color:#201400;border-color:transparent}
+.tabs b{display:inline-block;min-width:1.6em;margin-inline-start:.3rem;padding:0 .35rem;border-radius:99px;background:rgba(0,0,0,.25);font:800 .8rem "Inter",sans-serif}
+.tabs #refreshBtn{margin-inline-start:auto}
+.alist{display:grid;gap:.8rem}
+.arow{display:grid;grid-template-columns:auto 1fr auto;gap:1rem;align-items:center;padding:.9rem 1.1rem;border:1px solid rgba(244,203,85,.3);border-radius:20px;background:linear-gradient(180deg,rgba(11,42,119,.4),rgba(6,21,64,.7))}
+.arow .pav{width:64px;height:64px}
+.arow h3{margin:0;font:800 1.05rem var(--fb);color:var(--gold1)}
+.arow .meta{display:flex;flex-wrap:wrap;gap:.4rem .9rem;align-items:center;color:var(--mut);font-size:.9rem;margin-top:.25rem}
+.arow .acts{display:flex;gap:.5rem;flex-wrap:wrap;justify-content:flex-end}
+.tag{display:inline-block;padding:.1rem .7rem;border-radius:99px;font-weight:800;font-size:.8rem;border:1px solid currentColor}
+.tag.pending{color:#ffd166}.tag.approved,.tag.live{color:#7ee2a8}.tag.rejected,.tag.off{color:#ff9aa3}
+.muted{color:var(--mut);text-align:center;padding:1.4rem}
+.muted[hidden]{display:none}
+.edgrid{display:grid;grid-template-columns:1.25fr 1fr;gap:1.6rem;align-items:start}
+.edgrid>div{min-width:0}
+.edgrid h2{font:800 1.05rem var(--fb);color:var(--gold2);margin:0 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid rgba(244,203,85,.25)}
+.sticky{position:sticky;top:78px}
+.privbox{padding:.8rem 1rem;border:1px dashed rgba(244,203,85,.4);border-radius:16px;background:rgba(3,10,36,.55);color:var(--mut);font-size:.92rem;line-height:1.9;margin-bottom:1rem}
+.privbox b{color:var(--gold1)}
+.photoed{display:flex;flex-direction:column;align-items:center;gap:.7rem;margin-bottom:1rem}
+.pcw{position:relative;width:min(280px,72vw);aspect-ratio:1;border-radius:50%;overflow:hidden;border:4px solid var(--gold2);background:#050505;touch-action:none;cursor:grab}
+.pcw canvas{width:100%;height:100%;display:block}
+.pcw.drag{cursor:grabbing}
+.photoed input[type=range]{width:min(280px,72vw);accent-color:#f4cb55;min-height:28px}
+.prow{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center}
+.prow .btn{min-height:44px}
+.target{padding:1rem;border:1px solid rgba(244,203,85,.4);border-radius:18px;background:rgba(244,203,85,.07);margin:1rem 0}
+.target select{width:100%}
+.preview{display:flex;justify-content:center}
+.preview .lcard{max-width:300px;flex:0 1 300px}
+.edactions{display:flex;flex-wrap:wrap;gap:.7rem;justify-content:center;margin-top:1.2rem}
+.btn.danger{border-color:#ff7a86;color:#ffc3c9}
+.toast{position:fixed;inset-inline:0;bottom:22px;margin-inline:auto;width:max-content;max-width:92vw;padding:.8rem 1.4rem;border-radius:99px;background:#0e3a22;border:1.5px solid #7ee2a8;color:#d7ffe9;font-weight:800;z-index:300;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.toast.err{background:#3a0e14;border-color:#ff7a86;color:#ffd7db}
+.toast[hidden]{display:none}
+@media(max-width:900px){.edgrid{grid-template-columns:1fr}.sticky{position:static}.arow{grid-template-columns:auto 1fr}.arow .acts{grid-column:1/-1;justify-content:stretch}.arow .acts .btn{flex:1}}
+.target label{display:block;font-weight:800;margin-bottom:.5rem;color:var(--gold1)}
+.target select{width:100%;min-height:48px;border-radius:14px;border:1.5px solid rgba(244,203,85,.4);background:rgba(3,10,36,.7);color:var(--txt);padding:.6rem 1rem;font:600 1rem var(--fb);color-scheme:dark}
+.target select:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.arow .btn,.edactions .btn{min-height:44px}
+#refreshBtn{height:44px}
+.loginform[hidden]{display:none}

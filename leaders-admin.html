@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>إدارة القيادات — بطولة الأساسيات 2026</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#030a24">
+<link rel="icon" href="assets/champion.webp">
+<link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="style.css?v=20261115a">
+<link rel="stylesheet" href="leaders.css?v=15">
+<link rel="stylesheet" href="leaders-register.css?v=12">
+<link rel="stylesheet" href="leaders-admin.css?v=4">
+</head>
+<body class="ld lr adm">
+<nav class="cnav" aria-label="Navigation">
+  <div class="wrap nav-in">
+    <span class="brand"><img src="assets/champion.webp" alt="" width="40" height="40"><span>إدارة القيادات</span></span>
+    <div class="tools"><span id="pendBadge" class="pbadge" hidden></span><button class="tbtn" id="outBtn" type="button" hidden>خروج</button></div>
+  </div>
+</nav>
+<main class="wrap admmain" id="main">
+  <p class="demo" id="demoBanner" hidden></p>
+
+  <section class="card" id="login">
+    <h1>دخول الإدارة</h1>
+    <p class="intro" id="loginIntro">هذه الصفحة خاصة بإدارة البطولة فقط. سجّل بريد كابتن تايكوندو وسيصله كود تأكيد للدخول.</p>
+    <form id="emailForm" class="loginform" novalidate>
+      <label class="f"><span>بريد كابتن تايكوندو</span><input id="adminEmail" type="email" autocomplete="username" dir="ltr" required></label>
+      <button class="btn fill big" type="submit" id="sendCodeBtn">إرسال كود التأكيد</button>
+    </form>
+    <form id="codeForm" class="loginform" novalidate hidden>
+      <label class="f"><span>كود التأكيد (6 أرقام)</span><input id="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" dir="ltr" required></label>
+      <button class="btn fill big" type="submit" id="loginBtn">تأكيد ودخول</button>
+      <button class="btn" type="button" id="resendBtn">إعادة إرسال الكود</button>
+      <button class="btn" type="button" id="changeEmailBtn">تغيير البريد</button>
+    </form>
+    <p class="formerr" id="loginErr" role="alert"></p>
+  </section>
+
+  <section id="panel" hidden>
+    <div class="tabs" role="tablist" id="tabs">
+      <button type="button" role="tab" data-tab="pending" aria-selected="true">بانتظار المراجعة <b id="nPend">0</b></button>
+      <button type="button" role="tab" data-tab="published" aria-selected="false">المنشور <b id="nPub">0</b></button>
+      <button type="button" role="tab" data-tab="done" aria-selected="false">تمت معالجتها <b id="nDone">0</b></button>
+      <button type="button" class="tbtn" id="refreshBtn">تحديث</button>
+    </div>
+    <div id="list" class="alist" aria-live="polite"></div>
+    <p class="muted" id="listEmpty" hidden></p>
+  </section>
+
+  <section id="editor" class="card" hidden aria-labelledby="edT"></section>
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="leaders-config.js?v=1"></script>
+<script src="leaders-admin.js?v=5"></script>
+</body>
+</html>

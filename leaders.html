@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>القيادات العربية للبارا تايكوندو — بطولة الأساسيات 2026</title>
+<meta name="description" content="مساحة رقمية رسمية للتعريف بقيادات لجان البارا تايكوندو العربية وإبراز جهودهم ودعم أبطال البارا تايكوندو في الوطن العربي. بطولة أساسيات البارا تايكوندو 2026.">
+<meta name="theme-color" content="#030a24">
+<link rel="canonical" href="https://captaintaekwondo.github.io/para-taekwondo-2026/leaders.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="القيادات العربية للبارا تايكوندو — Arab Para Taekwondo Leaders">
+<meta property="og:description" content="Arab Para Taekwondo Basics Championship 2026 — official leaders page.">
+<meta property="og:image" content="assets/og.jpg">
+<link rel="icon" href="assets/champion.webp">
+<link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
+<link rel="preload" href="assets/champion.webp" as="image" type="image/webp">
+<link rel="stylesheet" href="style.css?v=20261115a">
+<link rel="stylesheet" href="leaders.css?v=15">
+<link rel="stylesheet" href="leaders-fx.css?v=9">
+</head>
+<body class="ld">
+<a class="skip" href="#main" id="skipLnk">تخطَّ إلى المحتوى</a>
+
+<nav id="nav" class="cnav" aria-label="Navigation">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/champion.webp" alt="" width="40" height="40"><span id="brandTxt">أساسيات البارا تايكوندو 2026</span></a>
+    <ul class="lnav" id="lnav">
+      <li><a href="#about" data-i="nAbout">عن المبادرة</a></li>
+      <li><a href="#leaders" data-i="nLeaders">القيادات</a></li>
+      <li><a href="#features" data-i="nFeatures">المميزات</a></li>
+      <li><a href="#vision" data-i="nVision">الرؤية</a></li>
+    </ul>
+    <div class="tools">
+      <a class="tbtn" href="index.html" id="backLnk">الموقع الرئيسي</a>
+      <button class="tbtn lang" id="langBtn" type="button" aria-label="Switch to English">English</button>
+      <button class="tbtn menu" id="menuBtn" type="button" aria-expanded="false" aria-controls="lnav" aria-label="القائمة">☰</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+  <!-- A. HERO -->
+  <header class="lhero" id="top">
+    <div class="wrap lh-in">
+      <div class="lh-txt rv">
+        <p class="eyebrow" data-i="heroEyebrow">بطولة أساسيات البارا تايكوندو 2026</p>
+        <h1><span class="h-main" data-i="heroT">القيادات العربية للبارا تايكوندو</span><span class="h-sub" id="heroSub">ARAB PARA TAEKWONDO LEADERS</span></h1>
+        <p class="lead" data-i="heroLead">مساحة رقمية رسمية للتعريف بقيادات لجان البارا تايكوندو العربية، وإبراز جهودهم ومساهماتهم، وتعزيز التواصل والتعاون بينهم ودعم أبطالنا.</p>
+        <div class="acts">
+          <a class="btn fill" href="#leaders" data-i="heroBtn1">تصفّح القيادات</a>
+          <a class="btn" href="#about" data-i="heroBtn2">التعريف بالمبادرة</a>
+        </div>
+      </div>
+      <div class="lh-art rv">
+        <div class="ring"></div>
+        <div data-coin="lg" id="heroLogo"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- B. STATS (تظهر فقط عند توفر بيانات حقيقية) -->
+  <section class="wrap stats" id="stats" aria-label="Statistics" hidden>
+    <ul class="stat-grid" id="statGrid"></ul>
+  </section>
+
+  <!-- C. LEADERS -->
+  <section class="sec wrap" id="leaders" aria-labelledby="lT">
+    <div class="sh rv"><p class="eyebrow" data-i="lEye">الصفحة الرسمية</p><h2 id="lT" class="foil" data-i="lT">القيادات العربية</h2><p class="sub" data-i="lSub">قيادات لجان البارا تايكوندو المعتمدة من إدارة البطولة.</p></div>
+    <form class="filters" id="filters" role="search" hidden onsubmit="return false">
+      <label class="srch"><span class="sr" data-i="search">بحث</span><input type="search" id="q" autocomplete="off" data-iph="searchPh" placeholder="ابحث بالاسم..."></label>
+      <label class="sel"><span class="sr" data-i="country">الدولة</span><select id="fCountry"></select></label>
+      <label class="sel"><span class="sr" data-i="position">المنصب</span><select id="fPos"></select></label>
+    </form>
+    <p class="count" id="count" aria-live="polite" hidden></p>
+    <div class="lgrid" id="grid" aria-busy="true"></div>
+    <div class="empty" id="empty" hidden></div>
+  </section>
+
+  <!-- D. ABOUT -->
+  <section class="sec band" id="about" aria-labelledby="aT">
+    <div class="wrap about">
+      <div class="sh rv"><p class="eyebrow" data-i="aEye">عن المبادرة</p><h2 id="aT" class="foil" data-i="aT">مساحة رقمية للقيادات العربية</h2></div>
+      <p class="about-p rv" data-i="aP">نهدف إلى إنشاء مساحة رقمية رسمية للتعريف بقيادات لجان البارا تايكوندو العربية، وإبراز جهودهم ومساهماتهم، وتعزيز التواصل والتعاون بينهم، ودعم أبطال البارا تايكوندو في الوطن العربي.</p>
+      <ul class="pillars">
+        <li class="rv"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2l2.9 6 6.6.8-4.9 4.5 1.3 6.5L12 16.5 6.1 19.8l1.3-6.5L2.5 8.8 9.1 8z"/></svg><b data-i="p1T">التعريف</b><span data-i="p1">ملفات تعريفية موثّقة للقيادات.</span></li>
+        <li class="rv"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16 11a4 4 0 10-8 0 4 4 0 008 0zM4 20a8 8 0 0116 0z"/></svg><b data-i="p2T">الإبراز</b><span data-i="p2">إبراز الجهود والمساهمات والخبرات.</span></li>
+        <li class="rv"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 12h6m6 0h6M9 12a3 3 0 106 0 3 3 0 00-6 0z"/></svg><b data-i="p3T">التواصل</b><span data-i="p3">تعزيز التعاون بين اللجان العربية.</span></li>
+        <li class="rv"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-4.6-9.3-9A5.3 5.3 0 0112 6.6 5.3 5.3 0 0121.3 12c-2.3 4.4-9.3 9-9.3 9z"/></svg><b data-i="p4T">الدعم</b><span data-i="p4">دعم أبطال البارا تايكوندو.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- E. FEATURES -->
+  <section class="sec wrap" id="features" aria-labelledby="fT">
+    <div class="sh rv"><p class="eyebrow" data-i="fEye">المميزات</p><h2 id="fT" class="foil" data-i="fT">مميزات الصفحة</h2></div>
+    <ul class="feat" id="featList"></ul>
+  </section>
+
+  <!-- F. VISION -->
+  <section class="sec band vision" id="vision" aria-labelledby="vT">
+    <div class="wrap">
+      <div class="sh rv"><p class="eyebrow" data-i="vEye">الرؤية والأهداف</p><h2 id="vT" class="foil" data-i="vT">رؤيتنا</h2><p class="sub" data-i="vSub">مجتمع رياضي عربي أكثر ترابطًا واحترافية.</p></div>
+      <ol class="goals" id="goalList"></ol>
+    </div>
+  </section>
+</main>
+
+<!-- G. FOOTER -->
+<footer class="lfoot">
+  <div class="wrap lfoot-in">
+    <div class="lf-brand">
+      <img src="assets/champion.webp" alt="" width="72" height="72" loading="lazy">
+      <div><b data-i="fName">بطولة أساسيات البارا تايكوندو 2026</b><span>Arab Para Taekwondo Basics Championship 2026</span></div>
+    </div>
+    <ul class="lf-links">
+      <li><a href="index.html" data-i="fHome">الموقع الرسمي للبطولة</a></li>
+      <li><a href="index.html#team" data-i="fTeam">المنظمون</a></li>
+    </ul>
+    <p class="lf-sup"><span data-i="fSup">بدعم إعلامي وتسويقي من</span> <img src="assets/captain.webp" alt="Captain Taekwondo" width="22" height="22" loading="lazy"> <b>Captain Taekwondo</b></p>
+    <p class="lf-copy" data-i="fCopy">© 2026 بطولة أساسيات البارا تايكوندو. جميع الحقوق محفوظة.</p>
+  </div>
+</footer>
+
+<!-- Profile modal -->
+<div class="mback" id="modal" role="dialog" aria-modal="true" aria-labelledby="mName" hidden>
+  <div class="pbox" id="mbox" tabindex="-1">
+    <button class="mclose" id="mClose" type="button" aria-label="إغلاق">✕</button>
+    <div id="mBody"></div>
+  </div>
+</div>
+
+<noscript><p class="nojs">تتطلب هذه الصفحة تفعيل JavaScript. / This page requires JavaScript.</p></noscript>
+<script src="leaders-fx.js?v=14"></script>
+<script src="leaders-config.js?v=1"></script>
+<script src="leaders-data.js?v=1"></script>
+<script src="leaders.js?v=16"></script>
+</body>
+</html>

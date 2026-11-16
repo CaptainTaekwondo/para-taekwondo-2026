@@ -1,0 +1,74 @@
+/* مؤثرات صفحات القيادات: عملة ثلاثية الأبعاد، خلفية ذهبية متحركة، ميل 3D للبطاقات. تتعطل مع «تقليل الحركة». */
+#fx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.ld>main,.ld>footer{position:relative;z-index:1}
+.cnav{z-index:60}
+.ld::before,.ld::after{content:"";position:fixed;z-index:0;pointer-events:none;border-radius:50%;opacity:.5;will-change:transform}
+.ld::before{width:46vmax;height:46vmax;top:-14vmax;left:-12vmax;background:radial-gradient(circle,rgba(47,107,255,.55),transparent 65%);animation:blobA 22s ease-in-out infinite alternate}
+.ld::after{width:40vmax;height:40vmax;bottom:-16vmax;right:-10vmax;background:radial-gradient(circle,rgba(244,203,85,.3),transparent 65%);animation:blobB 26s ease-in-out infinite alternate}
+@keyframes blobA{to{transform:translate3d(12vmax,8vmax,0) scale(1.15)}}
+@keyframes blobB{to{transform:translate3d(-10vmax,-9vmax,0) scale(1.2)}}
+
+/* ---------- العملة: وجه البطولة ووجه كابتن تايكوندو (الدوران يُحسب بالـ JS ويُرسم السمك كشرائح) ---------- */
+.coin{--s:clamp(150px,34vw,360px);position:relative;width:var(--s);height:var(--s);margin-inline:auto;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;transition:transform .15s}
+.coin.sm{--s:clamp(104px,26vw,128px);margin-bottom:.6rem}
+.coin-in{position:absolute;inset:0;animation:coinBob 4.5s ease-in-out infinite}
+.coin-pt{position:absolute;inset:0}
+.coin .face,.coin .slab,.coin .shine{position:absolute;inset:0;width:100%;height:100%;border-radius:50%;will-change:transform}
+.coin .face{object-fit:cover;box-shadow:0 18px 50px rgba(244,203,85,.28);pointer-events:none}
+.coin .slab{background:linear-gradient(90deg,#7d5208,#c58a18 30%,#fff4bd 52%,#c58a18 72%,#7d5208)}
+.coin .shine{pointer-events:none;background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,.5) 50%,transparent 60%) 140% 0/260% 100% no-repeat;mix-blend-mode:screen;animation:coinShine 3.2s ease-in-out infinite}
+@keyframes coinShine{0%,55%{background-position:140% 0}100%{background-position:-40% 0}}
+@keyframes coinBob{0%,100%{translate:0 0}50%{translate:0 -9px}}
+.cshadow{position:absolute;left:12%;right:12%;bottom:-16%;height:12%;border-radius:50%;background:radial-gradient(ellipse,rgba(244,203,85,.32),transparent 70%);filter:blur(8px);animation:coinShadow 4.5s ease-in-out infinite;pointer-events:none}
+@keyframes coinShadow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.86);opacity:.65}}
+.coin:focus-visible{outline:3px solid var(--gold2);outline-offset:10px;border-radius:50%}
+.coin.press{transform:scale(.95)}
+.coin::before{content:"";position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(255,226,130,.55),rgba(244,203,85,0) 62%);opacity:.3;animation:idleGlow 4.5s ease-in-out infinite;transform:scale(.9);transition:opacity .35s,transform .6s;pointer-events:none}
+@keyframes idleGlow{50%{opacity:.5}}
+.coin.tossing::before{opacity:1;transform:scale(1.15);animation:glowPulse .5s ease-in-out infinite alternate}
+@keyframes glowPulse{to{opacity:.55;transform:scale(1.05)}}
+.coin.tossing .shine{animation-duration:.4s}
+.ring{animation:ringSpin 24s linear infinite}
+@keyframes ringSpin{to{transform:rotate(360deg)}}
+.lh-art{perspective:1100px}
+/* ---------- ميل ثلاثي الأبعاد + لمعة تتبع المؤشر ---------- */
+.tilt{position:relative;transform-style:preserve-3d}
+.tilt.tilting{transition:transform .09s linear,box-shadow .3s!important;box-shadow:0 34px 80px rgba(0,0,0,.55),0 0 50px rgba(244,203,85,.18)}
+.tilt::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;background:radial-gradient(420px circle at var(--mx,50%) var(--my,30%),rgba(255,236,160,.2),transparent 55%)}
+.tilt.tilting::after{opacity:1}
+.lr .card.tilt{transform-style:flat}
+.lcard .pav{transform:translateZ(36px)}
+.lcard h3{transform:translateZ(22px)}
+
+/* حافة ذهبية تدور حول البطاقات */
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.rim::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;background:conic-gradient(from var(--ang),transparent 0 62%,rgba(255,236,160,.9) 78%,transparent 92%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spinRim 7s linear infinite;animation-play-state:paused;opacity:.6}
+.rim:hover::before{animation-play-state:running;opacity:.95}
+@keyframes spinRim{to{--ang:360deg}}
+
+/* دخول ثلاثي الأبعاد عند التمرير */
+.fx .rv{transform:perspective(900px) translate3d(0,40px,-90px) rotateX(-14deg);transition:opacity .7s ease,transform .85s cubic-bezier(.16,.84,.24,1)}
+.fx .rv.in{transform:none}
+.fx .lgrid .rv:nth-child(3n+1){transform:perspective(900px) translate3d(60px,34px,-120px) rotateY(-22deg)}
+.fx .lgrid .rv:nth-child(3n){transform:perspective(900px) translate3d(-60px,34px,-120px) rotateY(22deg)}
+.fx .lgrid .rv.in{transform:none}
+
+/* لمعان العناوين والأزرار */
+.fx .h-main,.fx .foil{background-size:220% 100%}
+@keyframes foil{from{background-position:0 0}to{background-position:100% 0}}
+.btn.fill{position:relative;overflow:hidden}
+.btn.fill::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:shine 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.stat-grid b{text-shadow:0 0 30px rgba(244,203,85,.35)}
+.pillars svg,.feat .ic svg{animation:floaty 4.5s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+.eyebrow{position:relative;display:inline-block}
+
+html.nofx .ld::before,html.nofx .ld::after{display:none}
+html.nofx .coin-in,html.nofx .cshadow,html.nofx .coin .shine,html.nofx .ring,html.nofx .coin::before{animation:none}
+html.nofx .rim::before,html.nofx .btn.fill::after,html.nofx .h-main,html.nofx .foil{animation:none}
+@media (max-width:560px){.rim::before{display:none}.fx .lgrid .rv:nth-child(n){transform:perspective(900px) translate3d(0,34px,-90px) rotateX(-14deg)}.fx .lgrid .rv.in{transform:none}}
+@media (prefers-reduced-motion:reduce){
+  .ld::before,.ld::after,.coin-in,.cshadow,.coin .shine,.ring,.rim::before,.btn.fill::after,.h-main,.foil,.pillars svg,.feat .ic svg{animation:none!important}
+  .fx .rv{transform:none}
+}
