@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>استبيان المدربين — بطولة الأساسيات العربية للبارا تايكوندو 2026</title>
+<meta name="description" content="شاركنا رأيك في بطولة الأساسيات العربية للبارا تايكوندو 2026. رأيك محل اهتمامنا ومشاركتك جزء من رحلة التطوير.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#030a24">
+<meta property="og:title" content="استبيان المدربين — Arab Para Taekwondo Basics Championship 2026">
+<meta property="og:description" content="رأيكم محل اهتمامنا، ومشاركتكم جزء من رحلة التطوير. Your opinion matters.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://captaintaekwondo.github.io/para-taekwondo-2026/survey.html">
+<meta property="og:image" content="https://captaintaekwondo.github.io/para-taekwondo-2026/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/champion-lite.webp">
+<link rel="preload" href="assets/champion-lite.webp" as="image">
+<link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
+<link rel="stylesheet" href="style.css?v=20261115a">
+<link rel="stylesheet" href="survey.css?v=2">
+<link rel="stylesheet" href="survey-fx.css?v=12">
+</head>
+<body class="sv">
+<nav id="nav" class="cnav" aria-label="Navigation">
+  <div class="wrap nav-in">
+    <a class="brand" href="index.html"><img src="assets/champion-lite.webp" alt="" width="40" height="40"><span id="brandTxt">أساسيات البارا تايكوندو 2026</span></a>
+    <div class="tools">
+      <a class="tbtn" href="index.html" id="backLnk">العودة للموقع</a>
+      <button class="tbtn lang" id="langBtn" type="button" aria-label="Switch to English">English</button>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap svmain" id="main">
+  <p class="demo" id="demoBanner" hidden></p>
+
+  <section class="stage" id="stage" aria-live="polite"><div class="boot"><img src="assets/champion-lite.webp" alt="" width="84" height="84"><p>جارٍ تحميل الاستبيان… / Loading the survey…</p></div></section>
+
+  <noscript><p class="demo">يتطلب الاستبيان تفعيل JavaScript. / This survey requires JavaScript.</p></noscript>
+</main>
+
+<script>
+/* شبكة أمان: لو لم يظهر الاستبيان خلال 10 ثوانٍ (نت ضعيف جدًا أو ملف لم يُحمَّل) نعرض زر إعادة المحاولة بدل صفحة عالقة */
+setTimeout(function(){var s=document.getElementById("stage");if(s&&s.querySelector(".boot")){s.innerHTML='<div class="boot"><p>تعذّر تحميل الاستبيان بسبب بطء الاتصال. / The survey could not load on this connection.</p><p><button class="btn fill" type="button" onclick="location.reload()">إعادة المحاولة / Retry</button></p></div>'}},10000);
+</script>
+<script src="survey-config.js?v=1"></script>
+<script src="survey-data.js?v=2"></script>
+<script src="survey.js?v=5"></script>
+<script src="survey-fx.js?v=2" defer></script>
+<script src="survey-orbit.js?v=4" defer></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+/* مؤثرات ثلاثية الأبعاد للاستبيان — تُحمَّل بعد survey.css وتتغلّب عليه */
+html{--s:1}html[dir=rtl]{--s:-1}
+#fx{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.svmain{position:relative;z-index:1}
+.sv::before,.sv::after{content:"";position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(70px);opacity:.55;will-change:transform}
+.sv::before{width:46vmax;height:46vmax;top:-14vmax;left:-12vmax;background:radial-gradient(circle,rgba(47,107,255,.55),transparent 65%);animation:blobA 22s ease-in-out infinite alternate}
+.sv::after{width:40vmax;height:40vmax;bottom:-16vmax;right:-10vmax;background:radial-gradient(circle,rgba(244,203,85,.32),transparent 65%);animation:blobB 26s ease-in-out infinite alternate}
+@keyframes blobA{to{transform:translate3d(12vmax,8vmax,0) scale(1.15)}}
+@keyframes blobB{to{transform:translate3d(-10vmax,-9vmax,0) scale(1.2)}}
+
+.card{--rx:0deg;--ry:0deg;--mx:50%;--my:30%;--d:1;
+  transform:perspective(1400px) rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s;
+  animation:cardIn .85s cubic-bezier(.16,.84,.24,1) backwards}
+.card.back{--d:-1}
+.card.calm{transition:transform .1s ease-out,box-shadow .35s}
+.card.tilting{transition:transform .08s linear,box-shadow .35s;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 60px rgba(244,203,85,.12),inset 0 1px 0 rgba(255,244,189,.2)}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;bottom:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:radial-gradient(520px circle at var(--mx) var(--my),rgba(255,236,160,.16),transparent 55%)}
+.card.tilting::before{opacity:1}
+.card::after{content:"";position:absolute;top:-1px;left:-1px;right:-1px;bottom:-1px;border-radius:inherit;padding:1.5px;pointer-events:none;
+  background:conic-gradient(from var(--ang,0deg),transparent 0 62%,rgba(255,236,160,.9) 78%,transparent 92%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+  animation:spinRim 7s linear infinite;opacity:.8}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+@keyframes spinRim{to{--ang:360deg}}
+@keyframes cardIn{
+  from{opacity:0;transform:perspective(1400px) translate3d(calc(70px * var(--s) * var(--d)),34px,-160px) rotateY(calc(-22deg * var(--s) * var(--d))) rotateX(9deg)}
+  to{opacity:1;transform:perspective(1400px) translate3d(0,0,0) rotateY(0) rotateX(0)}}
+
+.opts{transform-style:preserve-3d}
+.opt{transform-style:preserve-3d;overflow:hidden;animation:optIn .55s cubic-bezier(.16,.84,.24,1) backwards;animation-delay:calc(var(--i,0) * 45ms + 120ms)}
+@keyframes optIn{from{opacity:0;transform:perspective(900px) translate3d(0,28px,-60px) rotateX(-38deg)}to{opacity:1;transform:perspective(900px) none}}
+.opt:hover{transform:translateZ(22px) translateY(-2px);box-shadow:0 14px 30px rgba(0,0,0,.4),0 0 24px rgba(244,203,85,.18)}
+.opt::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;pointer-events:none;background:linear-gradient(105deg,transparent 35%,rgba(255,244,189,.35) 50%,transparent 65%);transform:translateX(-120%);opacity:0}
+.opt.on::after{animation:sweep .9s ease-out}
+@keyframes sweep{0%{opacity:1;transform:translateX(-120%)}100%{opacity:0;transform:translateX(120%)}}
+.opt.on .mark{animation:markPop .5s cubic-bezier(.3,1.6,.5,1)}
+@keyframes markPop{0%{transform:scale(.6)}60%{transform:scale(1.35)}100%{transform:scale(1)}}
+.opt input{z-index:2;top:0;left:0}
+
+.qtag b{animation:badge 2.6s ease-in-out infinite}
+@keyframes badge{0%,100%{box-shadow:0 0 0 0 rgba(244,203,85,.55)}50%{box-shadow:0 0 0 9px rgba(244,203,85,0)}}
+.bar i{position:relative;overflow:hidden;box-shadow:0 0 14px rgba(244,203,85,.55)}
+.bar i::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.65) 50%,transparent 70%);transform:translateX(-100%);animation:glint 2.4s ease-in-out infinite}
+@keyframes glint{to{transform:translateX(100%)}}
+
+.logo3d{position:relative;width:clamp(110px,26vw,150px);height:clamp(110px,26vw,150px);margin:3.6rem auto 5.4rem;animation:floaty 5s ease-in-out infinite}
+.logo3d .ring{position:absolute;top:-9px;left:-9px;right:-9px;bottom:-9px;border-radius:50%;background:conic-gradient(from 0deg,#fff4bd,#c58a18,#2f6bff,#f4cb55,#fff4bd);animation:spin 9s linear infinite;
+  -webkit-mask:radial-gradient(circle,transparent 62%,#000 64%);mask:radial-gradient(circle,transparent 62%,#000 64%);opacity:.9;z-index:1}
+.planet{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:50%;z-index:1;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .25s}
+.planet:focus-visible{outline:3px solid var(--gold2);outline-offset:6px}
+.planet.pulse{animation:planetPulse .6s ease-out}
+@keyframes planetPulse{0%{transform:scale(1)}30%{transform:scale(.93)}60%{transform:scale(1.05)}100%{transform:scale(1)}}
+.planet .svlogo{display:block;width:100%;height:100%;margin:0;border-radius:50%;filter:none;-webkit-user-select:none;user-select:none}
+/* ضوء كابتن تايكوندو على وجه لوجو البطولة: يضيء الجهة القريبة منه ويعتّم المقابلة */
+.planet .lit{position:absolute;top:0;left:0;right:0;bottom:0;border-radius:50%;pointer-events:none;--lx:50%;--ly:50%;--ox:50%;--oy:50%;--li:.5;
+  background:radial-gradient(circle at var(--lx) var(--ly),rgba(255,230,150,calc(.62 * var(--li))),rgba(255,200,80,calc(.22 * var(--li))) 38%,transparent 68%),
+            radial-gradient(circle at var(--ox) var(--oy),rgba(2,6,28,.62),transparent 72%);mix-blend-mode:normal}
+/* القمر (لوجو كابتن تايكوندو) بشعاع كالشمس */
+.moon{position:absolute;left:50%;top:50%;width:clamp(36px,9vw,48px);height:clamp(36px,9vw,48px);margin:calc(clamp(36px,9vw,48px) / -2) 0 0 calc(clamp(36px,9vw,48px) / -2);z-index:3;will-change:transform;pointer-events:none;transform:translate3d(60px,20px,0)}
+.moon img{position:relative;display:block;width:100%;height:100%;border-radius:50%;box-shadow:0 0 0 2px rgba(255,236,160,.85)}
+.moon{--fx:0}
+.moon .glow{position:absolute;left:-60%;top:-60%;width:220%;height:220%;border-radius:50%;background:radial-gradient(circle,rgba(255,226,130,.7),rgba(255,190,60,.22) 38%,transparent 66%);opacity:calc(.22 + .78 * var(--fx));animation:sunPulse 2.6s ease-in-out infinite}
+.moon .rays{position:absolute;left:-90%;top:-90%;width:280%;height:280%;border-radius:50%;opacity:var(--fx);
+  background:repeating-conic-gradient(from 0deg,rgba(255,232,150,.9) 0 3deg,transparent 3deg 14deg);
+  -webkit-mask:radial-gradient(circle,transparent 17%,#000 22%,transparent 68%);mask:radial-gradient(circle,transparent 17%,#000 22%,transparent 68%);
+  animation:spin 6s linear infinite;mix-blend-mode:screen}
+.moon img{box-shadow:0 0 0 2px rgba(255,236,160,.85),0 0 calc(8px + 14px * var(--fx)) rgba(255,210,90,calc(.35 + .5 * var(--fx)))}
+.otail{position:absolute;left:50%;top:50%;pointer-events:none;z-index:2}
+.wave{position:absolute;top:-4px;left:-4px;right:-4px;bottom:-4px;border-radius:50%;border:2px solid rgba(255,226,140,.9);pointer-events:none;z-index:1;animation:wave 1s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes wave{from{opacity:.9;transform:scale(1)}to{opacity:0;transform:scale(2.1)}}
+.logo3d.hot .ring{animation-duration:2.2s;opacity:1}
+.planet .lit{opacity:0}
+@keyframes sunPulse{0%,100%{opacity:.75;transform:scale(.94)}50%{opacity:1;transform:scale(1.06)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.done .logo3d{animation:popIn 1s cubic-bezier(.3,1.5,.5,1) both,floaty 5s 1s ease-in-out infinite}
+@keyframes popIn{from{transform:scale(.2) rotateY(-180deg);opacity:0}to{transform:scale(1) rotateY(0);opacity:1}}
+
+.btn.fill{position:relative;overflow:hidden}
+.btn.fill::after{content:"";position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%);animation:shine 3.6s ease-in-out infinite;pointer-events:none}
+@keyframes shine{0%,55%{transform:translateX(-130%)}100%{transform:translateX(130%)}}
+.chips li{animation:chipIn .6s cubic-bezier(.16,.84,.24,1) backwards}
+.chips li:nth-child(2){animation-delay:.12s}.chips li:nth-child(3){animation-delay:.24s}
+@keyframes chipIn{from{opacity:0;transform:translateY(14px) scale(.9)}}
+.introtxt p{animation:fadeUp .7s ease backwards}
+.introtxt p:nth-child(2){animation-delay:.12s}.introtxt p:nth-child(3){animation-delay:.22s}.introtxt p:nth-child(4){animation-delay:.32s}.introtxt p:nth-child(5){animation-delay:.42s}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}}
+.cfields .fld{animation:optIn .55s cubic-bezier(.16,.84,.24,1) backwards;animation-delay:calc(var(--i,0) * 90ms + 200ms)}
+
+/* حقول التواصل */
+.req{color:var(--gold2)}
+.cfields{margin-top:1rem;display:grid;gap:.9rem}
+.phonewrap{display:flex;gap:.5rem;direction:ltr}
+.phonewrap select{flex:0 0 44%;min-width:0;padding:.75rem .8rem;border-radius:14px;border:1.5px solid rgba(156,192,255,.35);background:rgba(3,10,36,.7);color:var(--txt);font:600 .95rem var(--fb);color-scheme:dark}
+.phonewrap select:focus-visible{outline:3px solid var(--gold2);outline-offset:2px}
+.phonewrap input{flex:1;min-width:0}
+.sv input:focus,.sv textarea:focus{border-color:var(--gold2);box-shadow:0 0 0 4px rgba(244,203,85,.15)}
+
+html.nofx .sv::before,html.nofx .sv::after{display:none}
+.adm::before,.adm::after{display:none}
+@media(max-width:560px){.phonewrap select{flex-basis:46%}.card::after{display:none}}
+@media (prefers-reduced-motion:reduce){
+  .sv::before,.sv::after,.card::after,.logo3d,.logo3d .ring,.moon .glow,.moon .rays,.planet.pulse,.wave,.bar i::after,.btn.fill::after,.qtag b,.opt,.chips li,.introtxt p,.cfields .fld,.opt.on::after,.opt.on .mark,.done .logo3d,.card{animation:none!important}
+  .card{transform:none;transition:none}.opt:hover{transform:none}
+}
+
+.sv{min-height:100vh;background-attachment:fixed}
+
+.boot{text-align:center;color:var(--mut);padding:3rem 1rem}.boot img{width:84px;height:84px;display:block;margin:0 auto 1rem}
+.planet{box-shadow:0 10px 34px rgba(244,203,85,.28)}
+
+/* حلقة متموّجة يتحكم بها لوجو كابتن + ذيل شهاب + المرور فوق النص */
+.logo3d.orb .ring{display:none}
+.oring{position:absolute;left:50%;top:50%;pointer-events:none;z-index:1}
+.moon .rays{display:none}
+.planet .lit{display:none}
+
+/* النص دائمًا فوق لوجو كابتن، مع مسافة كافية تحت مدار اللوجو */
+.intro>:not(.logo3d),.done>:not(.logo3d){position:relative;z-index:6}
+@media(max-width:560px){.logo3d{margin:3.2rem auto 5rem}}
+
+/* عنوان الاستبيان: كتابة أكبر ومسافات مريحة */
+.intro .kicker,.done .kicker{font-size:clamp(1.25rem,4vw,1.7rem);font-weight:800;letter-spacing:.03em;line-height:1.5;margin:0 0 .9rem}
+.intro h1{margin:0 0 .3rem;line-height:1.45}
+.intro .orn,.done .orn{margin:1.2rem auto 1.5rem}
+.introtxt{margin-top:.2rem}
+.introtxt .salute{margin-top:0}
+.chips{margin:1.6rem 0 1.4rem}
+
+/* العناوين الرئيسية بخط عناوين الموقع (Reem Kufi) */
+.qcard h2,.done h2,.intro h1,.login h1,.adm h1{font-family:var(--fd)}
+.qcard h2{font-weight:700;line-height:1.75}
+.qtag span{font-family:var(--fd);font-size:1.05rem}
+
+/* شريط التنقل: أهداف لمس 44px على كل الأجهزة وبدون خروج عن الشاشة */
+.cnav .tbtn{min-height:44px;box-sizing:border-box;white-space:nowrap}
+.cnav .nav-in{gap:.6rem}
+.cnav .tools{flex-shrink:0}
+@media(max-width:480px){
+  .cnav .tools{gap:.4rem}
+  .cnav .tbtn{padding:0 .75rem;font-size:.85rem}
+  .cnav .brand img{width:36px;height:36px}
+}
+@media(max-width:350px){.cnav .tbtn{padding:0 .55rem;font-size:.8rem}}
+
+/* لا تمرير أفقي أبدًا (حتى أثناء حركة دخول البطاقة) */
+html,body.sv{overflow-x:hidden}
+@supports (overflow:clip){.svmain{overflow-x:clip}}
+@media(max-width:700px){
+  @keyframes cardIn{
+    from{opacity:0;transform:perspective(1400px) translate3d(calc(26px * var(--s) * var(--d)),24px,-120px) rotateY(calc(-14deg * var(--s) * var(--d))) rotateX(6deg)}
+    to{opacity:1;transform:perspective(1400px) translate3d(0,0,0) rotateY(0) rotateX(0)}}
+}
+
+/* قابلية قراءة عناوين الأسئلة بخط Reem Kufi */
+.qcard h2{font-weight:600;font-size:clamp(1.2rem,3.9vw,1.55rem);line-height:1.9;letter-spacing:0;word-spacing:.14em}
+.qcard h2 + .hint{margin-top:.5rem}
+@media(max-width:360px){.nav2 .btn{font-size:.92rem;padding-inline:.8rem}.nav2 .btn.fill{flex:1}}
+
+.introtxt .salute{text-align:center}
