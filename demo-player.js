@@ -4,6 +4,8 @@
 (() => {
   "use strict";
   if (!/[?&]demo=1(&|$)/.test(location.search)) return;
+  /* وضع التجربة محلي فقط (localhost أو ملف على الجهاز): على الموقع المنشور مغلق لحد ما يُعلن عن اللاعب الداعم */
+  if (!/^(localhost|127\.0\.0\.1|\[::1\])?$/.test(location.hostname)) return;
   const KEY = "ptk_demo_v1";
   const seed = () => {
     const P = (code, nameAr, nameEn, clubAr, clubEn, birth, belt, para, gender, phone, guardian) => ({
