@@ -160,3 +160,21 @@ html,body.sv{overflow-x:hidden}
 @media(max-width:360px){.nav2 .btn{font-size:.92rem;padding-inline:.8rem}.nav2 .btn.fill{flex:1}}
 
 .introtxt .salute{text-align:center}
+
+/* ألوان أغنى وأوضح (خصوصًا على الموبايل) + منع تعتيم/تغيير ألوان الوضع الداكن التلقائي في أندرويد */
+:root{color-scheme:dark}
+.sv{background:
+  radial-gradient(900px 520px at 50% 4%,rgba(47,107,255,.46),transparent 62%),
+  radial-gradient(700px 480px at 100% 38%,rgba(244,203,85,.18),transparent 60%),
+  radial-gradient(700px 520px at 0% 82%,rgba(47,107,255,.32),transparent 60%),
+  #040d2e;background-attachment:fixed}
+.card{background:linear-gradient(160deg,rgba(22,72,196,.72),rgba(7,24,76,.92) 72%);border-color:rgba(244,203,85,.6);box-shadow:0 24px 70px rgba(0,0,0,.45),0 0 40px rgba(47,107,255,.18),inset 0 1px 0 rgba(255,244,189,.2)}
+.introtxt p{color:#f4f7ff}
+.hint,.pct,.qlead,.privacy,.xfld em,.fld em{color:#c9d6f3}
+.chips li{border-color:rgba(244,203,85,.7);color:#fff0b0;background:rgba(244,203,85,.1)}
+.opt{border-color:rgba(156,192,255,.5);background:rgba(4,13,46,.72)}
+.opt.on{border-color:var(--gold1);background:linear-gradient(180deg,rgba(244,203,85,.3),rgba(244,203,85,.12));box-shadow:0 0 0 1px rgba(244,203,85,.6),0 0 22px rgba(244,203,85,.22)}
+.cnav .tbtn{border-color:rgba(244,203,85,.7);background:rgba(10,30,100,.55)}
+.sv input[type=text],.sv input[type=email],.sv input[type=tel],.sv textarea,.phonewrap select{border-color:rgba(156,192,255,.6);background:rgba(3,10,40,.8)}
+@media(max-width:700px){.sv::before,.sv::after{opacity:.75}}
+html.lowfx .sv::before,html.lowfx .sv::after{animation:none}

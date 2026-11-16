@@ -4,8 +4,9 @@
   "use strict";
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const nc = navigator.connection || {};
-  const weak = nc.saveData || /(^|-)(2|3)g/.test(nc.effectiveType || "") || (navigator.hardwareConcurrency || 4) <= 2 || (navigator.deviceMemory || 4) <= 2;
-  if (reduce || weak) { document.documentElement.classList.add("nofx"); return; }   // لا مؤثرات ثقيلة مع الحركة المقلّلة أو النت البطيء/الأجهزة الضعيفة
+  const weak = nc.saveData || /(^|-)2g/.test(nc.effectiveType || "") || (navigator.hardwareConcurrency || 4) <= 2;
+  if (reduce) { document.documentElement.classList.add("nofx"); return; }
+  if (weak) document.documentElement.classList.add("lowfx");       // نت بطيء/جهاز ضعيف: بلا جسيمات متحركة، والخلفية الملونة تبقى ثابتة
 
   /* ---- ميل البطاقة (الماوس فقط) ---- */
   if (matchMedia("(hover:hover) and (pointer:fine)").matches) {
@@ -43,7 +44,7 @@
   size(); addEventListener("resize", size);
 
   const rnd = (a, b) => a + Math.random() * (b - a);
-  const N = weak ? 0 : Math.min(48, Math.round((innerWidth * innerHeight) / 26000));
+  const N = weak ? 0 : Math.min(innerWidth < 700 ? 26 : 48, Math.round((innerWidth * innerHeight) / 26000));
   const dust = Array.from({ length: N }, () => ({ x: rnd(0, W), y: rnd(0, H), r: rnd(.6, 2.6), vy: rnd(.08, .35), vx: rnd(-.08, .08), ph: rnd(0, 6.28), big: Math.random() < .12 }));
   let conf = [];
   const COL = ["#fff4bd", "#f4cb55", "#c58a18", "#2f6bff", "#9cc0ff", "#ffffff", "#d9202f"];
