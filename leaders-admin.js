@@ -71,6 +71,21 @@
   $("#refreshBtn").addEventListener("click", async () => { try { await load(); toast("تم التحديث"); } catch (e) { toast(errText(e), true); } });
   (function auto() { try { const t = sessionStorage.getItem("ld_t"); if (t && API) { S.token = t; load().then(showPanel).catch(() => { S.token = ""; }); } } catch (e) {} })();
 
+  /* ---------- الروابط (للنسخ والمشاركة) ---------- */
+  (function links() {
+    const abs = f => new URL(f, location.href.split("?")[0].split("#")[0]).href;
+    const items = [["نموذج التسجيل (أرسله لرؤساء البارا)", abs("leaders-register.html")], ["صفحة القيادات العامة", abs("leaders.html")], ["صفحة الإدارة (لا تشاركها)", abs("leaders-admin.html")]];
+    const ul = $("#linkList"); if (!ul) return;
+    items.forEach(it => {
+      const copy = h("button", { class: "btn sm", type: "button", text: "نسخ الرابط" });
+      copy.addEventListener("click", async () => {
+        try { await navigator.clipboard.writeText(it[1]); toast("تم نسخ الرابط"); }
+        catch (e) { const t = h("textarea", { style: "position:fixed;opacity:0" }); t.value = it[1]; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); toast("تم نسخ الرابط"); } catch (x) { toast(it[1], true); } t.remove(); }
+      });
+      const open = h("a", { class: "btn sm", href: it[1], target: "_blank", rel: "noopener noreferrer", text: "فتح" });
+      ul.appendChild(h("li", {}, [h("div", {}, [h("b", { text: it[0] }), h("code", { dir: "ltr", text: it[1] })]), h("div", { class: "prow" }, [copy, open])]));
+    });
+  })();
   async function load() { const j = await call("admin_list"); S.subs = j.submissions || []; S.pub = j.published || []; renderLists(); }
 
   /* ---------- القوائم ---------- */

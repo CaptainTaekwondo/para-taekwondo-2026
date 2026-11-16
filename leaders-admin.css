@@ -50,3 +50,10 @@
 .arow .btn,.edactions .btn{min-height:44px}
 #refreshBtn{height:44px}
 .loginform[hidden]{display:none}
+.links{margin-bottom:1rem;border:1px solid rgba(244,203,85,.3);border-radius:18px;background:rgba(3,10,36,.55)}
+.links summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:0 1.1rem;font-weight:800;color:var(--gold1)}
+.links ul{list-style:none;margin:0;padding:0 1rem 1rem;display:grid;gap:.7rem}
+.links li{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;justify-content:space-between;padding:.7rem .9rem;border:1px solid rgba(244,203,85,.2);border-radius:14px}
+.links li>div:first-child{display:flex;flex-direction:column;gap:.25rem;min-width:0;flex:1 1 260px}
+.links code{color:var(--sky);font-size:.85rem;word-break:break-all;text-align:start}
+.links .btn{min-height:44px;text-decoration:none}

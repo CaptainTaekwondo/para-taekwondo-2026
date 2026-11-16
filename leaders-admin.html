@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="style.css?v=20261115a">
 <link rel="stylesheet" href="leaders.css?v=15">
 <link rel="stylesheet" href="leaders-register.css?v=12">
-<link rel="stylesheet" href="leaders-admin.css?v=4">
+<link rel="stylesheet" href="leaders-admin.css?v=5">
 </head>
 <body class="ld lr adm">
 <nav class="cnav" aria-label="Navigation">
@@ -40,6 +40,10 @@
   </section>
 
   <section id="panel" hidden>
+    <details class="links" id="linksBox">
+      <summary>الروابط (للنسخ والمشاركة)</summary>
+      <ul id="linkList"></ul>
+    </details>
     <div class="tabs" role="tablist" id="tabs">
       <button type="button" role="tab" data-tab="pending" aria-selected="true">بانتظار المراجعة <b id="nPend">0</b></button>
       <button type="button" role="tab" data-tab="published" aria-selected="false">المنشور <b id="nPub">0</b></button>
@@ -54,6 +58,6 @@
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="leaders-config.js?v=2"></script>
-<script src="leaders-admin.js?v=31"></script>
+<script src="leaders-admin.js?v=32"></script>
 </body>
 </html>
