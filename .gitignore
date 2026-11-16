@@ -1,0 +1,12 @@
+
+# محلي فقط
+.playwright-mcp/
+backend/
+reports/
+research_notes/
+snap.yml
+judges.html
+judges.js
+judges.css
+assets/judges/
+assets/video-background-1080x1920.png
