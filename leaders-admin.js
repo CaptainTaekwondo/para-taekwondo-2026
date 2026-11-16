@@ -150,7 +150,7 @@
     const bar = h("div", { class: "orderbar" }, []);
     const save = h("button", { class: "btn fill", type: "button", text: S.orderDirty ? "حفظ الترتيب" : "الترتيب محفوظ" }); save.disabled = !S.orderDirty;
     const reset = h("button", { class: "btn", type: "button", text: "الترتيب الافتراضي (حسب الدولة)" });
-    bar.append(h("p", { class: "muted", text: "حرّك البطاقات بالأسهم، ثم اضغط «حفظ الترتيب» ليظهر في صفحة القيادات. البطاقة الجديدة التي تحل محل أخرى ترث مكانها." }), h("div", { class: "prow" }, [save, reset]));
+    bar.append(h("p", { class: "muted", text: "اكتب رقم الترتيب في المربع (مثلًا 1 لتصير البطاقة الأولى ثم Enter)، أو اضغط ⤒ للأول، أو اسحب المقبض ⠿ بالماوس، أو استخدم الأسهم. ثم اضغط «حفظ الترتيب» ليظهر في صفحة القيادات." }), h("div", { class: "prow" }, [save, reset]));
     save.addEventListener("click", async () => {
       save.disabled = true; save.textContent = "جارٍ الحفظ...";
       try { await call("admin_order_save", { order: S.orderIds }); S.saved = S.orderIds.slice(); S.orderDirty = false; toast("تم حفظ الترتيب ✓"); renderLists(); }
@@ -162,21 +162,43 @@
     });
     box.appendChild(bar);
     const list = h("ol", { class: "ordlist" }, []);
-    const move = (i, d) => { const a = S.orderIds, j = i + d; if (j < 0 || j >= a.length) return; const t = a[i]; a[i] = a[j]; a[j] = t; S.orderDirty = true; S.focus = { id: t, d }; renderLists(); };
+    /* نقل بطاقة من موضع i إلى موضع j (يبدأ العدّ من 0) */
+    const moveTo = (i, j, focus) => {
+      const a = S.orderIds; j = Math.max(0, Math.min(a.length - 1, j)); if (j === i || i < 0) { renderLists(); return; }
+      const t = a.splice(i, 1)[0]; a.splice(j, 0, t); S.orderDirty = true; S.focus = Object.assign({ id: t }, focus); renderLists();
+    };
+    let dragFrom = -1;
     S.orderIds.forEach((id, i) => {
       const c = byId.get(id); if (!c) return;
+      const n = S.orderIds.length;
+      const pos = h("input", { class: "ordpos", type: "number", min: "1", max: String(n), value: String(i + 1), inputmode: "numeric", "aria-label": "ترتيب " + (c.placeholder ? c.countryAr : c.nameAr) + " (اكتب رقمًا ثم Enter)" });
+      pos.dataset.id = id; pos.dataset.k = "pos";
+      const commit = () => { const v = parseInt(pos.value, 10); if (!isNaN(v) && v !== i + 1) moveTo(i, v - 1, { k: "pos" }); else pos.value = String(i + 1); };
+      pos.addEventListener("change", commit); pos.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); commit(); } });
+      pos.addEventListener("focus", () => pos.select());
+      const top = h("button", { class: "btn sm", type: "button", "aria-label": "نقل " + c.nameAr + " إلى الأول", title: "إلى الأول", text: "⤒" });
       const up = h("button", { class: "btn sm", type: "button", "aria-label": "تحريك " + c.nameAr + " للأعلى", text: "▲" }), dn = h("button", { class: "btn sm", type: "button", "aria-label": "تحريك " + c.nameAr + " للأسفل", text: "▼" });
-      up.disabled = i === 0; dn.disabled = i === S.orderIds.length - 1;
-      up.addEventListener("click", () => move(i, -1)); dn.addEventListener("click", () => move(i, 1));
-      up.dataset.id = dn.dataset.id = id; up.dataset.d = "-1"; dn.dataset.d = "1";
-      list.appendChild(h("li", { class: "ordrow" + (c.placeholder ? " ph" : "") }, [h("b", { class: "ordn", text: String(i + 1) }),
+      top.disabled = up.disabled = i === 0; dn.disabled = i === n - 1;
+      top.addEventListener("click", () => moveTo(i, 0, { d: -2 })); up.addEventListener("click", () => moveTo(i, i - 1, { d: -1 })); dn.addEventListener("click", () => moveTo(i, i + 1, { d: 1 }));
+      top.dataset.id = up.dataset.id = dn.dataset.id = id; top.dataset.d = "-2"; up.dataset.d = "-1"; dn.dataset.d = "1";
+      const grip = h("span", { class: "grip", draggable: "true", title: "اسحب لتغيير الترتيب", "aria-hidden": "true", text: "⠿" });
+      const row = h("li", { class: "ordrow" + (c.placeholder ? " ph" : "") }, [pos,
         h("span", { class: "ctry" }, [flagImg(c.countryCode || "un"), h("span", { text: c.countryAr })]),
         h("span", { class: "ordname", text: c.placeholder ? "بطاقة افتراضية" : c.nameAr }),
         h("span", { class: "tag " + (c.placeholder ? "off" : "live"), text: c.placeholder ? "افتراضية" : "منشورة" }),
-        h("span", { class: "prow" }, [up, dn])]));
-    });
-    box.appendChild(list);
-    if (S.focus) { const t = list.querySelector('button[data-id="' + S.focus.id + '"][data-d="' + S.focus.d + '"]:not(:disabled)') || list.querySelector('button[data-id="' + S.focus.id + '"]:not(:disabled)'); if (t) t.focus({ preventScroll: false }); S.focus = null; }
+        h("span", { class: "prow" }, [grip, top, up, dn])]);
+      /* سحب وإفلات (بالماوس): اسحب المقبض ⠿ وأفلت على البطاقة المطلوبة */
+      grip.addEventListener("dragstart", e => { dragFrom = i; row.classList.add("dragging"); try { e.dataTransfer.setData("text/plain", id); e.dataTransfer.effectAllowed = "move"; e.dataTransfer.setDragImage(row, 30, 20); } catch (x) {} });
+      grip.addEventListener("dragend", () => { dragFrom = -1; row.classList.remove("dragging"); list.querySelectorAll(".over").forEach(x => x.classList.remove("over")); });
+      row.addEventListener("dragover", e => { if (dragFrom < 0) return; e.preventDefault(); list.querySelectorAll(".over").forEach(x => x.classList.remove("over")); row.classList.add("over"); });
+      row.addEventListener("drop", e => { if (dragFrom < 0) return; e.preventDefault(); const from = dragFrom; dragFrom = -1; moveTo(from, i, { k: "pos" }); });
+      list.appendChild(row);
+    });    box.appendChild(list);
+    if (S.focus) {
+      const sel = S.focus.k === "pos" ? 'input[data-id="' + S.focus.id + '"]' : 'button[data-id="' + S.focus.id + '"][data-d="' + S.focus.d + '"]:not(:disabled)';
+      const t = list.querySelector(sel) || list.querySelector('button[data-id="' + S.focus.id + '"]:not(:disabled)') || list.querySelector('input[data-id="' + S.focus.id + '"]');
+      if (t) { t.focus({ preventScroll: false }); if (t.tagName === "INPUT") t.select(); } S.focus = null;
+    }
   }
   /* ---------- المحرّر ---------- */
   const newPhoto = () => ({ img: null, z: 1, ox: 0, oy: 0, dirty: false, clear: false, orig: null });
