@@ -211,12 +211,19 @@
     document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 500);
   }
   const stamp = () => new Date().toISOString().slice(0, 10);
+  /* التصدير بلغة الواجهة الحالية (العربية افتراضيًا): العناوين ونصوص الإجابات */
+  const EXP = {
+    ar: { ts: "التاريخ", rid: "معرّف الإجابة", lang: "لغة التعبئة", code: "رقم الاختيار", ans: "الإجابة", txt: "نص إضافي", q: "س", langV: { ar: "عربي", en: "English" },
+      name: "الاسم", email: "البريد الإلكتروني", phone: "الهاتف / واتساب", coach: "كود المدرب", q10: "إجابة السؤال 10 (الرغبة في المشاركة)", fa: "survey-answers-ar-", fc: "survey-contacts-ar-" },
+    en: { ts: "Timestamp", rid: "Response ID", lang: "Language", code: "choice no.", ans: "answer", txt: "text", q: "Q", langV: { ar: "Arabic", en: "English" },
+      name: "Name", email: "Email", phone: "Phone / WhatsApp", coach: "Coach Code", q10: "Q10 answer", fa: "survey-answers-", fc: "survey-contacts-" }
+  };
   function exportAnswers() {
-    const head = ["Timestamp", "Response ID", "Lang"];
-    Q.forEach((qq, i) => { head.push("Q" + (i + 1) + " code", "Q" + (i + 1) + " answer (EN)"); if (qq.text) head.push("Q" + (i + 1) + " text"); });
-    const en = lang; lang = "en";
+    const E = EXP[lang];
+    const head = [E.ts, E.rid, E.lang];
+    Q.forEach((qq, i) => { const n = E.q + (i + 1) + " — " + L(qq.tag); head.push(n + " (" + E.code + ")", n + " (" + E.ans + ")"); if (qq.text) head.push(n + " (" + E.txt + ")"); });
     const rows = data.map(r => {
-      const o = [val(r, "ts"), val(r, "rid"), val(r, "lang")];
+      const o = [val(r, "ts"), val(r, "rid"), E.langV[val(r, "lang")] || val(r, "lang")];
       Q.forEach(qq => {
         const v = val(r, qq.id);
         o.push(v, qq.type === "multi" ? v.split(",").filter(Boolean).map(k => optLabel(qq, k)).join(" | ") : optLabel(qq, v));
@@ -224,15 +231,13 @@
       });
       return o;
     });
-    lang = en;
-    download("survey-answers-" + stamp() + ".csv", [head, ...rows]);
+    download(E.fa + stamp() + ".csv", [head, ...rows]);
   }
   function exportContacts() {
     if (!contacts) return loadContacts().then(() => contacts && exportContacts());
-    const en = lang; lang = "en";
+    const E = EXP[lang];
     const rows = contacts.map(r => [r[0], r[1], r[2], r[3], r[4], r[5], optLabel(Q[9], r[7])]);
-    lang = en;
-    download("survey-collaborators-" + stamp() + ".csv", [["Timestamp", "Response ID", "Name", "Email", "Phone / WhatsApp", "Coach Code", "Q10 answer"], ...rows]);
+    download(E.fc + stamp() + ".csv", [[E.ts, E.rid, E.name, E.email, E.phone, E.coach, E.q10], ...rows]);
   }
   function exportBox() {
     return h("section", { class: "qbox" }, h("p", { class: "hint", text: t().expNote }),
