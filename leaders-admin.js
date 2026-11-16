@@ -55,21 +55,22 @@
     e.preventDefault(); const c = $("#code").value.replace(/\D/g, ""); if (c.length !== 6) { loginErr("اكتب الكود المكوَّن من 6 أرقام."); return; }
     const b = $("#loginBtn"), t0 = b.textContent; b.disabled = true; b.textContent = "جارٍ التحقق..."; loginErr("");
     try {
-      const j = await call("admin_code_verify", { email: S.email, code: c });
-      S.token = j.token; try { sessionStorage.setItem("ld_t", j.token); } catch (x) {}
+      const rem = $("#remember").checked, j = await call("admin_code_verify", { email: S.email, code: c, remember: rem });
+      S.token = j.token; try { (rem ? localStorage : sessionStorage).setItem("ld_t", j.token); (rem ? sessionStorage : localStorage).removeItem("ld_t"); } catch (x) {}
       await load(); showPanel();
     } catch (err) { S.token = ""; loginErr(errText(err)); }
     b.disabled = false; b.textContent = t0;
   });
   function showPanel() { $("#login").hidden = true; $("#panel").hidden = false; $("#outBtn").hidden = false; }
   function expire() {                                           // انتهت الجلسة أو أُبطلت: ارجع لشاشة الدخول
-    S.token = ""; try { sessionStorage.removeItem("ld_t"); } catch (x) {}
+    S.token = ""; clearToken();
     $("#editor").hidden = true; $("#editor").textContent = ""; $("#panel").hidden = true; $("#login").hidden = false; $("#outBtn").hidden = true; $("#pendBadge").hidden = true; document.title = "إدارة القيادات — بطولة الأساسيات 2026";
     $("#emailForm").hidden = false; $("#codeForm").hidden = true; $("#loginIntro").textContent = "انتهت الجلسة. سجّل بريد كابتن تايكوندو لاستلام كود جديد.";
   }
-  $("#outBtn").addEventListener("click", () => { try { sessionStorage.removeItem("ld_t"); } catch (x) {} location.reload(); });
+  function clearToken() { try { sessionStorage.removeItem("ld_t"); localStorage.removeItem("ld_t"); } catch (x) {} }
+  $("#outBtn").addEventListener("click", async () => { try { await call("admin_logout"); } catch (x) {} clearToken(); location.reload(); });
   $("#refreshBtn").addEventListener("click", async () => { try { await load(); toast("تم التحديث"); } catch (e) { toast(errText(e), true); } });
-  (function auto() { try { const t = sessionStorage.getItem("ld_t"); if (t && API) { S.token = t; load().then(showPanel).catch(() => { S.token = ""; }); } } catch (e) {} })();
+  (function auto() { try { const t = localStorage.getItem("ld_t") || sessionStorage.getItem("ld_t"); if (t && API) { S.token = t; load().then(showPanel).catch(() => { S.token = ""; }); } } catch (e) {} })();
 
   /* ---------- الروابط (للنسخ والمشاركة) ---------- */
   (function links() {

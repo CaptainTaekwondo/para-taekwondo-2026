@@ -32,6 +32,7 @@
     </form>
     <form id="codeForm" class="loginform" novalidate hidden>
       <label class="f"><span>كود التأكيد (6 أرقام)</span><input id="code" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="one-time-code" dir="ltr" required></label>
+      <label class="chk"><input type="checkbox" id="remember" checked><span>تذكّر هذا الجهاز 30 يومًا (لا تفعّله على جهاز مشترك)</span></label>
       <button class="btn fill big" type="submit" id="loginBtn">تأكيد ودخول</button>
       <button class="btn" type="button" id="resendBtn">إعادة إرسال الكود</button>
       <button class="btn" type="button" id="changeEmailBtn">تغيير البريد</button>
@@ -60,6 +61,6 @@
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
 <script src="leaders-core.js?v=1"></script>
 <script src="leaders-config.js?v=2"></script>
-<script src="leaders-admin.js?v=40"></script>
+<script src="leaders-admin.js?v=41"></script>
 </body>
 </html>
