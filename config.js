@@ -35,7 +35,7 @@ const CONFIG = {
 
   /* ---- 2) الروابط الرسمية ---- */
   links: {
-    registration: "",                                  // رابط التسجيل على منصة SportLand (فارغ = زر معطّل «قريبًا»)
+    registration: "",                                  // رابط التسجيل (فارغ = زر معطّل «قريبًا»)
     whatsapp: "https://chat.whatsapp.com/BD4xmYfh9o05vFmhCoatym",    // رابط جروب الواتساب المباشر (معتمد 2026-11-15)
     sponsor: ""                                        // رابط الراعي (اختياري)
   },
@@ -61,8 +61,8 @@ const CONFIG = {
         bio: "رئيس لجنة حكام البارا تايكوندو بالاتحاد العربي للتايكوندو\nيتمتع الكابتن علي نور بمكانة في منظومة التحكيم الرياضي، ويتولى رئاسة لجنة حكام البارا تايكوندو بالاتحاد العربي للتايكوندو، في دور يستهدف دعم وتطوير منظومة التحكيم، والارتقاء بالمستوى الفني للحكام، وتعزيز العدالة والنزاهة في المنافسات.\nوتعكس هذه المسؤولية أهمية الخبرات التحكيمية المتخصصة في تطوير رياضة البارا تايكوندو، والمساهمة في تنظيم منافسات أكثر احترافية، تراعي طبيعة اللعبة وخصوصية اللاعبين.",
         en: { bio: "Head of the Para Taekwondo Referees Committee at the Arab Taekwondo Federation\nCaptain Ali Nour holds a distinguished standing in the sports officiating system and heads the Para Taekwondo Referees Committee at the Arab Taekwondo Federation, in a role aimed at supporting and developing the officiating system, raising the technical level of referees, and strengthening fairness and integrity in competitions.\nThis responsibility reflects the importance of specialized officiating expertise in developing Para Taekwondo and in helping organize more professional competitions that respect the nature of the sport and the particular needs of the athletes." }
       } },
-    { name: "Captain Taekwondo", role: "المنصة الإعلامية",
-      about: "المسؤول الدعائي والتسويقي للبطولة والتصميم الفني والتقني", phone: "+20 103 144 1064", initial: "C",
+    { name: "Captain Taekwondo", role: "المنصة الإعلامية ومنصة التسجيل",
+      about: "المسؤولة عن الدعاية والتسويق والتصميم الفني والتقني وتسجيل البيانات، والتحكيم عبر منظومة كابتن تايكوندو للتحكيم الرقمي CTJ", phone: "+20 103 144 1064", initial: "C",
       photo: "", logo: "assets/captain.webp", darkLogo: true,
       details: {
         bio: "منصة رياضية لدعم وتطوير رياضة التايكوندو\nكابتن تايكوندو منصة رياضية تسعى إلى دعم وتطوير رياضة التايكوندو، من خلال تقديم محتوى تعليمي وإعلامي متميز، ودعم المدربين واللاعبين، وتسليط الضوء على المواهب والإنجازات والمبادرات الرياضية.\nتجمع المنصة مجتمعًا من المهتمين والخبراء والمتخصصين في التايكوندو من مختلف دول العالم، بما يتيح فرصًا لتبادل الخبرات، وتعزيز التواصل، ونشر المعرفة، وفتح آفاق جديدة للتعاون والتطوير.\nكما تهتم المنصة بدعم البطولات والمبادرات الرياضية، وتوظيف الإعلام والتصميم والتقنيات الرقمية في خدمة اللعبة، والمساهمة في تقديم أفكار جديدة تسهم في توسيع فرص المشاركة والارتقاء بالمستوى الرياضي.\nوتؤمن كابتن تايكوندو بأن تطوير الرياضة مسؤولية مشتركة، لذلك تمد يد التعاون لكل مدرب أو مؤسسة أو جهة تسعى إلى تقديم إضافة حقيقية وترك بصمة إيجابية في عالم التايكوندو.\nهدفنا أن نكون جزءًا من كل خطوة تسهم في تطوير اللعبة، ودعم أبطالها، وصناعة مستقبل أفضل للتايكوندو.",
@@ -71,13 +71,6 @@ const CONFIG = {
         en: { bio: "A sports platform supporting and developing Taekwondo\nCaptain Taekwondo is a sports platform that works to support and develop Taekwondo by offering outstanding educational and media content, supporting coaches and athletes, and highlighting talents, achievements and sports initiatives.\nThe platform brings together a community of enthusiasts, experts and specialists in Taekwondo from around the world, creating opportunities to exchange experience, strengthen connections, share knowledge, and open new horizons for cooperation and development.\nThe platform also supports tournaments and sports initiatives, and uses media, design and digital technologies in the service of the sport, contributing new ideas that widen participation and raise the level of play.\nCaptain Taekwondo believes that developing the sport is a shared responsibility, so it extends a hand of cooperation to every coach, institution or entity seeking to make a real contribution and leave a positive mark on the world of Taekwondo.\nOur goal is to be part of every step that helps develop the game, support its champions, and build a better future for Taekwondo.",
           facts: ["Chief Executive and Technical Officer of the platform: 🥋 Captain: Hosny Rashad", "Administrative and Marketing Head of the platform: 🥋 Captain: Rashad Ahmed"] }
       } },
-    { name: "منصة الكابتن عادل SportLand", role: "منصة التسجيل",
-      about: "المسؤولة عن تسجيل البيانات والتحكيم", phone: "+216 44 162 995", initial: "ع",
-      photo: "", logo: "assets/sportland.webp",
-      details: {
-        bio: "الشريك التقني وإدارة المنافسات الإلكترونية\nتُسهم منصة SportLand في تطوير منظومة المنافسات الرياضية الرقمية، من خلال توفير الحلول التقنية اللازمة لاستقبال فيديوهات اللاعبين، وإتاحة التحكيم الإلكتروني، وإدارة النتائج وتنظيمها، بما يساعد على تسهيل إجراءات المشاركة وتحسين كفاءة إدارة البطولات.",
-        en: { bio: "Technical partner and electronic competition management\nThe SportLand platform contributes to developing the digital sports competition system by providing the technical solutions needed to receive athletes' videos, enable electronic judging, and manage and organize results, helping to simplify participation procedures and improve the efficiency of tournament management." }
-      } }
   ],
 
   /* تفاصيل كل منظم: أضف داخل كل عنصر في team الحقل التالي (الفارغ = «تُضاف التفاصيل قريبًا»):

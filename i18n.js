@@ -118,8 +118,8 @@
 
     /* التسجيل */
     "خطوات التسجيل وإرسال المشاركة": "Registration and Submitting Your Entry",
-    "يتم التسجيل من خلال منصة الكابتن عادل SportLand، وفق الرابط وطريقة الإرسال اللتين ستعلنهما الإدارة رسميًا. يُرجى تجهيز البيانات التالية قبل بدء التسجيل.":
-      "Registration is through Captain Adel's SportLand platform, using the link and submission method the management will announce officially. Please prepare the following details before you start.",
+    "يتم التسجيل من خلال منصة كابتن تايكوندو، وفق الرابط وطريقة الإرسال اللتين ستعلنهما الإدارة رسميًا. يُرجى تجهيز البيانات التالية قبل بدء التسجيل.":
+      "Registration is through the Captain Taekwondo platform, using the link and submission method the management will announce officially. Please prepare the following details before you start.",
     "الاسم الكامل للاعب": "Athlete's full name",
     "الفئة العمرية": "Age category",
     "الحزام والمستوى": "Belt and level",
@@ -131,7 +131,7 @@
     "رابط التسجيل": "Registration link",
     "QR التسجيل": "Registration QR",
     "يُضاف لاحقًا": "Added later",
-    "التسجيل عبر منصة SportLand": "Register through the SportLand platform",
+    "التسجيل عبر منصة كابتن تايكوندو": "Register through the Captain Taekwondo platform",
     "افتح رابط التسجيل": "Open registration link",
     "الرابط يُضاف قريبًا": "Link coming soon",
     "خطوات التسجيل": "Registration steps",
@@ -186,9 +186,9 @@
     "الحكم الدولي علي نور": "International referee Ali Nour",
     "المسؤول عن التحكيم والتنظيم الفني": "In charge of refereeing and technical organization",
     "رئيس لجنة الحكام والمسؤول عن الإشراف التحكيمي": "Head of the referees' committee, in charge of refereeing supervision",
-    "منصة الكابتن عادل SportLand": "Captain Adel's SportLand platform",
+    "منصة كابتن تايكوندو": "the Captain Taekwondo platform",
     "منصة التسجيل": "Registration platform",
-    "المسؤولة عن تسجيل البيانات والتحكيم": "Responsible for data registration and judging",
+    "المسؤولة عن الدعاية والتسويق والتصميم الفني والتقني وتسجيل البيانات، والتحكيم عبر منظومة كابتن تايكوندو للتحكيم الرقمي CTJ": "Responsible for promotion, marketing, technical and design work, data registration, and judging through the CTJ – Captain Taekwondo Digital Judging System",
     "المسؤول الدعائي والتسويقي للبطولة والتصميم الفني والتقني": "In charge of the championship's promotion, marketing, and design and technical work",
     "اتصال": "Call", "واتساب": "WhatsApp",
     "الراعي الرسمي للبطولة": "Official championship sponsor",
@@ -243,8 +243,9 @@
     "أنا بطل، والأبطال لا يعرفون حدودًا. شاهد الفيديوهات الإرشادية وسجّل مشاركتك.": "I am a champion, and champions know no limits. Watch the guide videos and register.",
     "التنقل الرئيسي": "Main navigation",
     "شعار Captain Taekwondo": "Captain Taekwondo logo",
+    "شعار منظومة كابتن تايكوندو للتحكيم الرقمي CTJ": "CTJ – Captain Taekwondo Digital Judging System logo",
+    "منظومة كابتن تايكوندو للتحكيم الرقمي CTJ": "CTJ – Captain Taekwondo Digital Judging System",
     "شعار بطولة أساسيات البارا تايكوندو": "Arab Para Taekwondo Basics Championship logo",
-    "شعار SportLand": "SportLand logo",
     "شعار البطولة": "Championship logo",
     "تكبير ملصق البطولة": "Enlarge the championship poster",
     "ملصق البطولة": "Championship poster",
@@ -316,8 +317,7 @@
     "رمز QR للانضمام إلى جروب الواتساب": "QR code to join the WhatsApp group",
     "تكبير بطاقة المدرب": "Enlarge the coach card",
     "صورة الكابتن الفلسطيني إبراهيم الحاج": "Photo of Palestinian Captain Ibrahim Al-Haj",
-    "صورة الحكم الدولي علي نور": "Photo of international referee Ali Nour",
-    "شعار منصة الكابتن عادل SportLand": "Logo of Captain Adel's SportLand platform"
+    "صورة الحكم الدولي علي نور": "Photo of international referee Ali Nour"
   };
 
   /* ---------------- المحرّك ---------------- */

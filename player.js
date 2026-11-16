@@ -37,7 +37,7 @@
     ar: {
       title: "تسجيل اللاعب وإصدار بطاقة البطل",
       lead: "املأ بيانات اللاعب وستظهر بطاقته أمامك فورًا. بعد الحفظ يحصل اللاعب على كوده الفريد وتحمّل البطاقة بصورة عالية الجودة.",
-      sportland: "هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منصة SportLand بعد فتح رابطها رسميًا.",
+      sportland: "هذا تسجيل مبدئي لبيانات اللاعب وإصدار بطاقته. رفع فيديو المشاركة والتحكيم يتمّان عبر منظومة كابتن تايكوندو للتحكيم الرقمي CTJ بعد فتح رابطها رسميًا.",
       guideBtn: "شاهد شرح التسجيل مع مريم", guideT: "شرح التسجيل مع مريم", guideClose: "إغلاق", guideMin: "تصغير الفيديو", guideMax: "تكبير", guideBack: "رجوع 10 ثوانٍ ⏪", guideFwd: "⏩ تقديم 10 ثوانٍ", guideBackS: "10 ⏪", guideFwdS: "⏩ 10", guideWide: "↔ بالعرض", guideTall: "↕ بالطول",
       back: "العودة للموقع", lang: "English", choose: "اختر",
       titleSup: "تسجيل لاعب داعم وإصدار بطاقته", g2sup: "الحزام",
@@ -92,7 +92,7 @@
     en: {
       title: "Player Registration & Champion Card",
       lead: "Fill in the player's details and the card appears live. After saving, the player gets a unique code and a high-quality card to download.",
-      sportland: "This is the initial registration of the player's details and card. Uploading the performance video and judging take place on the SportLand platform once its link is officially opened.",
+      sportland: "This is the initial registration of the player's details and card. Uploading the performance video and judging take place on the CTJ – Captain Taekwondo Digital Judging System once its link is officially opened.",
       guideBtn: "Watch the registration guide (Arabic)", guideT: "Registration guide with Mariam", guideClose: "Close", guideMin: "Minimize video", guideMax: "Enlarge", guideBack: "⏪ Back 10 seconds", guideFwd: "Forward 10 seconds ⏩", guideBackS: "⏪ 10", guideFwdS: "10 ⏩", guideWide: "↔ Landscape", guideTall: "↕ Portrait",
       back: "Back to site", lang: "عربي", choose: "Choose",
       titleSup: "Supporting Player Registration & Card", g2sup: "Belt",
