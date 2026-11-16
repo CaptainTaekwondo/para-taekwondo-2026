@@ -5,7 +5,7 @@
   const COUNTRIES = [["dz", "الجزائر", "Algeria"], ["bh", "البحرين", "Bahrain"], ["km", "جزر القمر", "Comoros"], ["dj", "جيبوتي", "Djibouti"], ["eg", "مصر", "Egypt"], ["iq", "العراق", "Iraq"], ["jo", "الأردن", "Jordan"], ["kw", "الكويت", "Kuwait"], ["lb", "لبنان", "Lebanon"], ["ly", "ليبيا", "Libya"], ["mr", "موريتانيا", "Mauritania"], ["ma", "المغرب", "Morocco"], ["om", "عُمان", "Oman"], ["ps", "فلسطين", "Palestine"], ["qa", "قطر", "Qatar"], ["sa", "السعودية", "Saudi Arabia"], ["so", "الصومال", "Somalia"], ["sd", "السودان", "Sudan"], ["sy", "سوريا", "Syria"], ["tn", "تونس", "Tunisia"], ["ae", "الإمارات", "UAE"], ["ye", "اليمن", "Yemen"]];
   const CN = c => COUNTRIES.find(x => x[0] === c);
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
-  const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((window.LEADERS_CONFIG && window.LEADERS_CONFIG.api) || "");
+  const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((typeof LEADERS_CONFIG !== "undefined" && LEADERS_CONFIG.api) || "");
   const $ = s => document.querySelector(s);
   const S = { token: "", email: "", subs: [], pub: [], tab: "pending", ed: null };
   const ERR = { auth: "الكود غير صحيح أو انتهت صلاحيته.", bad_email: "اكتب بريدًا صحيحًا.", mail: "تعذّر إرسال البريد، حاول بعد قليل.", locked: "محاولات كثيرة، حاول بعد 15 دقيقة.", not_setup: "الباك إند غير مُجهّز (شغّل setup).", missing: "أكمل الاسم والمنصب والدولة.", bad_photo: "تعذّر قبول الصورة.", forbidden: "ملف غير مسموح." };
@@ -39,27 +39,27 @@
     tick(); cool = setInterval(tick, 1000);
   }
   async function sendCode(em) {
-    const b = $("#sendCodeBtn"); b.disabled = true; loginErr("");
+    const b = $("#sendCodeBtn"), t0 = b.textContent; b.disabled = true; b.textContent = "جارٍ الإرسال... (قد يستغرق عدة ثوانٍ)"; loginErr("");
     try {
       await call("admin_code_request", { email: em }); S.email = em;
       $("#emailForm").hidden = true; $("#codeForm").hidden = false; $("#code").value = ""; $("#code").focus();
       $("#loginIntro").textContent = "إن كان البريد مسجَّلًا لدينا فقد أرسلنا كود تأكيد من 6 أرقام. أدخله هنا (صالح 10 دقائق).";
       startCooldown();
     } catch (err) { loginErr(errText(err)); }
-    b.disabled = false;
+    b.disabled = false; b.textContent = t0;
   }
   $("#emailForm").addEventListener("submit", e => { e.preventDefault(); const em = $("#adminEmail").value.trim().toLowerCase(); if (em) sendCode(em); });
   $("#resendBtn").addEventListener("click", () => { if (S.email) sendCode(S.email); });
   $("#changeEmailBtn").addEventListener("click", () => { clearInterval(cool); $("#codeForm").hidden = true; $("#emailForm").hidden = false; loginErr(""); $("#loginIntro").textContent = "سجّل بريد كابتن تايكوندو وسيصله كود تأكيد للدخول."; $("#adminEmail").focus(); });
   $("#codeForm").addEventListener("submit", async e => {
     e.preventDefault(); const c = $("#code").value.replace(/\D/g, ""); if (c.length !== 6) { loginErr("اكتب الكود المكوَّن من 6 أرقام."); return; }
-    const b = $("#loginBtn"); b.disabled = true; loginErr("");
+    const b = $("#loginBtn"), t0 = b.textContent; b.disabled = true; b.textContent = "جارٍ التحقق..."; loginErr("");
     try {
       const j = await call("admin_code_verify", { email: S.email, code: c });
       S.token = j.token; try { sessionStorage.setItem("ld_t", j.token); } catch (x) {}
       await load(); showPanel();
     } catch (err) { S.token = ""; loginErr(errText(err)); }
-    b.disabled = false;
+    b.disabled = false; b.textContent = t0;
   });
   function showPanel() { $("#login").hidden = true; $("#panel").hidden = false; $("#outBtn").hidden = false; }
   function expire() {                                           // انتهت الجلسة أو أُبطلت: ارجع لشاشة الدخول

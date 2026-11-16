@@ -105,7 +105,7 @@
   const ORDER = COUNTRIES.map(c => c[0]);
   const PH = COUNTRIES.map(c => ({ id: "ph-" + c[0], placeholder: true, approved: true, nameAr: "سيتم الإعلان قريبًا", nameEn: "To be announced", countryCode: c[0], countryAr: c[1], countryEn: c[2], positionAr: "رئيس البارا تايكوندو", positionEn: "President of Para Taekwondo" }));
 
-  const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((window.LEADERS_CONFIG && window.LEADERS_CONFIG.api) || "");
+  const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((typeof LEADERS_CONFIG !== "undefined" && LEADERS_CONFIG.api) || "");
   const CK = "ld_pub_v1";
   let REMOTE = [], ALL = [], REAL = [];
   const okPhoto = u => /^https:\/\/(lh3\.googleusercontent\.com|drive\.google\.com)\//.test(u || "") ? u : "";
@@ -121,12 +121,21 @@
     ALL = list; REAL = list.filter(x => !x.placeholder);
   }
   rebuild();
-  function loadRemote() {
+  function loadCache() {                                        // آخر قائمة منشورة محفوظة على الجهاز: عرض فوري بدون انتظار الشبكة
+    if (!API || DEMO) return;
+    try { const c = JSON.parse(localStorage.getItem(CK) || "null"); if (c && Array.isArray(c)) { REMOTE = c; rebuild(); } } catch (e) {}
+  }
+  function loadRemote() {                                       // يحدّث القائمة في الخلفية، ويعيد true فقط لو تغيّرت
     if (!API || DEMO) return Promise.resolve(false);
-    try { const c = JSON.parse(sessionStorage.getItem(CK) || "null"); if (c && Array.isArray(c)) { REMOTE = c; rebuild(); } } catch (e) {}
-    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 8000);
+    const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 25000);
     return fetch(API + (API.indexOf("?") < 0 ? "?" : "&") + "action=public", { signal: ctl.signal, cache: "no-store" })
-      .then(r => r.json()).then(j => { clearTimeout(to); if (j && j.ok && Array.isArray(j.leaders)) { REMOTE = j.leaders; rebuild(); try { sessionStorage.setItem(CK, JSON.stringify(REMOTE)); } catch (e) {} return true; } return false; })
+      .then(r => r.json()).then(j => {
+        clearTimeout(to);
+        if (!(j && j.ok && Array.isArray(j.leaders))) return false;
+        const changed = JSON.stringify(REMOTE) !== JSON.stringify(j.leaders);
+        REMOTE = j.leaders; rebuild(); try { localStorage.setItem(CK, JSON.stringify(REMOTE)); } catch (e) {}
+        return changed;
+      })
       .catch(() => { clearTimeout(to); return false; });
   }
 
@@ -334,9 +343,8 @@
   // حالة التحميل (هياكل عظمية) ثم العرض
   const grid = $("#grid");
   if (API && !DEMO) {
-    /* هياكل عظمية حتى تصل القائمة المنشورة (حد أقصى 8 ثوانٍ) كي لا يظهر الافتراضي ثم يتبدّل */
-    renderStatic();
-    for (let i = 0; i < 6; i++) grid.appendChild(h("div", { class: "sk" }));
-    loadRemote().then(() => renderAll());
+    /* عرض فوري (من آخر نسخة محفوظة أو الافتراضيات)، ثم تحديث هادئ عند وصول القائمة المنشورة */
+    loadCache(); renderAll();
+    loadRemote().then(changed => { if (changed) { setupFilters(); renderStats(); renderGrid(); } });
   } else requestAnimationFrame(() => setTimeout(renderAll, DEMO ? 250 : 0));
 })();
