@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="style.css?v=20261115a">
 <link rel="stylesheet" href="leaders.css?v=15">
 <link rel="stylesheet" href="leaders-register.css?v=12">
-<link rel="stylesheet" href="leaders-admin.css?v=5">
+<link rel="stylesheet" href="leaders-admin.css?v=6">
 </head>
 <body class="ld lr adm">
 <nav class="cnav" aria-label="Navigation">
@@ -48,6 +48,7 @@
       <button type="button" role="tab" data-tab="pending" aria-selected="true">بانتظار المراجعة <b id="nPend">0</b></button>
       <button type="button" role="tab" data-tab="published" aria-selected="false">المنشور <b id="nPub">0</b></button>
       <button type="button" role="tab" data-tab="done" aria-selected="false">تمت معالجتها <b id="nDone">0</b></button>
+      <button type="button" role="tab" data-tab="order" aria-selected="false">ترتيب البطاقات</button>
       <button type="button" class="tbtn" id="refreshBtn">تحديث</button>
     </div>
     <div id="list" class="alist" aria-live="polite"></div>
@@ -57,7 +58,8 @@
   <section id="editor" class="card" hidden aria-labelledby="edT"></section>
 </main>
 <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+<script src="leaders-core.js?v=1"></script>
 <script src="leaders-config.js?v=2"></script>
-<script src="leaders-admin.js?v=32"></script>
+<script src="leaders-admin.js?v=40"></script>
 </body>
 </html>

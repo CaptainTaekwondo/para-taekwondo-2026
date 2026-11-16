@@ -7,7 +7,7 @@
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
   const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((typeof LEADERS_CONFIG !== "undefined" && LEADERS_CONFIG.api) || "");
   const $ = s => document.querySelector(s);
-  const S = { token: "", email: "", subs: [], pub: [], tab: "pending", ed: null };
+  const S = { token: "", email: "", subs: [], pub: [], saved: [], orderIds: null, orderDirty: false, tab: "pending", ed: null };
   const ERR = { auth: "الكود غير صحيح أو انتهت صلاحيته.", bad_email: "اكتب بريدًا صحيحًا.", mail: "تعذّر إرسال البريد، حاول بعد قليل.", locked: "محاولات كثيرة، حاول بعد 15 دقيقة.", not_setup: "الباك إند غير مُجهّز (شغّل setup).", missing: "أكمل الاسم والمنصب والدولة.", bad_photo: "تعذّر قبول الصورة.", forbidden: "ملف غير مسموح." };
 
   function h(tag, attrs, kids) {
@@ -86,7 +86,7 @@
       ul.appendChild(h("li", {}, [h("div", {}, [h("b", { text: it[0] }), h("code", { dir: "ltr", text: it[1] })]), h("div", { class: "prow" }, [copy, open])]));
     });
   })();
-  async function load() { const j = await call("admin_list"); S.subs = j.submissions || []; S.pub = j.published || []; renderLists(); }
+  async function load() { const j = await call("admin_list"); S.subs = j.submissions || []; S.pub = j.published || []; S.saved = Array.isArray(j.order) ? j.order : []; renderLists(); }
 
   /* ---------- القوائم ---------- */
   const pending = () => S.subs.filter(s => s.status === "pending");
@@ -102,6 +102,7 @@
     const bd = $("#pendBadge"); bd.hidden = !p.length; bd.textContent = p.length; document.title = (p.length ? "(" + p.length + ") " : "") + "إدارة القيادات — بطولة الأساسيات 2026";
     document.querySelectorAll("#tabs [role=tab]").forEach(b => b.setAttribute("aria-selected", String(b.dataset.tab === S.tab)));
     const box = $("#list"); box.textContent = "";
+    if (S.tab === "order") { $("#listEmpty").hidden = true; renderOrder(box); return; }
     const rows = S.tab === "pending" ? p : S.tab === "done" ? d : S.pub;
     $("#listEmpty").hidden = rows.length > 0; $("#listEmpty").textContent = S.tab === "pending" ? "لا توجد تسجيلات بانتظار المراجعة." : S.tab === "done" ? "لا توجد تسجيلات معالجة بعد." : "لا توجد بطاقات منشورة بعد.";
     rows.forEach(x => box.appendChild(S.tab === "published" ? pubRow(x) : subRow(x)));
@@ -134,6 +135,48 @@
   }
   $("#tabs").addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (!b) return; S.tab = b.dataset.tab; renderLists(); });
 
+  /* ---------- ترتيب البطاقات ---------- */
+  const visibleCards = () => LeadersCore.merge(S.pub.filter(x => x.active), S.saved);
+  function orderIds(cards) {                                    // يبقي ترتيبك غير المحفوظ ويضيف ما استجدّ في النهاية
+    const ids = cards.map(c => c.id);
+    if (!S.orderDirty || !S.orderIds) return ids;
+    const keep = S.orderIds.filter(i => ids.indexOf(i) >= 0);
+    return keep.concat(ids.filter(i => keep.indexOf(i) < 0));
+  }
+  function renderOrder(box) {
+    const cards = visibleCards(), byId = new Map(cards.map(c => [c.id, c]));
+    S.orderIds = orderIds(cards);
+    const bar = h("div", { class: "orderbar" }, []);
+    const save = h("button", { class: "btn fill", type: "button", text: S.orderDirty ? "حفظ الترتيب" : "الترتيب محفوظ" }); save.disabled = !S.orderDirty;
+    const reset = h("button", { class: "btn", type: "button", text: "الترتيب الافتراضي (حسب الدولة)" });
+    bar.append(h("p", { class: "muted", text: "حرّك البطاقات بالأسهم، ثم اضغط «حفظ الترتيب» ليظهر في صفحة القيادات. البطاقة الجديدة التي تحل محل أخرى ترث مكانها." }), h("div", { class: "prow" }, [save, reset]));
+    save.addEventListener("click", async () => {
+      save.disabled = true; save.textContent = "جارٍ الحفظ...";
+      try { await call("admin_order_save", { order: S.orderIds }); S.saved = S.orderIds.slice(); S.orderDirty = false; toast("تم حفظ الترتيب ✓"); renderLists(); }
+      catch (e) { toast(errText(e), true); save.disabled = false; save.textContent = "حفظ الترتيب"; }
+    });
+    reset.addEventListener("click", async () => {
+      if (!confirm("العودة للترتيب الافتراضي (حسب الدولة)؟ سيُمسح الترتيب المحفوظ.")) return;
+      try { await call("admin_order_save", { order: [] }); S.saved = []; S.orderIds = null; S.orderDirty = false; toast("رجع الترتيب الافتراضي"); renderLists(); } catch (e) { toast(errText(e), true); }
+    });
+    box.appendChild(bar);
+    const list = h("ol", { class: "ordlist" }, []);
+    const move = (i, d) => { const a = S.orderIds, j = i + d; if (j < 0 || j >= a.length) return; const t = a[i]; a[i] = a[j]; a[j] = t; S.orderDirty = true; S.focus = { id: t, d }; renderLists(); };
+    S.orderIds.forEach((id, i) => {
+      const c = byId.get(id); if (!c) return;
+      const up = h("button", { class: "btn sm", type: "button", "aria-label": "تحريك " + c.nameAr + " للأعلى", text: "▲" }), dn = h("button", { class: "btn sm", type: "button", "aria-label": "تحريك " + c.nameAr + " للأسفل", text: "▼" });
+      up.disabled = i === 0; dn.disabled = i === S.orderIds.length - 1;
+      up.addEventListener("click", () => move(i, -1)); dn.addEventListener("click", () => move(i, 1));
+      up.dataset.id = dn.dataset.id = id; up.dataset.d = "-1"; dn.dataset.d = "1";
+      list.appendChild(h("li", { class: "ordrow" + (c.placeholder ? " ph" : "") }, [h("b", { class: "ordn", text: String(i + 1) }),
+        h("span", { class: "ctry" }, [flagImg(c.countryCode || "un"), h("span", { text: c.countryAr })]),
+        h("span", { class: "ordname", text: c.placeholder ? "بطاقة افتراضية" : c.nameAr }),
+        h("span", { class: "tag " + (c.placeholder ? "off" : "live"), text: c.placeholder ? "افتراضية" : "منشورة" }),
+        h("span", { class: "prow" }, [up, dn])]));
+    });
+    box.appendChild(list);
+    if (S.focus) { const t = list.querySelector('button[data-id="' + S.focus.id + '"][data-d="' + S.focus.d + '"]:not(:disabled)') || list.querySelector('button[data-id="' + S.focus.id + '"]:not(:disabled)'); if (t) t.focus({ preventScroll: false }); S.focus = null; }
+  }
   /* ---------- المحرّر ---------- */
   const newPhoto = () => ({ img: null, z: 1, ox: 0, oy: 0, dirty: false, clear: false, orig: null });
   function targets(cc, editId) {

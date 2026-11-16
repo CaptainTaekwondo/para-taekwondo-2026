@@ -57,3 +57,13 @@
 .links li>div:first-child{display:flex;flex-direction:column;gap:.25rem;min-width:0;flex:1 1 260px}
 .links code{color:var(--sky);font-size:.85rem;word-break:break-all;text-align:start}
 .links .btn{min-height:44px;text-decoration:none}
+.orderbar{margin-bottom:.8rem}.orderbar .muted{padding:.2rem 0 .8rem;text-align:start}.orderbar .prow{justify-content:flex-start}
+.ordlist{list-style:none;margin:0;padding:0;display:grid;gap:.5rem}
+.ordrow{display:grid;grid-template-columns:2.6rem minmax(110px,1fr) minmax(0,1.4fr) auto auto;gap:.7rem;align-items:center;padding:.5rem .9rem;border:1px solid rgba(244,203,85,.28);border-radius:16px;background:linear-gradient(180deg,rgba(11,42,119,.35),rgba(6,21,64,.65))}
+.ordrow.ph{border-style:dashed;opacity:.9}
+.ordn{display:grid;place-items:center;width:2.2rem;height:2.2rem;border-radius:50%;background:var(--foil);color:#201400;font:800 .95rem "Inter",sans-serif}
+.ordname{font-weight:800;color:var(--gold1);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ordrow .prow{flex-wrap:nowrap;gap:.4rem}
+.ordrow .btn{min-width:44px;min-height:44px;padding:0}
+.ordrow .btn:disabled{opacity:.35;cursor:default}
+@media(max-width:700px){.ordrow{grid-template-columns:2.2rem 1fr auto;grid-template-areas:"n c b" "n nm b";row-gap:.2rem}.ordrow .ordn{grid-area:n}.ordrow .ctry{grid-area:c}.ordrow .ordname{grid-area:nm}.ordrow .tag{display:none}.ordrow .prow{grid-area:b}}

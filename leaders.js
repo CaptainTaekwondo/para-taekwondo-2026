@@ -100,30 +100,15 @@
   const raw = (window.LEADERS_DATA && Array.isArray(window.LEADERS_DATA.leaders)) ? window.LEADERS_DATA.leaders : [];
   const staticReal = raw.filter(x => x && x.approved === true && x.nameAr);
 
-  /* ---- بطاقة افتراضية لرئيس البارا في كل دولة عربية (تُستبدل عند النشر من صفحة الإدارة) ---- */
-  const COUNTRIES = [["jo", "الأردن", "Jordan"], ["ae", "الإمارات", "UAE"], ["bh", "البحرين", "Bahrain"], ["tn", "تونس", "Tunisia"], ["dz", "الجزائر", "Algeria"], ["dj", "جيبوتي", "Djibouti"], ["sa", "السعودية", "Saudi Arabia"], ["sd", "السودان", "Sudan"], ["sy", "سوريا", "Syria"], ["so", "الصومال", "Somalia"], ["iq", "العراق", "Iraq"], ["om", "عُمان", "Oman"], ["ps", "فلسطين", "Palestine"], ["qa", "قطر", "Qatar"], ["km", "جزر القمر", "Comoros"], ["kw", "الكويت", "Kuwait"], ["lb", "لبنان", "Lebanon"], ["ly", "ليبيا", "Libya"], ["eg", "مصر", "Egypt"], ["ma", "المغرب", "Morocco"], ["mr", "موريتانيا", "Mauritania"], ["ye", "اليمن", "Yemen"]];
-  const ORDER = COUNTRIES.map(c => c[0]);
-  const PH = COUNTRIES.map(c => ({ id: "ph-" + c[0], placeholder: true, approved: true, nameAr: "سيتم الإعلان قريبًا", nameEn: "To be announced", countryCode: c[0], countryAr: c[1], countryEn: c[2], positionAr: "رئيس البارا تايكوندو", positionEn: "President of Para Taekwondo" }));
-
+  /* ---- بطاقات الدول الافتراضية + الدمج + الترتيب المحفوظ: المنطق المشترك في leaders-core.js ---- */
+  const C = window.LeadersCore;
   const API = ((isLocal && /[?&]api=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((typeof LEADERS_CONFIG !== "undefined" && LEADERS_CONFIG.api) || "");
-  const CK = "ld_pub_v1";
-  let REMOTE = [], ALL = [], REAL = [];
-  const okPhoto = u => /^https:\/\/(lh3\.googleusercontent\.com|drive\.google\.com)\//.test(u || "") ? u : "";
-  const clean = x => (x && x.approved === true && x.nameAr) ? Object.assign({}, x, { photo: okPhoto(x.photo) || (/^assets\//.test(x.photo || "") ? x.photo : ""), achievements: (x.achievements && typeof x.achievements === "object") ? x.achievements : { ar: [], en: [] }, contact: (x.contact && typeof x.contact === "object") ? x.contact : {} }) : null;
-  /* يبني القائمة المعروضة: الافتراضيات + المنشور، مع تطبيق «استبدال بطاقة» حسب ترتيب النشر */
-  function rebuild() {
-    const real = (DEMO ? demoData() : staticReal.concat(REMOTE)).map(clean).filter(Boolean);
-    real.sort((a, b) => String(a.updated || "").localeCompare(String(b.updated || "")));
-    let list = PH.slice();
-    real.forEach(x => { const rep = String(x.replaces || "").split(",").filter(Boolean); list = list.filter(y => y.id !== x.id && rep.indexOf(y.id) < 0); list.push(x); });
-    const idx = c => { const i = ORDER.indexOf(c.countryCode); return i < 0 ? 99 : i; };
-    list.sort((a, b) => idx(a) - idx(b) || (a.placeholder ? 1 : 0) - (b.placeholder ? 1 : 0) || String(a.nameAr).localeCompare(String(b.nameAr), "ar"));
-    ALL = list; REAL = list.filter(x => !x.placeholder);
-  }
-  rebuild();
-  function loadCache() {                                        // آخر قائمة منشورة محفوظة على الجهاز: عرض فوري بدون انتظار الشبكة
+  const CK = "ld_pub_v2";
+  let REMOTE = [], SAVED = [], ALL = [], REAL = [];
+  function rebuild() { ALL = C.merge(DEMO ? demoData() : staticReal.concat(REMOTE), DEMO ? [] : SAVED); REAL = ALL.filter(x => !x.placeholder); }
+  rebuild();  function loadCache() {                                        // آخر قائمة منشورة محفوظة على الجهاز: عرض فوري بدون انتظار الشبكة
     if (!API || DEMO) return;
-    try { const c = JSON.parse(localStorage.getItem(CK) || "null"); if (c && Array.isArray(c)) { REMOTE = c; rebuild(); } } catch (e) {}
+    try { const c = JSON.parse(localStorage.getItem(CK) || "null"); if (c && Array.isArray(c.leaders)) { REMOTE = c.leaders; SAVED = Array.isArray(c.order) ? c.order : []; rebuild(); } } catch (e) {}
   }
   function loadRemote() {                                       // يحدّث القائمة في الخلفية، ويعيد true فقط لو تغيّرت
     if (!API || DEMO) return Promise.resolve(false);
@@ -132,8 +117,8 @@
       .then(r => r.json()).then(j => {
         clearTimeout(to);
         if (!(j && j.ok && Array.isArray(j.leaders))) return false;
-        const changed = JSON.stringify(REMOTE) !== JSON.stringify(j.leaders);
-        REMOTE = j.leaders; rebuild(); try { localStorage.setItem(CK, JSON.stringify(REMOTE)); } catch (e) {}
+        const order = Array.isArray(j.order) ? j.order : [], changed = JSON.stringify([REMOTE, SAVED]) !== JSON.stringify([j.leaders, order]);
+        REMOTE = j.leaders; SAVED = order; rebuild(); try { localStorage.setItem(CK, JSON.stringify({ leaders: REMOTE, order: SAVED })); } catch (e) {}
         return changed;
       })
       .catch(() => { clearTimeout(to); return false; });
