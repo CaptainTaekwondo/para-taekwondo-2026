@@ -7,10 +7,14 @@
   let lang = "ar";
   try { const l = localStorage.getItem("lang"); if (l === "en" || l === "ar") lang = l; } catch (e) {}
   let key = ""; try { key = sessionStorage.getItem("pta_adm_key") || ""; } catch (e) {}
+  let token = ""; try { token = sessionStorage.getItem("pta_adm_tok") || ""; } catch (e) {}
+  let mail = "", step = "email", sending = false;          // دخول بالبريد: email ← code ، أو بالمفتاح: key
+  const authBody = () => (token ? { token } : { key });
+  const clearAuth = () => { key = ""; token = ""; try { sessionStorage.removeItem("pta_adm_key"); sessionStorage.removeItem("pta_adm_tok"); } catch (e) {} };
   let data = null, contacts = null, tab = "sum", busy = false, msg = "", onlyInterested = false;
 
   const X = {
-    ar: { title: "لوحة نتائج استبيان المدربين", sub: "بطولة الأساسيات العربية للبارا تايكوندو 2026", pass: "مفتاح الإدارة", enter: "دخول", out: "خروج", lang: "English", langAria: "Switch to English",
+    ar: { title: "لوحة نتائج استبيان المدربين", sub: "بطولة الأساسيات العربية للبارا تايكوندو 2026", pass: "مفتاح الإدارة", emailLbl: "بريد كابتن تايكوندو", sendCode: "أرسل كود التأكيد", codeLbl: "كود التأكيد (6 أرقام)", codeSent: "إن كان البريد معتمدًا فقد أرسلنا إليه كودًا صالحًا 10 دقائق (تفقّد البريد المزعج أيضًا).", verify: "تأكيد ودخول", badCode: "الكود غير صحيح أو انتهت صلاحيته.", badMail: "اكتب بريدًا صحيحًا.", useKey: "الدخول بالمفتاح بدلًا من ذلك", useMail: "الدخول بكود البريد", changeMail: "تغيير البريد", mailFail: "تعذّر إرسال البريد، أعد المحاولة.", enter: "دخول", out: "خروج", lang: "English", langAria: "Switch to English",
       loading: "جارٍ التحميل…", noApi: "لم يُربط الحفظ بعد (survey-config.js فارغ)، لذلك لا توجد بيانات لعرضها.", auth: "المفتاح غير صحيح.", locked: "تم قفل الدخول مؤقتًا بعد محاولات خاطئة. أعد المحاولة بعد 15 دقيقة.",
       notSetup: "الخلفية لم تُجهَّز بعد (شغّل setup في Apps Script).", net: "تعذّر الاتصال بالخلفية.", other: "حدث خطأ غير متوقع.",
       tabs: { sum: "النتائج والرسوم", txt: "المقترحات النصية", col: "بيانات التواصل", raw: "الإجابات", exp: "التصدير" },
@@ -18,7 +22,7 @@
       answers: "إجابة", of: "من", noText: "لا توجد مقترحات نصية بعد.", noRows: "لا توجد بيانات بعد.", reload: "تحديث", load: "عرض البيانات", onlyInt: "المهتمون بالتعاون فقط (إجابات السؤال 10 الأربع الأولى)",
       colLead: "بيانات التواصل مفصولة عن الإجابات ولا تُجلب إلا عند الطلب، وبعد موافقة صاحبها فقط.", date: "التاريخ", name: "الاسم", email: "البريد", phone: "الهاتف / واتساب", code: "كود المدرب", interest: "درجة الرغبة",
       expAns: "تصدير الإجابات (CSV لـ Excel)", expCon: "تصدير الراغبين في التعاون (CSV)", expNote: "ملفات CSV بترميز UTF-8 تُفتح مباشرة في Excel بالعربية. الإجابات بدون أي بيانات تواصل.", multiNote: "اختيار متعدد: النسب من إجمالي المشاركين", lg: "اللغة", improve: "ما أكثر نقطة يتمنون تحسينها", know: "ما يعرفونه عن المنظومة", ideas: "أفكار أخرى للتطوير" },
-    en: { title: "Coaches Survey Results", sub: "Arab Para Taekwondo Basics Championship 2026", pass: "Admin key", enter: "Sign in", out: "Sign out", lang: "العربية", langAria: "التبديل إلى العربية",
+    en: { title: "Coaches Survey Results", sub: "Arab Para Taekwondo Basics Championship 2026", pass: "Admin key", emailLbl: "Captain Taekwondo email", sendCode: "Send verification code", codeLbl: "Verification code (6 digits)", codeSent: "If the email is authorized, we sent it a code valid for 10 minutes (check spam too).", verify: "Verify & sign in", badCode: "The code is incorrect or has expired.", badMail: "Enter a valid email.", useKey: "Use the admin key instead", useMail: "Sign in with an email code", changeMail: "Change email", mailFail: "Could not send the email, please retry.", enter: "Sign in", out: "Sign out", lang: "العربية", langAria: "التبديل إلى العربية",
       loading: "Loading…", noApi: "Saving is not connected yet (survey-config.js is empty), so there is no data to show.", auth: "Incorrect key.", locked: "Sign-in is temporarily locked after failed attempts. Try again in 15 minutes.",
       notSetup: "The backend is not set up yet (run setup in Apps Script).", net: "Could not reach the backend.", other: "Unexpected error.",
       tabs: { sum: "Results & charts", txt: "Written suggestions", col: "Contacts", raw: "Responses", exp: "Export" },
@@ -45,10 +49,10 @@
   async function fetchData(which) {
     if (!API) { msg = t().noApi; return null; }
     try {
-      const r = await post({ action: which, key });
+      const r = await post(Object.assign({ action: which }, authBody()));
       if (r && r.ok) return r;
       msg = r && r.error === "auth" ? t().auth : r && r.error === "locked" ? t().locked : r && r.error === "not_setup" ? t().notSetup : t().other;
-      if (r && (r.error === "auth" || r.error === "locked")) { key = ""; try { sessionStorage.removeItem("pta_adm_key"); } catch (e) {} }
+      if (r && (r.error === "auth" || r.error === "locked")) clearAuth();
     } catch (e) { msg = t().net; }
     return null;
   }
@@ -56,7 +60,7 @@
     busy = true; msg = ""; view();
     const r = await fetchData("admin_data");
     busy = false;
-    if (r) { data = r.rows; try { sessionStorage.setItem("pta_adm_key", key); } catch (e) {} }
+    if (r) { data = r.rows; try { if (token) sessionStorage.setItem("pta_adm_tok", token); else sessionStorage.setItem("pta_adm_key", key); } catch (e) {} }
     view();
   }
   async function loadContacts() {
@@ -87,14 +91,50 @@
     root.append(h("h1", { class: "foil", text: t().title }), h("p", { class: "hint", text: t().sub }), kpis(), tabsBar(), panel());
   }
   function login() {
-    const inp = h("input", { type: "password", id: "k", autocomplete: "current-password", "aria-label": t().pass, placeholder: t().pass });
-    inp.value = key;
-    const go = () => { key = inp.value.trim(); if (key) load(); };
+    const errP = h("p", { class: "err", role: "alert", hidden: !msg, text: msg });
+    const head = [h("img", { class: "svlogo", src: "assets/champion-lite.webp", alt: "", width: 100, height: 100 }), h("h1", { class: "foil", text: t().title }), h("p", { class: "hint", text: t().sub })];
+    const btn = (txt, fn, fill) => h("button", { class: "btn" + (fill ? " fill" : ""), type: "button", disabled: busy || sending, text: (busy || sending) ? t().loading : txt, onclick: fn });
+    if (step === "key") {
+      const inp = h("input", { type: "password", id: "k", autocomplete: "current-password", "aria-label": t().pass, placeholder: t().pass });
+      inp.value = key;
+      const go = () => { key = inp.value.trim(); token = ""; if (key) load(); };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+      return h("div", { class: "card login" }, ...head, inp, errP, h("div", { class: "acts" }, btn(t().enter, go, true)),
+        h("button", { class: "lnk", type: "button", text: t().useMail, onclick: () => { step = "email"; msg = ""; view(); } }));
+    }
+    if (step === "code") {
+      const inp = h("input", { type: "text", id: "c", class: "code", inputmode: "numeric", maxlength: 6, autocomplete: "one-time-code", dir: "ltr", "aria-label": t().codeLbl, placeholder: "······" });
+      const go = async () => {
+        const code = inp.value.trim(); if (code.length < 6) { msg = t().badCode; return view(); }
+        sending = true; msg = ""; view();
+        try {
+          const r = await post({ action: "admin_verify", email: mail, code });
+          if (r && r.ok && r.token) { token = r.token; key = ""; sending = false; return load(); }
+          msg = r && r.error === "locked" ? t().locked : t().badCode;
+        } catch (e) { msg = t().net; }
+        sending = false; view();
+      };
+      inp.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+      return h("div", { class: "card login" }, ...head, h("p", { class: "hint", text: t().codeSent }), h("label", { for: "c", class: "hint", text: t().codeLbl }), inp, errP,
+        h("div", { class: "acts" }, btn(t().verify, go, true)),
+        h("button", { class: "lnk", type: "button", text: t().changeMail, onclick: () => { step = "email"; msg = ""; view(); } }));
+    }
+    const inp = h("input", { type: "email", id: "m", autocomplete: "email", dir: "ltr", "aria-label": t().emailLbl, placeholder: t().emailLbl });
+    inp.value = mail;
+    const go = async () => {
+      const v = inp.value.trim().toLowerCase();
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)) { msg = t().badMail; mail = v; return view(); }
+      if (!API) { msg = t().noApi; return view(); }
+      mail = v; sending = true; msg = ""; view();
+      try {
+        const r = await post({ action: "admin_sendcode", email: mail });
+        if (r && r.ok) { step = "code"; msg = ""; } else msg = r && r.error === "mail_failed" ? t().mailFail : t().other;
+      } catch (e) { msg = t().net; }
+      sending = false; view();
+    };
     inp.addEventListener("keydown", e => { if (e.key === "Enter") go(); });
-    return h("div", { class: "card login" }, h("img", { class: "svlogo", src: "assets/champion.webp", alt: "", width: 100, height: 100 }),
-      h("h1", { class: "foil", text: t().title }), h("p", { class: "hint", text: t().sub }), inp,
-      h("p", { class: "err", role: "alert", hidden: !msg, text: msg }),
-      h("div", { class: "acts" }, h("button", { class: "btn fill", type: "button", disabled: busy, text: busy ? t().loading : t().enter, onclick: go })));
+    return h("div", { class: "card login" }, ...head, inp, errP, h("div", { class: "acts" }, btn(t().sendCode, go, true)),
+      h("button", { class: "lnk", type: "button", text: t().useKey, onclick: () => { step = "key"; msg = ""; view(); } }));
   }
   function kpis() {
     const n = data.length;
@@ -200,6 +240,6 @@
   }
 
   document.getElementById("langBtn").addEventListener("click", () => { lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("lang", lang); } catch (e) {} view(); });
-  document.getElementById("outBtn").addEventListener("click", () => { data = contacts = null; key = ""; try { sessionStorage.removeItem("pta_adm_key"); } catch (e) {} view(); });
-  if (key && API) load(); else view();
+  document.getElementById("outBtn").addEventListener("click", () => { data = contacts = null; clearAuth(); step = "email"; view(); });
+  if ((key || token) && API) load(); else view();
 })();

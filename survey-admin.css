@@ -32,3 +32,6 @@ td.ltr{direction:ltr;text-align:left}
 .empty{color:var(--mut);text-align:center;padding:2rem 0}
 @media(max-width:620px){.row{grid-template-columns:1fr 4.6rem}.row .track{grid-column:1/-1;order:3}}
 @media print{.cnav,.tabs,.toolbar{display:none}body{background:#fff;color:#000}}
+
+.login .lnk{background:none;border:0;color:var(--mut);text-decoration:underline;cursor:pointer;font:inherit;font-size:.9rem;margin-top:.8rem}
+.login input.code{letter-spacing:.5em;font-size:1.4rem}
