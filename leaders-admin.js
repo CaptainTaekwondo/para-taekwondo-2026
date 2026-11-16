@@ -96,13 +96,24 @@
     const meta = h("div", { class: "meta" }, [h("span", { class: "ctry" }, [flagImg(s.countryCode || "un"), h("span", { text: s.countryAr })]), h("span", { text: s.positionAr }), h("span", { text: ago(s.ts) }), h("span", { class: "tag " + s.status, text: stLabel[s.status] || s.status })]);
     const acts = h("div", { class: "acts" }, [h("button", { class: "btn sm fill", type: "button", text: s.status === "pending" ? "مراجعة واتخاذ قرار" : "فتح" })]);
     acts.firstChild.addEventListener("click", () => openSub(s));
+    acts.appendChild(delBtn("sub", s.rid, s.nameAr));
     return h("article", { class: "arow" }, [h("div", { class: "pav" }, [dflt()]), h("div", {}, [h("h3", { text: s.nameAr }), meta]), acts]);
+  }
+  /* حذف نهائي (للتجارب أو الطلبات غير المرغوبة): يحذف الصف وصورته نهائيًا من الشيت */
+  function delBtn(kind, id, name) {
+    const b = h("button", { class: "btn sm danger", type: "button", text: "حذف نهائي" });
+    b.addEventListener("click", async () => {
+      if (!confirm("حذف «" + name + "» نهائيًا؟ لا يمكن التراجع، وسيُحذف الصف وصورته من الشيت.")) return;
+      try { await call("admin_delete", { kind, id }); await load(); toast("تم الحذف نهائيًا"); } catch (e) { toast(errText(e), true); }
+    });
+    return b;
   }
   function pubRow(x) {
     const meta = h("div", { class: "meta" }, [h("span", { class: "ctry" }, [flagImg(x.countryCode || "un"), h("span", { text: x.countryAr })]), h("span", { text: x.positionAr }), h("span", { text: ago(x.updated) }), h("span", { class: "tag " + (x.active ? "live" : "off"), text: x.active ? "منشورة" : "غير منشورة" })]);
     const ed = h("button", { class: "btn sm fill", type: "button", text: "تعديل وإعادة النشر" }); ed.addEventListener("click", () => openPub(x));
     const acts = h("div", { class: "acts" }, [ed]);
     if (x.active) { const un = h("button", { class: "btn sm danger", type: "button", text: "إلغاء النشر" }); un.addEventListener("click", async () => { if (!confirm("إلغاء نشر بطاقة «" + x.nameAr + "»؟ ستعود البطاقة الافتراضية للدولة إن كانت قد استُبدلت.")) return; try { await call("admin_unpublish", { id: x.id }); await load(); toast("تم إلغاء النشر"); } catch (e) { toast(errText(e), true); } }); acts.appendChild(un); }
+    acts.appendChild(delBtn("pub", x.id, x.nameAr));
     const av = h("div", { class: "pav" }, [x.photo ? h("img", { src: x.photo, alt: "", width: 64, height: 64, loading: "lazy" }) : dflt()]);
     return h("article", { class: "arow" }, [av, h("div", {}, [h("h3", { text: x.nameAr }), meta]), acts]);
   }
