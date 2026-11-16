@@ -178,3 +178,9 @@ html,body.sv{overflow-x:hidden}
 .sv input[type=text],.sv input[type=email],.sv input[type=tel],.sv textarea,.phonewrap select{border-color:rgba(156,192,255,.6);background:rgba(3,10,40,.8)}
 @media(max-width:700px){.sv::before,.sv::after{opacity:.75}}
 html.lowfx .sv::before,html.lowfx .sv::after{animation:none}
+
+/* تناسق: إلغاء الحشوة الافتراضية للقوائم (كانت تزيح الشارات والنقاط عن المنتصف) */
+.chips,.dots,.txts{padding:0;margin-inline:0}
+.chips{justify-content:center;gap:.6rem .6rem}
+.chips li{margin:0}
+@media(max-width:560px){.chips li{font-size:.92rem;padding:.35rem 1rem}}
