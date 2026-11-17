@@ -1381,6 +1381,15 @@
     const ps = $("#f_lkPfx"); ps.value = "PTP-2026-"; ps.hidden = true;
     const fix = document.createElement("span"); fix.textContent = "PTP-2026-"; ps.after(fix);
   }
+  /* نقطة ربط لـ bulk.js (التسجيل بالجملة وروابط الفيديو بـ Excel) */
+  window.PTK_X = {
+    $, t, get lang() { return lang; }, post, get API() { return API; }, DEMO, VIDEO_OPEN, SUP_OPEN, BELTS, PARA, AGES, COUNTRIES, DIAL,
+    ageOf, ageCat, ytId, ytUrl, thumbOk, loadImg, renderCanvas, photoJpeg, blobOf, makeZip, newRid, assetsReady, fontsReady,
+    phoneFor: (phone, countryEn) => normPhone(phone, { value: String(countryEn || "").toLowerCase() }),
+    mine: () => ({ cred: mineCred, coach: mineCoach, token: mineToken, players: minePlayers }),
+    vcoach: () => vCoach,
+    refreshVideoList: () => { if (vCoach) showList(); },
+  };
   fillSelects(); applyRole(); infoAll();
   Promise.all([assetsReady, fontsReady]).then(() => { applyLang(); canvas.classList.add("ready"); });
 })();
