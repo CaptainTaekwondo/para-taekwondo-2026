@@ -20,6 +20,8 @@ const CONFIG = {
   ageDate: "2026-12-31",
   /* خانة «رابط فيديو المشاركة» في صفحة اللاعب: false = مغلقة مؤقتًا حتى يبدأ موعد إرسال الفيديوهات، true = مفتوحة */
   videoOpen: false,
+  /* آخر يوم لإرسال الفيديوهات (صيغة 2026-12-31): بعده تُقفل الخانة. فارغ = تظل مفتوحة (تحكّم بها بـ videoOpen) */
+  videoDeadline: "",
   supportersOpen: false,   // تسجيل «اللاعب الداعم» (PTS) وتحسينات «لاعبيني» (معاينة البطاقة، البحث، الفلاتر): false = مخفية، true = تظهر
   /* فيديو شرح التسجيل مع مريم: يظهر زر مشاهدته أعلى صفحة تسجيل اللاعب (فارغ = يختفي الزر) */
   guideVideo: "https://youtu.be/s9xeFxCtrks",
@@ -79,6 +81,20 @@ const CONFIG = {
 
   /* ---- 5) الراعي الرسمي: اكتب الاسم وضع الشعار عند اعتماده ---- */
   sponsor: { name: "", logo: "" },
+
+  /* صفحة «لجنة التحكيم» (judges.html): false = مقفولة وتظهر رسالة «تُعلن قريبًا»، true = تظهر الصفحة كاملة */
+  judgesOpen: false,
+  /* ---- لجنة التحكيم (صفحة judges.html): أضف الحكام في referees بالشكل { name: "الاسم", id: "رقم الحكم (يظهر الكود PTJ-2026-XXXX من آخر 4 أرقام)", photo: "assets/judges/x.webp" } ----
+          judgeCardBg: مسار قالب الكرت إن توفر (صورة من تصميم خارجي)، والفارغ = تصميم ذهبي جاهز. */
+  judges: {
+    head: { name: "الحكم الدولي علي نور", id: "0001", role: "رئيس لجنة الحكام", photo: "assets/team/ali-nour.webp", fit: "contain" },
+    referees: []
+  },
+  judgeCardBg: "assets/judges/judge-card-plain.webp?v=2",      // كرت الحكام (بنجمة)
+  judgeCardBack: "assets/judges/judge-back.webp?v=2",         // ظهر البطاقة (بعد القلب)
+  watermarkReveal: "assets/judges/watermark-rainbow.webp?v=2",
+  watermarkTile: "assets/judges/watermark-tile.webp?v=3",       // نمط لوجوهات ملوّنة صغيرة متكررة (يظهر مع الكشاف)
+  judgeCardChief: "assets/judges/judge-card.webp?v=2",        // كرت رئيس الحكام (بتاج)
 
   /* ---- 6) المواعيد: اكتب النص عند اعتماده (مثال: "15 ديسمبر 2026")، والفارغ = «يُعلن لاحقًا» ---- */
   dates: {

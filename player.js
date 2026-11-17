@@ -80,6 +80,13 @@
       dlPng: "تحميل البطاقة PNG", dlJpg: "تحميل JPG", another: "تسجيل جديد",
       gPlayers: "لاعبوك", playersHint: "أضف بيانات كل لاعب تدرّبه، ويحصل كل لاعب على كوده وبطاقته عند الحفظ. الدولة والنادي والبريد والهاتف تؤخذ من بياناتك.", addP: "إضافة لاعبين", remove: "حذف", showCard: "عرض البطاقة", playerN: "لاعب {n}", tabMe: "بطاقتك", addedT: "بطاقات لاعبيك", doneCoachT: "تم تسجيلك وتسجيل لاعبيك", savedOf: "تم حفظ {a} من {b} لاعبين.",
       driveOk: "تم حفظ نسخة من البطاقة لدى الإدارة.", driveWait: "جاري حفظ نسخة من البطاقة…", driveFail: "تعذّر حفظ نسخة البطاقة تلقائيًا، لكن البيانات سُجّلت.",
+      vrHint: "اختر: هل أنت لاعب أم مدرب؟", vrPlayer: "🥋 لاعب", vrPlayerH: "ادخل بكودك وأرسل رابط فيديوك.", vrCoach: "🧑‍🏫 مدرب", vrCoachH: "ادخل بكود بطاقتك واختر لاعبيك واحدًا واحدًا.",
+      vcHint: "أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين. تظهر لك أكواد لاعبيك لتضيف رابط فيديو كل لاعب.", vcBtn: "عرض لاعبيّ", vcPick: "اضغط على كود اللاعب لإضافة رابط فيديوه.",
+      vcCount: "تم حفظ فيديو {a} من {b} لاعب", vcEmpty: "لا يوجد لاعبون مسجلون بكود بطاقتك.", vcHas: "✓ تم الحفظ (اضغط للتعديل)", vcNone: "بدون فيديو بعد", vcSavedN: "✓ تم حفظ فيديو {c}. اختر اللاعب التالي.", vcFinish: "حفظ وتأكيد", vcOut: "خروج",
+      vcSumOk: "✓ تم حفظ وتأكيد فيديوهات جميع اللاعبين ({n}). يمكنك تعديل أي رابط من هنا حتى إغلاق باب إرسال الفيديوهات.", vcSumMiss: "تم حفظ {a} من {b}. لم يُضف فيديو لـ: {l}. يمكنك إضافتها حتى إغلاق باب إرسال الفيديوهات.",
+      vfNoneS: "بدون فيديو", vfDoneS: "تم الحفظ", vfBackList: "رجوع للقائمة", vfEdit: "تعديل رابط الفيديو", vfEnded: "🔒 انتهى موعد إرسال الفيديوهات.",
+      vlT: "إرسال الفيديو", vlHint: "أدخل رقم الهاتف والبريد الإلكتروني المسجَّلين وكود اللاعب (آخر 4 أرقام فقط). وبعد التأكد تظهر خانة رابط الفيديو.", vlBtn: "تأكيد البيانات",
+      vfClosed: "🔒 لم يُفتح موعد إرسال الفيديوهات بعد. عند فتحه ادخل من نفس الزر وضع رابط الفيديو.", vfCode: "كود اللاعب", vfLink: "رابط فيديو يوتيوب", vfSave: "حفظ الفيديو", vfSaved: "✓ تم حفظ رابط الفيديو.", vfNeed: "ضع رابط فيديو يوتيوب سليمًا وانتظر ظهور علامة ✓ قبل الحفظ.", vfOther: "لاعب آخر",
       lkT: "تعديل بطاقة لاعب", lkHint: "أدخل رقم الهاتف والبريد الإلكتروني المسجَّلين وكود اللاعب الظاهر على بطاقته. وبعد التأكد من البيانات تُفتح صفحة تعديلها.", lkPhone: "رقم الهاتف المسجَّل", lkEmail: "البريد الإلكتروني", lkCode: "كود اللاعب (آخر 4 أرقام فقط)", lkBtn: "عرض البيانات", lkBack: "رجوع",
       eNotFound: "لم نجد تسجيلًا بهذه البيانات. تأكد من كتابتها كما سجّلت.", eLk: "أدخل رقم الهاتف والبريد الإلكتروني والكود.", editBadge: "وضع التعديل: عدّل ما تريد ثم احفظ لإصدار البطاقة من جديد.",
       eName: "اكتب الاسم الكامل (حرفان على الأقل).", eNameAr: "اكتب الاسم بالحروف العربية.", eNameEn: "اكتب الاسم بالحروف الإنجليزية.",
@@ -135,6 +142,13 @@
       dlPng: "Download card (PNG)", dlJpg: "Download JPG", another: "New registration",
       gPlayers: "Your players", playersHint: "Add the details of each player you coach; every player gets a code and a card when you save. Country, club, email and phone are taken from your details.", addP: "Add players", remove: "Remove", showCard: "Show card", playerN: "Player {n}", tabMe: "Your card", addedT: "Your players' cards", doneCoachT: "You and your players are registered", savedOf: "{a} of {b} players saved.",
       driveOk: "A copy of the card was saved with the organisers.", driveWait: "Saving a copy of the card…", driveFail: "Could not store the card copy automatically, but the details are registered.",
+      vrHint: "Are you a player or a coach?", vrPlayer: "🥋 Player", vrPlayerH: "Sign in with your code and send your video link.", vrCoach: "🧑‍🏫 Coach", vrCoachH: "Sign in with your card code and pick your players one by one.",
+      vcHint: "Enter the last 4 digits of the coach card code with the registered phone and email. Your players' codes appear so you can add each video link.", vcBtn: "Show my players", vcPick: "Tap a player code to add that player's video link.",
+      vcCount: "Videos saved for {a} of {b} players", vcEmpty: "No players are registered under your card code.", vcHas: "✓ Saved (tap to edit)", vcNone: "No video yet", vcSavedN: "✓ Video for {c} saved. Pick the next player.", vcFinish: "Save and confirm", vcOut: "Sign out",
+      vcSumOk: "✓ Videos for all players ({n}) are saved and confirmed. You can edit any link from here until video submission closes.", vcSumMiss: "Saved {a} of {b}. No video yet for: {l}. You can add them until video submission closes.",
+      vfNoneS: "No video", vfDoneS: "Saved", vfBackList: "Back to the list", vfEdit: "Edit video link", vfEnded: "🔒 The video submission period has ended.",
+      vlT: "Send the video", vlHint: "Enter the registered phone number, email and the player code (last 4 digits only). Once verified, the video link field appears.", vlBtn: "Verify",
+      vfClosed: "🔒 The video submission period has not opened yet. When it opens, come back through the same button and add the link.", vfCode: "Player code", vfLink: "YouTube video link", vfSave: "Save video", vfSaved: "✓ Video link saved.", vfNeed: "Enter a valid YouTube link and wait for the ✓ before saving.", vfOther: "Another player",
       lkT: "Edit a player card", lkHint: "Enter the registered phone number, email and the player's code shown on the card. Once verified, the edit page opens.", lkPhone: "Registered phone number", lkEmail: "Email", lkCode: "Player code (last 4 digits only)", lkBtn: "Show details", lkBack: "Back",
       eNotFound: "No registration found with these details. Check them as you registered.", eLk: "Enter the phone number, email and code.", editBadge: "Edit mode: change what you need, then save to re-issue the card.",
       eName: "Enter the full name (2+ characters).", eNameAr: "Write the name in Arabic letters.", eNameEn: "Write the name in English letters.",
@@ -462,7 +476,9 @@
     let tm = 0; const go = () => { clearTimeout(tm); tm = setTimeout(() => { if (inp.value.trim() === inp._last) return; inp._last = inp.value.trim(); checkVideo(inp, msg, prev); }, 500); };
     inp.addEventListener("input", go); inp.addEventListener("change", go); inp.addEventListener("paste", go);
   }
-  const VIDEO_OPEN = typeof CONFIG !== "undefined" && CONFIG.videoOpen === true;
+  const VDL = !DEMO && typeof CONFIG !== "undefined" && /^\d{4}-\d{2}-\d{2}$/.test(CONFIG.videoDeadline || "") ? new Date(CONFIG.videoDeadline + "T23:59:59") : null;   // آخر يوم للإرسال (بتوقيت جهاز المستخدم)
+  const VIDEO_ENDED = !!VDL && Date.now() > VDL.getTime();
+  const VIDEO_OPEN = DEMO || (typeof CONFIG !== "undefined" && CONFIG.videoOpen === true && !VIDEO_ENDED);   // وضع التجربة المحلي: الخانة مفتوحة دائمًا
   const SUP_OPEN = DEMO || (typeof CONFIG !== "undefined" && CONFIG.supportersOpen === true);   // اللاعب الداعم وتحسينات «لاعبيني»
   // قبل موعد إرسال الفيديوهات: الخانة مقفولة مع توضيح
   function lockVideo(inp, msg) {
@@ -906,6 +922,12 @@
   $("#btnSup").addEventListener("click", () => { setType("sup"); typeBox.hidden = true; showForm("new"); });
   $("#typeBack").addEventListener("click", () => { typeBox.hidden = true; modeBox.hidden = false; });
   $("#btnEdit").addEventListener("click", () => { modeBox.hidden = true; lkBox.hidden = false; $("#f_lkPhone").focus(); });
+  /* زر «إرسال الفيديو» من الصفحة الرئيسية (player.html?video=1): دخول مباشر بالكود والإيميل والهاتف ثم الوصول لخانة الفيديو */
+  const videoFlow = /[?&]video=1(?:&|$)/.test(location.search);
+  if (videoFlow) {
+    [["#lookupBox h2", "vlT"], ["#lookupBox .hint", "vlHint"], ["#lkBtn", "vlBtn"]].forEach(([sel, k]) => { const el = $(sel); el.dataset.t = k; el.textContent = t(k); });
+    modeBox.hidden = true; $("#vRoleBox").hidden = false;
+  }
 
   /* «لاعبيني»: قائمة لاعبي المدرب بعد التحقق من الكود والهاتف والبريد */
   const mineBox = $("#mineBox"), mineErr = $("#mineErr"), mineList = $("#mineList"), mineBtn = $("#mineBtn");
@@ -1096,7 +1118,7 @@
     main.code = editCode; $("#f_consent").checked = false;
     showForm("edit");
   }
-  $("#lkBack").addEventListener("click", () => { lkBox.hidden = true; modeBox.hidden = false; $("#lkErr").hidden = true; });
+  $("#lkBack").addEventListener("click", () => { lkBox.hidden = true; (videoFlow ? $("#vRoleBox") : modeBox).hidden = false; $("#lkErr").hidden = true; });
   let lkBusy = false;
   $("#lkBtn").addEventListener("click", async () => {
     if (lkBusy) return; const err = $("#lkErr"); err.hidden = true;
@@ -1105,13 +1127,147 @@
     if (!API) { err.textContent = t("eSrv"); err.hidden = false; return; }
     lkBusy = true; const b = $("#lkBtn"); b.disabled = true; b.textContent = t("saving");
     try {
-      const res = await post({ action: "lookup", email, phone, code });
+      const res = await post({ action: "lookup", email, phone, code, vf: videoFlow });
       if (!res || !res.ok) throw new Error((res && res.error) || "srv");
+      if (videoFlow) { showVideoBox(res, email, phone); return; }
       await fillEdit(res, email, phone);
     } catch (e) {
       err.textContent = e && e.message === "not_found" ? t("eNotFound") : (e && e.name === "AbortError") || e instanceof TypeError ? t("eNet") : t("eSrv"); err.hidden = false;
     } finally { lkBusy = false; b.disabled = false; b.textContent = t("lkBtn"); }
   });
+
+  /* ---------- إرسال الفيديو فقط (player.html?video=1): لاعب أو مدرب، رابط يوتيوب بنفس التحقق ---------- */
+  const vb = $("#videoBox"), vfIn = $("#vf_video"), vfMsg = $("#vf_msg"), vfPrev = $("#vf_prev"), vfErr = $("#vf_err"), vfDone = $("#vf_done"), vfSave = $("#vf_save"), vfEdit = $("#vf_edit"), vfBack = $("#vf_other");
+  const vRole = $("#vRoleBox"), vCl = $("#vCoachLogin"), vList = $("#vListBox");
+  let vEd = null, vfBusy = false, vCoach = null, vNote = "";   // vEd = اللاعب المفتوح الآن {code, base, saved, mode, p}
+  const closedKey = () => (VIDEO_ENDED ? "vfEnded" : "vfClosed");
+  const vHide = () => [vRole, lkBox, vCl, vList, vb].forEach((x) => { x.hidden = true; });
+  wireVideo(vfIn, vfMsg, vfPrev);
+  function setLocked(lock) { vfIn.disabled = lock || !VIDEO_OPEN; vfSave.hidden = lock || !VIDEO_OPEN; vfEdit.hidden = !(lock && VIDEO_OPEN); }
+  /* معاينة بطاقة اللاعب فوق خانة الرابط: تترسم فورًا من بياناته المحفوظة، وصورته تتحمّل بعدها */
+  const vfCv = $("#vfCard"), vfCtx = vfCv.getContext("2d"), vfCardMsg = $("#vfCardMsg");
+  function drawVfCard(ed) { if (vEd === ed) safe(() => drawCard(vfCtx, ed.sub)); }
+  function showVfCard(ed) {
+    vfCardMsg.hidden = true;
+    ed.sub = { kind: "view", data: Object.assign({ type: typeOfCode(ed.code) }, ed.data || {}), code: ed.code, final: true, photo: photoCache.get(ed.code) || null, zoom: 1, ox: 0, oy: 0 };
+    drawVfCard(ed);
+    if (ed.sub.photo) return;
+    const done = (im) => { if (im) { photoCache.set(ed.code, im); ed.sub.photo = im; if (vEd === ed) vfCardMsg.hidden = true; drawVfCard(ed); } else if (vEd === ed) { vfCardMsg.textContent = t("mineNoPhoto"); vfCardMsg.hidden = false; } };
+    if (ed.photoSrc) loadImg(ed.photoSrc).then(done, () => done(null));
+    else if (ed.mode === "coach" && ed.p && ed.p.hasPhoto && API) {
+      vfCardMsg.textContent = t("mineLoadPhoto"); vfCardMsg.hidden = false;
+      post(Object.assign({ action: "playerphoto", player: ed.code }, vCoach.cred), 60000).then((r) => (r && r.ok ? loadImg(r.photo) : null)).then(done, () => done(null));
+    }
+  }
+  function openEditor(ed) {
+    vEd = ed; vHide(); vb.hidden = false; $("#vfCode").textContent = ed.code; showVfCard(ed);
+    const pn = ed.data && (lang === "en" ? ed.data.nameEn || ed.data.nameAr : ed.data.nameAr || ed.data.nameEn); $("#vfName").textContent = ed.mode === "coach" && pn ? "— " + pn : "";
+    vfErr.hidden = true; vfDone.hidden = true; vfPrev.innerHTML = ""; vfMsg.textContent = ""; vfMsg.className = "vmsg";
+    vfIn.value = ed.saved || ""; vfIn._last = vfIn.value; vfIn.dataset.v = "";
+    vfBack.dataset.t = ed.mode === "coach" ? "vfBackList" : "vfOther"; vfBack.textContent = t(vfBack.dataset.t);
+    if (ed.saved) checkVideo(vfIn, vfMsg, vfPrev);
+    setLocked(!!ed.saved || !VIDEO_OPEN);
+    if (!VIDEO_OPEN) { vfIn.placeholder = t("vClosedPh"); vfMsg.textContent = t(closedKey()); vfMsg.className = "vmsg closed"; }
+    else if (!ed.saved) vfIn.focus();
+  }
+  function showVideoBox(res, email, phone) {   // لاعب: بعد التحقق من الكود والإيميل والهاتف
+    const d = res.data || {};
+    openEditor({ mode: "player", code: res.code, saved: d.video || "", data: d, photoSrc: d.photo || "", base: { email, phone, code: res.code } });
+  }
+  vfEdit.addEventListener("click", () => { setLocked(false); vfDone.hidden = true; vfIn.focus(); vfIn.select(); });
+  vfSave.addEventListener("click", async () => {
+    if (vfBusy || !vEd) return; vfErr.hidden = true; vfDone.hidden = true;
+    if (vfIn.dataset.v !== "ok") { vfErr.textContent = t(vfIn.dataset.v === "net" ? "vNet" : "vfNeed"); vfErr.hidden = false; return; }
+    vfBusy = true; vfSave.disabled = true; vfSave.textContent = t("saving");
+    try {
+      const url = ytUrl(vfIn.dataset.id), res = await post(Object.assign({ action: "setvideo", video: url }, vEd.base));
+      if (!res || !res.ok) throw new Error((res && res.error) || "srv");
+      vEd.saved = url;
+      if (vEd.mode === "coach") { vEd.p.video = url; vNote = t("vcSavedN").replace("{c}", vEd.code); showList(); }
+      else { setLocked(true); vfDone.textContent = t("vfSaved"); vfDone.hidden = false; }
+    } catch (e) {
+      vfErr.textContent = e && e.message === "not_found" ? t("eNotFound") : e && e.message === "closed" ? t("vfEnded") : (e && e.name === "AbortError") || e instanceof TypeError ? t("eNet") : t("eSrv"); vfErr.hidden = false;
+    } finally { vfBusy = false; vfSave.disabled = false; vfSave.textContent = t("vfSave"); }
+  });
+  vfBack.addEventListener("click", () => {
+    if (vEd && vEd.mode === "coach") return showList();
+    vHide(); lkBox.hidden = false; vEd = null; vfIn.value = ""; $("#f_lkCode").value = ""; $("#f_lkCode").focus();
+  });
+
+  /* المدرب: كود بطاقته + هاتفه + بريده → قائمة أكواد لاعبيه → يختار لاعب ويضيف رابطه → التالي → «حفظ وتأكيد» */
+  const vcErr = (m) => { $("#vc_err").textContent = m; $("#vc_err").hidden = !m; };
+  $("#vc_code").addEventListener("input", (e) => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
+  /* فلاتر قائمة المدرب: بحث + الحالة + النوع + الحزام + الفئة العمرية. تظهر لما يزيد عدد اللاعبين عن VMIN */
+  const VMIN = 6, vf = { q: "", st: "all", type: "all", belt: "", age: "" };
+  const vSearch = document.createElement("input"); vSearch.type = "search"; vSearch.autocomplete = "off"; vSearch.setAttribute("enterkeyhint", "search");
+  vSearch.addEventListener("input", () => { vf.q = vSearch.value; renderVItems(); });
+  function renderVItems() {
+    const ps = vCoach.players, box = $("#vc_list"), qv = normQ(vf.q); box.textContent = "";
+    const shown = ps.filter((p) => (vf.st === "all" || (vf.st === "done") === !!p.video) && (vf.type === "all" || typeOfCode(p.code) === vf.type) && (!vf.belt || p.belt === vf.belt) && (!vf.age || p.ageCat === vf.age) && (!qv || matchQ(p, qv)));
+    const filtered = !!qv || vf.st !== "all" || vf.type !== "all" || vf.belt || vf.age, rs = $("#vc_res");
+    rs.hidden = !filtered; rs.textContent = shown.length ? t("mineResults").replace("{n}", shown.length).replace("{t}", ps.length) : t("mineNoRes");
+    shown.forEach((p) => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "vitem" + (p.video ? " done" : "");
+      [["b", p.code], ["span", lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn], ["em", t(p.video ? "vcHas" : "vcNone")]].forEach(([tag, txt]) => { const el = document.createElement(tag); el.textContent = txt || ""; if (tag === "b") el.dir = "ltr"; b.appendChild(el); });
+      b.addEventListener("click", () => { vNote = ""; openEditor({ mode: "coach", code: p.code, saved: p.video || "", p, data: p, base: { player: p.code, code: vCoach.cred.code, phone: vCoach.cred.phone, email: vCoach.cred.email } }); });
+      box.appendChild(b);
+    });
+  }
+  function buildVFilters() {
+    const ps = vCoach.players, bar = $("#vc_filters"); bar.textContent = ""; bar.hidden = ps.length <= VMIN;
+    if (bar.hidden) { Object.assign(vf, { q: "", st: "all", type: "all", belt: "", age: "" }); vSearch.value = ""; return; }
+    const sb = document.createElement("div"); sb.className = "minesearch"; vSearch.value = vf.q; vSearch.placeholder = t("mineSearchPh"); vSearch.setAttribute("aria-label", t("mineSearchL")); sb.appendChild(vSearch); bar.appendChild(sb);
+    const chips = (list, cur, set) => {
+      const g = document.createElement("div"); g.className = "minefilter"; g.setAttribute("role", "group");
+      list.forEach(([k, label]) => { const fb = document.createElement("button"); fb.type = "button"; fb.textContent = label; fb.setAttribute("aria-pressed", String(cur() === k)); fb.addEventListener("click", () => { set(k); [...g.children].forEach((c, i) => c.setAttribute("aria-pressed", String(list[i][0] === k))); renderVItems(); }); g.appendChild(fb); });
+      bar.appendChild(g);
+    };
+    const nDone = ps.filter((p) => p.video).length;
+    chips([["all", t("mineAll") + " (" + ps.length + ")"], ["none", t("vfNoneS") + " (" + (ps.length - nDone) + ")"], ["done", t("vfDoneS") + " (" + nDone + ")"]], () => vf.st, (k) => (vf.st = k));
+    const nOf = (tp) => ps.filter((p) => typeOfCode(p.code) === tp).length;
+    if (nOf("para") && nOf("sup")) chips([["all", t("mineAll")], ["para", t("badgePara") + " (" + nOf("para") + ")"], ["sup", t("badgeSup") + " (" + nOf("sup") + ")"]], () => vf.type, (k) => (vf.type = k));
+    else vf.type = "all";
+    const beltsHere = BELTS.filter((bt) => ps.some((p) => p.belt === bt[0])), agesHere = AGES.filter((a) => ps.some((p) => p.ageCat === a[1]));
+    if (!beltsHere.some((bt) => bt[0] === vf.belt)) vf.belt = ""; if (!agesHere.some((a) => a[1] === vf.age)) vf.age = "";
+    if (beltsHere.length > 1 || agesHere.length > 1) {
+      const wrap = document.createElement("div"); wrap.className = "beltsel";
+      const mkSel = (label, allTxt, items, cur, set) => { const sel = document.createElement("select"); sel.setAttribute("aria-label", label); sel.add(new Option(allTxt, "")); items.forEach(([v, txt, n]) => sel.add(new Option(txt + " (" + n + ")", v))); sel.value = cur; sel.addEventListener("change", () => { set(sel.value); renderVItems(); }); wrap.appendChild(sel); };
+      if (beltsHere.length > 1) mkSel(t("belt"), t("allBelts"), beltsHere.map((bt) => [bt[0], lang === "en" ? bt[2] + " belt" : "الحزام " + bt[1], ps.filter((p) => p.belt === bt[0]).length]), vf.belt, (v) => (vf.belt = v));
+      if (agesHere.length > 1) mkSel(t("ageL"), t("allAges"), agesHere.map((a) => [a[1], lang === "en" ? a[3] : a[2], ps.filter((p) => p.ageCat === a[1]).length]), vf.age, (v) => (vf.age = v));
+      bar.appendChild(wrap);
+    }
+  }
+  function showList() {
+    vHide(); vList.hidden = false; vEd = null;
+    const ps = vCoach.players, done = ps.filter((p) => p.video).length;
+    $("#vc_count").textContent = ps.length ? t("vcCount").replace("{a}", done).replace("{b}", ps.length) : t("vcEmpty");
+    buildVFilters(); renderVItems();
+    $("#vc_note").textContent = vNote; $("#vc_note").hidden = !vNote; $("#vc_sum").hidden = true;
+    $("#vc_finish").hidden = !ps.length;
+  }
+  $("#vc_btn").addEventListener("click", async () => {
+    if (vfBusy) return; vcErr("");
+    const cred = { code: $("#vc_code").value.trim(), phone: $("#vc_phone").value.trim(), email: $("#vc_email").value.trim().toLowerCase() };
+    if (cred.code.length !== 4 || !cred.phone || !cred.email) return vcErr(t("mineReq"));
+    if (!API) return vcErr(t("eSrv"));
+    vfBusy = true; const b = $("#vc_btn"); b.disabled = true; b.textContent = t("saving");
+    try {
+      const r = await post(Object.assign({ action: "myplayers" }, cred));
+      if (!r || !r.ok) throw new Error((r && r.error) || "srv");
+      vCoach = { cred, players: r.players || [] }; vNote = ""; showList();
+    } catch (err) { vcErr(err instanceof TypeError || err.name === "AbortError" ? t("eNet") : mineErrText(err.message)); }
+    vfBusy = false; b.disabled = false; b.textContent = t("vcBtn");
+  });
+  $("#vc_finish").addEventListener("click", () => {
+    const ps = vCoach.players, miss = ps.filter((p) => !p.video), s = $("#vc_sum");
+    s.className = "vmsg " + (miss.length ? "closed" : "ok");
+    s.textContent = miss.length ? t("vcSumMiss").replace("{a}", ps.length - miss.length).replace("{b}", ps.length).replace("{l}", miss.map((p) => p.code).join("، ")) : t("vcSumOk").replace("{n}", ps.length);
+    s.hidden = false; $("#vc_note").hidden = true;
+  });
+  $("#vc_back").addEventListener("click", () => { vHide(); vRole.hidden = false; vcErr(""); });
+  $("#vc_out").addEventListener("click", () => { vCoach = null; $("#vc_code").value = ""; $("#vc_phone").value = ""; $("#vc_email").value = ""; vHide(); vRole.hidden = false; });
+  $("#vrPlayer").addEventListener("click", () => { vHide(); lkBox.hidden = false; $("#f_lkPhone").focus(); });
+  $("#vrCoach").addEventListener("click", () => { vHide(); vCl.hidden = false; $("#vc_code").focus(); });
 
   /* ---------- الفيديو الترويجي ---------- */
   const promoYes = () => ($("input[name=promo]:checked") || {}).value === "yes";

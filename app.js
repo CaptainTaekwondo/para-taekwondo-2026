@@ -91,6 +91,10 @@
     vgrid.append(c);
   });
 
+  /* وضع التجربة المحلي: index.html?demo=1 يوصّل زر «إرسال الفيديو» بالسيرفر الوهمي (على الموقع المنشور بيتجاهله player.html) */
+  const vsb = $("#videoSendBtn");
+  if (vsb && /[?&]demo=1(&|$)/.test(location.search) && /^(localhost|127\.0\.0\.1|\[::1\])?$/.test(location.hostname)) vsb.href = "player.html?video=1&demo=1";
+
   /* ---------- الروابط والـQR ---------- */
   $$("[data-link]").forEach(a => {
     const u = (C.links || {})[a.dataset.link];

@@ -96,6 +96,14 @@ html[dir=rtl] .guideback{direction:rtl}
 .vthumb{position:relative;display:block;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer}
 .vthumb img{width:100%;height:100%;object-fit:cover;display:block}
 .vthumb span{position:absolute;inset:0;margin:auto;width:64px;height:44px;border-radius:12px;background:rgba(220,0,0,.9);color:#fff;display:grid;place-items:center;font-size:1.3rem}
+.vidcode{display:flex;align-items:center;gap:.7rem;margin:.4rem 0 1rem;font-weight:700}.vidcode b{font-size:1.25rem;color:var(--gold1);letter-spacing:.04em;background:rgba(244,203,85,.1);border:1px solid rgba(244,203,85,.4);border-radius:10px;padding:.2rem .7rem}
+.acts .btn[hidden]{display:none!important}
+.vfcard[hidden]{display:none}
+.vfcard{width:100%;max-width:520px;height:auto;aspect-ratio:1584/993;border-radius:12px;background:#030a24;display:block;margin:.2rem auto 1rem;box-shadow:0 6px 22px rgba(0,0,0,.4)}
+.vlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.6rem;margin:.6rem 0 1rem}
+.vitem{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;padding:.7rem .9rem;border-radius:12px;border:1px solid rgba(244,203,85,.4);background:rgba(244,203,85,.06);color:inherit;font:inherit;cursor:pointer;text-align:start}
+.vitem:hover,.vitem:focus-visible{background:rgba(244,203,85,.16)}.vitem b{color:var(--gold1);letter-spacing:.03em}.vitem span{font-size:.9rem;color:var(--mut)}
+.vitem em{font-style:normal;font-size:.85rem;font-weight:700;color:var(--mut)}.vitem.done{border-color:rgba(157,255,195,.6)}.vitem.done em{color:#9dffc3}
 .vmsg.closed{color:var(--gold1);background:rgba(244,203,85,.1);border:1px dashed rgba(244,203,85,.5);border-radius:10px;padding:.5rem .7rem;line-height:1.6}
 .cform input:disabled{opacity:1;cursor:not-allowed;background:rgba(244,203,85,.08)!important;border:1.5px dashed rgba(244,203,85,.6)!important;color:var(--gold1)}
 .cform input:disabled::placeholder{color:#ffe08a;opacity:1;font-weight:700}

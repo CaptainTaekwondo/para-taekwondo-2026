@@ -5,8 +5,11 @@ backend/
 reports/
 research_notes/
 snap.yml
-judges.html
-judges.js
-judges.css
-assets/judges/
+# ملفات مصدر صفحة الحكام (الصفحة نفسها تُنشر لكنها مقفولة بـ judgesOpen)
+assets/judges/*-src.png
+assets/judges/chatgpt-*.png
+assets/judges/judge-card-template.*
+assets/judges/plates-cut.png
+assets/judges/template-src.html
+assets/judges/ring-mask.png
 assets/video-background-1080x1920.png

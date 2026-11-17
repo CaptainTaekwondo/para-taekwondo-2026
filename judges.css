@@ -1,0 +1,635 @@
+/* صفحة لجنة التحكيم: كروت ذهبية مبهرة بهوية ملصق البطولة */
+.cnav .tools{margin-inline-start:auto;display:flex;gap:.5rem}
+
+.jpage{position:relative;isolation:isolate;padding:104px 0 90px;overflow:hidden;background:#02060f}
+/* إضاءة الملعب */
+.jpage::before{content:"";position:absolute;inset:0;z-index:-3;
+  background:
+    radial-gradient(ellipse 60% 38% at 50% 8%,rgba(47,107,255,.55) 0%,rgba(11,42,119,.45) 40%,transparent 75%),
+    radial-gradient(ellipse 90% 50% at 50% 100%,rgba(217,32,47,.22) 0%,transparent 70%),
+    linear-gradient(180deg,#040c26 0%,#02060f 55%,#030a24 100%)}
+.jbeam{position:absolute;inset:0 0 auto;height:760px;z-index:-2;pointer-events:none;
+  background:
+    conic-gradient(from 148deg at 0% -4%,transparent 0 6%,rgba(255,238,170,.30) 9%,transparent 14% 100%),
+    conic-gradient(from 212deg at 100% -4%,transparent 0 6%,rgba(255,238,170,.30) 9%,transparent 14% 100%);
+  -webkit-mask:linear-gradient(180deg,#000 30%,transparent);mask:linear-gradient(180deg,#000 30%,transparent);animation:jbeam 7s ease-in-out infinite alternate}
+@keyframes jbeam{from{opacity:.65}to{opacity:1}}
+/* غبار ذهبي */
+.jdust{position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.9;
+  background:
+    radial-gradient(1.6px 1.6px at 12% 22%,#ffe58a 50%,transparent 52%),radial-gradient(1.2px 1.2px at 28% 64%,#fff 50%,transparent 52%),
+    radial-gradient(2px 2px at 44% 12%,#ffd45c 50%,transparent 52%),radial-gradient(1.4px 1.4px at 63% 38%,#fff 50%,transparent 52%),
+    radial-gradient(1.8px 1.8px at 81% 18%,#ffe58a 50%,transparent 52%),radial-gradient(1.3px 1.3px at 90% 58%,#ffd45c 50%,transparent 52%),
+    radial-gradient(1.6px 1.6px at 7% 82%,#fff 50%,transparent 52%),radial-gradient(1.5px 1.5px at 55% 86%,#ffe58a 50%,transparent 52%),
+    radial-gradient(1.2px 1.2px at 74% 76%,#fff 50%,transparent 52%),radial-gradient(1.7px 1.7px at 35% 40%,#ffd45c 50%,transparent 52%);
+  animation:jtw 4.5s ease-in-out infinite alternate}
+@keyframes jtw{from{opacity:.35}to{opacity:1}}
+/* أركان ذهبية مثل الملصق */
+.jcorner{position:absolute;width:74px;height:74px;pointer-events:none;
+  background:linear-gradient(135deg,#fff4bd,#e0a929 45%,#8a5806);filter:drop-shadow(0 0 10px rgba(244,203,85,.55))}
+.jcorner.tl{top:78px;inset-inline-start:14px;clip-path:polygon(0 0,100% 0,0 100%)}
+.jcorner.tr{top:78px;inset-inline-end:14px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.jcorner.bl{bottom:14px;inset-inline-start:14px;clip-path:polygon(0 0,0 100%,100% 100%)}
+.jcorner.br{bottom:14px;inset-inline-end:14px;clip-path:polygon(100% 0,100% 100%,0 100%)}
+.jpage .wrap{position:relative}
+
+.jhead{text-align:center;margin-bottom:1.2rem}
+.jlogo{margin:0 auto .6rem;filter:drop-shadow(0 8px 24px rgba(244,203,85,.55))}
+.jhead h1{font-size:clamp(2.4rem,7vw,4rem);line-height:1.2}
+.jhead .en{margin:.2rem 0 0;font:700 clamp(1rem,3vw,1.45rem)/1.4 var(--fd);letter-spacing:.08em;color:var(--gold2);text-transform:uppercase;direction:ltr}
+.jhead p{max-width:640px;margin:.9rem auto 0}
+
+.jlabel{display:flex;align-items:center;gap:1rem;margin:2.6rem 0 1.4rem;font:700 1.3rem var(--fd);color:#fff}
+.jlabel::before,.jlabel::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.jlabel span{padding:.2rem 1.8rem;border-radius:8px;background:linear-gradient(180deg,#ff5a66,#d9202f 50%,#8f0e19);border:2px solid var(--gold2);box-shadow:0 6px 22px rgba(217,32,47,.5),inset 0 1px 0 rgba(255,255,255,.4)}
+
+/* ================= الكرت ================= */
+.jc{--w:216px;position:relative;width:var(--w);text-align:center;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.jc:hover{transform:translateY(-10px) scale(1.04)}
+.jc .frame{position:relative;padding:calc(var(--w)*.03);border-radius:calc(var(--w)*.13);
+  background:conic-gradient(from 20deg,#fff8cf,#e8b53a,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf);
+  box-shadow:0 0 0 1px rgba(60,30,0,.7),0 0 calc(var(--w)*.13) rgba(244,203,85,.5),0 18px 34px rgba(0,0,0,.6);
+  -webkit-box-reflect:below 4px linear-gradient(transparent 72%,rgba(255,255,255,.16))}
+.jc .glass{position:relative;aspect-ratio:4/5;border-radius:calc(var(--w)*.105);overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 38%,#2c64d8 0%,#12378f 42%,#050f38 100%);
+  box-shadow:inset 0 0 0 2px rgba(255,236,160,.85),inset 0 0 0 5px rgba(90,55,5,.9),inset 0 0 28px rgba(0,0,0,.55)}
+.jc .glass img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%;z-index:0}
+.jc .glass.contain img{object-fit:contain;padding:3%;object-position:50% 45%}
+.jc .glass::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(150deg,rgba(255,255,255,.22) 0%,rgba(255,255,255,0) 32%)}
+.jc .glass::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(112deg,transparent 38%,rgba(255,255,255,.55) 50%,transparent 62%) -160% 0/260% 100% no-repeat;animation:jshine 5.5s 1s ease-in-out infinite}
+@keyframes jshine{0%{background-position:-160% 0}55%,100%{background-position:160% 0}}
+.jc .frame::after{content:"✦";position:absolute;top:-.55rem;inset-inline-end:-.35rem;font-size:calc(var(--w)*.15);line-height:1;color:#fff6c9;text-shadow:0 0 12px #ffd45c,0 0 26px #f4cb55;animation:jtw 2.4s ease-in-out infinite alternate}
+
+.jc .role{margin:calc(var(--w)*.085) 0 calc(var(--w)*.035);font:800 calc(var(--w)*.085)/1.3 var(--fb);color:#fff0a8;
+  background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(60,30,0,.7))}
+.jc .plate{position:relative;margin-top:calc(var(--w)*.02);padding:calc(var(--w)*.04) calc(var(--w)*.05);border-radius:calc(var(--w)*.07);min-height:calc(var(--w)*.2);display:grid;place-items:center;
+  background:linear-gradient(180deg,#fff6c4 0%,#f3c94d 34%,#c58a18 52%,#f0c243 76%,#ffe9a0 100%);
+  box-shadow:inset 0 2px 0 rgba(255,255,255,.85),inset 0 -3px 0 rgba(110,70,5,.75),0 0 0 2px rgba(80,45,0,.85),0 10px 22px rgba(0,0,0,.55),0 0 22px rgba(244,203,85,.4)}
+.jc .nm{margin:0;font:800 calc(var(--w)*.088)/1.25 var(--fb);color:#1a0f00;text-shadow:0 1px 0 rgba(255,255,255,.7)}
+
+.jc .code{display:flex;align-items:center;justify-content:center;gap:.5em;margin-top:calc(var(--w)*.05);padding:.2em .9em;border-radius:99px;font-size:calc(var(--w)*.052);line-height:1.5;color:var(--sky);background:rgba(3,10,36,.6);border:1px dashed rgba(244,203,85,.6)}
+.jc .code b{color:var(--gold1);font-weight:800;letter-spacing:.06em}
+
+/* رئيس الحكام */
+.jhead-wrap{display:flex;justify-content:center;padding-top:8px}
+.jc.chief{--w:min(330px,82vw)}
+.jc.chief .frame{box-shadow:0 0 0 1px rgba(60,30,0,.7),0 0 calc(var(--w)*.2) rgba(255,214,90,.75),0 0 calc(var(--w)*.5) rgba(47,107,255,.45),0 22px 44px rgba(0,0,0,.65);animation:jpulse 3.4s ease-in-out infinite alternate}
+@keyframes jpulse{from{filter:brightness(1)}to{filter:brightness(1.12)}}
+.jc.chief .role{margin-top:calc(var(--w)*.07);display:inline-block;padding:.18em 1.6em;border-radius:99px;font-size:calc(var(--w)*.062);color:#fff;-webkit-text-fill-color:#fff;background:linear-gradient(180deg,#ff5a66,#d9202f 50%,#8f0e19);border:2px solid var(--gold2);box-shadow:0 6px 18px rgba(217,32,47,.55),inset 0 1px 0 rgba(255,255,255,.4);filter:none;-webkit-background-clip:border-box;background-clip:border-box}
+.jc.chief .nm{font-size:calc(var(--w)*.074)}
+.jc.chief::before{content:"♛";position:absolute;inset-inline:0;top:calc(var(--w)*-.2);margin-inline:auto;width:max-content;font-size:calc(var(--w)*.2);line-height:1;z-index:3;
+  background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 4px 8px rgba(0,0,0,.7)) drop-shadow(0 0 14px rgba(244,203,85,.8))}
+
+/* قالب ChatGPT (config.judgeCardBg): الصورة والاسم والكود فوق خانات القالب */
+.jc.tpl{perspective:900px;animation:jin .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*.12s)}
+@keyframes jin{from{opacity:0;transform:translateY(36px) scale(.94)}to{opacity:1;transform:none}}
+.jc.tpl:hover{transform:translateY(-8px) scale(1.03)}
+.jc.tpl .tcard{--rx:0deg;--ry:0deg;--mx:50%;--my:50%;position:relative;width:100%;aspect-ratio:978/1355;background:var(--bg) center/100% 100% no-repeat;transform:rotateX(var(--rx)) rotateY(var(--ry));transition:transform .18s ease-out;transform-style:preserve-3d;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6)) drop-shadow(0 0 16px rgba(244,203,85,.28));animation:jglow 3.6s ease-in-out infinite alternate}
+/* عند فتح الصفحة كملف (file://) Chrome بيرفض صور الـ mask (CORS) وبيبوّظ معاها صورة الإطار نفسها، فبنلغي اللمعة/الوهج المعتمدين على الـ mask في الحالة دي بس */
+.is-file .jc.tpl .tcard::before,.is-file .jc.tpl .tcard::after{display:none}
+@keyframes jglow{from{filter:drop-shadow(0 16px 26px rgba(0,0,0,.6)) drop-shadow(0 0 10px rgba(244,203,85,.2))}to{filter:drop-shadow(0 16px 26px rgba(0,0,0,.6)) drop-shadow(0 0 26px rgba(244,203,85,.6))}}
+/* لمعة تمر على شكل الكرت فقط */
+.jc.tpl .tcard::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:4;
+  -webkit-mask:var(--bg) center/100% 100% no-repeat;mask:var(--bg) center/100% 100% no-repeat;
+  background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.75) 50%,transparent 60%) -170% 0/260% 100% no-repeat;animation:jsweep 4.6s calc(.8s + var(--i,0)*.35s) ease-in-out infinite}
+@keyframes jsweep{0%{background-position:-170% 0}50%,100%{background-position:170% 0}}
+/* وهج يتبع الماوس */
+.jc.tpl .tcard::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:3;opacity:0;transition:opacity .3s;
+  -webkit-mask:var(--bg) center/100% 100% no-repeat;mask:var(--bg) center/100% 100% no-repeat;
+  background:radial-gradient(circle at var(--mx) var(--my),rgba(255,244,190,.28),transparent 45%)}
+.jc.tpl:hover .tcard::after{opacity:1}
+/* شرارات متلألئة */
+.jc.tpl .sp{position:absolute;z-index:5;pointer-events:none;font-style:normal;line-height:1;color:#fff6c9;text-shadow:0 0 8px #ffd45c,0 0 18px #f4cb55;font-size:calc(var(--w)*.075);opacity:0;animation:jspark 3.2s ease-in-out infinite}
+.jc.tpl .sp.s1{left:6%;top:24%}.jc.tpl .sp.s2{right:5%;top:12%;animation-delay:.7s;font-size:calc(var(--w)*.1)}
+.jc.tpl .sp.s3{left:9%;top:60%;animation-delay:1.4s}.jc.tpl .sp.s4{right:8%;top:52%;animation-delay:2.1s;font-size:calc(var(--w)*.06)}
+.jc.tpl .sp.s5{left:48%;top:93%;animation-delay:2.6s;font-size:calc(var(--w)*.065)}
+@keyframes jspark{0%,100%{opacity:0;transform:scale(.3) rotate(0)}45%{opacity:1;transform:scale(1.15) rotate(45deg)}70%{opacity:.4;transform:scale(.7) rotate(90deg)}}
+/* لمعة زجاج على نافذة الصورة */
+.jc.tpl .tph::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(155deg,rgba(255,255,255,.28) 0%,rgba(255,255,255,0) 30%),linear-gradient(112deg,transparent 42%,rgba(255,255,255,.4) 50%,transparent 58%) -170% 0/260% 100% no-repeat;animation:jsweep 4.6s calc(1.2s + var(--i,0)*.35s) ease-in-out infinite}
+.jc.tpl .tnm{z-index:2}
+.jc.tpl .tph{position:absolute;left:20%;width:60%;top:13.4%;height:54.4%;border-radius:calc(var(--w)*.045);overflow:hidden;background:radial-gradient(ellipse 70% 55% at 50% 38%,#2c64d8 0%,#12378f 45%,#050f38 100%);display:grid;place-items:center}
+.jc.tpl .tph>img:first-child{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.jc.tpl .tph.contain>img:first-child{object-fit:contain;padding:2%;object-position:50% 45%}
+.jc.tpl .tph .ini{font:700 calc(var(--w)*.35)/1 var(--fd)}
+.jc.tpl .tnm{position:absolute;left:14%;width:72%;top:75.9%;height:8.6%;margin:0;display:grid;place-items:center;text-align:center;font:800 calc(var(--w)*.075)/1.1 var(--fb);color:#2a1700;text-shadow:0 1px 0 rgba(255,255,255,.65)}
+.jc.tpl .tcode{position:absolute;left:25%;width:50%;top:87.6%;height:4.8%;display:flex;align-items:center;justify-content:center;gap:.5em;font-size:calc(var(--w)*.04);line-height:1;color:var(--sky);white-space:nowrap}
+.jc.tpl .tcode b{color:var(--gold1);font-weight:800;letter-spacing:.06em}
+.jc.tpl .role{margin-top:calc(var(--w)*.04)}
+.jc.tpl.chief{--w:min(360px,86vw)}
+/* هالة تدور خلف رئيس الحكام */
+.jc.tpl.chief::before{content:"";display:block;position:absolute;inset:-22% -30%;z-index:-1;pointer-events:none;border-radius:50%;
+  background:conic-gradient(from 0deg,transparent 0 8%,rgba(255,226,130,.38) 12%,transparent 18% 33%,rgba(120,170,255,.32) 38%,transparent 44% 58%,rgba(255,226,130,.38) 62%,transparent 68% 83%,rgba(120,170,255,.3) 88%,transparent 94%);
+  -webkit-mask:radial-gradient(circle,#000 18%,transparent 68%);mask:radial-gradient(circle,#000 18%,transparent 68%);animation:jspin 14s linear infinite}
+@keyframes jspin{to{transform:rotate(360deg)}}
+.jc.tpl.slot{opacity:.85}
+
+/* خانة لم تُعلن بعد */
+.jc.slot{opacity:.8}
+.jc.slot .glass{display:grid;place-items:center}
+.jc.slot .glass .ini{position:relative;z-index:1;font:700 calc(var(--w)*.4)/1 var(--fd);opacity:.85}
+
+.jgrid{display:flex;flex-wrap:wrap;justify-content:center;gap:2.2rem 1.8rem;padding-bottom:3.4rem}
+.jnote{margin-top:2rem;text-align:center;color:var(--mut);font-size:.92rem}
+
+@media(max-width:640px){.jc{--w:min(216px,64vw)}.jgrid{gap:1.8rem 1.2rem}.jcorner{width:46px;height:46px}}
+@media(prefers-reduced-motion:reduce){.jc.tpl,.jc.tpl .tcard,.jc.tpl .tcard::before,.jc.tpl .tph::after,.jc.tpl .sp,.jc.tpl.chief::before{animation:none}.jc.tpl .sp{opacity:.8}.jbeam,.jdust,.jc .glass::after,.jc .frame::after,.jc.chief .frame{animation:none}.jc,.jc:hover{transition:none;transform:none}}
+
+/* علامة مائية: لوجو كابتن تايكوندو */
+.jc.tpl .wm{display:none;position:absolute;z-index:3;inset:auto 5% 3.5% auto;align-self:end;justify-self:end;width:17%;aspect-ratio:1;opacity:.85;pointer-events:none;filter:drop-shadow(0 2px 5px rgba(0,0,0,.7))}
+.jc.tpl .wm2{position:absolute;z-index:1;left:50%;top:50%;width:64%;aspect-ratio:1;transform:translate(-50%,-50%);opacity:.09;mix-blend-mode:screen;pointer-events:none}
+.jmark{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-top:1.2rem;color:var(--gold1);font:700 .95rem var(--fd);letter-spacing:.14em;text-transform:uppercase;direction:ltr}
+.jmark img{width:54px;height:54px;filter:drop-shadow(0 0 12px rgba(244,203,85,.55))}
+.jkick{position:absolute;z-index:-1;pointer-events:none;width:min(560px,48vw);inset-inline-end:-90px;top:560px;opacity:.07;filter:blur(.4px) drop-shadow(0 0 30px rgba(244,203,85,.5));-webkit-mask:linear-gradient(90deg,transparent,#000 40%);mask:linear-gradient(90deg,transparent,#000 40%)}
+@media(max-width:900px){.jkick{display:none}}
+
+/* الاسم الطويل (الإنجليزي) يتقلص ليبقى داخل الشريط الذهبي */
+html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text-wrap:balance}
+.jc.tpl .tnm{overflow:hidden}
+
+/* ================= قلب الكرت وظهره ================= */
+.jc.tpl .flip{position:relative;width:100%;aspect-ratio:978/1355;transform-style:preserve-3d;transition:transform .85s cubic-bezier(.3,.8,.2,1)}
+.jc.tpl.flipped .flip{transform:rotateY(180deg)}
+.jc.tpl .tcard{position:absolute;inset:0;width:100%;aspect-ratio:auto;backface-visibility:hidden;-webkit-backface-visibility:hidden}
+.jc.flippable{cursor:pointer}
+.jc.tpl.flipped{z-index:6}
+.jc.tpl .back{position:absolute;inset:0;transform:rotateY(180deg);backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:calc(var(--w)*.03);border-radius:calc(var(--w)*.07);
+  background:conic-gradient(from 20deg,#fff8cf,#e8b53a,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf);
+  box-shadow:0 0 0 1px rgba(60,30,0,.7),0 0 26px rgba(244,203,85,.55),0 16px 30px rgba(0,0,0,.6);cursor:default}
+.jc.tpl .back .bin{position:relative;height:100%;border-radius:calc(var(--w)*.045);overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:calc(var(--w)*.022);padding:6% 7%;text-align:center;
+  background:radial-gradient(ellipse 90% 60% at 50% 18%,#2a63d4 0%,#0f3290 38%,#061a55 70%,#030a24 100%);box-shadow:inset 0 0 0 2px rgba(255,236,160,.85),inset 0 0 0 5px rgba(90,55,5,.9)}
+.jc.tpl .back .bin::before{content:"";position:absolute;inset:0;pointer-events:none;background:conic-gradient(from 160deg at 50% -10%,transparent 0 38%,rgba(255,236,160,.16) 44%,transparent 50%,rgba(255,236,160,.12) 56%,transparent 62%)}
+.jc.tpl .back .b1{position:relative;width:calc(var(--w)*.26);height:auto;filter:drop-shadow(0 4px 12px rgba(244,203,85,.55))}
+.jc.tpl .back .bt{position:relative;font:700 calc(var(--w)*.05)/1.4 var(--fd);color:var(--gold1)}
+.jc.tpl .back .bs{position:relative;padding:.05em 1.1em;border-radius:99px;font:800 calc(var(--w)*.048)/1.5 var(--fb);color:#fff;background:linear-gradient(180deg,#ff5a66,#d9202f 50%,#8f0e19);border:2px solid var(--gold2)}
+.jc.tpl .back .bn{position:relative;margin-top:calc(var(--w)*.02);font:800 calc(var(--w)*.075)/1.3 var(--fb);color:#fff;text-shadow:0 2px 0 rgba(0,0,0,.5)}
+.jc.tpl .back .bc{position:relative;display:flex;gap:.5em;align-items:center;padding:.1em .9em;border-radius:99px;border:1px dashed rgba(244,203,85,.7);background:rgba(3,10,36,.6);font-size:calc(var(--w)*.045);color:var(--sky)}
+.jc.tpl .back .bc b{color:var(--gold1);font-weight:800;letter-spacing:.06em}
+.jc.tpl .back .bd{position:relative;margin-top:calc(var(--w)*.03);font:700 calc(var(--w)*.05)/1.3 var(--fb);color:var(--gold2)}
+.jc.tpl .back .bb{position:relative;display:flex;gap:calc(var(--w)*.025)}
+.jc.tpl .back .bb button{min-width:calc(var(--w)*.2);padding:.35em .6em;border:0;border-radius:calc(var(--w)*.03);cursor:pointer;font:800 calc(var(--w)*.05)/1.2 var(--fb);letter-spacing:.04em;color:#201400;
+  background:linear-gradient(180deg,#fff6c4,#f3c94d 45%,#c58a18);box-shadow:inset 0 1px 0 rgba(255,255,255,.8),0 4px 10px rgba(0,0,0,.45);transition:transform .2s,filter .2s}
+.jc.tpl .back .bb button:hover{transform:translateY(-2px);filter:brightness(1.1)}
+.jc.tpl .back .bb button:disabled{opacity:.55;cursor:progress}
+.jc.tpl .back .bk{position:relative;margin-top:calc(var(--w)*.012);background:none;border:0;cursor:pointer;color:var(--mut);font:600 calc(var(--w)*.04)/1.3 var(--fb);text-decoration:underline}
+.jc.tpl .back .bf{position:relative;display:flex;align-items:center;gap:.5em;margin-top:calc(var(--w)*.02);font:700 calc(var(--w)*.035)/1 var(--fd);letter-spacing:.12em;text-transform:uppercase;color:var(--gold2);direction:ltr}
+.jc.tpl .back .bf img{width:calc(var(--w)*.09);height:auto}
+.jc.chief.tpl .back .bn{font-size:calc(var(--w)*.065)}
+
+/* نافذة كلمة المرور */
+.pwmodal{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:1rem;background:rgba(2,6,15,.78);backdrop-filter:blur(6px)}
+.pwmodal[hidden]{display:none}
+.pwbox{width:min(380px,100%);padding:1.6rem 1.4rem;border-radius:22px;text-align:center;background:radial-gradient(ellipse 90% 60% at 50% 0%,#14409a,#061540 70%);border:3px solid var(--gold2);box-shadow:0 0 40px rgba(244,203,85,.35),0 20px 50px rgba(0,0,0,.6)}
+.pwbox h2{font-size:1.6rem;margin:0 0 .3rem}
+.pwbox p{margin:0 0 1rem;color:var(--mut)}
+.pwbox input{width:100%;padding:.75rem 1rem;border-radius:12px;border:2px solid rgba(244,203,85,.6);background:rgba(3,10,36,.8);color:#fff;font:600 1.1rem var(--fb);text-align:center;direction:ltr}
+.pwbox input:focus{outline:3px solid var(--gold2);outline-offset:2px}
+.pwerr{margin-top:.6rem;color:#ff9aa2;font-weight:700}
+.pwact{display:flex;gap:.6rem;justify-content:center;margin-top:1.1rem}
+.pwbox.shake{animation:pwshake .4s}
+@keyframes pwshake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+@media(prefers-reduced-motion:reduce){.jc.tpl .flip{transition:none}.pwbox.shake{animation:none}}
+
+/* ظهر البطاقة من قالب ChatGPT */
+.jc.tpl .back[style*="--bk"]{padding:0;border-radius:0;background:var(--bk) center/100% 100% no-repeat;box-shadow:none;filter:drop-shadow(0 16px 26px rgba(0,0,0,.6)) drop-shadow(0 0 16px rgba(244,203,85,.3))}
+.jc.tpl .back[style*="--bk"] .bin{border-radius:0;background:none;box-shadow:none;padding:15% 13% 17%}
+.jc.tpl .back[style*="--bk"] .bin::before{display:none}
+.jc.tpl .back[style*="--bk"] .bt,.jc.tpl .back[style*="--bk"] .bn{text-shadow:0 2px 6px rgba(0,0,0,.8)}
+
+/* الكود وحده بدون عنوان: أكبر وأوضح */
+.jc.tpl .tcode{font-size:calc(var(--w)*.05)}
+.jc.tpl .tcode b,.jc.tpl .back .bc b{letter-spacing:.1em}
+.jc.tpl .back .bc{font-size:calc(var(--w)*.055)}
+
+/* ظهر الصفحة بدون الكود (موجود على الوش) */
+.jc.tpl .back .bc{display:none}
+
+/* لمعة وشرارات ظهر البطاقة (زي الوش) */
+.jc.tpl .back[style*="--bk"]::before{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;
+  -webkit-mask:var(--bk) center/100% 100% no-repeat;mask:var(--bk) center/100% 100% no-repeat;
+  background:linear-gradient(112deg,transparent 40%,rgba(255,255,255,.7) 50%,transparent 60%) -170% 0/260% 100% no-repeat;animation:jsweep 4.6s calc(.6s + var(--i,0)*.35s) ease-in-out infinite}
+.jc.tpl .back .sp{z-index:5}
+@media(prefers-reduced-motion:reduce){.jc.tpl .back::before,.jc.tpl .back .sp{animation:none}.jc.tpl .back .sp{opacity:.8}}
+
+/* عنوان "حمّل البطاقة" فوق الأزرار: تنسيق فقط */
+.jc.tpl .back .bd{display:flex;align-items:center;gap:.6em;width:88%;margin:calc(var(--w)*.045) auto calc(var(--w)*.03);font:800 calc(var(--w)*.058)/1.3 var(--fb);color:transparent;
+  background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 0 rgba(60,30,0,.7))}
+.jc.tpl .back .bd::before,.jc.tpl .back .bd::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,transparent,var(--gold2));-webkit-text-fill-color:initial}
+.jc.tpl .back .bd::after{background:linear-gradient(270deg,transparent,var(--gold2))}
+.jc.tpl .back .bd{justify-content:center;text-align:center}
+.jc.tpl .back .bd::before,.jc.tpl .back .bd::after{max-width:22%}
+
+/* ترتيب ظهر البطاقة في الصفحة: ثلاث مجموعات بمسافات متناسقة */
+.jc.tpl .back[style*="--bk"] .bin{padding:12% 10% 15%;justify-content:space-between;gap:0}
+.jc.tpl .back .g1,.jc.tpl .back .g2{position:relative;display:flex;flex-direction:column;align-items:center;gap:calc(var(--w)*.03);width:100%}
+.jc.tpl .back .g1{gap:calc(var(--w)*.028)}
+.jc.tpl .back .g2{gap:calc(var(--w)*.04)}
+.jc.tpl .back .bd{margin:0}
+.jc.tpl .back .bk{margin:0}
+.jc.tpl .back .bf{margin:0}
+.jc.tpl .back .b1{width:calc(var(--w)*.25)}
+.jc.tpl .back .bn{margin:calc(var(--w)*.012) 0 0}
+
+/* توقيع Captain Taekwondo أسفل الظهر: ذهبي متدرج بحروف مباعدة وخطين رفيعين */
+.jc.tpl .back .bf{width:100%;justify-content:center;gap:calc(var(--w)*.03);font:800 calc(var(--w)*.046)/1 var(--fd);letter-spacing:.16em;text-transform:uppercase;white-space:nowrap}
+.jc.tpl .back .bf img{width:calc(var(--w)*.11);height:auto;flex:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.7)) drop-shadow(0 0 8px rgba(244,203,85,.5))}
+.jc.tpl .back .bf span{background:linear-gradient(180deg,#fff6c9 0%,#f4cb55 48%,#c58a18 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.85));padding-inline-start:.16em}
+.jc.tpl .back .bf::before,.jc.tpl .back .bf::after{content:"";flex:1;height:1.5px;min-width:calc(var(--w)*.04);background:linear-gradient(90deg,transparent,rgba(244,203,85,.9))}
+.jc.tpl .back .bf::after{background:linear-gradient(270deg,transparent,rgba(244,203,85,.9))}
+.jc.tpl .back[style*="--bk"] .bin{padding-bottom:17%}
+
+/* اللوجو فوق الكلمة، والخطين على جنبي الكلمة */
+.jc.tpl .back .bf{flex-direction:column;gap:calc(var(--w)*.022)}
+.jc.tpl .back .bf::before,.jc.tpl .back .bf::after{content:none}
+.jc.tpl .back .bf img{width:calc(var(--w)*.15)}
+.jc.tpl .back .bfr{display:flex;align-items:center;justify-content:center;gap:calc(var(--w)*.03);width:100%}
+.jc.tpl .back .bfr::before,.jc.tpl .back .bfr::after{content:"";flex:1;height:1.5px;min-width:calc(var(--w)*.04);background:linear-gradient(90deg,transparent,rgba(244,203,85,.9))}
+.jc.tpl .back .bfr::after{background:linear-gradient(270deg,transparent,rgba(244,203,85,.9))}
+.jc.tpl .back .bfr span{flex:none}
+.jc.tpl .back[style*="--bk"] .bin{padding-bottom:13%}
+
+.jc.tpl .back[style*="--bk"] .bin{padding:8.5% 10% 10.5%}
+.jc.tpl .back .b1{width:calc(var(--w)*.23)}
+
+.jc.tpl .back[style*="--bk"] .bin{padding:8% 10% 15%}
+.jc.tpl .back .g2{gap:calc(var(--w)*.032)}
+
+.jc.tpl .back[style*="--bk"] .bin{padding:8% 10% 19%}
+
+/* الكلمة تنزل شوية وتتوسّط بين اللوجو وخطوط المنصة */
+.jc.tpl .back .bfr{position:relative;top:calc(var(--w)*.026)}
+
+/* ================= خلفية الصفحة المطوّرة ================= */
+.jpage::before{background:
+  radial-gradient(ellipse 70% 34% at 50% 6%,rgba(60,120,255,.62) 0%,rgba(11,42,119,.5) 42%,transparent 76%),
+  radial-gradient(ellipse 55% 30% at 50% 52%,rgba(244,203,85,.09) 0%,transparent 70%),
+  radial-gradient(ellipse 95% 44% at 50% 100%,rgba(217,32,47,.28) 0%,rgba(120,20,40,.12) 45%,transparent 75%),
+  linear-gradient(180deg,#050e2e 0%,#030a1f 38%,#02060f 70%,#0a0714 100%)}
+/* أشعة الإضاءة: أربع حزم بتتمايل ببطء */
+.jbeam{height:900px;background:
+  conic-gradient(from 150deg at 0% -4%,transparent 0 5%,rgba(255,238,170,.34) 8.5%,transparent 13% 100%),
+  conic-gradient(from 210deg at 100% -4%,transparent 0 5%,rgba(255,238,170,.34) 8.5%,transparent 13% 100%),
+  conic-gradient(from 158deg at 22% -6%,transparent 0 4%,rgba(120,170,255,.22) 6.5%,transparent 10% 100%),
+  conic-gradient(from 202deg at 78% -6%,transparent 0 4%,rgba(120,170,255,.22) 6.5%,transparent 10% 100%);
+  animation:jsway 9s ease-in-out infinite alternate}
+@keyframes jsway{from{opacity:.6;transform:skewX(-2deg)}to{opacity:1;transform:skewX(2deg)}}
+/* خطوط ضوء مائلة ناعمة + نقط شبكية على الأطراف زي الملصق */
+.jrays{position:absolute;inset:0;z-index:-2;pointer-events:none;opacity:.55;
+  background:
+    repeating-linear-gradient(115deg,transparent 0 46px,rgba(120,170,255,.045) 46px 48px),
+    radial-gradient(circle,rgba(244,203,85,.5) 1px,transparent 1.6px) 0 0/16px 16px;
+  -webkit-mask:linear-gradient(90deg,#000 0,transparent 24%,transparent 76%,#000 100%),linear-gradient(180deg,transparent 4%,#000 30%,#000 80%,transparent);
+  -webkit-mask-composite:source-in;mask-composite:intersect;
+  mask:linear-gradient(90deg,#000 0,transparent 24%,transparent 76%,#000 100%) intersect,linear-gradient(180deg,transparent 4%,#000 30%,#000 80%,transparent)}
+/* أرضية الساحة: حلقات ذهبية متوهجة تحت الصفحة */
+.jfloor{position:absolute;inset-inline:0;bottom:0;height:420px;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(ellipse 46% 15% at 50% 88%,rgba(255,226,130,.5) 0%,rgba(244,203,85,.18) 40%,transparent 72%),
+    repeating-radial-gradient(ellipse 52% 17% at 50% 90%,transparent 0 22px,rgba(244,203,85,.22) 22px 23.5px,transparent 23.5px 54px),
+    radial-gradient(ellipse 80% 30% at 50% 100%,rgba(47,107,255,.28),transparent 70%);
+  -webkit-mask:linear-gradient(180deg,transparent,#000 45%);mask:linear-gradient(180deg,transparent,#000 45%)}
+#jfx{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+/* تعتيم الأطراف لتركيز العين على الكروت */
+.jvig{position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(ellipse 85% 75% at 50% 45%,transparent 55%,rgba(1,3,10,.7) 100%)}
+.jdust{opacity:.55}
+@media(prefers-reduced-motion:reduce){.jbeam{animation:none}}
+
+/* ============ كشف الكود على الحواف + اللوجو الملوّن على الصورة (مع حركة الماوس) ============ */
+.jc.tpl .rcode{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:var(--pat) center/calc(var(--w)*1) auto repeat;
+  -webkit-mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
+  -webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-composite:source-in;
+  mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
+  mask-size:100% 100%;mask-repeat:no-repeat;mask-composite:intersect;
+  filter:drop-shadow(0 0 6px rgba(244,203,85,.7))}
+.jc.tpl:hover .rcode{opacity:.95}
+.jc.tpl .wm2{display:none}
+.jc.tpl .wmc{position:absolute;z-index:1;left:50%;top:50%;width:68%;aspect-ratio:1;transform:translate(-50%,-50%) scale(.92);opacity:0;pointer-events:none;
+  transition:opacity .35s,transform .45s;
+  -webkit-mask-image:radial-gradient(circle 62% at var(--px,50%) var(--py,50%),#000 25%,transparent 100%);mask-image:radial-gradient(circle 62% at var(--px,50%) var(--py,50%),#000 25%,transparent 100%);
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.55))}
+.jc.tpl.onph .wmc{opacity:.42;transform:translate(-50%,-50%) scale(1)}
+/* الموبايل مفيش ماوس: الكشاف بيتحرك لوحده على الكارت الظاهر (class auto من judges.js) فتظهر العلامة المائية */
+@media(hover:none){.jc.tpl.auto .rcode{opacity:.95}}
+@media(prefers-reduced-motion:reduce){.jc.tpl .rcode,.jc.tpl .wmc{transition:none}}
+
+/* تعديل: الكود عمودي مكرر على الحافتين، واللوجو شفاف يتبع الماوس */
+.jc.tpl .rcode{background:var(--pat) 0 0/100% auto repeat-y}
+.jc.tpl .wmc{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.55) 42%,transparent 78%);mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.55) 42%,transparent 78%)}
+.jc.tpl.onph .wmc{opacity:.42}
+
+/* الوجه غير الظاهر ما يستقبلش الماوس (كان بيمنع تأثير الصورة) */
+.jc.tpl:not(.flipped) .back{pointer-events:none}
+.jc.tpl.flipped .tcard{pointer-events:none}
+
+.jc.tpl .wmc{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.8) at var(--px,50%) var(--py,50%),#000 0,#000 40%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.8) at var(--px,50%) var(--py,50%),#000 0,#000 40%,transparent 100%)}
+.jc.tpl.onph .wmc{opacity:.5}
+
+/* ================= تنسيق احترافي: الشريط العلوي، الأركان، الميدالية، العنوان ================= */
+/* الشريط العلوي */
+.cnav{background:linear-gradient(180deg,rgba(3,10,36,.96),rgba(3,10,36,.82));border-bottom:0;box-shadow:0 12px 30px rgba(0,0,0,.45)}
+.cnav::after{content:"";position:absolute;inset-inline:0;bottom:0;height:2px;background:linear-gradient(90deg,transparent,#8a5806 12%,#fff4bd 50%,#8a5806 88%,transparent)}
+.cnav .brand{gap:.8rem}
+.cnav .brand img{width:46px;height:46px;border-radius:50%;box-shadow:0 0 0 2px rgba(244,203,85,.75),0 0 16px rgba(244,203,85,.5)}
+.cnav .brand span{display:inline;font:700 1.12rem/1.2 var(--fd);letter-spacing:.02em;background:var(--foil);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 1px 0 rgba(60,30,0,.6))}
+@media(max-width:700px){.cnav .brand span{display:none}}
+.cnav .tbtn{border-color:rgba(244,203,85,.7);background:linear-gradient(180deg,rgba(244,203,85,.16),rgba(244,203,85,.04))}
+
+/* الأركان الذهبية: كوشة بخطين متوازيين وماسة صغيرة */
+.jcorner{width:104px;height:104px;background:none;clip-path:none;filter:drop-shadow(0 0 10px rgba(244,203,85,.45))}
+.jcorner::before,.jcorner::after{content:"";position:absolute;border:solid transparent;border-image:linear-gradient(135deg,#fff4bd,#e0a929 48%,#8a5806) 1}
+.jcorner::before{inset:0;border-width:5px 0 0 5px}
+.jcorner::after{inset:14px;border-width:2px 0 0 2px;opacity:.85}
+.jcorner.tl{top:78px;left:20px;right:auto}
+.jcorner.tr{top:78px;right:20px;left:auto;clip-path:none;transform:scaleX(-1)}
+.jcorner.bl{bottom:20px;left:20px;right:auto;transform:scaleY(-1)}
+.jcorner.br{bottom:20px;right:20px;left:auto;transform:scale(-1,-1)}
+.jcorner.tl,.jcorner.tr,.jcorner.bl,.jcorner.br{inset-inline-start:auto;inset-inline-end:auto}
+.jcorner.tl{inset:78px auto auto 20px}.jcorner.tr{inset:78px 20px auto auto}.jcorner.bl{inset:auto auto 20px 20px}.jcorner.br{inset:auto 20px 20px auto}
+@media(max-width:640px){.jcorner{width:54px;height:54px}.jcorner::after{inset:9px}.jcorner.tl,.jcorner.tr{top:70px}.jcorner.tl,.jcorner.bl{left:10px}.jcorner.tr,.jcorner.br{right:10px}}
+
+/* ميدالية لوجو البطولة بخطين ذهبيين على الجنبين */
+.jmedalrow{display:flex;align-items:center;justify-content:center;gap:1.2rem;max-width:620px;margin:0 auto .7rem}
+.jmedalrow>i{flex:1;height:2px;background:linear-gradient(90deg,transparent,#f4cb55)}
+.jmedalrow>i:last-child{background:linear-gradient(270deg,transparent,#f4cb55)}
+.jmedal{position:relative;flex:none;width:132px;height:132px;border-radius:50%;padding:0;border:0;background:none;cursor:pointer;perspective:800px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;font:inherit;color:inherit}
+.jmedal .coin{position:absolute;inset:0;display:block;transform-style:preserve-3d;border-radius:50%}
+.jmedal .face{position:absolute;inset:0;display:block;border-radius:50%;padding:6px;-webkit-backface-visibility:hidden;backface-visibility:hidden;
+  background:conic-gradient(from 20deg,#fff8cf,#e8b53a,#fff1a6,#a06a0b,#f9d65f,#fff8cf,#d8a020,#8a5806,#fff8cf);
+  box-shadow:0 0 0 2px rgba(60,30,0,.75),0 0 28px rgba(244,203,85,.6),0 0 70px rgba(47,107,255,.35),0 12px 26px rgba(0,0,0,.6);animation:jmed 4s ease-in-out infinite alternate}
+.jmedal .face.back{transform:rotateX(180deg)}
+.jmedal:focus-visible{outline:3px solid #fff1a6;outline-offset:10px}
+.jmedal.rm .face{transition:opacity .35s}.jmedal.rm .face.back{transform:none;opacity:0}.jmedal.rm.flipped .face.front{opacity:0}.jmedal.rm.flipped .face.back{opacity:1}
+.jmedal::before{content:"";position:absolute;inset:-14px;border-radius:50%;border:1px solid rgba(244,203,85,.4);box-shadow:0 0 14px rgba(244,203,85,.25)}
+.jmedal .jlogo{width:100%;height:100%;border-radius:50%;margin:0;background:#050f38;filter:none}
+@keyframes jmed{from{box-shadow:0 0 0 2px rgba(60,30,0,.75),0 0 20px rgba(244,203,85,.45),0 0 60px rgba(47,107,255,.28),0 12px 26px rgba(0,0,0,.6)}to{box-shadow:0 0 0 2px rgba(60,30,0,.75),0 0 38px rgba(244,203,85,.8),0 0 84px rgba(47,107,255,.45),0 12px 26px rgba(0,0,0,.6)}}
+@media(max-width:640px){.jmedal{width:104px;height:104px}.jmedalrow{gap:.7rem}}
+@media(prefers-reduced-motion:reduce){.jmedal .face{animation:none}}
+
+/* العنوان والوصف */
+.jhead{margin-bottom:1.6rem}
+.jhead h1{margin:.1rem 0 .15rem;font-size:clamp(2.6rem,7.5vw,4.4rem);line-height:1.15;letter-spacing:.01em}
+.jhead .en{margin:.1rem auto 0;max-width:100%;font:700 clamp(.78rem,2vw,1.12rem)/1.5 var(--fd);letter-spacing:.24em;text-transform:uppercase;color:#f4d98a;text-wrap:balance;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+@media(min-width:760px){.jhead .en{white-space:nowrap}}
+.jdiv{display:flex;align-items:center;justify-content:center;gap:.8rem;max-width:380px;margin:1rem auto .9rem}
+.jdiv>i{flex:1;height:1.5px;background:linear-gradient(90deg,transparent,#f4cb55)}
+.jdiv>i:last-child{background:linear-gradient(270deg,transparent,#f4cb55)}
+.jdiv>b{flex:none;width:11px;height:11px;transform:rotate(45deg);background:linear-gradient(135deg,#fff4bd,#c58a18);box-shadow:0 0 12px rgba(244,203,85,.9),0 0 0 3px rgba(244,203,85,.18)}
+.jhead .jdesc{max-width:600px;margin:0 auto;font-size:1.06rem;line-height:1.95;color:#d3e0ff;text-wrap:balance;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+
+.jcorner.tl,.jcorner.tr,.jcorner.bl,.jcorner.br{clip-path:none}
+
+/* أركان بخلفيات متدرجة بدل border-image (أثبت في كل المتصفحات) */
+.jcorner::before,.jcorner::after{border:0;border-image:none;position:absolute;content:""}
+.jcorner::before{inset:0;background:
+  linear-gradient(90deg,#fff4bd,#e0a929 55%,rgba(138,88,6,.0)) 0 0/100% 5px no-repeat,
+  linear-gradient(180deg,#fff4bd,#e0a929 55%,rgba(138,88,6,.0)) 0 0/5px 100% no-repeat}
+.jcorner::after{inset:14px;opacity:.85;background:
+  linear-gradient(90deg,#f4cb55,rgba(138,88,6,0)) 0 0/100% 2px no-repeat,
+  linear-gradient(180deg,#f4cb55,rgba(138,88,6,0)) 0 0/2px 100% no-repeat}
+.jcorner{background:radial-gradient(circle at 2.5px 2.5px,#fff 0 4px,transparent 5px)}
+
+/* الأركان بصورة SVG واحدة تتقلب لكل ركن (حل نهائي) */
+.jcorner{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22104%22%20height%3D%22104%22%20viewBox%3D%220%200%20104%20104%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22h%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4bd%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23e0a929%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238a5806%22%20stop-opacity%3D%220%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%22v%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23fff4bd%22/%3E%3Cstop%20offset%3D%22.55%22%20stop-color%3D%22%23e0a929%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238a5806%22%20stop-opacity%3D%220%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%22h2%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f4cb55%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238a5806%22%20stop-opacity%3D%220%22/%3E%3C/linearGradient%3E%3ClinearGradient%20id%3D%22v2%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%23f4cb55%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%238a5806%22%20stop-opacity%3D%220%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22104%22%20height%3D%225%22%20fill%3D%22url%28%23h%29%22/%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%225%22%20height%3D%22104%22%20fill%3D%22url%28%23v%29%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2214%22%20width%3D%2290%22%20height%3D%222%22%20fill%3D%22url%28%23h2%29%22/%3E%3Crect%20x%3D%2214%22%20y%3D%2214%22%20width%3D%222%22%20height%3D%2290%22%20fill%3D%22url%28%23v2%29%22/%3E%3Ccircle%20cx%3D%223%22%20cy%3D%223%22%20r%3D%224.5%22%20fill%3D%22%23fff6c9%22/%3E%3C/svg%3E") 0 0/100% 100% no-repeat}
+.jcorner::before,.jcorner::after{content:none;display:none}
+.jcorner.tl{transform:none}
+
+/* نفس خط عناوين الموقع (Reem Kufi) */
+.jhead h1{font-family:var(--fd);font-weight:700}
+
+/* كشاف أصغر: قطر الدايرة اللي بتكشف الكود واللوجو */
+.jc.tpl .rcode{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp)}
+.jc.tpl .wmc{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%)}
+
+.jc.tpl .wmc{object-fit:contain}
+
+/* دمج اللوجو الذهبي مع الملوّن: ذهبي تحت، وملوّن فوقه بمزج لوني ولمعة متحركة */
+.jc.tpl .wmc{display:block;object-fit:unset}
+.jc.tpl .wmc img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block}
+.jc.tpl .wmc .wr{mix-blend-mode:color-dodge;opacity:.85;animation:jhue 7s linear infinite}
+@keyframes jhue{from{filter:hue-rotate(0deg) saturate(1.1)}to{filter:hue-rotate(360deg) saturate(1.1)}}
+.jc.tpl.onph .wmc{opacity:.72}
+@media(prefers-reduced-motion:reduce){.jc.tpl .wmc .wr{animation:none}}
+
+/* العلامة المائية الجديدة: نمط لوجوهات ملوّنة صغيرة متكررة بميلان، تظهر تحت الكشاف فقط */
+.jc.tpl .wmc{display:none}
+.jc.tpl .wmt{position:absolute;inset:0;z-index:1;overflow:hidden;opacity:0;pointer-events:none;transition:opacity .35s;
+  -webkit-mask-image:radial-gradient(circle calc(var(--w)*.26) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.85) 40%,transparent 100%);
+  mask-image:radial-gradient(circle calc(var(--w)*.26) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.85) 40%,transparent 100%)}
+.jc.tpl .wmt i{position:absolute;inset:-45%;transform:rotate(-24deg);background:var(--wmt) 0 0/calc(var(--w)*.38) calc(var(--w)*.38) repeat;
+  filter:drop-shadow(0 1px 2px rgba(0,0,0,.6));animation:jhue 9s linear infinite}
+.jc.tpl.onph .wmt{opacity:.92}
+@media(prefers-reduced-motion:reduce){.jc.tpl .wmt i{animation:none}}
+.jc.tpl .wmt i{background-size:calc(var(--w)*.26) calc(var(--w)*.26)}
+.jc.tpl .wmt{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.3) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.85) 45%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.3) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.85) 45%,transparent 100%)}
+.jc.tpl.onph .wmt{opacity:.9}
+.jc.tpl .wmt i{background-size:calc(var(--w)*.31) calc(var(--w)*.31)}
+
+/* العلامة المائية ورا الصورة: تظهر بس في المنطقة الكحلي حوالين الدايرة (بين الصورة والإطار الذهبي) */
+.jc.tpl .tph{isolation:isolate}
+.jc.tpl .wmt{z-index:-1}
+.jc.tpl .wmt i{background-size:calc(var(--w)*.2) calc(var(--w)*.2)}
+.jc.tpl .wmt{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.36) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.9) 50%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.36) at var(--px,50%) var(--py,50%),#000 0,rgba(0,0,0,.9) 50%,transparent 100%)}
+.jc.tpl.onph .wmt{opacity:1}
+
+/* خلفية نافذة الصورة في الصفحة (بدل الكحلي الساده): إضاءة + أشعة + نقط شبكية + غبار ذهبي + أرضية متوهجة */
+.jc.tpl .tph{background:
+  radial-gradient(ellipse 80% 38% at 50% 106%,rgba(255,214,110,.55) 0%,rgba(244,203,85,.16) 50%,transparent 80%),
+  radial-gradient(circle at 14% 20%,rgba(255,226,130,.5) 0,transparent 9%),
+  radial-gradient(circle at 86% 16%,rgba(255,226,130,.45) 0,transparent 12%),
+  radial-gradient(circle at 8% 62%,rgba(255,226,130,.4) 0,transparent 8%),
+  radial-gradient(circle at 92% 70%,rgba(255,226,130,.4) 0,transparent 11%),
+  radial-gradient(circle at 30% 90%,rgba(255,226,130,.35) 0,transparent 10%),
+  radial-gradient(circle at 74% 88%,rgba(255,226,130,.4) 0,transparent 8%),
+  linear-gradient(115deg,transparent 30%,rgba(255,240,180,.13) 40%,transparent 50%),
+  linear-gradient(245deg,transparent 30%,rgba(255,240,180,.13) 40%,transparent 50%),
+  radial-gradient(ellipse 100% 72% at 50% 28%,#4a86ff 0%,#1f4fc4 30%,#0b2478 65%,#040d38 100%)}
+
+/* خلفية نافذة الصورة: نضيفة وواضحة (تدرّج أزرق ملكي + هالة خلف الحلقة + توهج خفيف من تحت)، من غير فقاعات ولا أشعة */
+.jc.tpl .tph{background:
+  linear-gradient(180deg,transparent 50%,rgba(3,9,34,.55) 76%,rgba(2,6,24,.95) 100%),
+  radial-gradient(ellipse 58% 44% at 50% 45%,rgba(120,175,255,.5) 0%,rgba(60,120,255,.2) 55%,transparent 100%),
+  radial-gradient(ellipse 110% 80% at 50% 38%,#2c64d8 0%,#123a99 45%,#081c63 100%)}
+
+/* عناوين الأقسام بلوحات ذهبية فاخرة (بدل الشريط الأحمر): رئيس لجنة الحكام + الحكام */
+.jplate{position:relative;container-type:inline-size;margin:2.4rem auto 1.5rem;font:inherit;line-height:1}
+.jplate.chief{width:min(680px,94vw);margin-top:3rem}
+.jplate.pill{width:min(400px,76vw)}
+.jplate .pbg{display:block;width:100%;height:auto;filter:drop-shadow(0 12px 22px rgba(0,0,0,.6)) drop-shadow(0 0 22px rgba(244,203,85,.35))}
+.jplate .plogo{position:absolute;left:50.1%;top:25.5%;width:15.2%;aspect-ratio:1;transform:translate(-50%,-50%);object-fit:contain;filter:drop-shadow(0 0 10px rgba(255,214,90,.7))}
+.jplate .ptxt{position:absolute;left:50%;transform:translate(-50%,-50%);white-space:nowrap;font:700 var(--fd);font-family:var(--fd);font-weight:700;letter-spacing:.01em;
+  background:linear-gradient(180deg,#fffbe0 0%,#ffd75e 38%,#e29a12 66%,#ffe9a0 100%);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 2px 3px rgba(0,0,0,.85)) drop-shadow(0 0 10px rgba(255,200,70,.45))}
+.jplate.chief .ptxt{top:64%;font-size:8.2cqw}
+.jplate.pill .ptxt{top:50%;font-size:11cqw}
+@supports not (container-type:inline-size){.jplate.chief .ptxt{font-size:clamp(1.3rem,5vw,2.3rem)}.jplate.pill .ptxt{font-size:clamp(1.2rem,4vw,1.8rem)}}
+/* الإنجليزي أطول: نصغّر الخط عشان يدخل جوه اللوحة */
+html[lang="en"] .jplate.chief .ptxt{font-size:5cqw}
+html[lang="en"] .jplate.pill .ptxt{font-size:9cqw}
+@supports not (container-type:inline-size){html[lang="en"] .jplate.chief .ptxt{font-size:clamp(.9rem,3vw,1.4rem)}}
+
+/* لوحة رئيس لجنة الحكام: أصغر */
+.jplate.chief{width:min(430px,86vw);margin-top:2.4rem;margin-bottom:1.2rem}
+
+/* تدرّج واضح: رئيس لجنة الحكام أكبر لوحة، والحكام أصغر */
+.jplate.chief{width:min(480px,90vw)}
+.jplate.pill{width:min(270px,64vw);margin-top:2.2rem;margin-bottom:1.4rem}
+
+/* إخفاء الشارة الحمراء تحت كارت رئيس لجنة الحكام (مكررة مع اللوحة) */
+.jc.chief .role{display:none}
+
+/* ظهر البطاقة: الكلمة فوق واللوجو تحتها */
+.jc.tpl .back .bf{flex-direction:column-reverse}
+.jc.tpl .back .bfr{top:0;margin-top:calc(var(--w)*.03)}
+.jc.tpl .back .bf img{width:calc(var(--w)*.2)}
+
+/* أزرار التحميل: أيقونات ذهبية جاهزة (PDF / JPG / PNG) */
+.jc.tpl .back .bb{gap:calc(var(--w)*.03)}
+.jc.tpl .back .bb button{min-width:0;padding:0;background:none;box-shadow:none;border:0;border-radius:0;line-height:0;filter:drop-shadow(0 4px 8px rgba(0,0,0,.55))}
+.jc.tpl .back .bb button img{display:block;width:calc(var(--w)*.18);height:auto;pointer-events:none}
+.jc.tpl .back .bb button:hover{transform:translateY(-3px) scale(1.04);filter:brightness(1.12) drop-shadow(0 6px 12px rgba(0,0,0,.6))}
+
+/* ===== ظهر البطاقة على مرجع التصميم: لوحات بحواف مدببة ===== */
+.jc.tpl .back .bt,.jc.tpl .back .bn,.jc.tpl .back .bk{--c:.95em;position:relative;isolation:isolate;display:inline-block;width:auto;max-width:96%}
+.jc.tpl .back .bt::before,.jc.tpl .back .bn::before,.jc.tpl .back .bk::before,
+.jc.tpl .back .bt::after,.jc.tpl .back .bn::after,.jc.tpl .back .bk::after{content:"";position:absolute;pointer-events:none;
+  clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% 50%,calc(100% - var(--c)) 100%,var(--c) 100%,0 50%)}
+.jc.tpl .back .bt::before,.jc.tpl .back .bn::before,.jc.tpl .back .bk::before{inset:0;z-index:-2;background:linear-gradient(180deg,#fff3b0,#f0bd35 45%,#b9780f)}
+.jc.tpl .back .bt::after,.jc.tpl .back .bn::after,.jc.tpl .back .bk::after{inset:2.5px;z-index:-1;background:linear-gradient(180deg,#0e2a78,#041046 55%,#020a2c)}
+.jc.tpl .back .bt{padding:.22em 1.6em;font-family:"Reem Kufi","Cairo",sans-serif;font-weight:700;color:#ffd75e;text-shadow:0 2px 3px rgba(0,0,0,.8)}
+.jc.tpl .back .bn{--c:1.1em;padding:.14em 1.5em .2em;font-family:"Reem Kufi","Cairo",sans-serif;font-weight:700;font-size:calc(var(--w)*.085);color:#fff;text-shadow:0 2px 0 #8a93a8,0 4px 6px rgba(0,0,0,.7)}
+.jc.chief.tpl .back .bn{font-size:calc(var(--w)*.075)}
+.jc.tpl .back .bk{--c:.7em;padding:.3em 1.5em;margin-top:calc(var(--w)*.015);font:700 calc(var(--w)*.042)/1.3 "Cairo",sans-serif;color:#fff;text-decoration:none;border:0;background:none}
+/* لوحة "حمّل البطاقة" ذهبية */
+.jc.tpl .back .bd{display:inline-flex;width:auto;margin:0 auto;padding:.2em 1.8em;color:#2a1700;-webkit-text-fill-color:#2a1700;font:700 calc(var(--w)*.054)/1.3 "Reem Kufi","Cairo",sans-serif;
+  background:linear-gradient(180deg,#fff3b0,#f0bd35 48%,#c98c14);filter:none;--c:.9em;clip-path:polygon(var(--c) 0,calc(100% - var(--c)) 0,100% 50%,calc(100% - var(--c)) 100%,var(--c) 100%,0 50%)}
+.jc.tpl .back .bd::before,.jc.tpl .back .bd::after{display:none}
+.jc.tpl .back .bfr span{font-family:"Cairo",sans-serif;font-weight:900;letter-spacing:.1em;filter:drop-shadow(0 2px 3px rgba(0,0,0,.85)) drop-shadow(0 0 8px rgba(255,200,70,.4))}
+.jc.tpl .back .bt,.jc.tpl .back .bn,.jc.tpl .back .bk{white-space:nowrap}
+.jc.tpl .back .bt{font-size:calc(var(--w)*.041);padding:.16em 1.3em .22em}
+.jc.tpl .back .bn,.jc.chief.tpl .back .bn{font-size:calc(var(--w)*.066);padding:.08em 1.2em .16em}
+
+/* وضوح أكبر: خط Cairo للعنوان والاسم + لوجوهات أكبر */
+.jc.tpl .back .bt{font-family:"Cairo",sans-serif;font-weight:800;font-size:calc(var(--w)*.04);letter-spacing:0;color:#ffe08a;text-shadow:0 1px 2px rgba(0,0,0,.9)}
+.jc.tpl .back .bn,.jc.chief.tpl .back .bn{font-family:"Cairo",sans-serif;font-weight:900;font-size:calc(var(--w)*.068);letter-spacing:0;text-shadow:0 2px 3px rgba(0,0,0,.85)}
+.jc.tpl .back .b1{width:calc(var(--w)*.29);filter:drop-shadow(0 4px 10px rgba(0,0,0,.6)) drop-shadow(0 0 12px rgba(255,214,90,.45))}
+.jc.tpl .back .bf img{width:calc(var(--w)*.24);filter:drop-shadow(0 3px 8px rgba(0,0,0,.7)) drop-shadow(0 0 12px rgba(255,214,90,.6)) brightness(1.12)}
+.jc.tpl .back .bf img{width:calc(var(--w)*.2)}
+.jc.tpl .back[style*="--bk"] .bin{padding:7% 10% 13%}
+
+/* ===== عناصر ظهر البطاقة من صور ChatGPT (لوحات + إطار اللوجو) ===== */
+.jc.tpl .back .bt::before,.jc.tpl .back .bn::before,.jc.tpl .back .bk::before,
+.jc.tpl .back .bt::after,.jc.tpl .back .bn::after,.jc.tpl .back .bk::after{content:none}
+.jc.tpl .back .bt,.jc.tpl .back .bn,.jc.tpl .back .bk,.jc.tpl .back .bd{border-style:solid;border-width:0;border-image-repeat:stretch;background:none;clip-path:none}
+.jc.tpl .back .bt{border-image-source:url(assets/judges/plate-dark.webp?v=2);border-image-slice:0 71 fill;border-image-width:0 .87em;padding:.18em 1.4em .24em}
+.jc.tpl .back .bn{border-image-source:url(assets/judges/plate-dark.webp?v=2);border-image-slice:0 71 fill;border-image-width:0 .78em;padding:.12em 1.3em .2em}
+.jc.tpl .back .bd{border-image-source:url(assets/judges/plate-gold.webp?v=2);border-image-slice:0 199 fill;border-image-width:0 2.9em;padding:.2em 3.3em}
+.jc.tpl .back .bk{border-image-source:url(assets/judges/plate-pill.webp?v=1);border-image-slice:0 65 fill;border-image-width:0 .9em;padding:.3em 1.6em}
+/* لوجو كابتن تايكوندو جوه إطار الغار الذهبي */
+.jc.tpl .back .bf img{box-sizing:content-box;width:calc(var(--w)*.197);height:auto;padding:calc(var(--w)*.031) calc(var(--w)*.0714) calc(var(--w)*.0534);
+  background:url(assets/judges/medal-ring.webp?v=2) 0 0/100% 100% no-repeat}
+.jc.tpl .back .bn,.jc.chief.tpl .back .bn{font-size:calc(var(--w)*.062);padding:.12em 1.7em .2em}
+.jc.tpl .back .bd{margin-top:calc(var(--w)*.01)}
+.jc.tpl .back .bf img{width:calc(var(--w)*.165);padding:calc(var(--w)*.026) calc(var(--w)*.06) calc(var(--w)*.045)}
+.jc.tpl .back .bfr{margin-top:0}
+.jc.tpl .back[style*="--bk"] .bin{padding:6% 10% 6%}
+.jc.tpl .back .b1{width:calc(var(--w)*.24)}
+.jc.tpl .back .bf img{width:calc(var(--w)*.15);padding:calc(var(--w)*.0235) calc(var(--w)*.0545) calc(var(--w)*.041)}
+.jc.tpl .back[style*="--bk"] .bin{padding:5.5% 10% 8%}
+/* لوجو كابتن تايكوندو أوضح: قرص كحلي غامق خلفه جوه إطار الغار */
+.jc.tpl .back .bf img{filter:drop-shadow(0 0 6px rgba(255,214,90,.55)) brightness(1.15) contrast(1.1);
+  background:url(assets/judges/medal-ring.webp?v=2) 0 0/100% 100% no-repeat,radial-gradient(circle calc(var(--w)*.08) at 50% 46%,#020a2c 0,#06164d 88%,transparent 92%)}
+
+/* خطوط ظهر البطاقة = خط عناوين الموقع (Reem Kufi) */
+.jc.tpl .back .bt,.jc.tpl .back .bn,.jc.chief.tpl .back .bn,.jc.tpl .back .bd,.jc.tpl .back .bk,.jc.tpl .back .bfr span{font-family:var(--fd);font-weight:700;letter-spacing:0}
+.jc.tpl .back .bfr span{letter-spacing:.08em}
+/* اللوجو يملا فتحة إطار الغار (الإطار نفس الحجم) */
+.jc.tpl .back .bf img{width:calc(var(--w)*.166);padding:calc(var(--w)*.0157) calc(var(--w)*.0465) calc(var(--w)*.0328)}
+/* رفع "رجوع للبطاقة" شوية */
+.jc.tpl .back .bk{transform:translateY(calc(var(--w)*-.03))}
+
+/* وضع النت الضعيف: من غير الصورة الزخرفية وحركات أقل */
+.lite .jkick{display:none}
+.lite .jc.tpl .sp,.lite .jc.tpl .tph::after,.lite .jc.tpl .tcard::before,.lite .jc.tpl.chief::before,.lite .jbeam,.lite .jdust{animation:none}
+
+/* ظهر البطاقة بالإنجليزي: النصوص أطول فنصغّر الخط ونسمح للاسم الطويل بالنزول سطر تاني */
+html[lang="en"] .jc.tpl .back .bt{font-size:calc(var(--w)*.03);padding-left:1em;padding-right:1em}
+html[lang="en"] .jc.tpl .back .bn,html[lang="en"] .jc.chief.tpl .back .bn{font-size:calc(var(--w)*.048);white-space:normal;text-wrap:balance;max-width:90%;line-height:1.15;padding:.14em 1em .2em}
+html[lang="en"] .jc.tpl .back .bd{font-size:calc(var(--w)*.036);white-space:nowrap;padding-left:3.2em;padding-right:3.2em;margin-top:calc(var(--w)*.02)}
+html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowrap}
+
+/* ---- لجنة التحكيم: حركة وإضاءة (أضواء متأرجحة، نجوم متلألئة، مؤثرات لوجو البطولة) ---- */
+.jmedal .jshine{position:absolute;inset:6px;border-radius:50%;overflow:hidden;pointer-events:none;opacity:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%);mix-blend-mode:screen}
+.jmedal .jring{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:0;border:3px solid rgba(255,226,130,.95);box-shadow:0 0 24px rgba(255,214,90,.9),inset 0 0 18px rgba(255,214,90,.6)}
+.jswing{position:absolute;top:-30px;width:min(58vw,620px);height:860px;z-index:-2;pointer-events:none;transform-origin:50% 0;opacity:.9;
+  background:conic-gradient(from 162deg at 50% 0,transparent 0deg,rgba(150,195,255,.5) 18deg,transparent 36deg,transparent 360deg);
+  -webkit-mask:linear-gradient(180deg,#000 10%,transparent 88%);mask:linear-gradient(180deg,#000 10%,transparent 88%);animation:jswing 9s ease-in-out infinite alternate;will-change:transform}
+.jswing.a{inset-inline-start:2%}
+.jswing.b{inset-inline-end:2%;background:conic-gradient(from 162deg at 50% 0,transparent 0deg,rgba(255,214,120,.42) 18deg,transparent 36deg,transparent 360deg);animation-duration:11s;animation-direction:alternate-reverse}
+.jswing.c{inset-inline-start:30%;opacity:.55;animation-duration:13s;width:min(46vw,480px)}
+@keyframes jswing{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
+.jtw{position:absolute;z-index:0;pointer-events:none;font-style:normal;line-height:1;color:#fff6c9;text-shadow:0 0 8px #ffd45c,0 0 16px #f4cb55;opacity:0;animation:jtw 3.6s ease-in-out infinite}
+@keyframes jtw{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(20deg)}}
+.lite .jswing,.lite .jtw{display:none}
+@media(prefers-reduced-motion:reduce){.jswing{animation:none;transform:rotate(-12deg)}.jtw{display:none}}
+/* ميدالية كابتن تايكوندو في ظهر البطاقة: اللوجو دايرة متمركزة بالظبط في فتحة إطار الغار (فتحة الصورة عند 50% / 46%) */
+.jc.tpl .back .bf .bfm{position:relative;display:block;flex:none;width:calc(var(--w)*.25);aspect-ratio:420/348;background:url(assets/judges/medal-ring.webp?v=2) 0 0/100% 100% no-repeat;filter:drop-shadow(0 0 6px rgba(255,214,90,.5))}
+.jc.tpl .back .bf .bfm img{position:absolute;left:50%;top:46.1%;width:57%;height:auto;aspect-ratio:1;padding:0;box-sizing:border-box;transform:translate(-50%,-50%);border-radius:50%;object-fit:cover;background:#020a2c;filter:brightness(1.1) contrast(1.05)}
+/* الماسة تحت العنوان: إطار ذهبي وقلب أحمر بينبض بالإضاءة */
+.jdiv>b{width:15px;height:15px;border:2.5px solid #f4cb55;background:radial-gradient(circle at 40% 35%,#ff6b75,#d9202f 55%,#8f0e19);box-shadow:0 0 0 1.5px rgba(60,30,0,.7),0 0 10px rgba(244,203,85,.8),0 0 14px rgba(255,40,55,.7);animation:jredpulse 1.8s ease-in-out infinite}
+@keyframes jredpulse{0%,100%{box-shadow:0 0 0 1.5px rgba(60,30,0,.7),0 0 8px rgba(244,203,85,.6),0 0 8px rgba(255,40,55,.4);filter:brightness(.9)}50%{box-shadow:0 0 0 1.5px rgba(60,30,0,.7),0 0 16px rgba(244,203,85,.95),0 0 26px rgba(255,50,65,.95);filter:brightness(1.35)}}
+@media(prefers-reduced-motion:reduce){.jdiv>b{animation:none}}
+
+/* تكبير لوجو كابتن تايكوندو جوه الإطار بحيث ما يبانش أسود من تحته */
+.jc.tpl .back .bf .bfm img{width:63%;background:radial-gradient(circle,#8a5806,#4a2b02)}
+
+/* لوجو كابتن تايكوندو العايم (كريستال): بيطلع وينزل، وبالنقر ينزل يلمس منتصف أرضية الدوائر ويعمل موجة زي قطرة الماء */
+.jpage{padding-bottom:50px}
+.jstage{position:relative;height:300px;margin-top:.5rem;display:flex;justify-content:center}
+.jcw{position:absolute;top:10px;left:50%;margin-left:-95px;width:190px;height:190px;z-index:3}
+.jcrys{position:relative;display:block;width:100%;height:100%;padding:10px;border:0;border-radius:50%;background:none;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation;animation:jbob 3.4s ease-in-out infinite}
+.jcrys:focus-visible{outline:3px solid #fff1a6;outline-offset:6px}
+.jcrys img{position:relative;z-index:1;display:block;width:100%;height:100%;border-radius:50%;object-fit:cover;filter:drop-shadow(0 0 14px rgba(244,203,85,.7));animation:jcglow 2.2s ease-in-out infinite}
+.jcrys .jglow{position:absolute;inset:-26px;border-radius:50%;z-index:0;background:radial-gradient(circle,rgba(255,70,85,.55) 0,rgba(255,196,60,.4) 38%,transparent 68%);animation:jpulse 2.2s ease-in-out infinite}
+.jcrys .jfct{position:absolute;inset:10px;z-index:2;border-radius:50%;pointer-events:none;overflow:hidden;mix-blend-mode:screen;opacity:.55;
+  background:conic-gradient(from 0deg,transparent 0 8%,rgba(255,255,255,.7) 12%,transparent 16% 38%,rgba(255,226,140,.6) 43%,transparent 48% 70%,rgba(255,120,130,.55) 75%,transparent 80%);animation:jfct 6s linear infinite}
+@keyframes jbob{0%,100%{transform:translateY(0)}50%{transform:translateY(-16px)}}
+@keyframes jpulse{0%,100%{opacity:.45;transform:scale(.9)}50%{opacity:1;transform:scale(1.18)}}
+@keyframes jcglow{0%,100%{filter:drop-shadow(0 0 10px rgba(244,203,85,.55)) brightness(1)}50%{filter:drop-shadow(0 0 26px rgba(255,90,100,.85)) brightness(1.18)}}
+@keyframes jfct{to{transform:rotate(360deg)}}
+.jpoolpos{position:absolute;left:50%;top:0;width:0;height:0;z-index:0;pointer-events:none}
+.jpoolpos .rp{position:absolute;left:calc(var(--pw,600px)/-2);top:calc(var(--ph,80px)/-2);width:var(--pw,600px);height:var(--ph,80px);border-radius:50%;opacity:0;border:2px solid rgba(255,226,130,.95);box-shadow:0 0 18px rgba(244,203,85,.8),inset 0 0 18px rgba(255,120,110,.5)}
+.jpoolpos .rg{position:absolute;left:calc(var(--pw,600px)*-.18);top:calc(var(--ph,80px)*-.18);width:calc(var(--pw,600px)*.36);height:calc(var(--ph,80px)*.36);border-radius:50%;opacity:0;background:radial-gradient(ellipse,rgba(255,255,255,.95),rgba(255,214,90,.7) 35%,rgba(255,70,80,.35) 60%,transparent 72%)}
+.lite .jcrys,.lite .jcrys img,.lite .jcrys .jglow,.lite .jfct{animation:none}
+@media(prefers-reduced-motion:reduce){.jcrys,.jcrys img,.jcrys .jglow,.jcrys .jfct{animation:none}.jcrys .jglow{opacity:.8}}
+/* جملة الاعتماد: ذهبية ثلاثية الأبعاد بخط عناوين الموقع، ومسافة بعيدة عن اللوجو */
+.jnote{margin:3.2rem auto 0;max-width:820px;font:700 clamp(1.15rem,3.4vw,1.7rem)/1.7 var(--fd);letter-spacing:.01em;
+  background:linear-gradient(180deg,#fff8cf 0%,#f4cb55 38%,#c58a18 62%,#ffe08a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 0 #9a6208) drop-shadow(0 2px 0 #7e4d06) drop-shadow(0 3px 0 #643b04) drop-shadow(0 4px 0 #4a2b02) drop-shadow(0 9px 8px rgba(0,0,0,.65)) drop-shadow(0 0 16px rgba(244,203,85,.3))}
+.jstage{height:330px;margin-top:2.4rem}
+.jcw{top:30px;width:140px;height:140px;margin-left:-70px}
+.jcrys{padding:8px;animation:jbob 3s ease-in-out infinite}
+.jcrys .jglow{inset:-20px}
+@keyframes jbob{0%,100%{transform:translateY(8px)}50%{transform:translateY(-30px)}}
+/* إشعاع أخف للوجو العايم */
+.jcrys .jglow{inset:-10px;background:radial-gradient(circle,rgba(255,70,85,.22) 0,rgba(255,196,60,.14) 42%,transparent 66%)}
+.jcrys img{filter:drop-shadow(0 0 5px rgba(244,203,85,.35));animation:jcglow 2.4s ease-in-out infinite}
+@keyframes jcglow{0%,100%{filter:drop-shadow(0 0 4px rgba(244,203,85,.3)) brightness(1)}50%{filter:drop-shadow(0 0 9px rgba(255,90,100,.45)) brightness(1.07)}}
+@keyframes jpulse{0%,100%{opacity:.4;transform:scale(.92)}50%{opacity:.85;transform:scale(1.08)}}
+.jnote{filter:drop-shadow(0 1px 0 #9a6208) drop-shadow(0 2px 0 #7e4d06) drop-shadow(0 3px 0 #643b04) drop-shadow(0 4px 0 #4a2b02) drop-shadow(0 8px 6px rgba(0,0,0,.6))}
+/* جملة الاعتماد: عادية (بدون 3D) بملمس معدن ذهبي لامع */
+.jnote{background:linear-gradient(100deg,#b8860b 0%,#f6d56a 14%,#fff6c9 24%,#e2b13a 36%,#a8730a 50%,#f6d56a 64%,#fff3b8 76%,#d9a52a 88%,#b8860b 100%);background-size:220% 100%;background-position:0 0;
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 1px 1px rgba(60,30,0,.7));animation:jmetal 7s ease-in-out infinite alternate}
+@keyframes jmetal{to{background-position:100% 0}}
+@media(prefers-reduced-motion:reduce){.jnote{animation:none}}
+
+
+/* قلب الكرت: بطيء مع مؤثرات (فلاش ذهبي ولمعة) */
+.jc.tpl .flip{transition:transform 1.2s cubic-bezier(.45,.05,.25,1)}
+.jc.tpl .flip.anim{transition:none}
+.jc.tpl .jfxo,.jc.tpl .jfxs{position:absolute;inset:0;z-index:8;pointer-events:none;opacity:0;border-radius:calc(var(--w)*.07)}
+.jc.tpl .jfxo{background:radial-gradient(circle at 50% 45%,rgba(255,240,170,.85),rgba(255,200,70,.3) 42%,transparent 70%)}
+.jc.tpl .jfxs{background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,.6) 50%,transparent 64%) 130% 0/250% 100% no-repeat;mix-blend-mode:screen}
+@media(prefers-reduced-motion:reduce){.jc.tpl .jfxo,.jc.tpl .jfxs{display:none}}

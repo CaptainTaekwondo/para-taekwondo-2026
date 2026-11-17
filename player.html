@@ -15,7 +15,7 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="style.css?v=20261115a">
 <link rel="stylesheet" href="card.css?v=20261109">
-<link rel="stylesheet" href="player.css?v=20261115i">
+<link rel="stylesheet" href="player.css?v=20261117a">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">
@@ -71,6 +71,44 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
     <div class="fld"><label for="f_lkCode" data-t="lkCode">كود اللاعب (آخر 4 أرقام فقط)</label><div class="pfx" dir="ltr"><select id="f_lkPfx" aria-label="Code prefix"><option value="PTP-2026-">PTP-2026-</option><option value="PTS-2026-">PTS-2026-</option></select><input id="f_lkCode" type="text" dir="ltr" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div></div>
     <p class="err big" id="lkErr" role="alert" hidden></p>
     <div class="acts"><button class="btn fill" id="lkBtn" type="button" data-t="lkBtn">عرض البيانات</button><button class="btn" id="lkBack" type="button" data-t="lkBack">رجوع</button></div>
+  </section>
+  <section class="mode" id="vRoleBox" hidden>
+    <h2 class="foil" data-t="vlT">إرسال الفيديو</h2>
+    <p class="hint" data-t="vrHint">اختر: هل أنت لاعب أم مدرب؟</p>
+    <div class="mode-btns type-btns">
+      <button class="modebtn" id="vrPlayer" type="button"><b data-t="vrPlayer">🥋 لاعب</b><span data-t="vrPlayerH">ادخل بكودك وأرسل رابط فيديوك.</span></button>
+      <button class="modebtn gold" id="vrCoach" type="button"><b data-t="vrCoach">🧑‍🏫 مدرب</b><span data-t="vrCoachH">ادخل بكود بطاقتك واختر لاعبيك واحدًا واحدًا.</span></button>
+    </div>
+  </section>
+  <section class="mode" id="vCoachLogin" hidden>
+    <h2 class="foil" data-t="vlT">إرسال الفيديو</h2>
+    <p class="hint" data-t="vcHint">أدخل آخر 4 أرقام من كود بطاقة المدرب مع الهاتف والبريد المسجلين. تظهر لك أكواد لاعبيك لتضيف رابط فيديو كل لاعب.</p>
+    <div class="fld"><label for="vc_code" data-t="mineCode">كود بطاقة المدرب (آخر 4 أرقام فقط)</label><div class="pfx" dir="ltr"><span>PTA-2026-</span><input id="vc_code" type="text" dir="ltr" inputmode="numeric" maxlength="4" placeholder="0001" autocomplete="off"></div></div>
+    <div class="fld"><label for="vc_phone" data-t="lkPhone">رقم الهاتف المسجَّل</label><input id="vc_phone" type="tel" inputmode="tel" dir="ltr" placeholder="+20 100 000 0000" autocomplete="tel"></div>
+    <div class="fld"><label for="vc_email" data-t="lkEmail">البريد الإلكتروني</label><input id="vc_email" type="email" dir="ltr" autocomplete="email"></div>
+    <p class="err big" id="vc_err" role="alert" hidden></p>
+    <div class="acts"><button class="btn fill" id="vc_btn" type="button" data-t="vcBtn">عرض لاعبيّ</button><button class="btn" id="vc_back" type="button" data-t="lkBack">رجوع</button></div>
+  </section>
+  <section class="mode" id="vListBox" hidden>
+    <h2 class="foil" data-t="vlT">إرسال الفيديو</h2>
+    <p class="hint" data-t="vcPick">اضغط على كود اللاعب لإضافة رابط فيديوه.</p>
+    <p class="vmsg" id="vc_count"></p>
+    <div id="vc_filters" hidden></div>
+    <p class="hint mres" id="vc_res" aria-live="polite" hidden></p>
+    <div class="vlist" id="vc_list"></div>
+    <p class="vmsg ok" id="vc_note" role="status" hidden></p>
+    <p class="vmsg" id="vc_sum" role="status" hidden></p>
+    <div class="acts"><button class="btn fill" id="vc_finish" type="button" data-t="vcFinish">حفظ وتأكيد</button><button class="btn" id="vc_out" type="button" data-t="vcOut">خروج</button></div>
+  </section>
+  <section class="mode" id="videoBox" hidden>
+    <h2 class="foil" data-t="vlT">إرسال الفيديو</h2>
+    <div class="vidcode"><span data-t="vfCode">كود اللاعب</span><b id="vfCode" dir="ltr"></b><span id="vfName"></span></div>
+    <canvas id="vfCard" class="vfcard" width="1584" height="993" role="img" aria-label="بطاقة اللاعب"></canvas>
+    <p class="hint" id="vfCardMsg" hidden></p>
+    <div class="fld"><label for="vf_video" data-t="vfLink">رابط فيديو يوتيوب</label><input id="vf_video" type="url" inputmode="url" dir="ltr" maxlength="200" placeholder="https://youtu.be/..." autocomplete="off"><p class="vmsg" id="vf_msg"></p><div class="vprev" id="vf_prev"></div></div>
+    <p class="err big" id="vf_err" role="alert" hidden></p>
+    <p class="vmsg ok" id="vf_done" role="status" hidden></p>
+    <div class="acts"><button class="btn fill" id="vf_save" type="button" data-t="vfSave">حفظ الفيديو</button><button class="btn fill" id="vf_edit" type="button" data-t="vfEdit" hidden>تعديل رابط الفيديو</button><button class="btn" id="vf_other" type="button" data-t="vfOther">لاعب آخر</button></div>
   </section>
   <section class="mode" id="mineBox" hidden>
     <h2 class="foil" data-t="mineT">لاعبيني</h2>
@@ -231,9 +269,9 @@ mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMConten
   </div>
 </main>
 
-<script src="config.js?v=20261115a"></script>
-<script src="demo-player.js?v=20261116a"></script>
-<script src="ai-prompt-player.js?v=20261115n"></script>
+<script src="config.js?v=20261117a"></script>
+<script src="demo-player.js?v=20261117a"></script>
+<script src="ai-prompt-player.js?v=20261117a"></script>
 <script src="player.js?v=20261115n"></script>
 </body>
 </html>

@@ -6,20 +6,25 @@
   if (!/[?&]demo=1(&|$)/.test(location.search)) return;
   /* وضع التجربة محلي فقط (localhost أو ملف على الجهاز): على الموقع المنشور مغلق لحد ما يُعلن عن اللاعب الداعم */
   if (!/^(localhost|127\.0\.0\.1|\[::1\])?$/.test(location.hostname)) return;
-  const KEY = "ptk_demo_v1";
+  const KEY = "ptk_demo_v2";
   const seed = () => {
     const P = (code, nameAr, nameEn, clubAr, clubEn, birth, belt, para, gender, phone, guardian) => ({
       code, role: "player", nameAr, nameEn, clubAr, clubEn, countryAr: "مصر", countryEn: "Egypt", birth, belt, para, gender, phone, guardian,
       coachCode: "PTA-2026-0000", email: "demo@example.com", fake: true, promo: "no", whatsapp: "", coachInVideo: "no", video: "",
     });
     return {
-      next: { PTP: 9006, PTS: 9006 },
+      next: { PTP: 9011, PTS: 9011 },
       players: [
         P("PTP-2026-9001", "يوسف تجريبي", "Youssef Demo", "نادي الاختبار", "Demo Club", "2016-03-12", "yellow", "P40", "m", "+201111111111", "أحمد تجريبي"),
         P("PTP-2026-9002", "مريم تجريبية", "Mariam Demo", "نادي الاختبار", "Demo Club", "2013-07-20", "green", "P20", "f", "+201222222222", "محمود تجريبي"),
         P("PTP-2026-9003", "عمر تجريبي", "Omar Demo", "نادي التجربة", "Trial Club", "2019-01-05", "white", "P10", "m", "+201000000000", "سعيد تجريبي"),
         P("PTS-2026-9004", "سارة داعمة", "Sara Demo", "نادي الاختبار", "Demo Club", "2014-09-01", "blue", "", "f", "+201333333333", "خالد تجريبي"),
         P("PTS-2026-9005", "آدم داعم", "Adam Demo", "نادي التجربة", "Trial Club", "2017-02-15", "yellow", "", "m", "+201000000000", "حسن تجريبي"),
+        P("PTP-2026-9006", "ليلى تجريبية", "Layla Demo", "نادي الأبطال", "Champions Club", "2011-05-30", "red", "P30", "f", "+201444444444", "كريم تجريبي"),
+        P("PTP-2026-9007", "كريم تجريبي", "Karim Demo", "نادي الأبطال", "Champions Club", "2009-11-02", "black", "P50", "m", "+201555555555", "سامي تجريبي"),
+        P("PTP-2026-9008", "هنا تجريبية", "Hana Demo", "نادي الاختبار", "Demo Club", "2015-08-14", "blue", "P10", "f", "+201666666666", "وليد تجريبي"),
+        P("PTS-2026-9009", "ياسين داعم", "Yassin Demo", "نادي الأبطال", "Champions Club", "2012-01-19", "green", "", "m", "+201777777777", "هاني تجريبي"),
+        P("PTP-2026-9010", "نور تجريبية", "Nour Demo", "نادي التجربة", "Trial Club", "2018-04-09", "yellow", "P20", "f", "+201888888888", "ماجد تجريبي"),
       ],
     };
   };
@@ -63,11 +68,18 @@
       case "myplayers":
         return { ok: true, token: "demo", coach: { nameAr: "مدرب تجريبي", nameEn: "Demo Coach", countryAr: "مصر", countryEn: "Egypt", clubs: [{ ar: "نادي الاختبار", en: "Demo Club" }, { ar: "نادي التجربة", en: "Trial Club" }] },
           players: db.players.filter((x) => x.role === "player").map((x) => ({ code: x.code, nameAr: x.nameAr, nameEn: x.nameEn, clubAr: x.clubAr, clubEn: x.clubEn, countryAr: x.countryAr, countryEn: x.countryEn,
-            birth: x.birth, belt: x.belt, ageCat: ageCat(x.birth), para: x.para, type: typ(x.code), hasCard: !!cards[x.code], hasPhoto: !!photos[x.code] || !!x.fake })) };
+            birth: x.birth, belt: x.belt, ageCat: ageCat(x.birth), para: x.para, type: typ(x.code), hasCard: !!cards[x.code], hasPhoto: !!photos[x.code] || !!x.fake, video: x.video || "" })) };
       case "lookup": {
         const x = find(b.player || b.code);
         if (!x) return { ok: false, error: "not_found" };
+        const dg = (s) => String(s || "").replace(/\D/g, "").slice(-8);
+        if (b.vf && (String(b.email || "").toLowerCase() !== x.email || dg(b.phone) !== dg(x.phone))) return { ok: false, error: "not_found" };   // زر «إرسال الفيديو»: تحقق حقيقي من الإيميل والهاتف
         return { ok: true, code: x.code, token: "demo", data: Object.assign({}, x, { photo: photoOf(x), phone: b.player ? x.phone : (b.phone || x.phone), email: b.player ? x.email : (b.email || x.email) }) };
+      }
+      case "setvideo": {
+        const x = find(b.player || b.code);
+        if (!x) return { ok: false, error: "not_found" };
+        x.video = b.video; save(); return { ok: true, code: x.code };
       }
       case "register": {
         const k = b.ptype === "sup" ? "PTS" : "PTP", code = k + "-2026-" + db.next[k]++;
