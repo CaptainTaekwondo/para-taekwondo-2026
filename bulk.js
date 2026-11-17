@@ -304,7 +304,7 @@
 
   /* ---------- شاشة المراجعة ---------- */
   async function openRegReview(parsed) {
-    const sess = { type: parsed.type, rows: parsed.rows }, m = modal(s("title") + " — " + (parsed.type === "para" ? S.ar.dlPara.replace("تحميل نموذج ", "") : S.ar.dlSup.replace("تحميل نموذج ", "")));
+    const sess = { type: parsed.type, rows: parsed.rows }, m = modal(s("title") + " — " + s(parsed.type === "para" ? "dlPara" : "dlSup").replace(/^(تحميل نموذج |Download )/, ""));
     const { cred, coach } = X.mine(), clubs = (coach && coach.clubs) || [];
     const cols = REGCOLS(parsed.type, clubs.length).filter((c) => c.in);
     const sum = el("div", "bk-sum"), bar = el("div", "bk-bar2"), host = el("div", "bk-tw"), foot = el("div", "bk-foot");
@@ -564,6 +564,7 @@
     const v = $("#bkVid"); if (v) v.hidden = !$("#vListBox") || $("#vListBox").hidden || !X.vcoach();
   };
   ["ptk:mine", "ptk:vlist"].forEach((n) => document.addEventListener(n, sync));
+  new MutationObserver(() => document.dispatchEvent(new Event("ptk:lang"))).observe(document.documentElement, { attributes: true, attributeFilter: ["lang"] });
   document.addEventListener("ptk:lang", () => { ["bkReg", "bkVid"].forEach((id) => { const b = $("#" + id); if (b) b.remove(); }); sync(); });
   /* الأزرار تظهر وتختفي مع الشاشة اللي فيها (بعد دخول المدرب) */
   const mo = new MutationObserver(sync);
