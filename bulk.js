@@ -468,11 +468,25 @@
     const ws = wb.addWorksheet("Videos", { views: [{ rightToLeft: true }], properties: { tabColor: { argb: GOLD } } });
     const meta = wb.addWorksheet("_meta", { state: "veryHidden" }); const hdr = [both("hCode"), both("hName"), both("hLink")];
     meta.getCell("A1").value = JSON.stringify({ v: VER, t: "vid", coach: vc.cred.code, hdr });
-    for (let i = 1; i <= (notes ? 4 : 3); i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
+    for (let i = 1; i <= 10; i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
     const t1 = ws.getCell(1, 1); t1.value = both("dlVid").replace(/Download |تحميل /g, "") + "  —  " + vc.cred.code;
     t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { vertical: "middle" }; ws.getRow(1).height = 26;
     hdr.forEach((h, i) => { const c = ws.getCell(2, i + 1); c.value = h; c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } }; c.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; c.border = { bottom: { style: "medium" } }; });
     ws.getColumn(1).width = 18; ws.getColumn(2).width = 34; ws.getColumn(3).width = 52; ws.getRow(2).height = 46;
+    /* خانات استدلال للمدرب (قراءة فقط، مش بتتحسب في الرفع): إجمالي اللاعبين، الروابط اللي اتملت، والباقي بدون رابط. بتتغير لوحدها */
+    {
+      const last = 2 + players.length, total = players.length, rg = "C" + FIRST + ":C" + Math.max(FIRST, last);
+      const filled = players.filter((p) => String(rows ? rows.get(p.code) : p.video || "").trim()).length;
+      const items = [["إجمالي اللاعبين / Total", 5, `COUNTA(A${FIRST}:A${Math.max(FIRST, last)})`, total], ["بروابط / With link", 7, `SUMPRODUCT(--(LEN(TRIM(${rg}))>0))`, filled], ["بدون رابط / Missing", 9, `COUNTA(A${FIRST}:A${Math.max(FIRST, last)})-SUMPRODUCT(--(LEN(TRIM(${rg}))>0))`, total - filled]];
+      items.forEach(([label, col, f, res]) => {
+        ws.getColumn(col).width = 22; ws.getColumn(col + 1).width = 10;
+        const lc = ws.getCell(1, col), vc = ws.getCell(1, col + 1);
+        lc.value = label; lc.font = { bold: true, color: { argb: "FFFFFFFF" } }; lc.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
+        vc.value = { formula: f, result: res }; vc.font = { bold: true, size: 14, color: { argb: NAVY } }; vc.alignment = { horizontal: "center", vertical: "middle" };
+        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFFFFF" } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
+      });
+      ws.getRow(1).height = 30;
+    }
     if (notes) { const c = ws.getCell(2, 4); c.value = both("hNote"); c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; ws.getColumn(4).width = 40; }
     players.forEach((p, i) => {
       const rn = FIRST + i, ln = rows ? rows.get(p.code) : p.video || "";
