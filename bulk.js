@@ -178,34 +178,35 @@
     X.PARA.forEach((p, i) => (lists.getCell(i + 1, 1).value = paraLbl(p))); clubs.forEach((c, i) => (lists.getCell(i + 1, 2).value = clubLbl(c)));
     const dials = dialList(); X.BELTS.forEach((bb, i) => { lists.getCell(i + 1, 4).value = beltLbl(bb); lists.getCell(i + 1, 5).value = LV[bb[4]] || ""; }); dials.forEach((d, i) => (lists.getCell(i + 1, 6).value = d.label));
     const LT = {}; cols.forEach((c, i) => (LT[c.k] = String.fromCharCode(65 + i)));
-    const hasNote = !!notes;
+    const hasNote = !!notes, DK = { argb: "FF444444" };
     meta.getCell("A1").value = JSON.stringify({ v: VER, t: "reg", type, coach: cred.code, cols: cols.map((c) => c.k), hdr: cols.map(HDR), clubs: clubs.length });
     for (let i = 1; i <= cols.length + (hasNote ? 1 : 0); i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
     const t1 = ws.getCell(1, 1); t1.value = (type === "para" ? both("dlPara") : both("dlSup")).replace(/Download |تحميل /g, "") + "  —  " + cred.code;
-    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { vertical: "middle" }; ws.getRow(1).height = 30;
-    /* خانات استدلال للمدرب في الصف الأول (قراءة فقط، مش بتتحسب في الرفع): إجمالي اللاعبين اللي اتملوا في الشيت، وعدد الذكور والإناث. بتتغير لوحدها مع كل صف بيتملي */
+    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; for (let cc = 1; cc <= 4; cc++) ws.getCell(1, cc).alignment = { horizontal: "centerContinuous", vertical: "middle" }; ws.getRow(1).height = 30;
+    /* خانات استدلال للمدرب في الصف الأول (قراءة فقط، مش بتتحسب في الرفع): ذكور، إناث، الإجمالي. بتتغير لوحدها مع كل صف بيتملي */
     {
       const rgN = (k) => LT[k] + FIRST + ":" + LT[k] + (FIRST + MAXROWS - 1);
       const cnt = rows ? rows.filter((r) => r.nameAr || r.nameEn).length : 0, mal = rows ? rows.filter((r) => r.gender === "m").length : 0, fem = rows ? rows.filter((r) => r.gender === "f").length : 0;
-      const items = [["إجمالي اللاعبين / Total", 5, `SUMPRODUCT(--((${rgN("nameAr")}<>"")+(${rgN("nameEn")}<>"")>0))`, cnt], ["ذكور / Male", 7, `COUNTIF(${rgN("gender")},"ذكر*")`, mal], ["إناث / Female", 9, `COUNTIF(${rgN("gender")},"أنثى*")`, fem]];
-      items.forEach(([label, col, f, res]) => {
+      const items = [["ذكور / Male", 5, `COUNTIF(${rgN("gender")},"ذكر*")`, mal], ["إناث / Female", 7, `COUNTIF(${rgN("gender")},"أنثى*")`, fem], ["إجمالي اللاعبين / Total", 9, `SUMPRODUCT(--((${rgN("nameAr")}<>"")+(${rgN("nameEn")}<>"")>0))`, cnt]];
+      items.forEach(([label, col, f, res], idx) => {
         const lc = ws.getCell(1, col), vc = ws.getCell(1, col + 1);
         lc.value = label; lc.font = { bold: true, color: { argb: "FFFFFFFF" } }; lc.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
-        vc.value = { formula: f, result: res }; vc.font = { bold: true, size: 14, color: { argb: NAVY } }; vc.alignment = { horizontal: "center", vertical: "middle" };
-        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFFFFF" } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
+        vc.value = { formula: f, result: res }; const tone = idx === 0 ? ["FFCFE2FF", "FF0B3D91"] : idx === 1 ? ["FFFFD3E4", "FF9C1C54"] : ["FFFFFFFF", NAVY]; /* ذكور أزرق، إناث وردي، الإجمالي أبيض */
+        vc.font = { bold: true, size: 14, color: { argb: tone[1] } }; vc.alignment = { horizontal: "center", vertical: "middle" };
+        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: tone[0] } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
       });
     }
     cols.forEach((c, i) => {
       const cell = ws.getCell(2, i + 1); cell.value = HDR(c); cell.font = { bold: true, color: { argb: INK } }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } };
-      cell.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; cell.border = { bottom: { style: "medium" } }; ws.getColumn(i + 1).width = c.w;
+      cell.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; cell.border = { top: { style: "thin", color: DK }, left: { style: i === 0 ? "medium" : "thin", color: DK }, right: { style: i === cols.length - 1 ? "medium" : "thin", color: DK }, bottom: { style: "medium", color: DK } }; ws.getColumn(i + 1).width = c.w;
     });
     if (hasNote) { const nc = ws.getCell(2, cols.length + 1); nc.value = both("hNote"); nc.font = { bold: true }; nc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; ws.getColumn(cols.length + 1).width = 44; }
     ws.getRow(2).height = 46;
     for (let r = 0; r < MAXROWS; r++) {
       const rn = FIRST + r, row = rows && rows[r];
       cols.forEach((c, i) => {
-        const cell = ws.getCell(rn, i + 1); cell.border = { top: { style: "hair" }, bottom: { style: "hair" }, left: { style: "hair" }, right: { style: "hair" } };
-        if (c.k === "n") { cell.value = r + 1; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; cell.alignment = { horizontal: "center" }; return; }
+        const cell = ws.getCell(rn, i + 1); cell.border = { top: { style: r === 0 ? "medium" : "thin", color: DK }, bottom: { style: r === MAXROWS - 1 ? "medium" : "thin", color: DK }, left: { style: i === 0 ? "medium" : "thin", color: DK }, right: { style: i === cols.length - 1 ? "medium" : "thin", color: DK } };
+        if (c.k === "n") { cell.value = r + 1; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; cell.alignment = { horizontal: "center", vertical: "middle" }; return; }
         if (c.calc) {   /* أعمدة بتتحسب لوحدها بصيغ Excel (مقفولة) */
           const bc = LT.birth + rn, ac = LT.age + rn; let f;
           if (c.k === "age") f = `IF(${bc}="","",IFERROR(DATEDIF(${bc},DATE(${AGE_DATE.join(",")}),"Y"),""))`;
@@ -215,7 +216,7 @@
           const result = c.k === "age" ? (ag == null ? "" : ag) : c.k === "cat" ? (row && row.birth ? catOf(row.birth) : "") : (bl ? LV[bl[4]] || "" : "");
           cell.value = { formula: f, result }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; cell.alignment = { horizontal: "center", vertical: "middle" }; cell.font = { bold: true }; return;
         }
-        cell.protection = { locked: false }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: CREAM } }; cell.alignment = { horizontal: "center", vertical: "middle" };
+        cell.protection = { locked: false }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: CREAM } }; cell.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
         if (c.k === "birth") cell.numFmt = "yyyy-mm-dd";
         if (c.k === "phone") cell.numFmt = "@";
         if (!row) return;
@@ -468,22 +469,27 @@
     const ws = wb.addWorksheet("Videos", { views: [{ rightToLeft: true }], properties: { tabColor: { argb: GOLD } } });
     const meta = wb.addWorksheet("_meta", { state: "veryHidden" }); const hdr = [both("hCode"), both("hName"), both("hLink")];
     meta.getCell("A1").value = JSON.stringify({ v: VER, t: "vid", coach: vc.cred.code, hdr });
-    for (let i = 1; i <= 10; i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
+    for (let i = 1; i <= 6; i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
     const t1 = ws.getCell(1, 1); t1.value = both("dlVid").replace(/Download |تحميل /g, "") + "  —  " + vc.cred.code;
-    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { vertical: "middle" }; ws.getRow(1).height = 26;
-    hdr.forEach((h, i) => { const c = ws.getCell(2, i + 1); c.value = h; c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } }; c.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; c.border = { bottom: { style: "medium" } }; });
+    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; for (let cc = 1; cc <= 3; cc++) ws.getCell(1, cc).alignment = { horizontal: "centerContinuous", vertical: "middle" }; ws.getRow(1).height = 26;
+    hdr.forEach((h, i) => { const c = ws.getCell(2, i + 1); c.value = h; c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } }; c.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; const g = { style: "thin", color: { argb: "FF8A8A8A" } }; c.border = { top: g, left: g, right: g, bottom: { style: "medium" } }; });
     ws.getColumn(1).width = 18; ws.getColumn(2).width = 34; ws.getColumn(3).width = 52; ws.getRow(2).height = 46;
     /* خانات استدلال للمدرب (قراءة فقط، مش بتتحسب في الرفع): إجمالي اللاعبين، الروابط اللي اتملت، والباقي بدون رابط. بتتغير لوحدها */
     {
       const last = 2 + players.length, total = players.length, rg = "C" + FIRST + ":C" + Math.max(FIRST, last);
       const filled = players.filter((p) => String(rows ? rows.get(p.code) : p.video || "").trim()).length;
       const items = [["إجمالي اللاعبين / Total", 5, `COUNTA(A${FIRST}:A${Math.max(FIRST, last)})`, total], ["بروابط / With link", 7, `SUMPRODUCT(--(LEN(TRIM(${rg}))>0))`, filled], ["بدون رابط / Missing", 9, `COUNTA(A${FIRST}:A${Math.max(FIRST, last)})-SUMPRODUCT(--(LEN(TRIM(${rg}))>0))`, total - filled]];
-      items.forEach(([label, col, f, res]) => {
-        ws.getColumn(col).width = 22; ws.getColumn(col + 1).width = 10;
-        const lc = ws.getCell(1, col), vc = ws.getCell(1, col + 1);
-        lc.value = label; lc.font = { bold: true, color: { argb: "FFFFFFFF" } }; lc.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
-        vc.value = { formula: f, result: res }; vc.font = { bold: true, size: 14, color: { argb: NAVY } }; vc.alignment = { horizontal: "center", vertical: "middle" };
-        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFFFFF" } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
+      /* العدّادات الثلاثة تحت بعض (صفوف 2 و3 و4) فوق المفتاح، بدل ما تتمدد في الصف الأول */
+      const k0 = notes ? 5 : 4, k1 = notes ? 10 : 6;
+      items.push(items.shift()); /* الترتيب: بروابط، بدون رابط، الإجمالي */
+      items.forEach(([label, , f, res], idx) => {
+        const r = 2 + idx;
+        for (let cc = k0; cc < k1; cc++) { const lc = ws.getCell(r, cc); lc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; lc.alignment = { horizontal: "centerContinuous", vertical: "middle" }; }
+        const lc = ws.getCell(r, k0); lc.value = label; lc.font = { bold: true, color: { argb: "FFFFFFFF" } };
+        const vc = ws.getCell(r, k1);
+        vc.value = { formula: f, result: res }; const tone = idx === 0 ? ["FFC8E6C9", "FF1B5E20"] : idx === 1 ? ["FFFFCDD2", "FFB71C1C"] : ["FFFFFFFF", NAVY]; /* بروابط أخضر، بدون رابط أحمر، الإجمالي أبيض */
+        vc.font = { bold: true, size: 14, color: { argb: tone[1] } }; vc.alignment = { horizontal: "center", vertical: "middle" };
+        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: tone[0] } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
       });
       ws.getRow(1).height = 30;
     }
@@ -492,11 +498,41 @@
       const rn = FIRST + i, ln = rows ? rows.get(p.code) : p.video || "";
       const c1 = ws.getCell(rn, 1), c2 = ws.getCell(rn, 2), c3 = ws.getCell(rn, 3);
       c1.value = p.code; c2.value = (X.lang === "en" ? p.nameEn || p.nameAr : p.nameAr || p.nameEn) || ""; c3.value = ln || "";
-      [c1, c2].forEach((c) => { c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; c.alignment = { horizontal: "center" }; });
-      c3.protection = { locked: false }; c3.fill = { type: "pattern", pattern: "solid", fgColor: { argb: CREAM } }; c3.alignment = { horizontal: "left" };
-      [c1, c2, c3].forEach((c) => (c.border = { top: { style: "hair" }, bottom: { style: "hair" }, left: { style: "hair" }, right: { style: "hair" } }));
+      [c1, c2].forEach((c) => { c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; c.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; });
+      c3.protection = { locked: false }; c3.fill = { type: "pattern", pattern: "solid", fgColor: { argb: CREAM } }; c3.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
+      [c1, c2, c3].forEach((c) => (c.border = { top: { style: "thin", color: { argb: "FF8A8A8A" } }, bottom: { style: "thin", color: { argb: "FF8A8A8A" } }, left: { style: "thin", color: { argb: "FF8A8A8A" } }, right: { style: "thin", color: { argb: "FF8A8A8A" } } }));
       if (notes && notes.get(p.code)) { const n = ws.getCell(rn, 4); n.value = notes.get(p.code); n.font = { color: { argb: "FFB00020" } }; }
     });
+    /* تلوين خانة الرابط: أخضر = شكل رابط يوتيوب سليم، أحمر = مكتوب حاجة مش رابط يوتيوب أو فيها مسافات. (الفحص هنا للشكل بس، وجود الفيديو بيتأكد عند الرفع على الموقع) */
+    {
+      const T = "TRIM(C" + FIRST + ")", ok = (m) => { const q = m.replace(/\?/g, "~?"); return `IFERROR(AND(ISNUMBER(SEARCH("${q}",${T})),LEN(${T})-SEARCH("${q}",${T})-${m.length - 1}>=11),FALSE)`; };
+      const valid = `AND(ISERROR(FIND(" ",${T})),OR(${ok("youtu.be/")},${ok("youtube.com/watch?v=")},${ok("youtube.com/watch?feature=")},${ok("youtube.com/shorts/")},${ok("youtube.com/embed/")},${ok("youtube.com/live/")}))`;
+      const ref = "C" + FIRST + ":C" + (FIRST + Math.max(players.length, 1) - 1);
+      ws.addConditionalFormatting({ ref, rules: [
+        { type: "expression", priority: 1, formulae: [`AND(LEN(${T})>0,${valid})`], style: { fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFC8E6C9" }, fgColor: { argb: "FFC8E6C9" } }, font: { color: { argb: "FF1B5E20" } } } },
+        { type: "expression", priority: 2, formulae: [`AND(LEN(${T})>0,NOT(${valid}))`], style: { fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FFFFCDD2" }, fgColor: { argb: "FFFFCDD2" } }, font: { color: { argb: "FFB71C1C" } } } },
+      ] });
+    }
+    /* مفتاح الألوان ظاهر جنب العناوين + رسالة تظهر لما المدرب يقف على خانة الرابط */
+    {
+      /* مفتاح الألوان في المساحة الفاضية جنب عمود الرابط (من غير أعمدة جديدة ومن غير دمج): من D لحد F، متصل بلا فراغ أبيض، والنص بيبدأ من أقصى الشمال. لو فيه عمود ملاحظات (D) بنستخدم E:J */
+      const c0 = notes ? 5 : 4, c1 = notes ? 10 : 6, GR = ["FFC8E6C9", "FF1B5E20"], RD = ["FFFFCDD2", "FFB71C1C"], YL = ["FFFFF8E1", "FF5D4037"];
+      const LG = [[5, "✔   أخضر = رابط يوتيوب صحيح", GR, 17], [6, "Green = valid YouTube link", GR, 13], [7, "✖   أحمر = خطأ: مش رابط يوتيوب", RD, 17], [8, "Red = wrong: not a YouTube link", RD, 13], [9, "الفيديو الخاص أو المحذوف بيترفض عند الرفع", YL, 12], [10, "Private/deleted videos are rejected on upload", YL, 11]];
+      if (!notes) { ws.getColumn(4).width = 22; ws.getColumn(5).width = 22; }
+      const lastR = Math.max(FIRST + players.length - 1, 12);
+      for (let r = 2; r <= lastR; r++) { if (r >= 2 && r <= 4) continue; const L = LG.find((x) => x[0] === r), col = L ? L[2] : YL; for (let cc = c0; cc <= c1; cc++) ws.getCell(r, cc).fill = { type: "pattern", pattern: "solid", fgColor: { argb: col[0] } }; if (L) { for (let cc = c0; cc <= c1; cc++) ws.getCell(r, cc).alignment = { horizontal: "centerContinuous", vertical: "middle" }; const c = ws.getCell(r, c0); c.value = L[1]; c.font = { bold: true, size: L[3], color: { argb: col[1] } }; } }
+      const rg = "C" + FIRST + ":C" + (FIRST + Math.max(players.length, 1) - 1);
+      for (let r = FIRST; r < FIRST + Math.max(players.length, 1); r++) ws.getCell(r, 3).dataValidation = { type: "custom", allowBlank: true, formulae: ["TRUE"], showInputMessage: true, promptTitle: "رابط يوتيوب / YouTube link", prompt: "الأخضر = رابط صحيح، الأحمر = خطأ (لازم رابط يوتيوب).\nGreen = valid, Red = wrong (YouTube link only).", showErrorMessage: false };
+    }
+    /* حدود الجدول كله: جدول اللاعبين A:C ومربع العدّادات والمفتاح جنبه. خطوط رفيعة داكنة جوّه، وإطار سميك حوالين كل جزء */
+    {
+      const DK = { argb: "FF444444" }, th = { style: "thin", color: DK }, md = { style: "medium", color: DK };
+      const put = (r, c, side, st) => { const cell = ws.getCell(r, c); cell.border = Object.assign({}, cell.border || {}, { [side]: st }); };
+      const lastP = FIRST + Math.max(players.length, 1) - 1;
+      for (let r = 2; r <= lastP; r++) for (let c = 1; c <= 3; c++) { put(r, c, "top", r === 2 ? md : th); put(r, c, "bottom", r === lastP ? md : (r === 2 ? md : th)); put(r, c, "left", c === 1 ? md : th); put(r, c, "right", c === 3 ? md : th); }
+      const k0 = notes ? 5 : 4, k1 = notes ? 10 : 6, lastR = Math.max(lastP, 12);
+      for (let r = 2; r <= lastR; r++) { for (let c = k0; c <= k1; c++) { put(r, c, "top", r === 2 ? md : th); put(r, c, "bottom", r === lastR ? md : th); } put(r, k0, "left", md); put(r, k1, "right", md); if (r <= 4) put(r, k1, "left", th); }
+    }
     await ws.protect(PWD, { selectLockedCells: true, selectUnlockedCells: true });
     return xlsxBlob(wb);
   }
