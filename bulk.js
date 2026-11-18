@@ -156,7 +156,7 @@
     { k: "guardian", h: "hGuard", w: 24, in: 1 },
   ];
   const HDR = (c) => both(c.h);
-  const NAVY = "FF0B1F5C", GOLD = "FFF4CB55", INK = "FF1B1B1B", CREAM = "FFFFF6D6", GREY = "FFE9ECF5";
+  const NAVY = "FF0B1F5C", GOLD = "FFFFE082", INK = "FF1B1B1B", CREAM = "FFFFF4D1", GREY = "FFEEF0F7";
 
   const LV = ["", "الأول | 1", "الثاني | 2", "الثالث | 3"];
   const dialList = () => { const seen = new Set(), out = []; X.COUNTRIES.forEach(([ar, en]) => { const d = X.DIAL[String(en).toLowerCase()]; if (d && !seen.has(d + ar)) { seen.add(d + ar); out.push({ code: d, label: "+" + d + " | " + ar + " | " + en }); } }); return out; };
@@ -172,23 +172,35 @@
   const catOf = (birth) => { const a = birth ? X.ageOf(birth) : null; const c = a == null ? null : X.ageCat(a); return c ? c[1] : ""; };
   async function buildRegTemplate(type, rows, notes) {
     const ExcelJS = await loadEx(), { cred, coach } = X.mine(), clubs = (coach && coach.clubs) || [];
-    const cols = REGCOLS(type, clubs.length), wb = new ExcelJS.Workbook(); wb.creator = "Captain Taekwondo";
-    const ws = wb.addWorksheet("Players", { views: [{ rightToLeft: true, state: "frozen", ySplit: 2 }], properties: { tabColor: { argb: GOLD } } });
+    const cols = REGCOLS(type, clubs.length), wb = new ExcelJS.Workbook(); wb.creator = "Captain Taekwondo"; wb.calcProperties = { fullCalcOnLoad: true };
+    const ws = wb.addWorksheet("Players", { views: [{ rightToLeft: true }], properties: { tabColor: { argb: GOLD } } });
     const lists = wb.addWorksheet("lists", { state: "veryHidden" }), meta = wb.addWorksheet("_meta", { state: "veryHidden" });
     X.PARA.forEach((p, i) => (lists.getCell(i + 1, 1).value = paraLbl(p))); clubs.forEach((c, i) => (lists.getCell(i + 1, 2).value = clubLbl(c)));
     const dials = dialList(); X.BELTS.forEach((bb, i) => { lists.getCell(i + 1, 4).value = beltLbl(bb); lists.getCell(i + 1, 5).value = LV[bb[4]] || ""; }); dials.forEach((d, i) => (lists.getCell(i + 1, 6).value = d.label));
     const LT = {}; cols.forEach((c, i) => (LT[c.k] = String.fromCharCode(65 + i)));
     const hasNote = !!notes;
     meta.getCell("A1").value = JSON.stringify({ v: VER, t: "reg", type, coach: cred.code, cols: cols.map((c) => c.k), hdr: cols.map(HDR), clubs: clubs.length });
-    ws.mergeCells(1, 1, 1, cols.length + (hasNote ? 1 : 0));
+    for (let i = 1; i <= cols.length + (hasNote ? 1 : 0); i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
     const t1 = ws.getCell(1, 1); t1.value = (type === "para" ? both("dlPara") : both("dlSup")).replace(/Download |تحميل /g, "") + "  —  " + cred.code;
-    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { horizontal: "center", vertical: "middle" }; ws.getRow(1).height = 26;
+    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { vertical: "middle" }; ws.getRow(1).height = 30;
+    /* خانات استدلال للمدرب في الصف الأول (قراءة فقط، مش بتتحسب في الرفع): إجمالي اللاعبين اللي اتملوا في الشيت، وعدد الذكور والإناث. بتتغير لوحدها مع كل صف بيتملي */
+    {
+      const rgN = (k) => LT[k] + FIRST + ":" + LT[k] + (FIRST + MAXROWS - 1);
+      const cnt = rows ? rows.filter((r) => r.nameAr || r.nameEn).length : 0, mal = rows ? rows.filter((r) => r.gender === "m").length : 0, fem = rows ? rows.filter((r) => r.gender === "f").length : 0;
+      const items = [["إجمالي اللاعبين / Total", 5, `SUMPRODUCT(--((${rgN("nameAr")}<>"")+(${rgN("nameEn")}<>"")>0))`, cnt], ["ذكور / Male", 7, `COUNTIF(${rgN("gender")},"ذكر*")`, mal], ["إناث / Female", 9, `COUNTIF(${rgN("gender")},"أنثى*")`, fem]];
+      items.forEach(([label, col, f, res]) => {
+        const lc = ws.getCell(1, col), vc = ws.getCell(1, col + 1);
+        lc.value = label; lc.font = { bold: true, color: { argb: "FFFFFFFF" } }; lc.alignment = { horizontal: "center", vertical: "middle", wrapText: true };
+        vc.value = { formula: f, result: res }; vc.font = { bold: true, size: 14, color: { argb: NAVY } }; vc.alignment = { horizontal: "center", vertical: "middle" };
+        vc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: "FFFFFFFF" } }; vc.border = { top: { style: "thin" }, bottom: { style: "thin" }, left: { style: "thin" }, right: { style: "thin" } };
+      });
+    }
     cols.forEach((c, i) => {
       const cell = ws.getCell(2, i + 1); cell.value = HDR(c); cell.font = { bold: true, color: { argb: INK } }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } };
       cell.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; cell.border = { bottom: { style: "medium" } }; ws.getColumn(i + 1).width = c.w;
     });
     if (hasNote) { const nc = ws.getCell(2, cols.length + 1); nc.value = both("hNote"); nc.font = { bold: true }; nc.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; ws.getColumn(cols.length + 1).width = 44; }
-    ws.getRow(2).height = 34;
+    ws.getRow(2).height = 46;
     for (let r = 0; r < MAXROWS; r++) {
       const rn = FIRST + r, row = rows && rows[r];
       cols.forEach((c, i) => {
@@ -199,7 +211,9 @@
           if (c.k === "age") f = `IF(${bc}="","",IFERROR(DATEDIF(${bc},DATE(${AGE_DATE.join(",")}),"Y"),""))`;
           else if (c.k === "cat") f = `IF(${ac}="","",` + X.AGES.map((a, ix) => (ix === X.AGES.length - 1 ? `"${a[1]}"` : `IF(${ac}<${a[0]},"${a[1]}",`)).join("") + ")".repeat(X.AGES.length - 1) + ")";
           else f = `IF(${LT.belt}${rn}="","",IFERROR(VLOOKUP(${LT.belt}${rn},lists!$D$1:$E$${X.BELTS.length},2,FALSE),""))`;
-          cell.value = { formula: f }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; cell.alignment = { horizontal: "center", vertical: "middle" }; cell.font = { bold: true }; return;
+          const ag = row && row.birth ? X.ageOf(row.birth) : null, bl = row && X.BELTS.find((x) => x[0] === row.belt);
+          const result = c.k === "age" ? (ag == null ? "" : ag) : c.k === "cat" ? (row && row.birth ? catOf(row.birth) : "") : (bl ? LV[bl[4]] || "" : "");
+          cell.value = { formula: f, result }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; cell.alignment = { horizontal: "center", vertical: "middle" }; cell.font = { bold: true }; return;
         }
         cell.protection = { locked: false }; cell.fill = { type: "pattern", pattern: "solid", fgColor: { argb: CREAM } }; cell.alignment = { horizontal: "center", vertical: "middle" };
         if (c.k === "birth") cell.numFmt = "yyyy-mm-dd";
@@ -228,6 +242,20 @@
       if (c.k === "dial") dv(i, Object.assign({ type: "list", allowBlank: true, formulae: ["lists!$F$1:$F$" + Math.max(1, dials.length)] }, bad(both("eDial"))));
       if (c.k === "birth") dv(i, Object.assign({ type: "date", operator: "between", allowBlank: true, formulae: [new Date(Date.UTC(1940, 0, 1)), new Date(Date.UTC(2026, 11, 31))] }, bad(both("eBirth")), { showInputMessage: true, promptTitle: S.ar.hBirth, prompt: "2015-03-27" }));
     });
+    if (LT.gender) {   /* تلوين خانة النوع حسب القيمة (للملاحظة بس) */
+      const G = LT.gender, f0 = G + FIRST, fill = (c) => ({ type: "pattern", pattern: "solid", bgColor: { argb: c } });
+      ws.addConditionalFormatting({ ref: G + FIRST + ":" + G + (FIRST + MAXROWS - 1), rules: [
+        { type: "expression", priority: 1, formulae: ['LEFT(' + f0 + ',3)="ذكر"'], style: { fill: fill("FFCFE2FF"), font: { color: { argb: "FF0B3D91" }, bold: true } } },
+        { type: "expression", priority: 2, formulae: ['LEFT(' + f0 + ',4)="أنثى"'], style: { fill: fill("FFFFD3E4"), font: { color: { argb: "FF9C1C54" }, bold: true } } },
+      ] });
+    }
+    if (LT.belt) {   /* تلوين خانة الحزام بلون الحزام نفسه */
+      const BL = LT.belt, b0 = BL + FIRST, dark = { black: 1, red: 1, blue: 1, green: 1 };
+      ws.addConditionalFormatting({ ref: BL + FIRST + ":" + BL + (FIRST + MAXROWS - 1), rules: X.BELTS.map((bt, i) => ({
+        type: "expression", priority: 10 + i, formulae: ['LEFT(' + b0 + ',' + bt[1].length + ')="' + bt[1] + '"'],
+        style: { fill: { type: "pattern", pattern: "solid", bgColor: { argb: "FF" + bt[3].replace("#", "").toUpperCase() } }, font: { color: { argb: dark[bt[0]] ? "FFFFFFFF" : "FF1B1B1B" }, bold: true } },
+      })) });
+    }
     await ws.protect(PWD, { selectLockedCells: true, selectUnlockedCells: true });
     /* ورقة التعليمات + مثال */
     const ins = wb.addWorksheet("Help", { views: [{ rightToLeft: true }] }); ins.getColumn(1).width = 90;
@@ -341,7 +369,7 @@
         else if (c.k === "dial") inp = sel(dialList().map((d) => [d.code, "+" + d.code + " — " + d.label.split(" | ")[X.lang === "en" ? 2 : 1]]), r.dial);
         else if (c.k === "club") inp = sel(clubs.map((cl, i) => [String(i), cl[L2 === 1 ? "ar" : "en"] || cl.ar || cl.en]), r.club >= 0 ? String(r.club) : "");
         else { inp = el("input", ""); inp.type = c.k === "birth" ? "date" : c.k === "phone" ? "tel" : "text"; inp.value = (c.k === "phone" ? r.phoneRaw : r[c.k]) || ""; inp.maxLength = 60; if (c.k === "phone") inp.dir = "ltr"; if (c.k === "birth") { inp.min = "1940-01-01"; inp.dir = "ltr"; } if (c.k === "nameAr") inp.dir = "rtl"; if (c.k === "nameEn") inp.dir = "ltr"; }
-        inp.dataset.f = c.k; inp.addEventListener("input", () => { if (c.k === "phone") r.phoneRaw = inp.value.replace(/[\s\-().]/g, ""); else r[c.k] = c.k === "club" ? (inp.value === "" ? -1 : +inp.value) : inp.value.trim(); if (c.k === "birth" || c.k === "club" || c.k === "gender" || c.k === "belt" || c.k === "para") { /* القوائم */ } refresh(); });
+        inp.dataset.f = c.k; if (c.k === "gender") inp.dataset.g = r.gender || ""; if (c.k === "belt") inp.dataset.b = r.belt || ""; inp.addEventListener("input", () => { if (c.k === "gender") inp.dataset.g = inp.value; if (c.k === "belt") inp.dataset.b = inp.value; if (c.k === "phone") r.phoneRaw = inp.value.replace(/[\s\-().]/g, ""); else r[c.k] = c.k === "club" ? (inp.value === "" ? -1 : +inp.value) : inp.value.trim(); if (c.k === "birth" || c.k === "club" || c.k === "gender" || c.k === "belt" || c.k === "para") { /* القوائم */ } refresh(); });
         td.appendChild(inp); return td;
       };
       tr.append(el("td", "bk-n", String(r.n - FIRST + 1)), el("td", "bk-st", ""), el("td", "bk-m", ""), el("td", "bk-c", ""));
@@ -437,13 +465,14 @@
   async function buildVidTemplate(rows, notes) {
     const ExcelJS = await loadEx(), vc = X.vcoach(), players = vc.players.slice().sort((a, b) => (a.code < b.code ? -1 : 1));
     const wb = new ExcelJS.Workbook(); wb.creator = "Captain Taekwondo";
-    const ws = wb.addWorksheet("Videos", { views: [{ rightToLeft: true, state: "frozen", ySplit: 2 }], properties: { tabColor: { argb: GOLD } } });
+    const ws = wb.addWorksheet("Videos", { views: [{ rightToLeft: true }], properties: { tabColor: { argb: GOLD } } });
     const meta = wb.addWorksheet("_meta", { state: "veryHidden" }); const hdr = [both("hCode"), both("hName"), both("hLink")];
     meta.getCell("A1").value = JSON.stringify({ v: VER, t: "vid", coach: vc.cred.code, hdr });
-    ws.mergeCells(1, 1, 1, notes ? 4 : 3); const t1 = ws.getCell(1, 1); t1.value = both("dlVid").replace(/Download |تحميل /g, "") + "  —  " + vc.cred.code;
-    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { horizontal: "center", vertical: "middle" }; ws.getRow(1).height = 26;
+    for (let i = 1; i <= (notes ? 4 : 3); i++) ws.getCell(1, i).fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } };
+    const t1 = ws.getCell(1, 1); t1.value = both("dlVid").replace(/Download |تحميل /g, "") + "  —  " + vc.cred.code;
+    t1.font = { bold: true, size: 13, color: { argb: "FFFFFFFF" } }; t1.fill = { type: "pattern", pattern: "solid", fgColor: { argb: NAVY } }; t1.alignment = { vertical: "middle" }; ws.getRow(1).height = 26;
     hdr.forEach((h, i) => { const c = ws.getCell(2, i + 1); c.value = h; c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GOLD } }; c.alignment = { horizontal: "center", vertical: "middle", wrapText: true }; c.border = { bottom: { style: "medium" } }; });
-    ws.getColumn(1).width = 18; ws.getColumn(2).width = 34; ws.getColumn(3).width = 52; ws.getRow(2).height = 34;
+    ws.getColumn(1).width = 18; ws.getColumn(2).width = 34; ws.getColumn(3).width = 52; ws.getRow(2).height = 46;
     if (notes) { const c = ws.getCell(2, 4); c.value = both("hNote"); c.font = { bold: true }; c.fill = { type: "pattern", pattern: "solid", fgColor: { argb: GREY } }; ws.getColumn(4).width = 40; }
     players.forEach((p, i) => {
       const rn = FIRST + i, ln = rows ? rows.get(p.code) : p.video || "";
