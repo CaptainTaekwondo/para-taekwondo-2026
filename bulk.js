@@ -159,8 +159,8 @@
   const NAVY = "FF0B1F5C", GOLD = "FFFFE082", INK = "FF1B1B1B", CREAM = "FFFFF4D1", GREY = "FFEEF0F7";
 
   const LV = ["", "الأول | 1", "الثاني | 2", "الثالث | 3"];
-  const dialList = () => { const seen = new Set(), out = []; X.COUNTRIES.forEach(([ar, en]) => { const d = X.DIAL[String(en).toLowerCase()]; if (d && !seen.has(d + ar)) { seen.add(d + ar); out.push({ code: d, label: "+" + d + " | " + ar + " | " + en }); } }); return out; };
-  const dialOf = (v) => { const m = txt(v).match(/^\+?\s*(\d{1,4})/); return m ? m[1] : ""; };
+  const dialList = () => { const seen = new Set(), out = []; X.COUNTRIES.forEach(([ar, en]) => { const d = X.DIAL[String(en).toLowerCase()]; if (d && !seen.has(d + ar)) { seen.add(d + ar); out.push({ code: d, ar, en, label: "(+" + d + ") " + ar + " | " + en }); } }); return out; };
+  const dialOf = (v) => { const x = txt(v), m = x.match(/\+\s*(\d{1,4})/) || x.match(/^\s*(\d{1,4})\b/); return m ? m[1] : ""; };
   function fullPhone(r) {
     const p = String(r.phoneRaw || ""); if (!p) return "";
     if (p.startsWith("+")) return "+" + p.slice(1).replace(/\D/g, "");
@@ -366,7 +366,7 @@
         if (c.k === "gender") inp = sel([["m", S.ar.male.split(" | ")[L2 - 1]], ["f", S.ar.female.split(" | ")[L2 - 1]]], r.gender);
         else if (c.k === "belt") inp = sel(X.BELTS.map((b) => [b[0], b[L2]]), r.belt);
         else if (c.k === "para") inp = sel(X.PARA.map((p) => [p[0], p[0] + " — " + p[L2]]), r.para);
-        else if (c.k === "dial") inp = sel(dialList().map((d) => [d.code, "+" + d.code + " — " + d.label.split(" | ")[X.lang === "en" ? 2 : 1]]), r.dial);
+        else if (c.k === "dial") inp = sel(dialList().map((d) => [d.code, "+" + d.code + " — " + (X.lang === "en" ? d.en : d.ar)]), r.dial);
         else if (c.k === "club") inp = sel(clubs.map((cl, i) => [String(i), cl[L2 === 1 ? "ar" : "en"] || cl.ar || cl.en]), r.club >= 0 ? String(r.club) : "");
         else { inp = el("input", ""); inp.type = c.k === "birth" ? "date" : c.k === "phone" ? "tel" : "text"; inp.value = (c.k === "phone" ? r.phoneRaw : r[c.k]) || ""; inp.maxLength = 60; if (c.k === "phone") inp.dir = "ltr"; if (c.k === "birth") { inp.min = "1940-01-01"; inp.dir = "ltr"; } if (c.k === "nameAr") inp.dir = "rtl"; if (c.k === "nameEn") inp.dir = "ltr"; }
         inp.dataset.f = c.k; if (c.k === "gender") inp.dataset.g = r.gender || ""; if (c.k === "belt") inp.dataset.b = r.belt || ""; inp.addEventListener("input", () => { if (c.k === "gender") inp.dataset.g = inp.value; if (c.k === "belt") inp.dataset.b = inp.value; if (c.k === "phone") r.phoneRaw = inp.value.replace(/[\s\-().]/g, ""); else r[c.k] = c.k === "club" ? (inp.value === "" ? -1 : +inp.value) : inp.value.trim(); if (c.k === "birth" || c.k === "club" || c.k === "gender" || c.k === "belt" || c.k === "para") { /* القوائم */ } refresh(); });
