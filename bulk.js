@@ -634,8 +634,8 @@
     if (!X.VIDEO_OPEN || $("#bkVid")) return;
     const host = $("#vListBox .acts"); if (!host) return;
     const none = () => { const c = X.vcoach(); return !c || !c.players || !c.players.length; };
-    const dl = () => { if (none()) { toast($("#bkVid"), s("vidNone"), true); return; } return buildVidTemplate().then((b) => download(b, "video-links-template.xlsx")); };
-    const up = async () => { if (none()) { toast($("#bkVid"), s("vidNone"), true); return; } const f = await pickFile(".xlsx"); if (!f) return; toast($("#bkVid"), s("loading"), false, true); try { const p = await parseVid(f); toast($("#bkVid"), ""); await openVidReview(p); } catch (e) { toast($("#bkVid"), errText(e), true); } };
+    const dl = () => { if (none()) throw new Error("vidNone"); return buildVidTemplate().then((b) => download(b, "video-links-template.xlsx")); };
+    const up = async () => { if (none()) throw new Error("vidNone"); const f = await pickFile(".xlsx"); if (!f) return; toast($("#bkVid"), s("loading"), false, true); try { const p = await parseVid(f); toast($("#bkVid"), ""); await openVidReview(p); } catch (e) { toast($("#bkVid"), errText(e), true); } };
     host.before(mkBar("bkVid", s("vidTitle"), s("vidHint"), [[s("dlVid"), dl, "fill", 1], [s("upload"), up]]));
   }
   const sync = () => {
