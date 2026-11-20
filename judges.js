@@ -17,8 +17,8 @@
 
   /* نمط الكود المكرّر (SVG) يظهر على حواف الكرت تحت ضوء الماوس */
   const patUrl = code => {
-    const t = (x, rot) => `<text x="${x}" y="280" text-anchor="middle" textLength="500" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} 280)" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="78" letter-spacing="5" fill="#ffe9a0" stroke="#7a4a05" stroke-width="2.6" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="560">${t(86, -90)}${t(892, 90)}</svg>`;
+    const t = (x, y, rot) => `<text x="${x}" y="${y}" text-anchor="middle" textLength="250" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} ${y})" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="34" letter-spacing="2" fill="#ffe9a0" stroke="#7a4a05" stroke-width="1.6" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="1355" viewBox="0 0 978 1355">${t(40, 180, -90)}${t(40, 400, -90)}${t(40, 955, -90)}${t(40, 1175, -90)}${t(938, 180, 90)}${t(938, 400, 90)}${t(938, 955, 90)}${t(938, 1175, 90)}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   };
   /* p: { name, code?, role?, photo?, fit?: "contain" (للصور الدائرية المؤطرة) } */
@@ -210,7 +210,7 @@
       const render = () => {
         S.dB += (T.dB - S.dB) * .14; S.dG += (T.dG - S.dG) * .14; /* تنعيم أكتر */
         const dB = S.dB, dG = S.dG, m = Math.hypot(dB, dG), s = cl((m - 3) / 12, 0, 1), wc = m ? dB * dB / (dB * dB + dG * dG) : .5;
-        const aG = Math.abs(dG), aB = Math.abs(dB), co = cl((aB - 8) / 6, 0, 1) * cl((aB - aG) / 6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1) * (1 - co), x = .5 + cl(dG / R, -1, 1) * .45, cy = .5 + (dB < 0 ? -1 : 1) * (.28 + .3 * cl((aB - 8) / 52, 0, 1)), y = .5 + cl(dB / R, -1, 1) * .45;
+        const aG = Math.abs(dG), aB = Math.abs(dB), co = cl((aB - 8) / 6, 0, 1) * cl((aB - aG) / 6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1) * (1 - co), x = .5 + cl(dG / R, -1, 1) * .45, cy = .5 + (dB < 0 ? -1 : 1) * (.12 + .5 * cl((aB - 8) / 52, 0, 1)), y = .5 + cl(dB / R, -1, 1) * .45;
         /* التأثير على الكارت اللي في منتصف الشاشة بس (أو الكارت اللي الإصبع عليه) */
         const mid = innerHeight / 2; let best = finger && fcard ? fcard : null, bd = 1e9;
         if (!best) vis.forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = el; } });
