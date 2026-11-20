@@ -187,7 +187,7 @@
         if (el.classList.contains("flipped")) return;
         const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
         const k = STATIC ? 0 : t / 1000, i = +el.dataset.k || 0, x = .5 + .38 * Math.sin(k * .9 + i * 1.7), y = .5 + .36 * Math.sin(k * .65 + 1.3 + i);
-        box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+        box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%"); box.style.setProperty("--cy", (cy * 100).toFixed(1) + "%");
         ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
       });
     };
@@ -210,7 +210,7 @@
       const render = () => {
         S.dB += (T.dB - S.dB) * .14; S.dG += (T.dG - S.dG) * .14; /* تنعيم أكتر */
         const dB = S.dB, dG = S.dG, m = Math.hypot(dB, dG), s = cl((m - 3) / 12, 0, 1), wc = m ? dB * dB / (dB * dB + dG * dG) : .5;
-        const co = s * cl(wc * 2.2, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1), x = .5 + cl(dG / R, -1, 1) * .45, y = .5 + cl(dB / R, -1, 1) * .45;
+        const aG = Math.abs(dG), aB = Math.abs(dB), co = cl((aB - 8) / 6, 0, 1) * cl((aB - aG) / 6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1) * (1 - co), x = .5 + cl(dG / R, -1, 1) * .45, cy = .5 + (dB < 0 ? -1 : 1) * (.28 + .3 * cl((aB - 8) / 52, 0, 1)), y = .5 + cl(dB / R, -1, 1) * .45;
         /* التأثير على الكارت اللي في منتصف الشاشة بس (أو الكارت اللي الإصبع عليه) */
         const mid = innerHeight / 2; let best = finger && fcard ? fcard : null, bd = 1e9;
         if (!best) vis.forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = el; } });
@@ -223,7 +223,7 @@
           }
           el.classList.add("tilt");
           el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
-          box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+          box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%"); box.style.setProperty("--cy", (cy * 100).toFixed(1) + "%");
           box.style.setProperty("--ry", (cl(dG * .2, -9, 9)).toFixed(1) + "deg"); box.style.setProperty("--rx", (-cl(dB * .18, -8, 8)).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
           ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
         });

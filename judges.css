@@ -299,9 +299,9 @@ html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text
 /* ============ كشف الكود على الحواف + اللوجو الملوّن على الصورة (مع حركة الماوس) ============ */
 .jc.tpl .rcode{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity .3s;
   background:var(--pat) center/calc(var(--w)*1) auto repeat;
-  -webkit-mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
+  -webkit-mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--cy,var(--my)),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
   -webkit-mask-size:100% 100%;-webkit-mask-repeat:no-repeat;-webkit-mask-composite:source-in;
-  mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
+  mask-image:radial-gradient(circle calc(var(--w)*.34) at var(--mx) var(--cy,var(--my)),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);
   mask-size:100% 100%;mask-repeat:no-repeat;mask-composite:intersect;
   filter:drop-shadow(0 0 6px rgba(244,203,85,.7))}
 .jc.tpl:hover .rcode{opacity:.95}
@@ -400,7 +400,7 @@ html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text
 .jhead h1{font-family:var(--fd);font-weight:700}
 
 /* كشاف أصغر: قطر الدايرة اللي بتكشف الكود واللوجو */
-.jc.tpl .rcode{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--my),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp)}
+.jc.tpl .rcode{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--cy,var(--my)),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp);mask-image:radial-gradient(circle calc(var(--w)*.2) at var(--mx) var(--cy,var(--my)),#000 0,rgba(0,0,0,.6) 45%,transparent 100%),url(assets/judges/ring-mask.webp)}
 .jc.tpl .wmc{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%)}
 
 .jc.tpl .wmc{object-fit:contain}
@@ -639,7 +639,8 @@ html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowr
 
 /* ميلان الموبايل: الكود بميل فوق/تحت، اللوجو بميل يمين/شمال */
 .jc.tpl.tilt .tcard{transition:none}
-.jc.tpl.tilt .rcode{opacity:var(--co,0)!important;-webkit-mask-image:radial-gradient(circle calc(var(--w)*.7) at var(--mx) var(--my),#000 0,#000 55%,transparent 100%),url(assets/judges/ring-mask.webp);mask-image:radial-gradient(circle calc(var(--w)*.7) at var(--mx) var(--my),#000 0,#000 55%,transparent 100%),url(assets/judges/ring-mask.webp);filter:drop-shadow(0 0 3px rgba(244,203,85,.95)) drop-shadow(0 0 8px rgba(244,203,85,.8)) brightness(1.4)}
+.jc.tpl.tilt .rcode{opacity:var(--co,0)!important}
+body.tiltwm .jc.tpl:not(.tilt) .rcode,body.tiltwm .jc.tpl:not(.tilt) .wmt{opacity:0!important}
 .jc.tpl.tilt .wmt{opacity:var(--lo,0)!important}
 
 /* كشافات الخلفية: على الكمبيوتر تفضل بتتحرك بهدوء حتى لو النظام عامل «تقليل الحركة» */
