@@ -635,6 +635,7 @@ html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowr
 @media(prefers-reduced-motion:reduce){.jc.tpl .jfxo,.jc.tpl .jfxs{display:none}}
 
 /* ميلان الموبايل: الكود بميل فوق/تحت، اللوجو بميل يمين/شمال */
+.jc.tpl.tilt .tcard{transition:none}
 .jc.tpl.tilt .rcode{opacity:var(--co,0)!important}
 .jc.tpl.tilt .wmt{opacity:var(--lo,0)!important}
 

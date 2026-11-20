@@ -200,30 +200,49 @@
     cards.forEach(c => io.observe(c));
     document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
     /* ميلان الموبايل: فوق/تحت = الكود، يمين/شمال = لوجو كابتن تايكوندو */
-    if (!RM && "DeviceOrientationEvent" in window) {
-      let b0 = null, on = false;
+    if (!RM) {
+      /* ميلان في كل الاتجاهات (360°): الاتجاه بيحدد مين يظهر (الكود/اللوجو بيتمزجوا بالتدريج)، وقوة الميلان بتحدد الإضاءة وزاوية الكرت.
+         القيم بتتنعّم في rAF عشان الحركة تبقى سلسة ومتزامنة مع إيد المستخدم */
+      let b0 = null, on = false, oraf = 0;
       const cl = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-      const onOri = e => {
-        if (e.beta == null || e.gamma == null) return;
-        if (b0 == null) b0 = e.beta;
-        const dB = cl(e.beta - b0, -30, 30), dG = cl(e.gamma, -30, 30);
-        b0 += (e.beta - b0) * .004; /* خط الأساس بيتأقلم ببطء مع وضع الإمساك */
-        if (!on) { on = TILT = true; document.body.classList.add("tiltwm"); }
-        const co = cl((Math.abs(dB) - 4) / 10, 0, 1), lo = cl((Math.abs(dG) - 4) / 10, 0, 1);
+      const S = { dB: 0, dG: 0 }, T = { dB: 0, dG: 0 }, R = 60;
+      const wrap = a => a > 180 ? a - 360 : a < -180 ? a + 360 : a;
+      const render = () => {
+        S.dB += (T.dB - S.dB) * .35; S.dG += (T.dG - S.dG) * .35;
+        const dB = S.dB, dG = S.dG, m = Math.hypot(dB, dG), s = cl((m - 3) / 12, 0, 1), wc = m ? dB * dB / (dB * dB + dG * dG) : .5;
+        const co = s * cl(wc * 1.6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1), x = .5 + cl(dG / R, -1, 1) * .45, y = .5 + cl(dB / R, -1, 1) * .45;
         vis.forEach(el => {
           if (el.classList.contains("flipped")) return;
           const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
-          const x = .5 + dG / 60, y = .5 + dB / 60;
           el.classList.add("tilt");
           el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
           box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
-          box.style.setProperty("--ry", (dG * .45).toFixed(1) + "deg"); box.style.setProperty("--rx", (-dB * .4).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
+          box.style.setProperty("--ry", (cl(dG, -R, R) * .55).toFixed(1) + "deg"); box.style.setProperty("--rx", (-cl(dB, -R, R) * .5).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
           ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
         });
+        oraf = Math.abs(T.dB - S.dB) + Math.abs(T.dG - S.dG) > .05 && !document.hidden ? requestAnimationFrame(render) : 0;
       };
+      const G = { dB: 0, dG: 0 }; let finger = false;
+      const go = () => { if (!on) { on = TILT = true; document.body.classList.add("tiltwm"); } if (!oraf) oraf = requestAnimationFrame(render); };
+      const onOri = e => {
+        if (e.beta == null || e.gamma == null) return;
+        if (b0 == null) b0 = e.beta;
+        G.dB = cl(wrap(e.beta - b0), -R, R); G.dG = cl(e.gamma, -R, R);
+        b0 += wrap(e.beta - b0) * .003; /* خط الأساس بيتأقلم ببطء مع وضع الإمساك */
+        if (!finger) { T.dB = G.dB; T.dG = G.dG; go(); }
+      };
+      /* حركة الإصبع: موضع الإصبع على الكرت بيميله في أي اتجاه (دايرة كاملة)، ولما يسيبه يرجع لميلان الموبايل */
+      const touchAt = e => {
+        const t = e.touches[0], el = e.currentTarget; if (!t || el.classList.contains("flipped")) return;
+        const r = el.getBoundingClientRect(); finger = true;
+        T.dG = cl(((t.clientX - r.left) / r.width - .5) * 2 * R, -R, R); T.dB = cl(((t.clientY - r.top) / r.height - .5) * 2 * R, -R, R); go();
+      };
+      const release = () => { finger = false; T.dB = G.dB; T.dG = G.dG; if (oraf === 0) oraf = requestAnimationFrame(render); };
+      cards.forEach(c => { c.addEventListener("touchstart", touchAt, { passive: true }); c.addEventListener("touchmove", touchAt, { passive: true }); c.addEventListener("touchend", release, { passive: true }); c.addEventListener("touchcancel", release, { passive: true }); });
       const start = () => addEventListener("deviceorientation", onOri);
       const DO = window.DeviceOrientationEvent;
-      if (typeof DO.requestPermission === "function") {
+      if (!DO) { /* بدون جيروسكوب: الإصبع بس */ }
+      else if (typeof DO.requestPermission === "function") {
         const ask = () => { document.removeEventListener("touchend", ask); DO.requestPermission().then(r => { if (r === "granted") start(); }).catch(() => {}); };
         document.addEventListener("touchend", ask);
       } else start();
