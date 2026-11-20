@@ -210,7 +210,7 @@
       const render = () => {
         S.dB += (T.dB - S.dB) * .14; S.dG += (T.dG - S.dG) * .14; /* تنعيم أكتر */
         const dB = S.dB, dG = S.dG, m = Math.hypot(dB, dG), s = cl((m - 3) / 12, 0, 1), wc = m ? dB * dB / (dB * dB + dG * dG) : .5;
-        const co = s * cl(wc * 1.6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1), x = .5 + cl(dG / R, -1, 1) * .45, y = .5 + cl(dB / R, -1, 1) * .45;
+        const co = s * cl(wc * 2.2, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1), x = .5 + cl(dG / R, -1, 1) * .45, y = .5 + cl(dB / R, -1, 1) * .45;
         /* التأثير على الكارت اللي في منتصف الشاشة بس (أو الكارت اللي الإصبع عليه) */
         const mid = innerHeight / 2; let best = finger && fcard ? fcard : null, bd = 1e9;
         if (!best) vis.forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = el; } });
@@ -224,7 +224,7 @@
           el.classList.add("tilt");
           el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
           box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
-          box.style.setProperty("--ry", (cl(dG, -R, R) * .55).toFixed(1) + "deg"); box.style.setProperty("--rx", (-cl(dB, -R, R) * .5).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
+          box.style.setProperty("--ry", (cl(dG * .2, -9, 9)).toFixed(1) + "deg"); box.style.setProperty("--rx", (-cl(dB * .18, -8, 8)).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
           ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
         });
         oraf = Math.abs(T.dB - S.dB) + Math.abs(T.dG - S.dG) > .05 && !document.hidden ? requestAnimationFrame(render) : 0;
