@@ -11,12 +11,12 @@
 function sw(n){if(n.nodeType===1&&n.tagName==="IMG"&&n.hasAttribute("data-lite")){n.src=n.getAttribute("data-lite");n.removeAttribute("data-lite")}}
 var mo=new MutationObserver(function(ms){for(var i=0;i<ms.length;i++)for(var j=0;j<ms[i].addedNodes.length;j++){var n=ms[i].addedNodes[j];sw(n);if(n.querySelectorAll){var a=n.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])}}});
 mo.observe(d,{childList:true,subtree:true});document.addEventListener("DOMContentLoaded",function(){mo.disconnect();var a=document.querySelectorAll("img[data-lite]");for(var k=0;k<a.length;k++)sw(a[k])})}catch(e){}})();</script>
-<script src="perf.js?v=1"></script>
+<script src="perf.js?v=2"></script>
 <link rel="icon" href="assets/champion.webp">
 <link rel="preload" href="assets/fonts/cairo.woff" as="font" type="font/woff" crossorigin>
 <link rel="preload" href="assets/fonts/reemkufi.woff" as="font" type="font/woff" crossorigin>
 <link rel="stylesheet" href="style.css?v=20261114c">
-<link rel="stylesheet" href="judges.css?v=20261120g">
+<link rel="stylesheet" href="judges.css?v=20261120h">
 </head>
 <body>
 <nav id="nav" class="cnav" aria-label="التنقل">

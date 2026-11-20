@@ -26,7 +26,7 @@
       if (t - t0 < 1200) return requestAnimationFrame(f);
       var fps = n * 1000 / (t - t0);
       if (document.hidden) return;
-      if (fps < 28) set("low", false); else try { sessionStorage.setItem(KEY, "full"); } catch (e) {}
+      if (fps < 28) set("low", false); else if (!d.classList.contains("fx-low")) try { sessionStorage.setItem(KEY, "full"); } catch (e) {}
     }
     requestAnimationFrame(f);
   }
