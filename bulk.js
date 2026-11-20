@@ -18,7 +18,7 @@
     ar: {
       regTitle: "تسجيل بالجملة بملف Excel", regHint: "للأعداد الكبيرة: حمّل النموذج، املأه، ارفعه، راجع الأخطاء وأضف الصور، ثم أكّد التسجيل.",
       dlPara: "تحميل نموذج لاعبي البارا", dlSup: "تحميل نموذج اللاعبين الداعمين", upload: "رفع النموذج",
-      vidTitle: "إرسال الروابط بملف Excel", vidHint: "النموذج فيه كود كل لاعب واسمه ومكان الرابط فقط.", dlVid: "تحميل نموذج الروابط",
+      vidNone: "ما عندكش لاعبين مسجّلين لسه. سجّل لاعبين الأول، وبعدها نزّل النموذج وهتلاقي الكود والاسم جاهزين.", vidTitle: "إرسال الروابط بملف Excel", vidHint: "النموذج فيه كود كل لاعب واسمه ومكان الرابط فقط.", dlVid: "تحميل نموذج الروابط",
       loading: "جاري تجهيز الملف…", libFail: "تعذّر تحميل مكتبة Excel. تأكد من الاتصال وجرّب مرة أخرى.",
       badFile: "الملف مش نموذج صحيح. حمّل النموذج من الموقع واستخدمه كما هو.", badType: "النموذج ده لنوع تاني. حمّل النموذج المناسب.",
       badCoach: "النموذج ده متحمّل لمدرب تاني. حمّل نموذجك من حسابك.", oldVer: "نسخة النموذج قديمة. حمّل نموذجًا جديدًا.",
@@ -43,7 +43,7 @@
     en: {
       regTitle: "Bulk registration with Excel", regHint: "For large numbers: download the template, fill it, upload it, review errors and add photos, then confirm.",
       dlPara: "Download Para players template", dlSup: "Download Supporting players template", upload: "Upload the template",
-      vidTitle: "Send links with Excel", vidHint: "The template has each player's code, name and a place for the link only.", dlVid: "Download links template",
+      vidNone: "You have no registered players yet. Register players first, then download the template and each code and name will be filled in.", vidTitle: "Send links with Excel", vidHint: "The template has each player's code, name and a place for the link only.", dlVid: "Download links template",
       loading: "Preparing the file…", libFail: "Could not load the Excel library. Check your connection and try again.",
       badFile: "This is not a valid template. Download it from the site and use it as is.", badType: "This template is for another type. Download the right one.",
       badCoach: "This template belongs to another coach. Download yours from your account.", oldVer: "Old template version. Download a new one.",
@@ -633,8 +633,9 @@
   function mountVid() {
     if (!X.VIDEO_OPEN || $("#bkVid")) return;
     const host = $("#vListBox .acts"); if (!host) return;
-    const dl = () => buildVidTemplate().then((b) => download(b, "video-links-template.xlsx"));
-    const up = async () => { const f = await pickFile(".xlsx"); if (!f) return; toast($("#bkVid"), s("loading"), false, true); try { const p = await parseVid(f); toast($("#bkVid"), ""); await openVidReview(p); } catch (e) { toast($("#bkVid"), errText(e), true); } };
+    const none = () => { const c = X.vcoach(); return !c || !c.players || !c.players.length; };
+    const dl = () => { if (none()) { toast($("#bkVid"), s("vidNone"), true); return; } return buildVidTemplate().then((b) => download(b, "video-links-template.xlsx")); };
+    const up = async () => { if (none()) { toast($("#bkVid"), s("vidNone"), true); return; } const f = await pickFile(".xlsx"); if (!f) return; toast($("#bkVid"), s("loading"), false, true); try { const p = await parseVid(f); toast($("#bkVid"), ""); await openVidReview(p); } catch (e) { toast($("#bkVid"), errText(e), true); } };
     host.before(mkBar("bkVid", s("vidTitle"), s("vidHint"), [[s("dlVid"), dl, "fill", 1], [s("upload"), up]]));
   }
   const sync = () => {
