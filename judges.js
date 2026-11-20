@@ -160,7 +160,8 @@
   })();
 
   /* ميلان ثلاثي الأبعاد مع حركة الماوس */
-  if (matchMedia("(hover:hover)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
+  const TOUCH = matchMedia("(hover:none),(pointer:coarse)").matches;
+  if (!TOUCH && matchMedia("(hover:hover)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
     document.querySelectorAll(".jc.tpl").forEach(el => {
       const box = el.querySelector(".tcard");
       let ev = null, tk = 0;
@@ -177,7 +178,7 @@
   }
 
   /* الموبايل (بدون ماوس): كشّاف بيتحرك لوحده على الكرت اللي قدام العين، عشان العلامة المائية (الكود ولوجو كابتن تايكوندو الملوّن) تبان */
-  if (!matchMedia("(hover:hover)").matches) {
+  if (TOUCH) {
     const cards = [...document.querySelectorAll(".jc.tpl")], vis = new Set(), STATIC = LITE || matchMedia("(prefers-reduced-motion:reduce)").matches;
     let raf = 0, TILT = false;
     const paint = t => {
@@ -216,6 +217,7 @@
           el.classList.add("tilt");
           el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
           box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+          box.style.setProperty("--ry", (dG * .45).toFixed(1) + "deg"); box.style.setProperty("--rx", (-dB * .4).toFixed(1) + "deg"); /* الكرت نفسه بيميل مع الموبايل */
           ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
         });
       };

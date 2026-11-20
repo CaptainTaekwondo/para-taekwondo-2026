@@ -268,7 +268,7 @@ html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text
   radial-gradient(ellipse 95% 44% at 50% 100%,rgba(217,32,47,.28) 0%,rgba(120,20,40,.12) 45%,transparent 75%),
   linear-gradient(180deg,#050e2e 0%,#030a1f 38%,#02060f 70%,#0a0714 100%)}
 /* أشعة الإضاءة: أربع حزم بتتمايل ببطء */
-.jbeam{height:900px;background:
+.jbeam{height:560px;background:
   conic-gradient(from 150deg at 0% -4%,transparent 0 5%,rgba(255,238,170,.34) 8.5%,transparent 13% 100%),
   conic-gradient(from 210deg at 100% -4%,transparent 0 5%,rgba(255,238,170,.34) 8.5%,transparent 13% 100%),
   conic-gradient(from 158deg at 22% -6%,transparent 0 4%,rgba(120,170,255,.22) 6.5%,transparent 10% 100%),
@@ -312,7 +312,7 @@ html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text
   filter:drop-shadow(0 6px 14px rgba(0,0,0,.55))}
 .jc.tpl.onph .wmc{opacity:.42;transform:translate(-50%,-50%) scale(1)}
 /* الموبايل مفيش ماوس: الكشاف بيتحرك لوحده على الكارت الظاهر (class auto من judges.js) فتظهر العلامة المائية */
-@media(hover:none){.jc.tpl.auto .rcode{opacity:.95}}
+@media(hover:none),(pointer:coarse){.jc.tpl.auto .rcode{opacity:.95}}
 @media(prefers-reduced-motion:reduce){.jc.tpl .rcode,.jc.tpl .wmc{transition:none}}
 
 /* تعديل: الكود عمودي مكرر على الحافتين، واللوجو شفاف يتبع الماوس */
@@ -562,12 +562,12 @@ html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowr
 /* ---- لجنة التحكيم: حركة وإضاءة (أضواء متأرجحة، نجوم متلألئة، مؤثرات لوجو البطولة) ---- */
 .jmedal .jshine{position:absolute;inset:6px;border-radius:50%;overflow:hidden;pointer-events:none;opacity:0;background:linear-gradient(100deg,transparent 35%,rgba(255,255,255,.85) 50%,transparent 65%);mix-blend-mode:screen}
 .jmedal .jring{position:absolute;inset:0;border-radius:50%;pointer-events:none;opacity:0;border:3px solid rgba(255,226,130,.95);box-shadow:0 0 24px rgba(255,214,90,.9),inset 0 0 18px rgba(255,214,90,.6)}
-.jswing{position:absolute;top:-30px;width:min(58vw,620px);height:860px;z-index:-2;pointer-events:none;transform-origin:50% 0;opacity:.9;
+.jswing{position:absolute;top:-30px;width:min(34vw,340px);height:520px;z-index:-2;pointer-events:none;transform-origin:50% 0;opacity:.9;
   background:conic-gradient(from 162deg at 50% 0,transparent 0deg,rgba(150,195,255,.5) 18deg,transparent 36deg,transparent 360deg);
   -webkit-mask:linear-gradient(180deg,#000 10%,transparent 88%);mask:linear-gradient(180deg,#000 10%,transparent 88%);animation:jswing 9s ease-in-out infinite alternate;will-change:transform}
 .jswing.a{inset-inline-start:2%}
 .jswing.b{inset-inline-end:2%;background:conic-gradient(from 162deg at 50% 0,transparent 0deg,rgba(255,214,120,.42) 18deg,transparent 36deg,transparent 360deg);animation-duration:11s;animation-direction:alternate-reverse}
-.jswing.c{inset-inline-start:30%;opacity:.55;animation-duration:13s;width:min(46vw,480px)}
+.jswing.c{inset-inline-start:30%;opacity:.55;animation-duration:13s;width:min(26vw,260px)}
 @keyframes jswing{from{transform:rotate(-26deg)}to{transform:rotate(26deg)}}
 .jtw{position:absolute;z-index:0;pointer-events:none;font-style:normal;line-height:1;color:#fff6c9;text-shadow:0 0 8px #ffd45c,0 0 16px #f4cb55;opacity:0;animation:jtw 3.6s ease-in-out infinite}
 @keyframes jtw{0%,100%{opacity:0;transform:scale(.4) rotate(0)}50%{opacity:.95;transform:scale(1) rotate(20deg)}}
@@ -647,3 +647,13 @@ html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowr
 .jswing.c{animation-duration:24s}
 }
 @media(hover:hover) and (prefers-reduced-motion:reduce){.jtw{display:block;animation:jtw 3.6s ease-in-out infinite}}
+
+/* مستوى الأداء الضعيف (html.fx-low من perf.js): كشافين متحركين في صورة WebP خفيفة بدل طبقات CSS التقيلة */
+@media all{
+html.fx-low .jbeam,html.fx-low .jdust,html.fx-low .jswing,html.fx-low .jswing.b,html.fx-low .jswing.c{animation:none!important}
+html.fx-low .jswing,html.fx-low .jdust,html.fx-low .jrays{display:none}
+html.fx-low .jc.tpl .sp,html.fx-low .jc.tpl .back .sp{animation:none!important;opacity:.7}
+html.fx-low .jc.tpl .tph::after,html.fx-low .jc.tpl .tcard::before,html.fx-low .jc.tpl.chief::before{animation:none!important}
+html.fx-low .jc.tpl .tcard{animation:none!important}
+html.fx-low .jbeam{display:block!important;height:min(42vh,320px);background:url(assets/judges/beams.webp?v=1) center top/min(100%,440px) 100% no-repeat;opacity:1}
+}
