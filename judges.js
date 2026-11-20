@@ -205,15 +205,22 @@
          القيم بتتنعّم في rAF عشان الحركة تبقى سلسة ومتزامنة مع إيد المستخدم */
       let b0 = null, on = false, oraf = 0;
       const cl = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
-      const S = { dB: 0, dG: 0 }, T = { dB: 0, dG: 0 }, R = 60;
+      const S = { dB: 0, dG: 0 }, T = { dB: 0, dG: 0 }, R = 60, GAIN = 2.2; /* تضخيم الميلان: ميلان خفيف يعطي التأثير كامل */
       const wrap = a => a > 180 ? a - 360 : a < -180 ? a + 360 : a;
       const render = () => {
-        S.dB += (T.dB - S.dB) * .35; S.dG += (T.dG - S.dG) * .35;
+        S.dB += (T.dB - S.dB) * .14; S.dG += (T.dG - S.dG) * .14; /* تنعيم أكتر */
         const dB = S.dB, dG = S.dG, m = Math.hypot(dB, dG), s = cl((m - 3) / 12, 0, 1), wc = m ? dB * dB / (dB * dB + dG * dG) : .5;
         const co = s * cl(wc * 1.6, 0, 1), lo = s * cl((1 - wc) * 1.6, 0, 1), x = .5 + cl(dG / R, -1, 1) * .45, y = .5 + cl(dB / R, -1, 1) * .45;
+        /* التأثير على الكارت اللي في منتصف الشاشة بس (أو الكارت اللي الإصبع عليه) */
+        const mid = innerHeight / 2; let best = finger && fcard ? fcard : null, bd = 1e9;
+        if (!best) vis.forEach(el => { const r = el.getBoundingClientRect(), d = Math.abs(r.top + r.height / 2 - mid); if (d < bd) { bd = d; best = el; } });
         vis.forEach(el => {
           if (el.classList.contains("flipped")) return;
           const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
+          if (el !== best) {
+            if (el.classList.contains("tilt")) { el.classList.remove("tilt"); el.style.setProperty("--co", "0"); el.style.setProperty("--lo", "0"); box.style.setProperty("--ry", "0deg"); box.style.setProperty("--rx", "0deg"); }
+            return;
+          }
           el.classList.add("tilt");
           el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
           box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
@@ -222,23 +229,24 @@
         });
         oraf = Math.abs(T.dB - S.dB) + Math.abs(T.dG - S.dG) > .05 && !document.hidden ? requestAnimationFrame(render) : 0;
       };
-      const G = { dB: 0, dG: 0 }; let finger = false;
+      const G = { dB: 0, dG: 0 }; let finger = false, fcard = null;
       const go = () => { if (!on) { on = TILT = true; document.body.classList.add("tiltwm"); } if (!oraf) oraf = requestAnimationFrame(render); };
       const onOri = e => {
         if (e.beta == null || e.gamma == null) return;
         if (b0 == null) b0 = e.beta;
-        G.dB = cl(wrap(e.beta - b0), -R, R); G.dG = cl(e.gamma, -R, R);
+        G.dB = cl(wrap(e.beta - b0) * GAIN, -R, R); G.dG = cl(e.gamma * GAIN, -R, R);
         b0 += wrap(e.beta - b0) * .003; /* خط الأساس بيتأقلم ببطء مع وضع الإمساك */
         if (!finger) { T.dB = G.dB; T.dG = G.dG; go(); }
       };
       /* حركة الإصبع: موضع الإصبع على الكرت بيميله في أي اتجاه (دايرة كاملة)، ولما يسيبه يرجع لميلان الموبايل */
       const touchAt = e => {
         const t = e.touches[0], el = e.currentTarget; if (!t || el.classList.contains("flipped")) return;
-        const r = el.getBoundingClientRect(); finger = true;
+        const r = el.getBoundingClientRect(); finger = true; fcard = el;
         T.dG = cl(((t.clientX - r.left) / r.width - .5) * 2 * R, -R, R); T.dB = cl(((t.clientY - r.top) / r.height - .5) * 2 * R, -R, R); go();
       };
-      const release = () => { finger = false; T.dB = G.dB; T.dG = G.dG; if (oraf === 0) oraf = requestAnimationFrame(render); };
+      const release = () => { finger = false; fcard = null; T.dB = G.dB; T.dG = G.dG; if (oraf === 0) oraf = requestAnimationFrame(render); };
       cards.forEach(c => { c.addEventListener("touchstart", touchAt, { passive: true }); c.addEventListener("touchmove", touchAt, { passive: true }); c.addEventListener("touchend", release, { passive: true }); c.addEventListener("touchcancel", release, { passive: true }); });
+      addEventListener("scroll", () => { if (on && !oraf) oraf = requestAnimationFrame(render); }, { passive: true }); /* لما الكارت اللي في النص يتغيّر */
       const start = () => addEventListener("deviceorientation", onOri);
       const DO = window.DeviceOrientationEvent;
       if (!DO) { /* بدون جيروسكوب: الإصبع بس */ }
