@@ -103,7 +103,7 @@ const CONFIG = {
     announce: "1 نوفمبر 2026",
     open: "8 نوفمبر 2026",
     deadline: "",
-    videos: "",
+    videos: "20 نوفمبر 2026",
     judging: "",
     results: ""
   },

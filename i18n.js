@@ -83,6 +83,7 @@
     "الإعلان الرسمي": "Official announcement",
     "1 نوفمبر 2026": "1 November 2026",
     "8 نوفمبر 2026": "8 November 2026",
+    "20 نوفمبر 2026": "20 November 2026",
     "التسجيل والمواعيد": "Registration and dates",
     "تُضاف بعد اعتمادها رسميًا": "Added once officially approved",
     "قيد الاعتماد": "Pending approval",
