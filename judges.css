@@ -633,3 +633,17 @@ html[lang="en"] .jc.tpl .back .bk{font-size:calc(var(--w)*.038);white-space:nowr
 .jc.tpl .jfxo{background:radial-gradient(circle at 50% 45%,rgba(255,240,170,.85),rgba(255,200,70,.3) 42%,transparent 70%)}
 .jc.tpl .jfxs{background:linear-gradient(105deg,transparent 36%,rgba(255,255,255,.6) 50%,transparent 64%) 130% 0/250% 100% no-repeat;mix-blend-mode:screen}
 @media(prefers-reduced-motion:reduce){.jc.tpl .jfxo,.jc.tpl .jfxs{display:none}}
+
+/* ميلان الموبايل: الكود بميل فوق/تحت، اللوجو بميل يمين/شمال */
+.jc.tpl.tilt .rcode{opacity:var(--co,0)!important}
+.jc.tpl.tilt .wmt{opacity:var(--lo,0)!important}
+
+/* كشافات الخلفية: على الكمبيوتر تفضل بتتحرك بهدوء حتى لو النظام عامل «تقليل الحركة» */
+@media(hover:hover) and (prefers-reduced-motion:reduce){
+.jbeam{animation:jsway 12s ease-in-out infinite alternate}
+.jdust{animation:jtw 8s ease-in-out infinite alternate}
+.jswing{animation:jswing 16s ease-in-out infinite alternate;transform:none}
+.jswing.b{animation-duration:20s;animation-direction:alternate-reverse}
+.jswing.c{animation-duration:24s}
+}
+@media(hover:hover) and (prefers-reduced-motion:reduce){.jtw{display:block;animation:jtw 3.6s ease-in-out infinite}}

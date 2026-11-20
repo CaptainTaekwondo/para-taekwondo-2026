@@ -148,7 +148,7 @@
   /* نجوم صغيرة بتظهر وتختفي في خلفية الصفحة */
   (function () {
     const page = document.querySelector(".jpage");
-    if (!page || LITE || matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+    if (!page || LITE || (!matchMedia("(hover:hover)").matches && matchMedia("(prefers-reduced-motion:reduce)").matches)) return;
     let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
     const n = innerWidth < 700 ? 14 : 26, fr = document.createDocumentFragment();
     for (let i = 0; i < n; i++) {
@@ -177,8 +177,9 @@
   /* الموبايل (بدون ماوس): كشّاف بيتحرك لوحده على الكرت اللي قدام العين، عشان العلامة المائية (الكود ولوجو كابتن تايكوندو الملوّن) تبان */
   if (!matchMedia("(hover:hover)").matches) {
     const cards = [...document.querySelectorAll(".jc.tpl")], vis = new Set(), STATIC = LITE || matchMedia("(prefers-reduced-motion:reduce)").matches;
-    let raf = 0;
+    let raf = 0, TILT = false;
     const paint = t => {
+      if (TILT) return;
       vis.forEach(el => {
         if (el.classList.contains("flipped")) return;
         const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
@@ -195,6 +196,34 @@
     }, { threshold: .25 });
     cards.forEach(c => io.observe(c));
     document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
+    /* ميلان الموبايل: فوق/تحت = الكود، يمين/شمال = لوجو كابتن تايكوندو */
+    if (!STATIC && "DeviceOrientationEvent" in window) {
+      let b0 = null, on = false;
+      const cl = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+      const onOri = e => {
+        if (e.beta == null || e.gamma == null) return;
+        if (b0 == null) b0 = e.beta;
+        const dB = cl(e.beta - b0, -30, 30), dG = cl(e.gamma, -30, 30);
+        b0 += (e.beta - b0) * .004; /* خط الأساس بيتأقلم ببطء مع وضع الإمساك */
+        if (!on) { on = TILT = true; document.body.classList.add("tiltwm"); }
+        const co = cl((Math.abs(dB) - 4) / 10, 0, 1), lo = cl((Math.abs(dG) - 4) / 10, 0, 1);
+        vis.forEach(el => {
+          if (el.classList.contains("flipped")) return;
+          const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
+          const x = .5 + dG / 60, y = .5 + dB / 60;
+          el.classList.add("tilt");
+          el.style.setProperty("--co", co.toFixed(2)); el.style.setProperty("--lo", lo.toFixed(2));
+          box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%");
+          ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
+        });
+      };
+      const start = () => addEventListener("deviceorientation", onOri);
+      const DO = window.DeviceOrientationEvent;
+      if (typeof DO.requestPermission === "function") {
+        const ask = () => { document.removeEventListener("touchend", ask); DO.requestPermission().then(r => { if (r === "granted") start(); }).catch(() => {}); };
+        document.addEventListener("touchend", ask);
+      } else start();
+    }
   }
 
   /* ---------- قلب الكرت ---------- */
