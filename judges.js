@@ -179,7 +179,7 @@
 
   /* الموبايل (بدون ماوس): كشّاف بيتحرك لوحده على الكرت اللي قدام العين، عشان العلامة المائية (الكود ولوجو كابتن تايكوندو الملوّن) تبان */
   if (TOUCH) {
-    const cards = [...document.querySelectorAll(".jc.tpl")], vis = new Set(), STATIC = LITE || matchMedia("(prefers-reduced-motion:reduce)").matches;
+    const cards = [...document.querySelectorAll(".jc.tpl")], vis = new Set(), RM = matchMedia("(prefers-reduced-motion:reduce)").matches, STATIC = LITE || RM;
     let raf = 0, TILT = false;
     const paint = t => {
       if (TILT) return;
@@ -200,7 +200,7 @@
     cards.forEach(c => io.observe(c));
     document.addEventListener("visibilitychange", () => { if (!document.hidden) kick(); });
     /* ميلان الموبايل: فوق/تحت = الكود، يمين/شمال = لوجو كابتن تايكوندو */
-    if (!STATIC && "DeviceOrientationEvent" in window) {
+    if (!RM && "DeviceOrientationEvent" in window) {
       let b0 = null, on = false;
       const cl = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
       const onOri = e => {

@@ -654,7 +654,8 @@ html.fx-low .jbeam,html.fx-low .jdust,html.fx-low .jswing,html.fx-low .jswing.b,
 html.fx-low .jswing,html.fx-low .jdust,html.fx-low .jrays{display:none}
 html.fx-low .jc.tpl .sp,html.fx-low .jc.tpl .back .sp{animation:none!important;opacity:.7}
 html.fx-low .jc.tpl .tph::after,html.fx-low .jc.tpl .tcard::before,html.fx-low .jc.tpl.chief::before{animation:none!important}
-html.fx-low .jc.tpl .tcard{animation:none!important}
-html.fx-low .jbeam{display:block!important;height:min(28vh,210px);background:url(assets/judges/beams.webp?v=1) center top/min(72%,300px) 100% no-repeat;opacity:1}
+html.fx-low .jc.tpl .tcard{animation:jfloat 4s ease-in-out infinite alternate!important;filter:drop-shadow(0 12px 18px rgba(0,0,0,.55)) drop-shadow(0 0 14px rgba(244,203,85,.4))}
+@keyframes jfloat{from{translate:0 0}to{translate:0 -5px}}
+html.fx-low .jbeam{display:none!important}
 @media(max-width:700px){.jswing{width:min(22vw,150px);height:300px}.jswing.c{width:min(18vw,120px)}}
 }
