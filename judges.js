@@ -80,7 +80,28 @@
     document.querySelectorAll(".jc").forEach((e, i) => e.style.setProperty("--i", i));
     if (window.I18N) I18N.apply(document.body);
   }
-  render();
+  /* القائمة العامة من لوحة الإدارة (لو JUDGES_CONFIG.api متحدد): جلب بمهلة قصيرة ثم رسم مرة واحدة؛ لو فشل/فاضي نستخدم CONFIG.judges */
+  function applyPublic(d) {
+    if (!d || !d.ok || !Array.isArray(d.judges) || !d.judges.length) return;
+    const map = x => ({ id: x.num || x.id, name: x.name, nameEn: x.nameEn, role: x.role, photo: x.photo, fit: x.fit });
+    const ord = Array.isArray(d.order) ? d.order : [];
+    const pos = x => { const i = ord.indexOf(x.id); return i < 0 ? 9999 : i; };
+    const all = d.judges.slice().sort((a, b) => pos(a) - pos(b));
+    const chief = all.find(x => x.role === "chief");
+    if (chief) J.head = Object.assign({}, J.head, map(chief));
+    J.referees = all.filter(x => x.role !== "chief").map(map);
+  }
+  (async () => {
+    const api = (typeof JUDGES_CONFIG !== "undefined" && JUDGES_CONFIG && JUDGES_CONFIG.api) || "";
+    if (api) {
+      try {
+        const ac = new AbortController(), t = setTimeout(() => ac.abort(), 3000);
+        const r = await fetch(api + (api.includes("?") ? "&" : "?") + "action=public", { signal: ac.signal });
+        clearTimeout(t); applyPublic(await r.json());
+      } catch (e) {}
+    }
+    render();
+  })();
 
   /* لوجو البطولة: ضغطة = يلف عموديًا (rotateX) في مكانه ويظهر لوجو Captain Taekwondo، وضغطة تانية ترجّعه. مع تقليل الحركة: تلاشي بدل اللف */
   (function () {

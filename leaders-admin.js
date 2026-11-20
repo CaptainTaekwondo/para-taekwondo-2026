@@ -75,7 +75,7 @@
   /* ---------- الروابط (للنسخ والمشاركة) ---------- */
   (function links() {
     const abs = f => new URL(f, location.href.split("?")[0].split("#")[0]).href;
-    const items = [["نموذج التسجيل (أرسله لرؤساء البارا)", abs("leaders-register.html")], ["صفحة القيادات العامة", abs("leaders.html")], ["صفحة الإدارة (لا تشاركها)", abs("leaders-admin.html")]];
+    const items = [["نموذج التسجيل (أرسله لرؤساء البارا)", abs("leaders-register.html")], ["صفحة القيادات العامة", abs("leaders.html")], ["صفحة لجنة التحكيم العامة", abs("judges.html")],["صفحة الإدارة (لا تشاركها)", abs("leaders-admin.html")]];
     const ul = $("#linkList"); if (!ul) return;
     items.forEach(it => {
       const copy = h("button", { class: "btn sm", type: "button", text: "نسخ الرابط" });

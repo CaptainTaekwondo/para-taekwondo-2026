@@ -76,3 +76,6 @@
 .ordrow.over{outline:3px dashed var(--gold2);outline-offset:2px;background:rgba(244,203,85,.12)}
 @media(max-width:700px){.ordrow{grid-template-columns:4.2rem 1fr auto;grid-template-areas:"n c b" "n nm b"}.ordrow .ordpos{grid-area:n}.grip{display:none}.ordrow .prow{flex-wrap:wrap;justify-content:flex-end;max-width:150px}}
 @media(max-width:700px){.ordname{white-space:normal;overflow:visible;font-size:.95rem;line-height:1.4}}
+
+.secsw{margin-bottom:.8rem}
+#jpanel .alist,#jeditor{margin-top:.6rem}
