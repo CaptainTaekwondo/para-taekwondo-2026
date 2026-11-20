@@ -150,7 +150,7 @@
     const page = document.querySelector(".jpage");
     if (!page || LITE || (!matchMedia("(hover:hover)").matches && matchMedia("(prefers-reduced-motion:reduce)").matches)) return;
     let sd = 11; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
-    const n = innerWidth < 700 ? 14 : 26, fr = document.createDocumentFragment();
+    const n = innerWidth < 700 ? 8 : 16, fr = document.createDocumentFragment();
     for (let i = 0; i < n; i++) {
       const s = document.createElement("i"); s.className = "jtw"; s.textContent = "✦"; s.setAttribute("aria-hidden", "true");
       s.style.cssText = `left:${(rnd() * 96 + 2).toFixed(1)}%;top:${(rnd() * 96 + 1).toFixed(1)}%;font-size:${(8 + rnd() * 16).toFixed(0)}px;animation-delay:${(rnd() * 6).toFixed(2)}s;animation-duration:${(2.6 + rnd() * 3).toFixed(2)}s`;
@@ -163,13 +163,15 @@
   if (matchMedia("(hover:hover)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
     document.querySelectorAll(".jc.tpl").forEach(el => {
       const box = el.querySelector(".tcard");
-      el.addEventListener("pointermove", e => {
-        if (el.classList.contains("flipped")) return;
+      let ev = null, tk = 0;
+      const apply = () => {
+        tk = 0; const e = ev; if (!e || el.classList.contains("flipped")) return;
         const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
         box.style.setProperty("--ry", (x * 16).toFixed(2) + "deg"); box.style.setProperty("--rx", (-y * 14).toFixed(2) + "deg");
         box.style.setProperty("--mx", (x + .5) * 100 + "%"); box.style.setProperty("--my", (y + .5) * 100 + "%");
         const ph = box.querySelector(".tph"); if (ph) { const q = ph.getBoundingClientRect(); ph.style.setProperty("--px", (e.clientX - q.left) + "px"); ph.style.setProperty("--py", (e.clientY - q.top) + "px"); el.classList.toggle("onph", e.clientX >= q.left && e.clientX <= q.right && e.clientY >= q.top && e.clientY <= q.bottom); }
-      });
+      };
+      el.addEventListener("pointermove", e => { ev = e; if (!tk) tk = requestAnimationFrame(apply); });
       el.addEventListener("pointerleave", () => { el.classList.remove("onph"); box.style.setProperty("--ry", "0deg"); box.style.setProperty("--rx", "0deg"); });
     });
   }
@@ -565,34 +567,47 @@
   (function bg() {
     const cv = $("#jfx"); if (!cv) return;
     const page = cv.parentElement, ctx = cv.getContext("2d"), reduce = LITE || matchMedia("(prefers-reduced-motion:reduce)").matches;
-    let W = 0, H = 0, dpr = 1, P = [], B = [], raf = 0;
+    let W = 0, H = 0, P = [], B = [], raf = 0, last = 0, onScreen = true;
     const rnd = (a, b) => a + Math.random() * (b - a);
+    /* سبرايتات جاهزة مرة واحدة بدل gradient وshadowBlur في كل فريم */
+    const mk = (n, fn) => { const c = document.createElement("canvas"); c.width = c.height = n; fn(c.getContext("2d"), n / 2); return c; };
+    const bub = mk(64, (g, r) => { const q = g.createRadialGradient(r, r, 0, r, r, r); q.addColorStop(0, "rgba(255,226,130,1)"); q.addColorStop(1, "rgba(255,226,130,0)"); g.fillStyle = q; g.fillRect(0, 0, r * 2, r * 2); });
+    const dot = (col) => mk(32, (g, r) => { const q = g.createRadialGradient(r, r, 0, r, r, r); q.addColorStop(0, col); q.addColorStop(.3, col); q.addColorStop(1, "rgba(255,212,92,0)"); g.fillStyle = q; g.fillRect(0, 0, r * 2, r * 2); });
+    const dA = dot("#fff4bd"), dB = dot("#f4cb55");
     function size() {
-      dpr = Math.min(devicePixelRatio || 1, 2); W = page.clientWidth; H = page.clientHeight;
-      cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const n = Math.min(110, Math.round(W * H / 16000));
+      W = page.clientWidth; H = page.clientHeight;
+      cv.width = W; cv.height = H;
+      const n = Math.min(45, Math.round(W * H / 30000));
       P = Array.from({ length: n }, () => ({ x: rnd(0, W), y: rnd(0, H), r: rnd(.7, 2.4), v: rnd(.12, .42), ph: rnd(0, 6.28), s: rnd(.8, 2) }));
       B = Array.from({ length: Math.round(n / 4) }, () => ({ x: rnd(0, W), y: rnd(0, H), r: rnd(12, 36), v: rnd(.08, .24), ph: rnd(0, 6.28), a: rnd(.1, .22) }));
     }
     function frame(t) {
+      raf = 0;
+      if (!reduce && (!onScreen || document.hidden)) return;
+      if (!reduce && t - last < 33) { raf = requestAnimationFrame(frame); return; }  /* ~30fps */
+      last = t;
       ctx.clearRect(0, 0, W, H);
+      const top = Math.max(0, scrollY - page.offsetTop - 80), bot = top + innerHeight + 160;
       B.forEach(b => {
         b.y -= b.v; if (b.y < -30) { b.y = H + 30; b.x = rnd(0, W); }
-        const g = ctx.createRadialGradient(b.x, b.y, 0, b.x, b.y, b.r); g.addColorStop(0, `rgba(255,226,130,${b.a})`); g.addColorStop(1, "rgba(255,226,130,0)");
-        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(b.x, b.y, b.r, 0, 6.283); ctx.fill();
+        if (b.y < top - 40 || b.y > bot + 40) return;
+        ctx.globalAlpha = b.a * 4.2 > 1 ? 1 : b.a * 4.2; const d = b.r * 2; ctx.drawImage(bub, b.x - b.r, b.y - b.r, d, d);
       });
       P.forEach(p => {
         p.y -= p.v; p.x += Math.sin(t / 1800 * p.s + p.ph) * .12; if (p.y < -6) { p.y = H + 6; p.x = rnd(0, W); }
-        const a = .25 + .65 * (.5 + .5 * Math.sin(t / 700 * p.s + p.ph));
-        ctx.globalAlpha = a; ctx.fillStyle = p.r > 1.7 ? "#fff4bd" : "#f4cb55"; ctx.shadowColor = "#ffd45c"; ctx.shadowBlur = p.r * 3;
-        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, 6.283); ctx.fill();
+        if (p.y < top || p.y > bot) return;
+        ctx.globalAlpha = .25 + .65 * (.5 + .5 * Math.sin(t / 700 * p.s + p.ph));
+        const d = p.r * 5; ctx.drawImage(p.r > 1.7 ? dA : dB, p.x - d / 2, p.y - d / 2, d, d);
       });
-      ctx.globalAlpha = 1; ctx.shadowBlur = 0;
+      ctx.globalAlpha = 1;
       if (!reduce) raf = requestAnimationFrame(frame);
     }
+    function go() { if (!raf && !reduce && onScreen && !document.hidden) raf = requestAnimationFrame(frame); }
     size(); frame(0);
-    if (window.ResizeObserver) new ResizeObserver(() => { size(); if (reduce) frame(0); }).observe(page);
-    document.addEventListener("visibilitychange", () => { cancelAnimationFrame(raf); if (!document.hidden && !reduce) raf = requestAnimationFrame(frame); });
+    if (window.ResizeObserver) { let rt = 0; new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => { size(); if (reduce) frame(0); }, 150); }).observe(page); }
+    if (window.IntersectionObserver) new IntersectionObserver(e => { onScreen = e[0].isIntersecting; go(); }).observe(page);
+    document.addEventListener("visibilitychange", go);
+    go();
   })();
 
   const btn = $("#langBtn");
