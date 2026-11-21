@@ -1,12 +1,13 @@
 /* إدارة لجنة التحكيم من داخل لوحة القيادات: قائمة، إضافة/تعديل، صورة، ترتيب.
-   دخول خاص (OTP) على JUDGES_CONFIG.api. كل النصوص بـ textContent (لا innerHTML). */
+   دخول موحّد مع القيادات (توكن ld_t) على JUDGES_CONFIG.api. كل النصوص بـ textContent (لا innerHTML). */
 (function () {
   "use strict";
   const isLocal = /^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname);
+  const tok = () => { try { return localStorage.getItem("ld_t") || sessionStorage.getItem("ld_t") || ""; } catch (e) { return ""; } };
   const API = ((isLocal && /[?&]japi=([^&]+)/.exec(location.search)) ? decodeURIComponent(RegExp.$1) : "") || ((typeof JUDGES_CONFIG !== "undefined" && JUDGES_CONFIG.api) || "");
   const $ = s => document.querySelector(s);
-  const J = { token: "", email: "", judges: [], order: [], tab: "list", edit: null, sec: "leaders", ids: null, dirty: false };
-  const ERR = { auth: "الكود غير صحيح أو انتهت صلاحيته.", bad_email: "اكتب بريدًا صحيحًا.", mail: "تعذّر إرسال البريد، حاول بعد قليل.", locked: "محاولات كثيرة، حاول بعد 15 دقيقة.", missing: "أكمل الاسم والرقم.", dup_num: "هذا الرقم مستخدم لحَكَم آخر.", bad_photo: "تعذّر قبول الصورة.", forbidden: "ملف غير مسموح." };
+  const J = { judges: [], order: [], tab: "list", edit: null, sec: "leaders", ids: null, dirty: false };
+  const ERR = { auth: "انتهت الجلسة، سجّل الدخول من جديد.", missing: "أكمل الاسم والرقم.", dup_num: "هذا الرقم مستخدم لحَكَم آخر.", bad_photo: "تعذّر قبول الصورة.", forbidden: "ملف غير مسموح." };
   const errText = e => ERR[String(e && e.message)] || "تعذّر الاتصال، حاول مرة أخرى.";
 
   function h(tag, attrs, kids) {
@@ -19,9 +20,9 @@
   async function callJ(action, extra) {
     const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 45000);
     try {
-      const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ action, token: J.token }, extra || {})), signal: ctl.signal, redirect: "follow" });
+      const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ action, token: tok() }, extra || {})), signal: ctl.signal, redirect: "follow" });
       const j = await r.json();
-      if (!j.ok) { if (j.error === "auth" && J.token) jExpire(); throw new Error(j.error || "fail"); }
+      if (!j.ok) { if (j.error === "auth") jExpire(); throw new Error(j.error || "fail"); }
       return j;
     } finally { clearTimeout(to); }
   }
@@ -36,23 +37,10 @@
   const jeditor = h("section", { id: "jeditor", class: "card", hidden: true }, []);
   main.insertBefore(sw, panel); panel.after(jpanel); jpanel.after(jeditor);
 
-  const jloginBox = h("section", { class: "card", id: "jlogin" }, [
-    h("h2", { text: "دخول إدارة لجنة التحكيم" }),
-    h("p", { class: "intro", id: "jIntro", text: "سجّل بريد كابتن تايكوندو وسيصله كود تأكيد من 6 أرقام." }),
-    h("form", { id: "jEmailForm", class: "loginform", novalidate: true }, [
-      h("label", { class: "f" }, [h("span", { text: "بريد كابتن تايكوندو" }), h("input", { id: "jEmail", type: "email", dir: "ltr", autocomplete: "username" })]),
-      h("button", { class: "btn fill big", type: "submit", id: "jSend", text: "إرسال كود التأكيد" })]),
-    h("form", { id: "jCodeForm", class: "loginform", novalidate: true, hidden: true }, [
-      h("label", { class: "f" }, [h("span", { text: "كود التأكيد (6 أرقام)" }), h("input", { id: "jCode", type: "text", inputmode: "numeric", maxlength: 6, dir: "ltr", autocomplete: "one-time-code" })]),
-      h("label", { class: "chk" }, [h("input", { type: "checkbox", id: "jRem", checked: true }), h("span", { text: "تذكّر هذا الجهاز 30 يومًا (لا تفعّله على جهاز مشترك)" })]),
-      h("button", { class: "btn fill big", type: "submit", id: "jLogin", text: "تأكيد ودخول" }),
-      h("button", { class: "btn", type: "button", id: "jChange", text: "تغيير البريد" })]),
-    h("p", { class: "formerr", id: "jLoginErr", role: "alert" })]);
   const jbody = h("div", { id: "jbody", hidden: true }, []);
-  jpanel.append(h("p", { class: "demo", id: "jBanner", hidden: true }), jloginBox, jbody);
+  jpanel.append(h("p", { class: "demo", id: "jBanner", hidden: true }), jbody);
 
-  if (!API) { const b = $("#jBanner"); b.hidden = false; b.textContent = "لا يوجد رابط API في judges-config.js، لذلك لا تعمل إدارة لجنة التحكيم بعد."; $("#jSend").disabled = true; }
-  const lerr = m => { $("#jLoginErr").textContent = m || ""; };
+  if (!API) { const b = $("#jBanner"); b.hidden = false; b.textContent = "لا يوجد رابط API في judges-config.js، لذلك لا تعمل إدارة لجنة التحكيم بعد."; }
 
   /* ---------- مزامنة الأقسام ---------- */
   function sync() {
@@ -65,45 +53,17 @@
     if (showJ || (lead && J.edit)) panel.hidden = true; else if (lead && !edOpen) panel.hidden = false;
     if (!lead) { jpanel.hidden = true; jeditor.hidden = true; }
   }
-  sw.addEventListener("click", e => { const b = e.target.closest("[data-sec]"); if (!b) return; J.sec = b.dataset.sec; sync(); if (J.sec === "judges" && J.token && !J.judges.length) loadJ().catch(() => {}); });
+  sw.addEventListener("click", e => { const b = e.target.closest("[data-sec]"); if (!b) return; J.sec = b.dataset.sec; sync(); if (J.sec === "judges" && API && !J.judges.length) loadJ().catch(() => {}); });
   const mo = new MutationObserver(sync);
   ["#login", "#editor"].forEach(s => mo.observe($(s), { attributes: true, attributeFilter: ["hidden"] }));
 
-  /* ---------- الدخول ---------- */
-  let cool = 0;
-  function jCooldown() { const b = $("#jSend"); void b; clearInterval(cool); }
-  async function jSendCode(em) {
-    const b = $("#jSend"), t0 = b.textContent; b.disabled = true; b.textContent = "جارٍ الإرسال..."; lerr("");
-    try {
-      await callJ("admin_code_request", { email: em }); J.email = em;
-      $("#jEmailForm").hidden = true; $("#jCodeForm").hidden = false; $("#jCode").value = ""; $("#jCode").focus();
-      $("#jIntro").textContent = "إن كان البريد مسجَّلًا فقد أرسلنا كودًا من 6 أرقام (صالح 10 دقائق).";
-    } catch (err) { lerr(errText(err)); }
-    b.disabled = false; b.textContent = t0; jCooldown();
-  }
-  $("#jEmailForm").addEventListener("submit", e => { e.preventDefault(); const em = $("#jEmail").value.trim().toLowerCase(); if (em) jSendCode(em); });
-  $("#jChange").addEventListener("click", () => { $("#jCodeForm").hidden = true; $("#jEmailForm").hidden = false; lerr(""); });
-  $("#jCodeForm").addEventListener("submit", async e => {
-    e.preventDefault(); const c = $("#jCode").value.replace(/\D/g, ""); if (c.length !== 6) { lerr("اكتب الكود المكوَّن من 6 أرقام."); return; }
-    const b = $("#jLogin"), t0 = b.textContent; b.disabled = true; b.textContent = "جارٍ التحقق..."; lerr("");
-    try {
-      const rem = $("#jRem").checked, j = await callJ("admin_code_verify", { email: J.email, code: c, remember: rem });
-      J.token = j.token; try { (rem ? localStorage : sessionStorage).setItem("jd_t", j.token); (rem ? sessionStorage : localStorage).removeItem("jd_t"); } catch (x) {}
-      await loadJ();
-    } catch (err) { J.token = ""; lerr(errText(err)); }
-    b.disabled = false; b.textContent = t0;
-  });
-  function jClearToken() { try { sessionStorage.removeItem("jd_t"); localStorage.removeItem("jd_t"); } catch (x) {} }
-  function jExpire() {
-    J.token = ""; J.edit = null; jClearToken(); jbody.hidden = true; jbody.textContent = ""; jloginBox.hidden = false;
-    $("#jEmailForm").hidden = false; $("#jCodeForm").hidden = true; $("#jIntro").textContent = "انتهت الجلسة. سجّل البريد لاستلام كود جديد."; sync();
-  }
-  (function auto() { try { const t = localStorage.getItem("jd_t") || sessionStorage.getItem("jd_t"); if (t && API) { J.token = t; loadJ().catch(() => { J.token = ""; }); } } catch (e) {} })();
+  /* الدخول موحّد: نستخدم توكن لوحة القيادات (ld_t) */
+  function jExpire() { J.edit = null; jbody.hidden = true; jbody.textContent = ""; toast("انتهت الجلسة. سجّل الدخول من جديد.", true); setTimeout(() => location.reload(), 1500); }
 
   async function loadJ() {
     const j = await callJ("admin_list");
     J.judges = j.judges || []; J.order = Array.isArray(j.order) ? j.order : [];
-    jloginBox.hidden = true; jbody.hidden = false; renderJ();
+    jbody.hidden = false; renderJ();
   }
 
   /* ---------- القوائم ---------- */
@@ -117,11 +77,10 @@
     const tabs = h("div", { class: "tabs", role: "tablist" }, [
       h("button", { type: "button", role: "tab", "data-jt": "list", "aria-selected": String(J.tab === "list"), text: "الحكام " }, [h("b", { text: String(J.judges.length) })]),
       h("button", { type: "button", role: "tab", "data-jt": "order", "aria-selected": String(J.tab === "order"), text: "ترتيب البطاقات" })]);
-    const add = h("button", { class: "btn fill sm", type: "button", text: "+ إضافة حَكَم" }), ref = h("button", { class: "tbtn", type: "button", text: "تحديث" }), out = h("button", { class: "tbtn", type: "button", text: "خروج التحكيم" });
+    const add = h("button", { class: "btn fill sm", type: "button", text: "+ إضافة حَكَم" }), ref = h("button", { class: "tbtn", type: "button", text: "تحديث" });
     add.addEventListener("click", () => openEd(null));
     ref.addEventListener("click", async () => { try { await loadJ(); toast("تم التحديث"); } catch (e) { toast(errText(e), true); } });
-    out.addEventListener("click", async () => { try { await callJ("admin_logout"); } catch (x) {} jExpire(); });
-    tabs.append(add, ref, out);
+    tabs.append(add, ref);
     tabs.addEventListener("click", e => { const b = e.target.closest("[data-jt]"); if (!b) return; J.tab = b.dataset.jt; renderJ(); });
     jbody.appendChild(tabs);
     if (J.tab === "order") return renderJOrder();
