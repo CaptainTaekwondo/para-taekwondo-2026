@@ -216,7 +216,7 @@
         if (el.classList.contains("flipped")) return;
         const box = el.querySelector(".tcard"), ph = el.querySelector(".tph"); if (!box || !ph) return;
         const k = STATIC ? 0 : t / 1000, i = +el.dataset.k || 0, x = .5 + .38 * Math.sin(k * .9 + i * 1.7), y = .5 + .36 * Math.sin(k * .65 + 1.3 + i);
-        box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%"); box.style.setProperty("--cy", (cy * 100).toFixed(1) + "%");
+        box.style.setProperty("--mx", (x * 100).toFixed(1) + "%"); box.style.setProperty("--my", (y * 100).toFixed(1) + "%"); box.style.setProperty("--cy", (y * 100).toFixed(1) + "%");
         ph.style.setProperty("--px", (x * ph.offsetWidth).toFixed(0) + "px"); ph.style.setProperty("--py", (y * ph.offsetHeight).toFixed(0) + "px");
       });
     };
