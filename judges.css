@@ -479,6 +479,9 @@ html[lang="en"] .jplate.pill .ptxt{font-size:9cqw}
 /* إخفاء الشارة الحمراء تحت كارت رئيس لجنة الحكام (مكررة مع اللوحة) */
 .jc.chief .role{display:none}
 
+.jflag{display:flex;align-items:center;justify-content:center;gap:calc(var(--w)*.03);margin-top:calc(var(--w)*.03);color:#fff0a8;font:700 calc(var(--w)*.06)/1.2 var(--fb)}
+.jflag img{width:calc(var(--w)*.1);height:auto;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+
 /* ظهر البطاقة: الكلمة فوق واللوجو تحتها */
 .jc.tpl .back .bf{flex-direction:column-reverse}
 .jc.tpl .back .bfr{top:0;margin-top:calc(var(--w)*.03)}

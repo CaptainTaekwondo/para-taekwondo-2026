@@ -89,7 +89,7 @@ const CONFIG = {
   /* ---- لجنة التحكيم (صفحة judges.html): أضف الحكام في referees بالشكل { name: "الاسم", id: "رقم الحكم (يظهر الكود PTJ-2026-XXXX من آخر 4 أرقام)", photo: "assets/judges/x.webp" } ----
           judgeCardBg: مسار قالب الكرت إن توفر (صورة من تصميم خارجي)، والفارغ = تصميم ذهبي جاهز. */
   judges: {
-    head: { name: "الحكم الدولي علي نور", id: "0001", role: "رئيس لجنة الحكام", photo: "assets/team/ali-nour.webp", fit: "contain" },
+    head: { name: "الحكم الدولي علي نور", id: "0001", role: "رئيس لجنة الحكام", photo: "assets/team/ali-nour.webp", fit: "contain", country: "EG" },
     referees: []
   },
   judgeCardBg: "assets/judges/judge-card-plain.webp?v=2",      // كرت الحكام (بنجمة)

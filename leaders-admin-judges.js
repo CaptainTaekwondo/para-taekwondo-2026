@@ -125,7 +125,7 @@
   /* ---------- المحرر ---------- */
   const newPhoto = () => ({ img: null, z: 1, ox: 0, oy: 0, dirty: false, clear: false, orig: null });
   function openEd(x) {
-    J.edit = { id: x ? x.id : "", photo: newPhoto(), d: x ? { name: x.name, nameEn: x.nameEn, role: x.role, num: x.num, fit: x.fit, notes: x.notes || "" } : { name: "", nameEn: "", role: "judge", num: "", fit: "cover", notes: "" } };
+    J.edit = { id: x ? x.id : "", photo: newPhoto(), d: x ? { name: x.name, nameEn: x.nameEn, role: x.role, num: x.num, fit: x.fit, notes: x.notes || "", country: x.country || "" } : { name: "", nameEn: "", role: "judge", num: "", fit: "cover", notes: "", country: "" } };
     renderEd(); sync(); window.scrollTo(0, 0);
     if (x && x.photo) loadPhoto(x.id);
   }
@@ -150,6 +150,7 @@
       h("h2", { text: ed.id ? "تعديل: " + d.name : "إضافة حَكَم" }),
       h("div", { class: "row" }, [fld("j_name", "الاسم بالعربية *", inp("j_name", d.name)), fld("j_nameEn", "الاسم بالإنجليزية", inp("j_nameEn", d.nameEn, { dir: "ltr" }))]),
       h("div", { class: "row" }, [fld("j_role", "الدور", sel("j_role", [["judge", "حَكَم"], ["chief", "رئيس اللجنة"]], d.role)), fld("j_num", "الرقم * (أرقام فقط، حتى 4)", inp("j_num", d.num, { inputmode: "numeric", maxlength: 4, dir: "ltr" }), "فريد لكل حَكَم")]),
+      fld("j_country", "البلد (يظهر العلم على البطاقة)", sel("j_country", [["", "— بدون —"]].concat(Object.keys(JUDGES_COUNTRIES).map(k => [k.toUpperCase(), JUDGES_COUNTRIES[k]])), (d.country || "").toUpperCase())),
       fld("j_fit", "عرض الصورة في البطاقة", sel("j_fit", [["cover", "ملء البطاقة (cover)"], ["contain", "الصورة كاملة (contain)"]], d.fit)),
       fld("j_notes", "ملاحظات خاصة (لا تُنشر)", notes)]);
     const cw = h("div", { class: "pcw", id: "jpcw" }, [h("canvas", { id: "jpc", width: 320, height: 320, "aria-label": "معاينة الصورة، اسحب لتحريكها" })]);
@@ -188,7 +189,7 @@
 
   async function doSave() {
     const ed = J.edit, err = $("#jEdErr"); err.textContent = "";
-    const data = { name: jv("j_name"), nameEn: jv("j_nameEn"), role: jv("j_role"), num: jv("j_num").replace(/\D/g, "").slice(0, 4), fit: jv("j_fit"), notes: jv("j_notes") };
+    const data = { name: jv("j_name"), nameEn: jv("j_nameEn"), role: jv("j_role"), num: jv("j_num").replace(/\D/g, "").slice(0, 4), fit: jv("j_fit"), notes: jv("j_notes"), country: jv("j_country") };
     if (!data.name || !data.num) { err.textContent = ERR.missing; return; }
     const payload = { id: ed.id, data };
     if (ed.photo.img && ed.photo.dirty) payload.photo = { b64: exportB64() };

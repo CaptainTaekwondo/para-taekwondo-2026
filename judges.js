@@ -27,6 +27,10 @@
   const L = src => LITE && src ? String(src).replace(/\.webp(\?|$)/, "-lite.webp$1") : src;
   /* صور الكروت للعرض: النت البطيء = -lite (الأخف)، النت الكويس = -md (800px بدل 978، بنفس الجودة على الشاشة). التحميل PNG/JPG/PDF بيستخدم الأصل الكامل */
   const M = src => src ? String(src).replace(/\.webp(\?|$)/, (LITE ? "-lite" : "-md") + ".webp$1") : src;
+  function flagOf(p) {
+    const k = String(p.country || "").toLowerCase(), n = typeof JUDGES_COUNTRIES !== "undefined" && JUDGES_COUNTRIES[k];
+    return n ? `<span class="jflag"><img src="assets/flags/${k}.webp" alt="" width="40" height="27" loading="lazy"><b>${esc(n)}</b></span>` : "";
+  }
   function tplCard(p, cls, k) {
     const inner = p.photo ? `<img src="${esc(L(p.photo))}"${LITE ? ` onerror="this.onerror=null;this.src='${esc(p.photo)}'"` : ""} alt="${esc(p.name)}" loading="lazy">` : `<span class="ini foil" aria-hidden="true">★</span>`;
     const chief = /chief/.test(cls || "");
@@ -54,7 +58,7 @@
         <div class="g3 bf"><span class="bfm"><img src="assets/judges/captain-medal.webp?v=2" alt="" width="30" height="30"></span><div class="bfr"><span>Captain Taekwondo</span></div></div>
       </div><i class="sp s1">✦</i><i class="sp s2">✦</i><i class="sp s3">✦</i><i class="sp s4">✦</i><i class="sp s5">✦</i></div>` : "";
     return `<article class="jc tpl ${cls || ""}${live ? " flippable" : ""}" data-k="${k}"${live ? ' tabindex="0" role="button" aria-label="اضغط لقلب البطاقة"' : ""}>` +
-      `<div class="flip">${front}${back}</div><div class="role">${esc(p.role || "حكم")}</div></article>`;
+      `<div class="flip">${front}${back}</div><div class="role">${esc(p.role || "حكم")}</div>${flagOf(p)}</article>`;
   }
 
   function card(p, cls) {
@@ -66,7 +70,7 @@
     return `<article class="jc ${cls || ""}"><div class="frame"><div class="glass${p.fit === "contain" ? " contain" : ""}">${inner}</div></div>` +
       `<div class="role">${esc(p.role || "حكم")}</div>` +
       `<div class="plate"><h3 class="nm">${esc(p.name)}</h3></div>` +
-      `<div class="code"><b class="ltr">${esc(codeOf(p))}</b></div></article>`;
+      `<div class="code"><b class="ltr">${esc(codeOf(p))}</b></div>${flagOf(p)}</article>`;
   }
 
   function render() {
@@ -83,12 +87,16 @@
   /* القائمة العامة من لوحة الإدارة (لو JUDGES_CONFIG.api متحدد): جلب بمهلة قصيرة ثم رسم مرة واحدة؛ لو فشل/فاضي نستخدم CONFIG.judges */
   function applyPublic(d) {
     if (!d || !d.ok || !Array.isArray(d.judges) || !d.judges.length) return;
-    const map = x => ({ id: x.num || x.id, name: x.name, nameEn: x.nameEn, role: x.role, photo: x.photo, fit: x.fit });
+    const map = x => ({ id: x.num || x.id, name: x.name, nameEn: x.nameEn, role: x.role, photo: x.photo, fit: x.fit, country: x.country });
     const ord = Array.isArray(d.order) ? d.order : [];
     const pos = x => { const i = ord.indexOf(x.id); return i < 0 ? 9999 : i; };
     const all = d.judges.slice().sort((a, b) => pos(a) - pos(b));
     const chief = all.find(x => x.role === "chief");
-    if (chief) J.head = Object.assign({}, J.head, map(chief));
+    if (chief) {
+      const m = map(chief), keep = String(m.id) === String(J.head.id) && J.head.photo && /^assets\//.test(J.head.photo);
+      if (keep) { m.photo = J.head.photo; m.fit = J.head.fit; }
+      J.head = Object.assign({}, J.head, m);
+    }
     J.referees = all.filter(x => x.role !== "chief").map(map);
   }
   (async () => {
