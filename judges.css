@@ -491,7 +491,6 @@ html[lang="en"] .jplate.pill .ptxt{font-size:9cqw}
 .jflag .fw.wave:after{animation:jfsh 1.7s linear 3}
 @keyframes jfw{0%,100%{transform:translateY(calc(var(--w)*-.014))}50%{transform:translateY(calc(var(--w)*.014))}}
 @keyframes jfsh{to{background-position:-200% 0}}
-.lite .jflag .fw i,.lite .jflag .fw:after{animation:none}
 @media(prefers-reduced-motion:reduce){.jflag .fw i,.jflag .fw:after{animation:none}}
 
 /* ظهر البطاقة: الكلمة فوق واللوجو تحتها */
