@@ -400,7 +400,7 @@ html[lang="en"] .jc.tpl .tnm{font-size:calc(var(--w)*.052);line-height:1.05;text
 .jhead h1{font-family:var(--fd);font-weight:700}
 
 /* كشاف أصغر: قطر الدايرة اللي بتكشف الكود واللوجو */
-.jc.tpl .rcode{-webkit-mask-image:linear-gradient(180deg,transparent calc(var(--cy,50%) - 34%),#000 var(--cy,50%),transparent calc(var(--cy,50%) + 34%)),linear-gradient(90deg,#000 0,#000 12%,transparent 12%,transparent 88%,#000 88%,#000 100%);mask-image:linear-gradient(180deg,transparent calc(var(--cy,50%) - 34%),#000 var(--cy,50%),transparent calc(var(--cy,50%) + 34%)),linear-gradient(90deg,#000 0,#000 12%,transparent 12%,transparent 88%,#000 88%,#000 100%)}
+.jc.tpl .rcode{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.5) at var(--mx) var(--my),#000 0,rgba(0,0,0,.75) 45%,transparent 100%),url(assets/judges/ring-mask.webp);mask-image:radial-gradient(circle calc(var(--w)*.5) at var(--mx) var(--my),#000 0,rgba(0,0,0,.75) 45%,transparent 100%),url(assets/judges/ring-mask.webp)}
 .jc.tpl .wmc{-webkit-mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%);mask-image:radial-gradient(circle calc(var(--w)*.4) at var(--px,50%) var(--py,50%),#000 0,#000 30%,transparent 100%)}
 
 .jc.tpl .wmc{object-fit:contain}
@@ -479,8 +479,20 @@ html[lang="en"] .jplate.pill .ptxt{font-size:9cqw}
 /* إخفاء الشارة الحمراء تحت كارت رئيس لجنة الحكام (مكررة مع اللوحة) */
 .jc.chief .role{display:none}
 
-.jflag{display:flex;align-items:center;justify-content:center;gap:calc(var(--w)*.03);margin-top:calc(var(--w)*.03);color:#fff0a8;font:700 calc(var(--w)*.06)/1.2 var(--fb)}
-.jflag img{width:calc(var(--w)*.1);height:auto;border-radius:3px;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.jflag{cursor:pointer;display:flex;align-items:center;justify-content:center;gap:calc(var(--w)*.03);margin-top:calc(var(--w)*.03);color:#fff0a8;font:700 calc(var(--w)*.06)/1.2 var(--fb)}
+.jflag{direction:ltr}
+.jflag b{direction:rtl}
+.jflag .fpole{flex:none;width:calc(var(--w)*.012);height:calc(var(--w)*.15);align-self:flex-start;border-radius:3px;background:linear-gradient(90deg,#fff4bd,#c58a18 60%,#7a5410);box-shadow:0 1px 4px rgba(0,0,0,.6);margin-inline-end:calc(var(--w)*-.03);position:relative}
+.jflag .fpole:before{content:"";position:absolute;top:-4px;left:50%;width:calc(var(--w)*.022);height:calc(var(--w)*.022);transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff8cf,#d9a21f 70%);box-shadow:0 0 4px rgba(244,203,85,.8)}
+.jflag .fw{position:relative;flex:none;display:flex;width:calc(var(--w)*.2);height:calc(var(--w)*.133);align-self:flex-start;margin-top:calc(var(--w)*.006);filter:drop-shadow(0 0 .6px rgba(255,255,255,.55)) drop-shadow(0 2px 3px rgba(0,0,0,.55));transform-origin:0 50%}
+.jflag .fw i{flex:0 0 calc(100%/32 + 1px);margin-right:-1px;display:block;background-image:var(--fl);background-size:3200% 100%}
+.jflag .fw.wave i{animation:jfw 1.7s ease-in-out 3 both;animation-delay:calc(var(--i)*-.053s)}
+.jflag .fw:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(100deg,rgba(0,0,0,.2),rgba(255,255,255,.12) 25%,rgba(0,0,0,.14) 50%,rgba(255,255,255,.12) 75%,rgba(0,0,0,.2));background-size:200% 100%}
+.jflag .fw.wave:after{animation:jfsh 1.7s linear 3}
+@keyframes jfw{0%,100%{transform:translateY(calc(var(--w)*-.014))}50%{transform:translateY(calc(var(--w)*.014))}}
+@keyframes jfsh{to{background-position:-200% 0}}
+.lite .jflag .fw i,.lite .jflag .fw:after{animation:none}
+@media(prefers-reduced-motion:reduce){.jflag .fw i,.jflag .fw:after{animation:none}}
 
 /* ظهر البطاقة: الكلمة فوق واللوجو تحتها */
 .jc.tpl .back .bf{flex-direction:column-reverse}

@@ -17,8 +17,8 @@
 
   /* نمط الكود المكرّر (SVG) يظهر على حواف الكرت تحت ضوء الماوس */
   const patUrl = code => {
-    const t = (x, y, rot) => `<text x="${x}" y="${y}" text-anchor="middle" textLength="420" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} ${y})" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="62" letter-spacing="2" fill="#ffe9a0" stroke="#7a4a05" stroke-width="2.4" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="1355" viewBox="0 0 978 1355">${t(52, 230, -90)}${t(52, 680, -90)}${t(52, 1130, -90)}${t(926, 230, 90)}${t(926, 680, 90)}${t(926, 1130, 90)}</svg>`;
+    const t = (x, y, rot) => `<text x="${x}" y="${y}" text-anchor="middle" textLength="400" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} ${y})" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="54" letter-spacing="2" fill="#ffe9a0" stroke="#7a4a05" stroke-width="2.4" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="1355" viewBox="0 0 978 1355">${t(96, 230, -90)}${t(96, 680, -90)}${t(96, 1130, -90)}${t(882, 230, 90)}${t(882, 680, 90)}${t(882, 1130, 90)}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   };
   /* p: { name, code?, role?, photo?, fit?: "contain" (للصور الدائرية المؤطرة) } */
@@ -29,7 +29,9 @@
   const M = src => src ? String(src).replace(/\.webp(\?|$)/, (LITE ? "-lite" : "-md") + ".webp$1") : src;
   function flagOf(p) {
     const k = String(p.country || "").toLowerCase(), n = typeof JUDGES_COUNTRIES !== "undefined" && JUDGES_COUNTRIES[k];
-    return n ? `<span class="jflag"><img src="assets/flags/${k}.webp" alt="" width="40" height="27" loading="lazy"><b>${esc(n)}</b></span>` : "";
+    if (!n) return "";
+    let s = ""; for (let i = 0; i < 32; i++) s += `<i style="--i:${i};background-position:${(i * 100 / 31).toFixed(2)}% 0"></i>`;
+    return `<span class="jflag"><span class="fpole"></span><span class="fw" role="img" aria-label="${esc(n)}" style="--fl:url('assets/flags/${k}.webp')">${s}</span><b>${esc(n)}</b></span>`;
   }
   function tplCard(p, cls, k) {
     const inner = p.photo ? `<img src="${esc(L(p.photo))}"${LITE ? ` onerror="this.onerror=null;this.src='${esc(p.photo)}'"` : ""} alt="${esc(p.name)}" loading="lazy">` : `<span class="ini foil" aria-hidden="true">★</span>`;
@@ -96,6 +98,7 @@
     if (chief) {
       const m = map(chief), keep = String(m.id) === String(J.head.id) && J.head.photo && /^assets\//.test(J.head.photo);
       if (keep) { m.photo = J.head.photo; m.fit = J.head.fit; }
+      if (!m.country) delete m.country;
       J.head = Object.assign({}, J.head, m);
     }
     J.referees = all.filter(x => x.role !== "chief").map(map);
@@ -303,13 +306,15 @@
     const mk = c => { let n = el.querySelector("." + c); if (!n) { n = document.createElement("i"); n.className = c; n.setAttribute("aria-hidden", "true"); el.appendChild(n); } return n; };
     const flash = mk("jfxo"), sheen = mk("jfxs"), from = was ? 180 : 0, end = to ? 180 : 0, mid = (from + end) / 2;
     const ease = "cubic-bezier(.45,.05,.25,1)";
-    const an = fl.animate([{ transform: `rotateY(${from}deg) translateZ(0) scale(1)` }, { transform: `rotateY(${mid}deg) translateZ(130px) scale(1.06)`, offset: .5 }, { transform: `rotateY(${end}deg) translateZ(0) scale(1)` }], { duration: FLIP_MS, easing: ease });
+    const an = fl.animate([{ transform: `rotateY(${from}deg)` }, { transform: `rotateY(${end}deg)` }], { duration: FLIP_MS, easing: ease });
     flash.animate([{ opacity: 0 }, { opacity: .85, offset: .5 }, { opacity: 0 }], { duration: FLIP_MS, easing: "ease-in-out" });
     sheen.animate([{ opacity: 1, backgroundPosition: "130% 0" }, { opacity: 1, backgroundPosition: "-130% 0" }], { duration: FLIP_MS * .9, delay: FLIP_MS * .1, easing: "ease-in-out", fill: "backwards" });
     el.animate([{ filter: "drop-shadow(0 0 0 rgba(255,214,90,0))" }, { filter: "drop-shadow(0 0 34px rgba(255,214,90,.85))", offset: .5 }, { filter: "drop-shadow(0 0 0 rgba(255,214,90,0))" }], { duration: FLIP_MS, easing: "ease-in-out" });
     an.finished.catch(() => {}).then(() => { fl.classList.remove("anim"); el._flipping = false; });
   }
   document.addEventListener("click", e => {
+    const jf = e.target.closest(".jflag");
+    if (jf) { const w = jf.querySelector(".fw"); if (w) { w.classList.remove("wave"); void w.offsetWidth; w.classList.add("wave"); clearTimeout(w._wt); w._wt = setTimeout(() => w.classList.remove("wave"), 5400); } return; }
     const el = e.target.closest(".jc.flippable"); if (!el) return;
     const fmt = e.target.closest("[data-fmt]");
     if (fmt) { e.stopPropagation(); download(items[+el.dataset.k], fmt.dataset.fmt); return; }
