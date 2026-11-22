@@ -17,8 +17,8 @@
 
   /* نمط الكود المكرّر (SVG) يظهر على حواف الكرت تحت ضوء الماوس */
   const patUrl = code => {
-    const t = (x, y, rot) => `<text x="${x}" y="${y}" text-anchor="middle" textLength="250" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} ${y})" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="34" letter-spacing="2" fill="#ffe9a0" stroke="#7a4a05" stroke-width="1.6" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
-    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="1355" viewBox="0 0 978 1355">${t(40, 180, -90)}${t(40, 400, -90)}${t(40, 955, -90)}${t(40, 1175, -90)}${t(938, 180, 90)}${t(938, 400, 90)}${t(938, 955, 90)}${t(938, 1175, 90)}</svg>`;
+    const t = (x, y, rot) => `<text x="${x}" y="${y}" text-anchor="middle" textLength="420" lengthAdjust="spacingAndGlyphs" transform="rotate(${rot} ${x} ${y})" font-family="Arial, Helvetica, sans-serif" font-weight="900" font-size="62" letter-spacing="2" fill="#ffe9a0" stroke="#7a4a05" stroke-width="2.4" paint-order="stroke">${code.replace(/[<&>]/g, "")}</text>`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="978" height="1355" viewBox="0 0 978 1355">${t(52, 230, -90)}${t(52, 680, -90)}${t(52, 1130, -90)}${t(926, 230, 90)}${t(926, 680, 90)}${t(926, 1130, 90)}</svg>`;
     return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
   };
   /* p: { name, code?, role?, photo?, fit?: "contain" (للصور الدائرية المؤطرة) } */
@@ -200,7 +200,7 @@
         tk = 0; const e = ev; if (!e || el.classList.contains("flipped")) return;
         const r = el.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
         box.style.setProperty("--ry", (x * 16).toFixed(2) + "deg"); box.style.setProperty("--rx", (-y * 14).toFixed(2) + "deg");
-        box.style.setProperty("--mx", (x + .5) * 100 + "%"); box.style.setProperty("--my", (y + .5) * 100 + "%");
+        box.style.setProperty("--mx", (x + .5) * 100 + "%"); box.style.setProperty("--my", (y + .5) * 100 + "%"); box.style.setProperty("--cy", (y + .5) * 100 + "%");
         const ph = box.querySelector(".tph"); if (ph) { const q = ph.getBoundingClientRect(); ph.style.setProperty("--px", (e.clientX - q.left) + "px"); ph.style.setProperty("--py", (e.clientY - q.top) + "px"); el.classList.toggle("onph", e.clientX >= q.left && e.clientX <= q.right && e.clientY >= q.top && e.clientY <= q.bottom); }
       };
       el.addEventListener("pointermove", e => { ev = e; if (!tk) tk = requestAnimationFrame(apply); });
