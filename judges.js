@@ -83,6 +83,7 @@
       : Array.from({ length: 10 }, () => card({ name: "يُعلن لاحقًا" }, "slot")).join("");
     document.querySelectorAll(".jc").forEach((e, i) => e.style.setProperty("--i", i));
     if (window.I18N) I18N.apply(document.body);
+    bindFx();
   }
   /* القائمة العامة من لوحة الإدارة (لو JUDGES_CONFIG.api متحدد): جلب بمهلة قصيرة ثم رسم مرة واحدة؛ لو فشل/فاضي نستخدم CONFIG.judges */
   function applyPublic(d) {
@@ -188,7 +189,8 @@
     page.appendChild(fr);
   })();
 
-  /* ميلان ثلاثي الأبعاد مع حركة الماوس */
+  /* ميلان ثلاثي الأبعاد مع حركة الماوس + كشّاف الموبايل: بيتربط بعد رسم البطاقات (render) لأنها بتتعمل بعد جلب الـAPI */
+  function bindFx() {
   const TOUCH = matchMedia("(hover:none),(pointer:coarse)").matches;
   if (!TOUCH && matchMedia("(hover:hover)").matches && !matchMedia("(prefers-reduced-motion:reduce)").matches) {
     document.querySelectorAll(".jc.tpl").forEach(el => {
@@ -284,6 +286,7 @@
         document.addEventListener("touchend", ask);
       } else start();
     }
+  }
   }
 
   /* ---------- قلب الكرت ---------- */
