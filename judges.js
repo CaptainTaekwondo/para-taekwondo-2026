@@ -80,9 +80,9 @@
     const head = J.head || { name: "يُعلن لاحقًا" };
     $("#jHead").innerHTML = card(head, "chief");
     const list = J.referees || [];
-    $("#jGrid").innerHTML = list.length
-      ? list.map(p => card(p)).join("")
-      : Array.from({ length: 10 }, () => card({ name: "يُعلن لاحقًا" }, "slot")).join("");
+    const SLOTS = 10;
+    $("#jGrid").innerHTML = list.map(p => card(p)).join("") +
+      Array.from({ length: Math.max(0, SLOTS - list.length) }, () => card({ name: "يُعلن لاحقًا" }, "slot")).join("");
     document.querySelectorAll(".jc").forEach((e, i) => e.style.setProperty("--i", i));
     if (window.I18N) I18N.apply(document.body);
     bindFx();
